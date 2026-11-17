@@ -697,6 +697,399 @@ body::after {
   #game-screen::before { display: none; }
 }
 
+
+
+/* ═══════ KESUG SLOTS 1.1 · PREMIUM GOLD LOBBY ═══════ */
+
+.hero-facts { display: flex; align-items: center; gap: 17px; margin-top: 26px; }
+.hero-fact { display: flex; align-items: center; gap: 8px; color: rgba(231,219,195,.48); }
+.hero-fact strong { color: #f0d69a; font: 700 19px 'Space Grotesk',sans-serif; }
+.hero-fact span { font-size: 8px; font-weight: 800; letter-spacing: .13em; }
+.hero-fact i { color: #d8b36d; font-size: 18px; }
+.hero-fact-separator { width: 1px; height: 22px; background: rgba(224,190,124,.2); }
+@media (max-width: 600px) { .hero-facts { gap: 12px; margin-top: 19px; } .hero-fact span { font-size: 7px; letter-spacing: .08em; } }
+
+.lobby-hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(250px, .8fr);
+  align-items: center; min-height: 300px; margin: 2px 0 38px; padding: 34px 40px;
+  border: 1px solid rgba(225, 190, 119, .25); border-radius: 27px;
+  background:
+    radial-gradient(ellipse at 85% 48%, rgba(211, 166, 83, .16), transparent 37%),
+    linear-gradient(118deg, rgba(35, 29, 19, .98) 0%, rgba(23, 20, 15, .98) 52%, rgba(42, 31, 17, .94) 100%);
+  box-shadow: 0 24px 55px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,244,218,.08);
+}
+.lobby-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(rgba(242,220,174,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(242,220,174,.035) 1px, transparent 1px);
+  background-size: 42px 42px; opacity: .48; mask-image: linear-gradient(90deg, transparent 5%, #000 65%, #000 100%);
+}
+.lobby-hero::after {
+  content: ''; position: absolute; top: -65%; left: -25%; width: 55%; height: 230%; z-index: -1;
+  background: linear-gradient(90deg, transparent, rgba(255,244,218,.045), transparent);
+  transform: rotate(22deg); animation: heroAmbientSweep 13s ease-in-out infinite;
+}
+.hero-copy { position: relative; z-index: 2; max-width: 650px; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #d9b56f; font-size: 10px; font-weight: 800; letter-spacing: .2em; }
+.hero-eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #e9c878; box-shadow: 0 0 12px rgba(233,200,120,.8); }
+.hero-eyebrow-divider { width: 20px; height: 1px; background: rgba(226,193,130,.42); }
+.hero-greeting { margin-top: 22px; color: rgba(241,234,220,.66); font-size: 13px; font-weight: 600; }
+.hero-greeting strong { color: #f2d99f; font-weight: 800; }
+.lobby-hero h1 { margin-top: 8px; color: #fff8e9; font-size: clamp(29px, 4.2vw, 47px); line-height: 1.04; letter-spacing: -.055em; font-weight: 800; }
+.lobby-hero h1 span { color: #e0bd79; text-shadow: 0 4px 28px rgba(214,173,91,.12); }
+.hero-description { max-width: 550px; margin-top: 14px; color: rgba(230,222,207,.68); font-size: 13px; line-height: 1.7; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 17px; margin-top: 23px; }
+.hero-primary-btn { display: inline-flex; align-items: center; justify-content: center; gap: 11px; min-height: 46px; padding: 0 19px; border: 1px solid rgba(255,235,190,.32); border-radius: 12px; color: #211809; background: linear-gradient(110deg, #c99b4d, #f2d99b 55%, #d4aa60); box-shadow: 0 8px 24px rgba(214,173,91,.16), inset 0 1px 0 rgba(255,255,255,.38); font-size: 12px; font-weight: 900; cursor: pointer; transition: transform .25s ease, box-shadow .25s ease, filter .25s ease; }
+.hero-primary-btn i { font-size: 17px; transition: transform .25s ease; }
+.hero-primary-btn:hover { transform: translateY(-3px); filter: brightness(1.06); box-shadow: 0 13px 29px rgba(214,173,91,.24); }
+.hero-primary-btn:hover i { transform: translate(2px,2px); }
+.hero-safe-note { display: inline-flex; align-items: center; gap: 7px; color: rgba(230,222,207,.52); font-size: 10px; font-weight: 600; }
+.hero-safe-note i { color: #d5b16d; font-size: 15px; }
+.hero-visual { position: relative; z-index: 1; min-height: 220px; display: grid; place-items: center; }
+.hero-visual-glow { position: absolute; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(214,173,91,.24), rgba(164,119,43,.08) 48%, transparent 72%); filter: blur(9px); animation: heroGlowPulse 5s ease-in-out infinite alternate; }
+.hero-orbit { position: absolute; border: 1px solid rgba(228,194,128,.20); border-radius: 50%; transform: rotate(-23deg); }
+.hero-orbit-one { width: 205px; height: 112px; animation: heroOrbit 16s linear infinite; }
+.hero-orbit-two { width: 245px; height: 142px; transform: rotate(58deg); border-color: rgba(228,194,128,.13); animation: heroOrbitReverse 22s linear infinite; }
+.hero-orbit-three { width: 165px; height: 165px; border-style: dashed; border-color: rgba(228,194,128,.13); animation: heroOrbit 34s linear infinite; }
+.hero-emblem { position: relative; display: grid; place-items: center; width: 112px; height: 112px; border: 1px solid rgba(244,218,163,.45); border-radius: 31px; background: linear-gradient(145deg, rgba(76,57,27,.92), rgba(26,22,15,.96)); box-shadow: 0 0 0 9px rgba(214,173,91,.035), 0 18px 55px rgba(0,0,0,.42), 0 0 45px rgba(214,173,91,.17), inset 0 1px 0 rgba(255,255,255,.16); transform: rotate(-8deg); animation: heroEmblemFloat 5s ease-in-out infinite; }
+.hero-emblem i { color: #f3d99c; font-size: 60px; filter: drop-shadow(0 0 18px rgba(235,197,119,.45)); }
+.hero-spark { position: absolute; color: #f3d99c; text-shadow: 0 0 16px rgba(235,197,119,.65); animation: heroSparkle 3s ease-in-out infinite; }
+.hero-spark-one { top: 17%; right: 23%; font-size: 21px; }
+.hero-spark-two { left: 18%; bottom: 24%; font-size: 27px; animation-delay: -1.1s; }
+.hero-spark-three { right: 15%; bottom: 25%; font-size: 14px; animation-delay: -2s; }
+.hero-visual-label { position: absolute; bottom: 0; color: rgba(230,207,163,.38); font-size: 8px; font-weight: 800; letter-spacing: .28em; }
+.hero-bottom-line { position: absolute; left: 40px; right: 40px; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(236,202,136,.38), transparent); }
+
+.catalog-section { scroll-margin-top: 112px; }
+.catalog-heading-row { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 20px; }
+.section-kicker { margin-bottom: 5px; color: #c6a15d; font-size: 9px; font-weight: 800; letter-spacing: .22em; }
+.catalog-title { color: #fff7e8; font-size: clamp(24px, 3vw, 30px); font-weight: 800; letter-spacing: -.045em; }
+.catalog-subtitle { margin-top: 5px; color: var(--text-muted); font-size: 12px; }
+.catalog-count-card { display: flex; align-items: baseline; gap: 7px; padding: 10px 14px; border: 1px solid rgba(214,173,91,.18); border-radius: 12px; background: rgba(214,173,91,.055); white-space: nowrap; }
+.catalog-count-card strong { color: #f1d79d; font-family: 'Space Grotesk',sans-serif; font-size: 22px; }
+.catalog-count-card span { color: var(--text-muted); font-size: 10px; }
+.catalog-toolbar { display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; padding: 15px; border: 1px solid rgba(214,173,91,.13); border-radius: 18px; background: linear-gradient(115deg, rgba(31,26,18,.76), rgba(18,16,12,.76)); box-shadow: inset 0 1px 0 rgba(255,255,255,.035); }
+.category-tabs { display: flex; align-items: center; gap: 7px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.category-tabs::-webkit-scrollbar { display: none; }
+.category-chip { flex: 0 0 auto; padding: 9px 14px; border: 1px solid transparent; border-radius: 10px; color: rgba(235,226,210,.62); background: transparent; font-size: 11px; font-weight: 700; cursor: pointer; transition: color .22s ease, background .22s ease, border-color .22s ease, transform .22s ease, box-shadow .22s ease; }
+.category-chip:hover { color: #fff2d3; background: rgba(214,173,91,.08); transform: translateY(-1px); }
+.category-chip.active { color: #241909; border-color: rgba(255,239,204,.3); background: linear-gradient(110deg, #c79a4d, #edd39a); box-shadow: 0 5px 15px rgba(214,173,91,.14), inset 0 1px 0 rgba(255,255,255,.28); }
+.catalog-tools { display: grid; grid-template-columns: minmax(0,1fr) 190px; gap: 10px; }
+.catalog-search, .catalog-sort-wrap { display: flex; align-items: center; min-height: 43px; gap: 9px; padding: 0 12px; border: 1px solid rgba(214,173,91,.17); border-radius: 11px; background: rgba(8,7,5,.52); color: #c7a96c; transition: border-color .2s ease, box-shadow .2s ease, background .2s ease; }
+.catalog-search:focus-within, .catalog-sort-wrap:focus-within { border-color: rgba(232,197,125,.55); box-shadow: 0 0 0 3px rgba(214,173,91,.08); background: rgba(8,7,5,.74); }
+.catalog-search > i, .catalog-sort-wrap > i { flex: 0 0 auto; font-size: 17px; }
+.catalog-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #fff5df; font: 600 11px 'Manrope',sans-serif; user-select: text; }
+.catalog-search input::placeholder { color: rgba(220,207,182,.38); }
+.catalog-search kbd { padding: 2px 6px; border: 1px solid rgba(214,173,91,.18); border-radius: 5px; color: rgba(220,207,182,.42); font-size: 10px; }
+.catalog-sort-wrap select { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #e9ddc6; font: 600 10px 'Manrope',sans-serif; cursor: pointer; }
+.catalog-sort-wrap option { color: #eee8dc; background: #1b1710; }
+
+/* Cards use a dedicated art panel, while keeping each slot's existing icon and action. */
+.games-grid { grid-template-columns: repeat(auto-fill, minmax(225px, 1fr)); gap: 18px; }
+.game-card { min-height: 0; padding: 11px; border-radius: 19px; text-align: left; background: linear-gradient(155deg, rgba(37,31,21,.98), rgba(22,19,14,.99)); }
+.game-card-art { position: relative; isolation: isolate; display: grid; place-items: center; min-height: 151px; width: 100%; overflow: hidden; border: 1px solid rgba(214,173,91,.22); border-radius: 13px; background: radial-gradient(ellipse at 50% 44%, color-mix(in srgb, var(--card-accent, #d6ad5b) 27%, transparent), transparent 62%), linear-gradient(145deg, rgba(75,56,28,.44), rgba(14,12,8,.88)); }
+.game-card-art::before { content: ''; position: absolute; inset: -20%; z-index: -1; background: repeating-radial-gradient(circle at 50% 50%, transparent 0 17px, rgba(236,205,145,.075) 18px 19px, transparent 20px 34px); opacity: .75; transition: transform .7s ease, opacity .4s ease; }
+.game-card-art::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,.045), transparent 34%, rgba(0,0,0,.20)); }
+.game-card:hover .game-card-art::before { transform: rotate(16deg) scale(1.13); opacity: 1; }
+.game-card-number { position: absolute; top: 10px; left: 11px; z-index: 1; color: rgba(245,222,178,.43); font: 700 9px 'Space Grotesk',sans-serif; letter-spacing: .16em; }
+.game-card-category { position: absolute; top: 9px; right: 9px; z-index: 1; padding: 5px 8px; border: 1px solid rgba(237,211,157,.23); border-radius: 99px; color: rgba(247,229,191,.83); background: rgba(12,10,7,.43); backdrop-filter: blur(10px); font-size: 8px; font-weight: 800; letter-spacing: .06em; }
+.game-card-art .game-icon { position: relative; z-index: 1; width: 91px; height: 91px; margin: 8px 0 0; filter: drop-shadow(0 9px 13px rgba(0,0,0,.48)); transition: transform .55s cubic-bezier(.2,.8,.2,1), filter .45s ease; }
+.game-card:hover .game-card-art .game-icon { transform: translateY(-5px) scale(1.12) rotate(-4deg); filter: drop-shadow(0 10px 18px color-mix(in srgb, var(--card-accent, #d6ad5b) 30%, transparent)); }
+.game-card-body { display: flex; flex-direction: column; align-items: stretch; padding: 14px 7px 5px; }
+.game-card-body .game-title { margin-bottom: 4px; color: #fff6e4; font-size: 15px; letter-spacing: -.025em; }
+.game-card-body .game-desc { margin-bottom: 13px; color: rgba(221,209,187,.55); font-size: 11px; }
+.game-card .play-btn { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 11px 12px; border-radius: 10px; color: #e8d8b4; background: rgba(214,173,91,.07); border-color: rgba(214,173,91,.2); font-size: 10px; letter-spacing: .08em; }
+.game-card:hover .play-btn { color: #211707; background: linear-gradient(110deg, #c99b4d, #f0d69b); border-color: rgba(255,240,205,.35); }
+.game-card .play-btn i { font-size: 15px; }
+.catalog-empty { display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 46px 20px; border: 1px dashed rgba(214,173,91,.24); border-radius: 18px; color: var(--text-muted); text-align: center; background: rgba(24,20,14,.48); }
+.catalog-empty[hidden] { display: none; }
+.catalog-empty > i { color: #d6ad5b; font-size: 28px; }
+.catalog-empty strong { color: #f3e6cc; font-size: 14px; }
+.catalog-empty span { font-size: 11px; }
+.catalog-empty button { margin-top: 8px; padding: 8px 13px; border: 1px solid rgba(214,173,91,.28); border-radius: 9px; color: #e6cc98; background: rgba(214,173,91,.08); font-size: 11px; font-weight: 700; cursor: pointer; }
+
+@keyframes heroAmbientSweep { 0%, 28% { transform: translateX(-50%) rotate(22deg); opacity: 0; } 48% { opacity: .9; } 72%, 100% { transform: translateX(250%) rotate(22deg); opacity: 0; } }
+@keyframes heroGlowPulse { from { transform: scale(.91); opacity: .65; } to { transform: scale(1.1); opacity: 1; } }
+@keyframes heroOrbit { to { transform: rotate(337deg); } }
+@keyframes heroOrbitReverse { to { transform: rotate(-302deg); } }
+@keyframes heroEmblemFloat { 0%,100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-7px) rotate(-3deg); } }
+@keyframes heroSparkle { 0%,100% { opacity: .35; transform: scale(.8) rotate(0); } 50% { opacity: 1; transform: scale(1.16) rotate(18deg); } }
+
+@media (min-width: 481px) and (max-width: 900px) {
+  .lobby-hero { padding: 29px 27px; grid-template-columns: minmax(0,1.2fr) minmax(190px,.8fr); }
+  .hero-visual { min-height: 190px; }
+  .hero-emblem { width: 94px; height: 94px; }
+  .hero-emblem i { font-size: 49px; }
+  .hero-orbit-one { width: 172px; }
+  .hero-orbit-two { width: 205px; }
+}
+@media (max-width: 600px) {
+  .lobby-hero { display: block; min-height: 0; margin: 0 0 28px; padding: 24px 20px 25px; border-radius: 21px; }
+  .hero-greeting { margin-top: 18px; }
+  .lobby-hero h1 { font-size: clamp(27px, 8vw, 35px); }
+  .hero-description { max-width: 100%; font-size: 12px; }
+  .hero-actions { gap: 12px; margin-top: 19px; }
+  .hero-safe-note { width: 100%; }
+  .hero-visual { position: absolute; top: 8px; right: -45px; width: 175px; min-height: 175px; opacity: .22; pointer-events: none; }
+  .hero-emblem { width: 86px; height: 86px; border-radius: 25px; }
+  .hero-emblem i { font-size: 45px; }
+  .hero-orbit-one { width: 155px; height: 86px; }
+  .hero-orbit-two { width: 175px; height: 105px; }
+  .hero-orbit-three { width: 130px; height: 130px; }
+  .hero-visual-label { display: none; }
+  .hero-bottom-line { left: 20px; right: 20px; }
+  .catalog-heading-row { align-items: center; }
+  .catalog-title { font-size: 23px; }
+  .catalog-subtitle { max-width: 250px; font-size: 10px; }
+  .catalog-count-card { padding: 8px 10px; }
+  .catalog-count-card strong { font-size: 18px; }
+  .catalog-count-card span { font-size: 9px; }
+  .catalog-toolbar { padding: 11px; gap: 11px; }
+  .category-tabs { margin-right: -2px; }
+  .category-chip { padding: 8px 11px; font-size: 10px; }
+  .catalog-tools { grid-template-columns: 1fr; }
+  .catalog-sort-wrap { min-height: 39px; }
+  .games-grid { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 12px; }
+  .game-card { padding: 8px; border-radius: 15px; }
+  .game-card-art { min-height: 118px; border-radius: 11px; }
+  .game-card-art .game-icon { width: 70px; height: 70px; }
+  .game-card-number { top: 7px; left: 8px; font-size: 8px; }
+  .game-card-category { top: 6px; right: 6px; padding: 4px 6px; font-size: 7px; }
+  .game-card-body { padding: 10px 4px 3px; }
+  .game-card-body .game-title { font-size: 12px; }
+  .game-card-body .game-desc { margin-bottom: 10px; font-size: 10px; }
+  .game-card .play-btn { padding: 9px 7px; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lobby-hero::after, .hero-visual-glow, .hero-orbit, .hero-emblem, .hero-spark { animation: none !important; }
+}
+
+
+
+/* ═══════ KESUG SLOTS 1.2 · PROFILE, SETTINGS & FAVORITES ═══════ */
+.header-icon-btn {
+  width: 43px; height: 43px; display: grid; place-items: center; flex: 0 0 auto;
+  border: 1px solid rgba(245,220,165,.15); border-radius: 50%; color: #e7d3a6;
+  background: rgba(255,255,255,.035); cursor: pointer;
+  transition: transform .28s ease, color .28s ease, border-color .28s ease, background .28s ease, box-shadow .28s ease;
+}
+.header-icon-btn i { font-size: 19px; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+.header-icon-btn:hover { color: #fff0c8; border-color: rgba(214,173,91,.48); background: rgba(214,173,91,.10); box-shadow: 0 0 20px rgba(214,173,91,.10); transform: translateY(-2px); }
+.header-icon-btn:hover i { transform: rotate(35deg); }
+.header-right { gap: 10px; }
+.favorites-chip { display: inline-flex; align-items: center; gap: 6px; }
+.favorites-chip i { color: #e7c77f; font-size: 13px; }
+.favorites-chip span { min-width: 18px; padding: 1px 5px; border-radius: 99px; background: rgba(214,173,91,.13); color: #e6ca8e; font-size: 9px; }
+.game-card { padding-top: 11px; }
+.game-card-art { position: relative; }
+.favorite-toggle {
+  position: absolute; z-index: 4; top: 9px; right: 9px; width: 34px; height: 34px;
+  display: grid; place-items: center; border-radius: 50%; border: 1px solid rgba(255,238,199,.24);
+  color: rgba(255,245,221,.72); background: rgba(12,10,7,.58); backdrop-filter: blur(12px);
+  cursor: pointer; transition: transform .25s ease, color .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.favorite-toggle i { font-size: 16px; }
+.favorite-toggle:hover { transform: scale(1.10); color: #ffe8ae; border-color: rgba(240,207,131,.6); }
+.favorite-toggle.is-favorite { color: #f0cf83; background: rgba(91,65,25,.78); border-color: rgba(240,207,131,.48); box-shadow: 0 0 18px rgba(214,173,91,.16); }
+.favorite-toggle.is-favorite i { filter: drop-shadow(0 0 5px rgba(240,207,131,.48)); }
+.profile-actions { display: flex; gap: 10px; margin: 0 0 22px; }
+.profile-actions .btn { min-height: 44px; }
+.profile-data-panel, .settings-group, .settings-info-card {
+  border: 1px solid rgba(214,173,91,.17); border-radius: 19px;
+  background: linear-gradient(135deg, rgba(35,29,20,.88), rgba(20,17,12,.92));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 14px 38px rgba(0,0,0,.16);
+}
+.profile-data-panel { margin-top: 22px; padding: 23px; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 18px; }
+.profile-data-copy h3, .settings-group-heading h3 { color: #fff5df; font: 700 20px 'Space Grotesk','Manrope',sans-serif; letter-spacing: -.035em; }
+.profile-data-copy p { max-width: 610px; margin-top: 7px; color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+.profile-data-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+.profile-data-actions .btn { min-height: 42px; white-space: nowrap; }
+.profile-data-panel > small { grid-column: 1 / -1; color: rgba(224,211,185,.48); font-size: 10px; }
+.profile-data-panel > small i { margin-right: 5px; color: #d6b66f; }
+.settings-page-label { color: rgba(226,206,163,.42); font-size: 9px; font-weight: 800; letter-spacing: .18em; }
+.settings-page-label i { margin-right: 5px; color: #d6ad5b; }
+.settings-hero { display: flex; align-items: center; gap: 19px; margin-bottom: 22px; padding: 24px; border: 1px solid rgba(214,173,91,.22); border-radius: 20px; background: radial-gradient(ellipse at 0% 0%, rgba(214,173,91,.15), transparent 55%), linear-gradient(120deg, rgba(37,30,19,.96), rgba(19,17,13,.96)); }
+.settings-hero-icon { width: 58px; height: 58px; flex: 0 0 auto; display: grid; place-items: center; border: 1px solid rgba(240,207,131,.3); border-radius: 17px; color: #f0cf83; background: rgba(214,173,91,.10); box-shadow: 0 8px 24px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.09); }
+.settings-hero-icon i { font-size: 27px; }
+.settings-hero h2 { color: #fff5df; font: 800 clamp(23px,3vw,30px) 'Space Grotesk','Manrope',sans-serif; letter-spacing: -.045em; }
+.settings-hero p { margin-top: 4px; color: var(--text-muted); font-size: 12px; }
+.settings-layout { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+.settings-group { padding: 21px; }
+.settings-group-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.settings-group-heading > i { color: rgba(214,173,91,.45); font-size: 25px; }
+.settings-group-heading h3 { font-size: 17px; }
+.setting-row { position: relative; display: flex; align-items: center; gap: 12px; min-height: 68px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.055); cursor: pointer; }
+.setting-row:first-of-type { border-top: 0; }
+.setting-row-icon { width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 10px; color: #dfbf7b; background: rgba(214,173,91,.09); }
+.setting-row-icon i { font-size: 17px; }
+.setting-row-copy { display: flex; flex: 1; flex-direction: column; gap: 3px; min-width: 0; }
+.setting-row-copy strong { color: #eee5d3; font-size: 11px; font-weight: 800; }
+.setting-row-copy small { color: rgba(213,202,181,.48); font-size: 9px; line-height: 1.45; }
+.setting-row input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.setting-switch { position: relative; width: 38px; height: 22px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.12); border-radius: 99px; background: rgba(255,255,255,.09); transition: background .22s ease, border-color .22s ease; }
+.setting-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: #a69b86; box-shadow: 0 1px 4px rgba(0,0,0,.25); transition: transform .22s cubic-bezier(.2,.8,.2,1), background .22s ease; }
+.setting-row input:checked + .setting-switch { background: linear-gradient(100deg,#b8873d,#f0d28f); border-color: rgba(240,207,131,.55); }
+.setting-row input:checked + .setting-switch::after { transform: translateX(16px); background: #241909; }
+.setting-row input:focus-visible + .setting-switch { outline: 2px solid #f0cf83; outline-offset: 3px; }
+.settings-info-card { grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 12px; padding: 17px 19px; color: #dfc58f; }
+.settings-info-card > i { margin-top: 2px; font-size: 19px; }
+.settings-info-card strong { color: #f0e2c4; font-size: 11px; }
+.settings-info-card p { margin-top: 4px; color: rgba(213,202,181,.52); font-size: 10px; line-height: 1.6; }
+.settings-footer-actions { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 10px; }
+.settings-footer-actions .btn { min-height: 42px; }
+.catalog-empty { margin: 18px 0 4px; padding: 38px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px dashed rgba(214,173,91,.23); border-radius: 17px; color: var(--text-muted); background: rgba(25,20,13,.45); }
+.catalog-empty[hidden] { display: none !important; }
+.catalog-empty > i { color: #d9b56f; font-size: 27px; margin-bottom: 10px; }
+.catalog-empty strong { color: #f2e4c5; font-size: 14px; }
+.catalog-empty span { margin-top: 5px; font-size: 11px; }
+.catalog-empty button { margin-top: 15px; padding: 8px 13px; border: 1px solid rgba(214,173,91,.25); border-radius: 9px; color: #e7ca8b; background: rgba(214,173,91,.08); font-size: 10px; font-weight: 800; cursor: pointer; }
+.ks-toast { position: fixed; z-index: 15000; left: 50%; bottom: 24px; max-width: min(92vw,440px); padding: 12px 17px; border: 1px solid rgba(240,207,131,.28); border-radius: 13px; color: #f7edda; background: rgba(27,23,16,.94); box-shadow: 0 15px 45px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.07); backdrop-filter: blur(20px); font-size: 11px; font-weight: 700; text-align: center; opacity: 0; pointer-events: none; transform: translate(-50%,14px) scale(.98); transition: opacity .25s ease, transform .25s cubic-bezier(.2,.8,.2,1); }
+.ks-toast.is-visible { opacity: 1; transform: translate(-50%,0) scale(1); }
+body.compact-cards .games-grid { grid-template-columns: repeat(auto-fill,minmax(185px,1fr)); gap: 13px; }
+body.compact-cards .game-card-art { min-height: 116px; }
+body.compact-cards .game-card { padding: 9px; }
+body.reduce-effects *, body.reduce-effects *::before, body.reduce-effects *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+body.no-ambient::before, body.no-ambient::after { display: none !important; }
+@media (max-width: 700px) {
+  .header-icon-btn { width: 36px; height: 36px; }
+  .header-icon-btn i { font-size: 16px; }
+  .header-right { gap: 6px; }
+  .profile-actions { flex-direction: column; }
+  .profile-data-panel { grid-template-columns: 1fr; padding: 18px; }
+  .profile-data-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .profile-data-actions .btn { padding: 11px 8px; font-size: 11px; }
+  .settings-layout { grid-template-columns: 1fr; }
+  .settings-info-card, .settings-footer-actions { grid-column: auto; }
+  .settings-hero { padding: 19px; gap: 14px; }
+  .settings-hero-icon { width: 48px; height: 48px; border-radius: 14px; }
+  .settings-footer-actions { flex-direction: column; }
+  body.compact-cards .games-grid { grid-template-columns: repeat(auto-fill,minmax(145px,1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ks-toast, .setting-switch, .setting-switch::after { transition: none !important; }
+}
+
+
+.profile-fav-summary { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; color: rgba(225,208,173,.56); font-size: 10px; font-weight: 700; }
+.profile-fav-summary i { color: #e1bd72; }
+.profile-fav-summary strong { color: #f0d28f; }
+
+
+/* ═══════ KESUG SLOTS 1.2 · PERFORMANCE OPTIMIZATION ═══════
+   Keeps the gold look and frosted glass while reducing continuously animated effects. */
+/* Static ambient lighting: no full-viewport moving GPU layer. */
+body::before {
+  animation: none !important;
+  filter: none !important;
+  will-change: auto !important;
+  transform: none !important;
+  opacity: .62;
+}
+
+/* Retain visible frosted glass, but use a lighter blur radius on the main header. */
+.top-header.is-scrolled .header-glass {
+  -webkit-backdrop-filter: blur(18px) saturate(130%) !important;
+  backdrop-filter: blur(18px) saturate(130%) !important;
+  transition:
+    background-color .42s ease,
+    border-color .42s ease,
+    border-radius .42s ease,
+    box-shadow .42s ease,
+    padding .42s ease,
+    transform .42s cubic-bezier(.22,.61,.36,1) !important;
+}
+.top-header.is-scrolled .header-glass::before {
+  animation: none !important;
+  opacity: .34 !important;
+  transform: translateX(0) skewX(-16deg) !important;
+}
+.top-header.is-scrolled .header-glass::after {
+  animation: none !important;
+  opacity: .72 !important;
+}
+.top-header.is-scrolled .top-brand i,
+.top-header.is-scrolled .profile-btn,
+.top-header.is-scrolled .user-balance::after {
+  animation: none !important;
+}
+.top-header.is-scrolled .user-balance::after { display: none !important; }
+
+/* Keep the decorative gold hero, but stop orbiting, pulsing and blur-filter loops. */
+body::before,
+.ks-loader::before,
+.ks-loader::after,
+.hero-visual-glow {
+  filter: none !important;
+}
+.lobby-hero::after,
+.hero-visual-glow,
+.hero-orbit,
+.hero-emblem,
+.hero-spark {
+  animation: none !important;
+}
+.hero-emblem { transform: rotate(-5deg); }
+.hero-visual-glow { opacity: .78; }
+
+/* Cards appear immediately with no per-card blur; hover remains responsive. */
+.game-card {
+  animation: none !important;
+  opacity: 1 !important;
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease !important;
+}
+.game-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.28), 0 0 12px rgba(214,173,91,.07) !important;
+}
+.game-card::after,
+.game-card:hover::after,
+.game-card:hover .play-btn::after {
+  animation: none !important;
+  opacity: 0 !important;
+}
+.game-icon,
+.game-card .game-icon,
+.game-card:hover .game-icon {
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.38)) !important;
+  transition: transform .22s ease !important;
+}
+.game-card-category {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background: rgba(18,14,8,.88) !important;
+}
+
+/* No always-running glow/shadow animations on controls or winning tiles. */
+.spin-btn-big { animation: none !important; background-size: 100% 100% !important; }
+.reel-item.winning { animation: none !important; box-shadow: 0 0 12px rgba(214,173,91,.35) !important; }
+.page-view.active { animation: pageEnter .22s ease both !important; }
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Slot header and toast use lighter blur too; primary header keeps its frosted look. */
+.game-header {
+  -webkit-backdrop-filter: blur(14px) saturate(125%) !important;
+  backdrop-filter: blur(14px) saturate(125%) !important;
+}
+.ks-toast {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Once the intro screen has faded away, stop its looping decorative animations. */
+.ks-loader.is-hidden::before,
+.ks-loader.is-hidden::after,
+.ks-loader.is-hidden * {
+  animation: none !important;
+}
+
+/* Preserve system accessibility preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
 </style>
 </head>
 <body class="is-loading">
@@ -724,6 +1117,7 @@ body::after {
         <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png" alt="Wallet">
         <span id="ui-balance">0 ₽</span>
       </div>
+      <button class="header-icon-btn" type="button" onclick="showPage('settings')" aria-label="Настройки" title="Настройки"><i class="ph-bold ph-sliders-horizontal"></i></button>
       <button class="profile-btn" onclick="showPage('profile')">
         <img id="nav-avatar" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png">
       </button>
@@ -735,7 +1129,82 @@ body::after {
   <main>
     <!-- ЛОББИ -->
     <div class="page-view active" id="page-lobby">
-      <div class="games-grid" id="machine-grid"></div>
+      <!-- Главная приветственная область -->
+      <section class="lobby-hero" aria-labelledby="lobby-hero-title">
+        <div class="hero-copy">
+          <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> KESUG SLOTS <span class="hero-eyebrow-divider"></span> GOLD EDITION</div>
+          <p class="hero-greeting">С возвращением, <strong id="lobby-welcome-nick">Игрок</strong></p>
+          <h1 id="lobby-hero-title">ТВОЯ КОЛЛЕКЦИЯ<br><span>ИГРОВЫХ МИРОВ</span></h1>
+          <p class="hero-description">Исследуй тематические автоматы, находи знакомые миры и сохраняй свой игровой профиль. Здесь используются только виртуальные очки.</p>
+          <div class="hero-actions">
+            <button class="hero-primary-btn" type="button" onclick="scrollToCatalog()">Открыть каталог <i class="ph-bold ph-arrow-down-right"></i></button>
+            <span class="hero-safe-note"><i class="ph-fill ph-shield-check"></i> Без реальных денежных операций</span>
+          </div>
+          <div class="hero-facts">
+            <div class="hero-fact"><strong id="hero-machine-count">39</strong><span>АВТОМАТОВ В КАТАЛОГЕ</span></div>
+            <div class="hero-fact-separator"></div>
+            <div class="hero-fact"><i class="ph ph-user-circle"></i><span>ЛОКАЛЬНЫЙ ПРОФИЛЬ</span></div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-visual-glow"></div>
+          <div class="hero-orbit hero-orbit-one"></div>
+          <div class="hero-orbit hero-orbit-two"></div>
+          <div class="hero-orbit hero-orbit-three"></div>
+          <div class="hero-emblem"><i class="ph-fill ph-diamonds-four"></i></div>
+          <span class="hero-spark hero-spark-one">✦</span>
+          <span class="hero-spark hero-spark-two">✧</span>
+          <span class="hero-spark hero-spark-three">✦</span>
+          <div class="hero-visual-label">DISCOVER YOUR NEXT WORLD</div>
+        </div>
+        <div class="hero-bottom-line" aria-hidden="true"></div>
+      </section>
+
+      <section class="catalog-section" id="catalog-section" aria-labelledby="catalog-title">
+        <div class="catalog-heading-row">
+          <div class="catalog-heading-copy">
+            <div class="section-kicker">THE COLLECTION</div>
+            <h2 class="catalog-title" id="catalog-title">Каталог автоматов</h2>
+            <p class="catalog-subtitle">Выбери тематику или найди нужный автомат через поиск.</p>
+          </div>
+          <div class="catalog-count-card"><strong id="catalog-visible-count">0</strong><span>автоматов</span></div>
+        </div>
+
+        <div class="catalog-toolbar">
+          <div class="category-tabs" role="group" aria-label="Категории автоматов">
+            <button class="category-chip active" type="button" data-category="all" onclick="setMachineCategory('all', this)">Все</button>
+            <button class="category-chip" type="button" data-category="fantasy" onclick="setMachineCategory('fantasy', this)">Фэнтези</button>
+            <button class="category-chip" type="button" data-category="nature" onclick="setMachineCategory('nature', this)">Природа</button>
+            <button class="category-chip" type="button" data-category="fruit" onclick="setMachineCategory('fruit', this)">Фрукты</button>
+            <button class="category-chip" type="button" data-category="neon" onclick="setMachineCategory('neon', this)">Неон</button>
+            <button class="category-chip" type="button" data-category="adventure" onclick="setMachineCategory('adventure', this)">Приключения</button>
+            <button class="category-chip favorites-chip" type="button" data-category="favorites" onclick="setMachineCategory('favorites', this)"><i class="ph-fill ph-star"></i> Избранное <span id="favorites-tab-count">0</span></button>
+          </div>
+          <div class="catalog-tools">
+            <label class="catalog-search">
+              <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+              <input id="machine-search" type="search" placeholder="Найти автомат..." autocomplete="off" oninput="filterMachines(this.value)" aria-label="Поиск автоматов">
+              <kbd>⌕</kbd>
+            </label>
+            <label class="catalog-sort-wrap" aria-label="Сортировка автоматов">
+              <i class="ph ph-arrows-down-up" aria-hidden="true"></i>
+              <select id="machine-sort" onchange="sortMachines(this.value)">
+                <option value="default">По порядку</option>
+                <option value="az">По названию А–Я</option>
+                <option value="za">По названию Я–А</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="games-grid" id="machine-grid" aria-live="polite"></div>
+        <div class="catalog-empty" id="catalog-empty" hidden>
+          <i class="ph ph-magnifying-glass"></i>
+          <strong>Ничего не найдено</strong>
+          <span>Попробуй изменить запрос или выбрать другую категорию.</span>
+          <button type="button" onclick="resetMachineFilters()">Сбросить фильтры</button>
+        </div>
+      </section>
     </div>
 
     <!-- ПРОФИЛЬ -->
@@ -749,10 +1218,14 @@ body::after {
         <div class="profile-info">
           <h2 id="profile-big-nick">Игрок</h2>
           <p id="profile-big-id">ID: #0000</p>
+          <span class="profile-fav-summary"><i class="ph-fill ph-star"></i> <strong id="profile-favorites-count">0</strong> в избранном</span>
         </div>
       </div>
       
-      <button class="btn btn-green" onclick="showPage('edit-profile')" style="margin-bottom: 20px;"><i class="ph-bold ph-pencil"></i> Редактировать</button>
+      <div class="profile-actions">
+        <button class="btn btn-green" onclick="showPage('edit-profile')"><i class="ph-bold ph-pencil"></i> Редактировать профиль</button>
+        <button class="btn btn-gray" onclick="showPage('settings')"><i class="ph-bold ph-sliders-horizontal"></i> Настройки</button>
+      </div>
 
       <div class="stat-grid">
         <div class="stat-card"><i class="ph-bold ph-arrows-clockwise stat-icon"></i><div class="stat-value" id="stat-spins">0</div><div class="stat-label">Спинов</div></div>
@@ -761,6 +1234,47 @@ body::after {
         <div class="stat-card"><i class="ph-bold ph-trend-up stat-icon"></i><div class="stat-value" id="stat-maxwin">0 ₽</div><div class="stat-label">Макс. выигрыш</div></div>
         <div class="stat-card"><i class="ph-bold ph-wallet stat-icon"></i><div class="stat-value" id="stat-balance">0 ₽</div><div class="stat-label">Баланс</div></div>
         <div class="stat-card"><i class="ph-bold ph-arrows-down-up stat-icon"></i><div class="stat-value" id="stat-profit">0 ₽</div><div class="stat-label">Прибыль</div></div>
+      </div>
+
+      <section class="profile-data-panel">
+        <div class="profile-data-copy">
+          <span class="section-kicker">LOCAL PROFILE</span>
+          <h3>Резервная копия профиля</h3>
+          <p>Сохрани баланс, статистику, избранное и настройки в файл. Его можно импортировать обратно в этом браузере.</p>
+        </div>
+        <div class="profile-data-actions">
+          <button class="btn btn-green" type="button" onclick="exportProfileBackup()"><i class="ph-bold ph-download-simple"></i> Экспортировать</button>
+          <button class="btn btn-gray" type="button" onclick="document.getElementById('import-backup-file').click()"><i class="ph-bold ph-upload-simple"></i> Импортировать</button>
+          <input id="import-backup-file" type="file" accept=".json,application/json" hidden>
+        </div>
+        <small><i class="ph-fill ph-shield-check"></i> Файл хранится у тебя. Онлайн-синхронизации нет.</small>
+      </section>
+    </div>
+
+    <!-- НАСТРОЙКИ -->
+    <div class="page-view" id="page-settings">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('lobby')"><i class="ph-bold ph-arrow-left"></i> На главную</button>
+        <span class="settings-page-label"><i class="ph-bold ph-sliders-horizontal"></i> PERSONAL SETTINGS</span>
+      </div>
+      <section class="settings-hero">
+        <div class="settings-hero-icon"><i class="ph-fill ph-sliders-horizontal"></i></div>
+        <div><span class="section-kicker">KESUG SLOTS</span><h2>Центр настроек</h2><p>Настрой внешний вид и поведение интерфейса под себя.</p></div>
+      </section>
+      <div class="settings-layout">
+        <section class="settings-group">
+          <div class="settings-group-heading"><div><span class="section-kicker">APPEARANCE</span><h3>Внешний вид</h3></div><i class="ph ph-palette"></i></div>
+          <label class="setting-row" for="setting-compact-cards"><span class="setting-row-icon"><i class="ph-bold ph-squares-four"></i></span><span class="setting-row-copy"><strong>Компактные карточки</strong><small>Показывать больше автоматов в каталоге.</small></span><input id="setting-compact-cards" type="checkbox" onchange="updateSetting('compactCards', this.checked)"><span class="setting-switch"></span></label>
+          <label class="setting-row" for="setting-ambient"><span class="setting-row-icon"><i class="ph-bold ph-sun-horizon"></i></span><span class="setting-row-copy"><strong>Атмосферный фон</strong><small>Золотистые световые пятна и декоративная сетка.</small></span><input id="setting-ambient" type="checkbox" onchange="updateSetting('ambientBackground', this.checked)"><span class="setting-switch"></span></label>
+        </section>
+        <section class="settings-group">
+          <div class="settings-group-heading"><div><span class="section-kicker">MOTION</span><h3>Анимации</h3></div><i class="ph ph-sparkle"></i></div>
+          <label class="setting-row" for="setting-reduced-motion"><span class="setting-row-icon"><i class="ph-bold ph-waveform"></i></span><span class="setting-row-copy"><strong>Уменьшить анимации</strong><small>Отключить декоративные движения и длинные переходы.</small></span><input id="setting-reduced-motion" type="checkbox" onchange="updateSetting('reduceEffects', this.checked)"><span class="setting-switch"></span></label>
+        </section>
+        <section class="settings-info-card">
+          <i class="ph-fill ph-info"></i><div><strong>О настройках</strong><p>Настройки сохраняются локально в этом браузере. Очистка данных сайта может удалить их вместе с профилем.</p></div>
+        </section>
+        <div class="settings-footer-actions"><button class="btn btn-gray" type="button" onclick="resetInterfaceSettings()"><i class="ph-bold ph-arrow-counter-clockwise"></i> Сбросить настройки интерфейса</button><button class="btn btn-green" type="button" onclick="showPage('profile')">Готово</button></div>
       </div>
     </div>
 
@@ -787,6 +1301,7 @@ body::after {
   </main>
 </div>
 <footer class="ks-project-footer" aria-label="Информация о проекте"><a href="about.html">О проекте Kesug Slots</a><span>Только виртуальные игровые очки · без денежных операций</span></footer>
+<div class="ks-toast" id="ks-toast" role="status" aria-live="polite"></div>
 
 <!-- ИГРОВОЙ ЭКРАН -->
 <div id="game-screen">
@@ -879,14 +1394,30 @@ function getIconUrl(emoji) {
   return ICON_MAP[emoji] || 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Gem%20stone/3D/gem_stone_3d.png';
 }
 
+function readLocalJSON(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (error) {
+    console.warn('Kesug Slots: не удалось прочитать локальные данные', key, error);
+    return fallback;
+  }
+}
+
+const DEFAULT_SETTINGS = { compactCards: false, ambientBackground: true, reduceEffects: false };
+const savedSettings = readLocalJSON('ks_settings', {});
 const state = {
   playerId: localStorage.getItem('kasino_player_id') || 'player_' + Math.random().toString(36).substr(2, 9),
   balance: parseFloat(localStorage.getItem('ks_balance')) || 1000,
   bet: 100,
   avatar: localStorage.getItem('ks_avatar') || '',
   nickname: localStorage.getItem('ks_nickname') || 'Игрок',
-  stats: JSON.parse(localStorage.getItem('ks_stats')) || { spins: 0, won: 0, maxWin: 0, totalBet: 0 }
+  stats: readLocalJSON('ks_stats', { spins: 0, won: 0, maxWin: 0, totalBet: 0 }),
+  favorites: readLocalJSON('ks_favorites', []),
+  settings: { ...DEFAULT_SETTINGS, ...(savedSettings && typeof savedSettings === 'object' ? savedSettings : {}) }
 };
+if (!Array.isArray(state.favorites)) state.favorites = [];
+state.favorites = [...new Set(state.favorites.filter(id => typeof id === 'string' && MACHINES.some(machine => machine.id === id)))];
 localStorage.setItem('kasino_player_id', state.playerId);
 
 let currentMachine = null, isSpinning = false;
@@ -897,14 +1428,19 @@ window.showPage = (id) => {
   if (el) el.classList.add('active');
 
   if (id === 'profile') renderProfileStats();
+  if (id === 'settings') syncSettingsControls();
   if (id === 'edit-profile') document.getElementById('input-nick').value = state.nickname;
+  window.scrollTo({ top: 0, behavior: state.settings.reduceEffects ? 'auto' : 'smooth' });
 };
 
 function saveToLocal() {
+  localStorage.setItem('kasino_player_id', state.playerId);
   localStorage.setItem('ks_balance', state.balance);
   localStorage.setItem('ks_nickname', state.nickname);
   localStorage.setItem('ks_stats', JSON.stringify(state.stats));
   localStorage.setItem('ks_avatar', state.avatar);
+  localStorage.setItem('ks_favorites', JSON.stringify(state.favorites));
+  localStorage.setItem('ks_settings', JSON.stringify(state.settings));
 }
 
 function updateUI() {
@@ -931,6 +1467,8 @@ function updateProfileUI() {
   
   document.getElementById('profile-big-nick').textContent = state.nickname;
   document.getElementById('profile-big-id').textContent = `ID: #${state.playerId.slice(-4).toUpperCase()}`;
+  const lobbyNick = document.getElementById('lobby-welcome-nick');
+  if (lobbyNick) lobbyNick.textContent = state.nickname;
 }
 
 function renderProfileStats() {
@@ -944,18 +1482,266 @@ function renderProfileStats() {
   const profitEl = document.getElementById('stat-profit');
   profitEl.textContent = (profit >= 0 ? '+' : '') + Math.floor(profit).toLocaleString('ru-RU') + ' ₽';
   profitEl.style.color = profit >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+  const favCount = document.getElementById('profile-favorites-count');
+  if (favCount) favCount.textContent = String(state.favorites.length);
 }
+
+const MACHINE_CATEGORY_MAP = {
+  fantasy: new Set(['gatesofolympus','bookofra','dragon','divinefortune','gonzo','riseofolympus','moonprincess','madamedestiny','templetumble','jackbeanstalk','5lions']),
+  nature: new Set(['bigbass','winter','jungle','ocean','pets','razortooth','wolfgold','greatrhino','doghouse','doghouse2','wildswarm']),
+  fruit: new Set(['classic','twinspin','jars']),
+  neon: new Set(['cyber','reactoonz','wildmachine','firestrike','chaoscrew','moneytrain','moneytrain3','snakearena']),
+  adventure: new Set(['starburst','stars','tombstone','sanquentin','deadordealive','bandit'])
+};
+const MACHINE_CATEGORY_META = {
+  fantasy: { label: 'Фэнтези', accent: '#e2bf7b' },
+  nature: { label: 'Природа', accent: '#caa35f' },
+  fruit: { label: 'Фрукты', accent: '#f0d28f' },
+  neon: { label: 'Неон', accent: '#bd914b' },
+  adventure: { label: 'Приключения', accent: '#a98243' }
+};
+const lobbyFilters = { category: 'all', query: '', sort: 'default' };
+
+function getMachineCategory(machine) {
+  for (const [category, ids] of Object.entries(MACHINE_CATEGORY_MAP)) {
+    if (ids.has(machine.id)) return category;
+  }
+  return 'adventure';
+}
+
+window.setMachineCategory = (category, button) => {
+  lobbyFilters.category = category;
+  document.querySelectorAll('.category-chip').forEach(chip => {
+    chip.classList.toggle('active', chip.dataset.category === category);
+  });
+  renderLobby();
+};
+
+window.toggleFavorite = (event, machineId) => {
+  if (event) { event.preventDefault(); event.stopPropagation(); }
+  const index = state.favorites.indexOf(machineId);
+  if (index >= 0) {
+    state.favorites.splice(index, 1);
+    showToast('Удалено из избранного');
+  } else {
+    state.favorites.push(machineId);
+    showToast('Добавлено в избранное');
+  }
+  saveToLocal();
+  renderLobby();
+  renderProfileStats();
+};
+
+window.filterMachines = (query) => {
+  lobbyFilters.query = String(query || '').trim().toLocaleLowerCase('ru-RU');
+  renderLobby();
+};
+
+window.sortMachines = (sort) => {
+  lobbyFilters.sort = sort || 'default';
+  renderLobby();
+};
+
+window.resetMachineFilters = () => {
+  lobbyFilters.category = 'all';
+  lobbyFilters.query = '';
+  lobbyFilters.sort = 'default';
+  const search = document.getElementById('machine-search');
+  const sort = document.getElementById('machine-sort');
+  if (search) search.value = '';
+  if (sort) sort.value = 'default';
+  document.querySelectorAll('.category-chip').forEach(chip => {
+    chip.classList.toggle('active', chip.dataset.category === 'all');
+  });
+  renderLobby();
+};
+
+window.scrollToCatalog = () => {
+  const section = document.getElementById('catalog-section');
+  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 function renderLobby() {
   const grid = document.getElementById('machine-grid');
-  grid.innerHTML = MACHINES.map((m, index) => `
-    <div class="game-card" style="--card-delay: ${Math.min(index * 42, 520)}ms" onclick="openMachine('${m.id}')">
-      <img src="${getIconUrl(m.symbols[0])}" class="game-icon">
-      <div class="game-title">${m.name}</div>
-      <div class="game-desc">${m.desc}</div>
-      <button class="play-btn">Играть</button>
-    </div>
-  `).join('');
+  if (!grid) return;
+
+  let items = MACHINES.filter(machine => {
+    const categoryMatch = lobbyFilters.category === 'all'
+      || (lobbyFilters.category === 'favorites' ? state.favorites.includes(machine.id) : getMachineCategory(machine) === lobbyFilters.category);
+    const searchText = `${machine.name} ${machine.desc}`.toLocaleLowerCase('ru-RU');
+    const searchMatch = !lobbyFilters.query || searchText.includes(lobbyFilters.query);
+    return categoryMatch && searchMatch;
+  });
+
+  if (lobbyFilters.sort === 'az') items.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+  if (lobbyFilters.sort === 'za') items.sort((a, b) => b.name.localeCompare(a.name, 'ru'));
+
+  const count = document.getElementById('catalog-visible-count');
+  const empty = document.getElementById('catalog-empty');
+  const heroCount = document.getElementById('hero-machine-count');
+  if (count) count.textContent = String(items.length);
+  if (heroCount) heroCount.textContent = String(MACHINES.length);
+  const favoritesTabCount = document.getElementById('favorites-tab-count');
+  if (favoritesTabCount) favoritesTabCount.textContent = String(state.favorites.length);
+  if (empty) {
+    empty.hidden = items.length !== 0;
+    const emptyTitle = empty.querySelector('strong');
+    const emptyText = empty.querySelector('span');
+    if (emptyTitle) emptyTitle.textContent = lobbyFilters.category === 'favorites' && state.favorites.length === 0 ? 'Избранное пока пусто' : 'Ничего не найдено';
+    if (emptyText) emptyText.textContent = lobbyFilters.category === 'favorites' && state.favorites.length === 0 ? 'Нажимай на звёздочку на карточке, чтобы сохранить автомат здесь.' : 'Попробуй изменить запрос или выбрать другую категорию.';
+  }
+
+  grid.innerHTML = items.map((machine, index) => {
+    const category = getMachineCategory(machine);
+    const meta = MACHINE_CATEGORY_META[category] || MACHINE_CATEGORY_META.adventure;
+    const originalIndex = MACHINES.findIndex(item => item.id === machine.id) + 1;
+    return `
+      <article class="game-card" role="button" tabindex="0" aria-label="Открыть виртуальный автомат ${machine.name}" style="--card-delay:${Math.min(index * 10, 120)}ms;--card-accent:${meta.accent}" onclick="openMachine('${machine.id}')" onkeydown="if((event.key==='Enter'||event.key===' ') && event.target === event.currentTarget){event.preventDefault();openMachine('${machine.id}')}" >
+        <div class="game-card-art">
+          <button class="favorite-toggle ${state.favorites.includes(machine.id) ? 'is-favorite' : ''}" type="button" aria-label="${state.favorites.includes(machine.id) ? 'Убрать из избранного' : 'Добавить в избранное'}" aria-pressed="${state.favorites.includes(machine.id)}" onclick="toggleFavorite(event, '${machine.id}')"><i class="${state.favorites.includes(machine.id) ? 'ph-fill' : 'ph-bold'} ph-star"></i></button>
+          <span class="game-card-number">KS / ${String(originalIndex).padStart(2, '0')}</span>
+          <span class="game-card-category">${meta.label}</span>
+          <img src="${getIconUrl(machine.symbols[0])}" class="game-icon" alt="" loading="lazy" decoding="async">
+        </div>
+        <div class="game-card-body">
+          <div class="game-title">${machine.name}</div>
+          <div class="game-desc">${machine.desc}</div>
+          <div class="play-btn">Открыть автомат <i class="ph-bold ph-arrow-up-right"></i></div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function showToast(message) {
+  const toast = document.getElementById('ks-toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('is-visible');
+  window.clearTimeout(showToast.timeoutId);
+  showToast.timeoutId = window.setTimeout(() => toast.classList.remove('is-visible'), 2300);
+}
+
+function applySettings() {
+  document.body.classList.toggle('compact-cards', !!state.settings.compactCards);
+  document.body.classList.toggle('reduce-effects', !!state.settings.reduceEffects);
+  document.body.classList.toggle('no-ambient', !state.settings.ambientBackground);
+  document.documentElement.style.scrollBehavior = state.settings.reduceEffects ? 'auto' : 'smooth';
+}
+
+function syncSettingsControls() {
+  const compact = document.getElementById('setting-compact-cards');
+  const ambient = document.getElementById('setting-ambient');
+  const reduced = document.getElementById('setting-reduced-motion');
+  if (compact) compact.checked = !!state.settings.compactCards;
+  if (ambient) ambient.checked = !!state.settings.ambientBackground;
+  if (reduced) reduced.checked = !!state.settings.reduceEffects;
+}
+
+window.updateSetting = (key, value) => {
+  if (!Object.prototype.hasOwnProperty.call(DEFAULT_SETTINGS, key)) return;
+  state.settings[key] = Boolean(value);
+  saveToLocal();
+  applySettings();
+  showToast('Настройка сохранена');
+};
+
+window.resetInterfaceSettings = () => {
+  state.settings = { ...DEFAULT_SETTINGS };
+  saveToLocal();
+  applySettings();
+  syncSettingsControls();
+  showToast('Настройки интерфейса сброшены');
+};
+
+window.exportProfileBackup = () => {
+  try {
+    const backup = {
+      app: 'kesug-slots',
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      profile: {
+        playerId: state.playerId,
+        nickname: state.nickname,
+        balance: state.balance,
+        avatar: state.avatar,
+        stats: state.stats,
+        favorites: state.favorites,
+        settings: state.settings
+      }
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `kesug-slots-profile-${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+    showToast('Резервная копия подготовлена');
+  } catch (error) {
+    console.error('Kesug Slots backup export failed:', error);
+    showToast('Не удалось создать резервную копию');
+  }
+};
+
+async function importProfileBackup(file) {
+  if (!file) return;
+  if (file.size > 8 * 1024 * 1024) {
+    showToast('Файл слишком большой (максимум 8 МБ)');
+    return;
+  }
+  try {
+    const parsed = JSON.parse(await file.text());
+    if (!parsed || parsed.app !== 'kesug-slots' || parsed.version !== 1 || !parsed.profile || typeof parsed.profile !== 'object') {
+      throw new Error('Неподдерживаемый формат резервной копии');
+    }
+    if (!window.confirm('Импорт заменит текущий локальный профиль, баланс, статистику и избранное. Продолжить?')) return;
+
+    const profile = parsed.profile;
+    const validNumber = (value, fallback = 0) => {
+      const number = Number(value);
+      return Number.isFinite(number) && number >= 0 ? Math.min(number, 1_000_000_000_000) : fallback;
+    };
+    state.nickname = String(profile.nickname || 'Игрок').trim().slice(0, 15) || 'Игрок';
+    state.balance = validNumber(profile.balance, state.balance);
+    state.playerId = typeof profile.playerId === 'string' && /^player_[a-z0-9]+$/i.test(profile.playerId) ? profile.playerId : state.playerId;
+    state.avatar = typeof profile.avatar === 'string' && profile.avatar.length <= 6 * 1024 * 1024 && (profile.avatar === '' || profile.avatar.startsWith('data:image/') || /^https:\/\//i.test(profile.avatar)) ? profile.avatar : '';
+    const stats = profile.stats && typeof profile.stats === 'object' ? profile.stats : {};
+    state.stats = {
+      spins: validNumber(stats.spins),
+      won: validNumber(stats.won),
+      maxWin: validNumber(stats.maxWin),
+      totalBet: validNumber(stats.totalBet)
+    };
+    state.favorites = Array.isArray(profile.favorites) ? [...new Set(profile.favorites.filter(id => MACHINES.some(machine => machine.id === id)))] : [];
+    const importedSettings = profile.settings && typeof profile.settings === 'object' ? profile.settings : {};
+    state.settings = { ...DEFAULT_SETTINGS };
+    Object.keys(DEFAULT_SETTINGS).forEach(key => {
+      if (typeof importedSettings[key] === 'boolean') state.settings[key] = importedSettings[key];
+    });
+
+    saveToLocal();
+    applySettings();
+    updateProfileUI();
+    updateUI();
+    renderLobby();
+    renderProfileStats();
+    syncSettingsControls();
+    showToast('Профиль успешно восстановлен');
+  } catch (error) {
+    console.error('Kesug Slots backup import failed:', error);
+    showToast('Не удалось прочитать резервную копию');
+  } finally {
+    const input = document.getElementById('import-backup-file');
+    if (input) input.value = '';
+  }
+}
+
+const backupInput = document.getElementById('import-backup-file');
+if (backupInput) {
+  backupInput.addEventListener('change', event => importProfileBackup(event.target.files && event.target.files[0]));
 }
 
 window.saveProfile = () => {
@@ -1168,9 +1954,9 @@ updateHeaderOnScroll();
 
   function animateWheelScroll() {
     const distance = targetScrollY - currentScrollY;
-    currentScrollY += distance * 0.16;
+    currentScrollY += distance * 0.22;
 
-    if (Math.abs(distance) < 0.65) {
+    if (Math.abs(distance) < 0.9) {
       currentScrollY = targetScrollY;
       window.scrollTo({ top: currentScrollY, behavior: 'instant' });
       scrollFrame = null;
@@ -1214,6 +2000,8 @@ updateHeaderOnScroll();
 })();
 
 // Инициализация
+applySettings();
+syncSettingsControls();
 renderLobby();
 updateUI();
 updateProfileUI();

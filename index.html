@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Kesug Slots</title>
+<title>Kesug Slots — Virtual Slot Playground</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='0' fill='%23222'/%3E%3Cpath d='M32 12 L52 32 L32 52 L12 32 Z' fill='%2310b981'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23fbbf24'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -45,6 +45,71 @@ body {
   background-color: var(--bg-main); padding-top: 108px; 
 }
 
+/* ═══════ ФИРМЕННЫЙ ЭКРАН ЗАГРУЗКИ ═══════ */
+body.is-loading { overflow: hidden; }
+.ks-loader {
+  position: fixed; inset: 0; z-index: 20000; display: grid; place-items: center;
+  overflow: hidden; isolation: isolate; background: #101012;
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transition: opacity .68s cubic-bezier(.2,.7,.2,1), visibility 0s linear .68s;
+}
+.ks-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.ks-loader::before, .ks-loader::after {
+  content: ''; position: absolute; pointer-events: none; border-radius: 50%; filter: blur(2px);
+}
+.ks-loader::before {
+  width: min(75vw, 720px); aspect-ratio: 1; left: -25%; top: -42%;
+  background: radial-gradient(circle, rgba(16,185,129,.17), rgba(16,185,129,.035) 42%, transparent 70%);
+  animation: loaderAura 5.5s ease-in-out infinite alternate;
+}
+.ks-loader::after {
+  width: min(68vw, 620px); aspect-ratio: 1; right: -27%; bottom: -45%;
+  background: radial-gradient(circle, rgba(16,185,129,.12), rgba(16,185,129,.025) 45%, transparent 70%);
+  animation: loaderAura 6.5s ease-in-out -1.5s infinite alternate-reverse;
+}
+.ks-loader-grid {
+  position: absolute; inset: 0; pointer-events: none; opacity: .18;
+  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 54px 54px; mask-image: radial-gradient(ellipse at center, #000 5%, transparent 78%);
+}
+.ks-loader-content {
+  position: relative; z-index: 1; width: min(390px, calc(100vw - 52px));
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  animation: loaderContentIn .85s cubic-bezier(.18,.82,.24,1) both;
+}
+.ks-loader-emblem {
+  position: relative; width: 76px; height: 76px; display: grid; place-items: center;
+  margin-bottom: 24px; border: 1px solid rgba(16,185,129,.38); border-radius: 23px;
+  background: linear-gradient(145deg, rgba(28,43,38,.88), rgba(18,20,20,.92));
+  box-shadow: 0 0 0 7px rgba(16,185,129,.035), 0 12px 42px rgba(0,0,0,.38), 0 0 38px rgba(16,185,129,.14), inset 0 1px 0 rgba(255,255,255,.11);
+  transform: rotate(-7deg); animation: loaderEmblemFloat 3.4s ease-in-out infinite;
+}
+.ks-loader-emblem::before {
+  content: ''; position: absolute; inset: -8px; border: 1px solid rgba(16,185,129,.12);
+  border-radius: 27px; transform: rotate(14deg);
+}
+.ks-loader-emblem::after {
+  content: ''; position: absolute; inset: -17px; border: 1px solid rgba(16,185,129,.07);
+  border-radius: 31px; transform: rotate(27deg);
+}
+.ks-loader-emblem i { position: relative; z-index: 1; color: #34d399; font-size: 35px; filter: drop-shadow(0 0 12px rgba(16,185,129,.62)); }
+.ks-loader-wordmark { display: flex; align-items: baseline; gap: 8px; color: #fff; font-size: clamp(25px, 6vw, 32px); font-weight: 800; letter-spacing: .13em; line-height: 1.1; }
+.ks-loader-wordmark span:last-child { color: #34d399; text-shadow: 0 0 22px rgba(16,185,129,.22); }
+.ks-loader-caption { margin-top: 11px; color: rgba(228,228,231,.55); font-size: 10px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.ks-loader-progress { position: relative; width: 100%; height: 3px; margin-top: 35px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.075); box-shadow: 0 0 0 1px rgba(255,255,255,.025); }
+.ks-loader-progress span {
+  position: absolute; inset: 0 auto 0 0; width: 38%; border-radius: inherit;
+  background: linear-gradient(90deg, transparent, #10b981 45%, #a7f3d0 100%);
+  box-shadow: 0 0 13px rgba(16,185,129,.55); animation: loaderProgress 1.45s cubic-bezier(.55,.05,.35,.95) infinite;
+}
+.ks-loader-status { display: flex; align-items: center; gap: 9px; margin-top: 15px; color: rgba(228,228,231,.42); font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
+.ks-loader-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; box-shadow: 0 0 12px rgba(16,185,129,.85); animation: loaderDot 1s ease-in-out infinite; }
+@keyframes loaderAura { from { transform: translate3d(-2%, -1%, 0) scale(.92); opacity: .7; } to { transform: translate3d(3%, 2%, 0) scale(1.08); opacity: 1; } }
+@keyframes loaderContentIn { from { opacity: 0; transform: translateY(18px) scale(.97); filter: blur(7px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes loaderEmblemFloat { 0%, 100% { transform: translateY(0) rotate(-7deg); } 50% { transform: translateY(-7px) rotate(-2deg); } }
+@keyframes loaderProgress { 0% { transform: translateX(-110%); } 100% { transform: translateX(285%); } }
+@keyframes loaderDot { 0%, 100% { opacity: .45; transform: scale(.78); } 50% { opacity: 1; transform: scale(1.18); } }
+
 /* ═══════ ПАРЯЩАЯ ШАПКА ═══════ */
 .top-header { 
   position: fixed; top: 15px; left: 50%; transform: translateX(-50%); 
@@ -56,22 +121,23 @@ body {
   background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
   border: 1px solid transparent; border-radius: 0; padding: 10px 20px;
   display: flex; justify-content: space-between; align-items: center; box-shadow: none;
-  transform: scale(.985);
+  transform: translateY(-2px) scale(.99);
   transition:
-    background-color .38s ease,
-    backdrop-filter .38s ease,
-    -webkit-backdrop-filter .38s ease,
-    border-color .38s ease,
-    border-radius .38s ease,
-    box-shadow .38s ease,
-    padding .38s ease,
-    transform .38s cubic-bezier(.2,.75,.25,1);
+    background-color .72s cubic-bezier(.22,.61,.36,1),
+    backdrop-filter .72s ease,
+    -webkit-backdrop-filter .72s ease,
+    border-color .72s cubic-bezier(.22,.61,.36,1),
+    border-radius .72s cubic-bezier(.22,.61,.36,1),
+    box-shadow .72s cubic-bezier(.22,.61,.36,1),
+    padding .72s cubic-bezier(.22,.61,.36,1),
+    transform .72s cubic-bezier(.22,.61,.36,1);
 }
 /* Два декоративных слоя: скользящий блик и мягкое зелёное свечение стекла. */
 .header-glass::before,
 .header-glass::after {
   content: ''; position: absolute; inset: 0; border-radius: inherit;
   pointer-events: none; z-index: 0; opacity: 0;
+  transition: opacity .85s cubic-bezier(.22,.61,.36,1);
 }
 .header-glass::before {
   inset: -1px;
@@ -89,26 +155,25 @@ body {
   backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
   border-color: var(--glass-border); border-radius: 50px;
   box-shadow: 0 12px 34px rgba(0,0,0,.42), 0 0 0 1px rgba(16,185,129,.035), inset 0 1px 0 rgba(255,255,255,.10);
-  transform: scale(1);
-  animation: headerSettle .68s cubic-bezier(.18,.82,.24,1) both;
+  transform: translateY(0) scale(1);
 }
 .top-header.is-scrolled .header-glass::before {
-  opacity: 1; animation: headerGlassSweep 7.2s ease-in-out 0.25s infinite;
+  opacity: 1; animation: headerGlassSweep 9s ease-in-out 0.6s infinite;
 }
 .top-header.is-scrolled .header-glass::after {
-  opacity: 1; animation: headerGlassGlow 4.8s ease-in-out infinite alternate;
+  opacity: 1; animation: headerGlassGlow 6.5s ease-in-out infinite alternate;
 }
-.top-header.is-scrolled .top-brand i { animation: headerLogoGlow 3.2s ease-in-out infinite; }
+.top-header.is-scrolled .top-brand i { animation: headerLogoGlow 4.5s ease-in-out infinite; }
 .top-header.is-scrolled .user-balance { position: relative; overflow: hidden; }
 .top-header.is-scrolled .user-balance::after {
   content: ''; position: absolute; z-index: 0; top: -35%; bottom: -35%; left: -55%; width: 34%;
   pointer-events: none; transform: skewX(-18deg);
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
-  animation: headerBalanceShine 5.5s ease-in-out 1s infinite;
+  animation: headerBalanceShine 7s ease-in-out 1.4s infinite;
 }
 .top-header.is-scrolled .profile-btn {
   box-shadow: 0 0 0 3px rgba(16,185,129,.055), 0 0 18px rgba(16,185,129,.10);
-  animation: headerAvatarHalo 4s ease-in-out infinite;
+  animation: headerAvatarHalo 5.5s ease-in-out infinite;
 }
 .top-brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; color: var(--text-white); cursor: pointer; transition: 0.3s; }
 .top-brand:hover { transform: scale(1.02); text-shadow: 0 0 15px rgba(16,185,129,0.5); }
@@ -277,11 +342,6 @@ body {
 /* Набор мягких микроанимаций Kesug Slots */
 @keyframes ambientDrift { from { transform: translate3d(-1.5%, -1%, 0) scale(1); } to { transform: translate3d(1.5%, 1%, 0) scale(1.06); } }
 @keyframes headerFadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes headerSettle {
-  0% { opacity: .76; transform: translateY(-9px) scale(.975); filter: blur(2px); }
-  68% { opacity: 1; transform: translateY(1px) scale(1.006); filter: blur(0); }
-  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
 @keyframes headerGlassSweep {
   0%, 22% { transform: translateX(-135%) skewX(-16deg); }
   58%, 100% { transform: translateX(145%) skewX(-16deg); }
@@ -316,6 +376,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
   html { scroll-behavior: auto; }
+  .top-header.is-scrolled .header-glass::before, .top-header.is-scrolled .header-glass::after, .top-header.is-scrolled .top-brand i, .top-header.is-scrolled .user-balance::after, .top-header.is-scrolled .profile-btn { animation: none !important; }
+  .ks-loader-content, .ks-loader-emblem, .ks-loader::before, .ks-loader::after, .ks-loader-progress span, .ks-loader-status-dot { animation: none !important; }
 }
 
 /* АДАПТИВ */
@@ -349,9 +411,27 @@ body {
   .reels { gap: 5px; padding: 5px; }
   .game-header { top: 10px; width: 94%; height: 55px; border-radius: 30px; }
 }
+
+.ks-project-footer { width: min(1200px, 100%); margin: 0 auto; padding: 0 18px 28px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--text-muted); font-size: 11px; }
+.ks-project-footer a { color: #6ee7b7; text-decoration: none; font-weight: 700; transition: color .25s ease, text-shadow .25s ease; }
+.ks-project-footer a:hover { color: #a7f3d0; text-shadow: 0 0 14px rgba(16,185,129,.32); }
+@media (max-width: 600px) { .ks-project-footer { padding: 0 12px 22px; flex-direction: column; align-items: flex-start; } }
+
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+<!-- ФИРМЕННЫЙ ЭКРАН ЗАГРУЗКИ -->
+<div class="ks-loader" id="ks-loader" role="status" aria-live="polite" aria-label="Загрузка Kesug Slots">
+  <div class="ks-loader-grid" aria-hidden="true"></div>
+  <div class="ks-loader-content">
+    <div class="ks-loader-emblem" aria-hidden="true"><i class="ph-bold ph-diamonds-four"></i></div>
+    <div class="ks-loader-wordmark"><span>KESUG</span><span>SLOTS</span></div>
+    <div class="ks-loader-caption">ТВОЁ ИГРОВОЕ ПРОСТРАНСТВО</div>
+    <div class="ks-loader-progress" aria-hidden="true"><span></span></div>
+    <div class="ks-loader-status"><span class="ks-loader-status-dot" aria-hidden="true"></span>ЗАГРУЗКА ИНТЕРФЕЙСА</div>
+  </div>
+</div>
 
 <!-- ПАРЯЩАЯ ШАПКА -->
 <div class="top-header">
@@ -426,6 +506,7 @@ body {
     </div>
   </main>
 </div>
+<footer class="ks-project-footer" aria-label="Информация о проекте"><a href="about.html">О проекте Kesug Slots</a><span>Только виртуальные игровые очки · без денежных операций</span></footer>
 
 <!-- ИГРОВОЙ ЭКРАН -->
 <div id="game-screen">
@@ -819,6 +900,37 @@ updateHeaderOnScroll();
     window.scrollTo({ top: currentScrollY, behavior: 'instant' });
     scrollFrame = window.requestAnimationFrame(animateWheelScroll);
   }
+})();
+
+// Фирменный экран загрузки: короткая заставка, затем плавное открытие лобби.
+(() => {
+  const loader = document.getElementById('ks-loader');
+  if (!loader) {
+    document.body.classList.remove('is-loading');
+    return;
+  }
+
+  const startedAt = Date.now();
+  const minimumDisplayTime = 1050;
+  let hasFinished = false;
+
+  function hideLoader() {
+    if (hasFinished) return;
+    hasFinished = true;
+
+    const remaining = Math.max(0, minimumDisplayTime - (Date.now() - startedAt));
+    window.setTimeout(() => {
+      loader.classList.add('is-hidden');
+      document.body.classList.remove('is-loading');
+      window.setTimeout(() => loader.remove(), 850);
+    }, remaining);
+  }
+
+  if (document.readyState === 'complete') hideLoader();
+  else window.addEventListener('load', hideLoader, { once: true });
+
+  // Не задерживаем вход в игру, если внешний ресурс загружается слишком долго.
+  window.setTimeout(hideLoader, 3200);
 })();
 
 // Инициализация

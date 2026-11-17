@@ -29,14 +29,14 @@
 html { scroll-behavior: smooth; }
 ::-webkit-scrollbar { display: none; }
 body { 
-  color: var(--text-main); font-size: 14px; line-height: 1.5; overflow-x: hidden; min-height: 100vh; 
-  background-color: var(--bg-main); padding-top: 100px; 
+  color: var(--text-main); font-size: 15px; line-height: 1.55; overflow-x: hidden; min-height: 100vh; 
+  background-color: var(--bg-main); padding-top: 108px; 
 }
 
 /* ═══════ ПАРЯЩАЯ ШАПКА ═══════ */
 .top-header { 
   position: fixed; top: 15px; left: 50%; transform: translateX(-50%); 
-  width: 95%; max-width: 800px; z-index: 1000;
+  width: 94%; max-width: 1180px; z-index: 1000;
 }
 /* В самом верху остаются только логотип, баланс и аватар.
    При прокрутке контейнер плавно превращается в стеклянную шапку. */
@@ -61,44 +61,44 @@ body {
   border-color: var(--glass-border); border-radius: 50px;
   box-shadow: var(--shadow-main); transform: scale(1);
 }
-.top-brand { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: var(--text-white); cursor: pointer; transition: 0.3s; }
+.top-brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; color: var(--text-white); cursor: pointer; transition: 0.3s; }
 .top-brand:hover { transform: scale(1.02); text-shadow: 0 0 15px rgba(16,185,129,0.5); }
-.top-brand i { color: var(--accent-green); font-size: 22px; }
+.top-brand i { color: var(--accent-green); font-size: 25px; }
 
 .header-right { display: flex; align-items: center; gap: 12px; }
 .user-balance { 
-  display: flex; align-items: center; gap: 6px; font-family: monospace; font-size: 16px; font-weight: 800; 
-  color: var(--accent-green); padding: 8px 16px; background: rgba(16, 185, 129, 0.1); border-radius: 30px; border: 1px solid rgba(16, 185, 129, 0.2);
+  display: flex; align-items: center; gap: 8px; font-family: monospace; font-size: 18px; font-weight: 800; 
+  color: var(--accent-green); padding: 9px 18px; background: rgba(16, 185, 129, 0.1); border-radius: 30px; border: 1px solid rgba(16, 185, 129, 0.2);
 }
-.user-balance img { width: 18px; }
+.user-balance img { width: 21px; }
 
 .profile-btn { 
-  background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); width: 42px; height: 42px; border-radius: 50%; 
+  background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); width: 48px; height: 48px; border-radius: 50%; 
   cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; padding: 0;
 }
 .profile-btn:hover { border-color: var(--accent-green); background: rgba(255,255,255,0.1); }
-.profile-btn img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+.profile-btn img { width: 39px; height: 39px; border-radius: 50%; object-fit: cover; }
 
 /* ═══════ КОНТЕНТ ═══════ */
-.content-wrapper { width: 100%; max-width: 800px; margin: 0 auto; padding: 20px 15px 50px 15px; }
+.content-wrapper { width: 100%; max-width: 1200px; margin: 0 auto; padding: 28px 18px 60px 18px; }
 
 /* СЕТКА ИГР */
 .games-grid { 
   display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-  gap: 15px; 
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  gap: 20px; 
 }
 .game-card { 
   background: var(--bg-card); border: 1px solid var(--border); 
-  padding: 20px 15px; text-align: center; cursor: pointer; border-radius: 16px; 
+  padding: 26px 20px; text-align: center; cursor: pointer; border-radius: 18px; min-height: 310px; 
   display: flex; flex-direction: column; align-items: center; transition: 0.2s;
 }
 .game-card:hover { border-color: var(--accent-green); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-.game-icon { width: 60px; height: 60px; margin-bottom: 12px; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); transition: 0.3s; }
+.game-icon { width: 76px; height: 76px; margin-bottom: 16px; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); transition: 0.3s; }
 .game-card:hover .game-icon { transform: scale(1.1); }
-.game-title { font-size: 14px; font-weight: 700; color: var(--text-white); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-.game-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-.play-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; padding: 10px; font-size: 12px; font-weight: 700; text-transform: uppercase; width: 100%; border-radius: 8px; transition: 0.2s; }
+.game-title { font-size: 17px; font-weight: 700; color: var(--text-white); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.game-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.play-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; padding: 13px; font-size: 14px; font-weight: 700; text-transform: uppercase; width: 100%; border-radius: 8px; transition: 0.2s; }
 .game-card:hover .play-btn { background: var(--accent-green); color: #000; border-color: var(--accent-green); }
 
 /* ПРОФИЛЬ */
@@ -117,11 +117,11 @@ body {
 .btn-gray:hover { background: #3f3f46; }
 
 /* СТАТИСТИКА */
-.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
-.stat-card { background: var(--bg-card); border: 1px solid var(--border); padding: 15px 10px; text-align: center; border-radius: 16px; }
-.stat-icon { font-size: 22px; color: var(--text-muted); margin-bottom: 6px; display: block; }
-.stat-value { font-family: monospace; font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
-.stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 16px; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); padding: 19px 14px; text-align: center; border-radius: 16px; }
+.stat-icon { font-size: 25px; color: var(--text-muted); margin-bottom: 6px; display: block; }
+.stat-value { font-family: monospace; font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+.stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
 
 /* ФОРМА */
 .form-box { background: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 20px; }
@@ -200,9 +200,23 @@ body {
 }
 
 /* АДАПТИВ */
+@media (min-width: 481px) and (max-width: 900px) {
+  .content-wrapper { max-width: 900px; padding-left: 18px; padding-right: 18px; }
+  .games-grid { grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 16px; }
+  .game-card { min-height: 285px; padding: 22px 16px; }
+  .game-icon { width: 68px; height: 68px; }
+}
+
 @media (max-width: 480px) {
   :root { --reel-h: 65px; }
-  body { padding-top: 90px; }
+  body { padding-top: 90px; font-size: 14px; }
+  .content-wrapper { padding: 18px 12px 40px; }
+  .games-grid { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 12px; }
+  .game-card { min-height: 255px; padding: 19px 12px; }
+  .game-icon { width: 60px; height: 60px; margin-bottom: 12px; }
+  .game-title { font-size: 14px; }
+  .game-desc { font-size: 12px; margin-bottom: 14px; }
+  .play-btn { padding: 10px; font-size: 12px; }
   .top-header { top: 10px; width: 94%; }
   .header-glass { padding: 8px 15px; border-radius: 30px; }
   .top-brand { font-size: 16px; }

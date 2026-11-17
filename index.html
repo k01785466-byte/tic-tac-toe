@@ -1141,6 +1141,56 @@ body::before,
   body { padding-top: 116px; }
 }
 
+
+
+/* ═══════ NEW PLAYER PROFILE SETUP ═══════ */
+.ks-onboarding {
+  position: fixed; inset: 0; z-index: 19000; display: none; place-items: center;
+  padding: 18px; background: rgba(5,4,3,.78);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  opacity: 0;
+}
+.ks-onboarding.is-visible { display: grid; animation: onboardingFade .28s ease forwards; }
+.ks-onboarding-card {
+  position: relative; width: min(460px, 100%); max-height: min(90vh, 760px); overflow: auto;
+  padding: 28px; border: 1px solid rgba(240,207,131,.28); border-radius: 25px;
+  color: #eee7d9; background:
+    radial-gradient(ellipse at 50% 0%, rgba(214,173,91,.16), transparent 55%),
+    linear-gradient(145deg, #252016, #14110c 72%);
+  box-shadow: 0 28px 80px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,250,235,.08);
+  animation: onboardingCardIn .42s cubic-bezier(.2,.8,.2,1) both;
+}
+.ks-onboarding-kicker { display:flex; align-items:center; justify-content:center; gap:8px; color:#d6b66f; font-size:9px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+.ks-onboarding-kicker::before, .ks-onboarding-kicker::after { content:''; width:22px; height:1px; background:rgba(214,173,91,.42); }
+.ks-onboarding-title { margin-top:12px; color:#fff5df; text-align:center; font:700 clamp(23px,5vw,29px) 'Space Grotesk','Manrope',sans-serif; letter-spacing:-.045em; }
+.ks-onboarding-description { max-width:330px; margin:8px auto 22px; color:rgba(226,215,194,.62); text-align:center; font-size:12px; line-height:1.65; }
+.ks-onboarding-avatar-wrap { display:flex; flex-direction:column; align-items:center; gap:11px; margin:0 auto 22px; }
+.ks-onboarding-avatar { width:94px; height:94px; padding:4px; border:1px solid rgba(240,207,131,.55); border-radius:50%; object-fit:cover; background:#0d0b08; box-shadow:0 0 0 6px rgba(214,173,91,.06), 0 10px 30px rgba(0,0,0,.35); }
+.ks-onboarding-upload { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:36px; padding:0 13px; border:1px solid rgba(214,173,91,.3); border-radius:10px; color:#ecd49e; background:rgba(214,173,91,.08); font-size:10px; font-weight:800; cursor:pointer; transition:background .2s ease,border-color .2s ease,transform .2s ease; }
+.ks-onboarding-upload:hover { background:rgba(214,173,91,.15); border-color:rgba(240,207,131,.58); transform:translateY(-1px); }
+.ks-onboarding-label { display:block; margin-bottom:8px; color:#d9c69e; font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.ks-onboarding-input { width:100%; min-height:47px; padding:0 14px; border:1px solid rgba(214,173,91,.24); border-radius:11px; outline:none; color:#fff7e8; background:rgba(8,7,5,.6); font:600 13px 'Manrope',sans-serif; user-select:text; transition:border-color .2s ease,box-shadow .2s ease; }
+.ks-onboarding-input:focus { border-color:rgba(240,207,131,.68); box-shadow:0 0 0 3px rgba(214,173,91,.11); }
+.ks-onboarding-input::placeholder { color:rgba(226,215,194,.34); }
+.ks-onboarding-error { min-height:17px; margin-top:6px; color:#f0a6a0; font-size:10px; }
+.ks-onboarding-actions { display:grid; grid-template-columns:1fr 1.25fr; gap:10px; margin-top:12px; }
+.ks-onboarding-actions button { min-height:45px; border-radius:11px; font:800 11px 'Manrope',sans-serif; cursor:pointer; transition:transform .2s ease,filter .2s ease,background .2s ease; }
+.ks-onboarding-actions button:active { transform:scale(.98); }
+.ks-onboarding-skip { border:1px solid rgba(255,255,255,.10); color:rgba(236,226,207,.7); background:rgba(255,255,255,.045); }
+.ks-onboarding-save { border:1px solid rgba(255,239,205,.28); color:#211707; background:linear-gradient(110deg,#c99b4d,#f0d69b); box-shadow:0 7px 18px rgba(214,173,91,.14); }
+.ks-onboarding-save:hover { filter:brightness(1.06); transform:translateY(-1px); }
+.ks-onboarding-footnote { margin-top:14px; color:rgba(226,215,194,.38); text-align:center; font-size:9px; line-height:1.5; }
+@keyframes onboardingFade { to { opacity:1; } }
+@keyframes onboardingCardIn { from { opacity:0; transform:translateY(14px) scale(.975); } to { opacity:1; transform:translateY(0) scale(1); } }
+@media (max-width:480px) {
+  .ks-onboarding { padding:12px; }
+  .ks-onboarding-card { padding:23px 18px 19px; border-radius:21px; }
+  .ks-onboarding-avatar { width:84px; height:84px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .ks-onboarding.is-visible, .ks-onboarding-card { animation:none !important; }
+}
+
 </style>
 </head>
 <body class="is-loading">
@@ -1155,6 +1205,28 @@ body::before,
     <div class="ks-loader-progress" aria-hidden="true"><span></span></div>
     <div class="ks-loader-status"><span class="ks-loader-status-dot" aria-hidden="true"></span>ЗАГРУЗКА ИНТЕРФЕЙСА</div>
   </div>
+</div>
+
+<!-- ПЕРВАЯ НАСТРОЙКА ПРОФИЛЯ НОВОГО ИГРОКА -->
+<div class="ks-onboarding" id="ks-onboarding" aria-hidden="true">
+  <section class="ks-onboarding-card" role="dialog" aria-modal="true" aria-labelledby="ks-onboarding-title" aria-describedby="ks-onboarding-description">
+    <div class="ks-onboarding-kicker"><i class="ph-fill ph-diamonds-four"></i> WELCOME TO KESUG</div>
+    <h2 class="ks-onboarding-title" id="ks-onboarding-title">Давай познакомимся!</h2>
+    <p class="ks-onboarding-description" id="ks-onboarding-description">Придумай игровой ник и выбери аватар. Это можно будет изменить позже в профиле.</p>
+    <div class="ks-onboarding-avatar-wrap">
+      <img class="ks-onboarding-avatar" id="ks-onboarding-avatar-preview" alt="Предпросмотр аватара">
+      <label class="ks-onboarding-upload" for="ks-onboarding-avatar-input"><i class="ph-bold ph-image"></i> Выбрать аватар</label>
+      <input id="ks-onboarding-avatar-input" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+    </div>
+    <label class="ks-onboarding-label" for="ks-onboarding-nickname">Твой игровой ник</label>
+    <input class="ks-onboarding-input" id="ks-onboarding-nickname" type="text" maxlength="15" minlength="2" autocomplete="nickname" placeholder="Например, Player123">
+    <div class="ks-onboarding-error" id="ks-onboarding-error" aria-live="polite"></div>
+    <div class="ks-onboarding-actions">
+      <button class="ks-onboarding-skip" type="button" onclick="skipNewPlayerSetup()">Пока пропустить</button>
+      <button class="ks-onboarding-save" type="button" onclick="saveNewPlayerSetup()">Сохранить профиль</button>
+    </div>
+    <p class="ks-onboarding-footnote">Профиль хранится только в этом браузере. Не указывай здесь личные данные.</p>
+  </section>
 </div>
 
 <!-- ПАРЯЩАЯ ШАПКА -->
@@ -1456,6 +1528,7 @@ function readLocalJSON(key, fallback) {
 }
 
 const DEFAULT_SETTINGS = { compactCards: false, ambientBackground: true, reduceEffects: false };
+const shouldShowNewPlayerSetup = !localStorage.getItem('kasino_player_id') && localStorage.getItem('ks_onboarding_done') !== '1';
 const savedSettings = readLocalJSON('ks_settings', {});
 const state = {
   playerId: localStorage.getItem('kasino_player_id') || 'player_' + Math.random().toString(36).substr(2, 9),
@@ -2019,6 +2092,104 @@ updateHeaderOnScroll();
   }
 })();
 
+
+
+// Первая настройка профиля показывается только при первом запуске в этом браузере.
+const KESUG_DEFAULT_AVATAR = 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png';
+let onboardingAvatarDraft = '';
+
+function openNewPlayerSetup() {
+  if (!shouldShowNewPlayerSetup || localStorage.getItem('ks_onboarding_done') === '1') return;
+  const modal = document.getElementById('ks-onboarding');
+  const preview = document.getElementById('ks-onboarding-avatar-preview');
+  const nickname = document.getElementById('ks-onboarding-nickname');
+  if (!modal || !preview || !nickname) return;
+  onboardingAvatarDraft = '';
+  preview.src = state.avatar || KESUG_DEFAULT_AVATAR;
+  nickname.value = state.nickname !== 'Игрок' ? state.nickname : '';
+  modal.setAttribute('aria-hidden', 'false');
+  modal.classList.add('is-visible');
+  document.body.style.overflow = 'hidden';
+  window.setTimeout(() => nickname.focus(), 120);
+}
+
+function closeNewPlayerSetup() {
+  const modal = document.getElementById('ks-onboarding');
+  if (!modal) return;
+  modal.classList.remove('is-visible');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+window.skipNewPlayerSetup = () => {
+  localStorage.setItem('ks_onboarding_done', '1');
+  closeNewPlayerSetup();
+  showToast('Можно настроить профиль позже');
+};
+
+window.saveNewPlayerSetup = () => {
+  const nicknameInput = document.getElementById('ks-onboarding-nickname');
+  const error = document.getElementById('ks-onboarding-error');
+  const nickname = (nicknameInput?.value || '').trim().replace(/\s+/g, ' ');
+  if (nickname.length < 2) {
+    if (error) error.textContent = 'Введи ник длиной хотя бы 2 символа.';
+    nicknameInput?.focus();
+    return;
+  }
+  state.nickname = nickname.slice(0, 15);
+  if (onboardingAvatarDraft) state.avatar = onboardingAvatarDraft;
+  saveToLocal();
+  localStorage.setItem('ks_onboarding_done', '1');
+  updateProfileUI();
+  updateUI();
+  closeNewPlayerSetup();
+  showToast('Профиль настроен!');
+};
+
+const onboardingAvatarInput = document.getElementById('ks-onboarding-avatar-input');
+if (onboardingAvatarInput) {
+  onboardingAvatarInput.addEventListener('change', event => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    const error = document.getElementById('ks-onboarding-error');
+    if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type.toLowerCase())) {
+      if (error) error.textContent = 'Выбери изображение PNG, JPG или WEBP.';
+      event.target.value = '';
+      return;
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      if (error) error.textContent = 'Файл должен быть меньше 8 МБ.';
+      event.target.value = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const image = new Image();
+      image.onload = () => {
+        const maxSide = 420;
+        const scale = Math.min(1, maxSide / Math.max(image.naturalWidth, image.naturalHeight));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        const context = canvas.getContext('2d');
+        if (!context) {
+          if (error) error.textContent = 'Не удалось обработать это изображение.';
+          return;
+        }
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        onboardingAvatarDraft = canvas.toDataURL('image/jpeg', 0.82);
+        const preview = document.getElementById('ks-onboarding-avatar-preview');
+        if (preview) preview.src = onboardingAvatarDraft;
+        if (error) error.textContent = '';
+      };
+      image.onerror = () => { if (error) error.textContent = 'Не удалось открыть это изображение.'; };
+      image.src = String(reader.result || '');
+    };
+    reader.onerror = () => { if (error) error.textContent = 'Не удалось прочитать файл.'; };
+    reader.readAsDataURL(file);
+  });
+}
+
 // Фирменный экран загрузки: короткая заставка, затем плавное открытие лобби.
 (() => {
   const loader = document.getElementById('ks-loader');
@@ -2039,7 +2210,10 @@ updateHeaderOnScroll();
     window.setTimeout(() => {
       loader.classList.add('is-hidden');
       document.body.classList.remove('is-loading');
-      window.setTimeout(() => loader.remove(), 850);
+      window.setTimeout(() => {
+        loader.remove();
+        openNewPlayerSetup();
+      }, 850);
     }, remaining);
   }
 

@@ -3,1288 +3,563 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Casino Drop</title>
+<title>Kesug Slots</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='0' fill='%23000'/%3E%3Cpath d='M32 12 L52 32 L32 52 L12 32 Z' fill='%2334c759'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
-<script src="https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
 <style>
 :root {
-  --bg-base: #121212;
-  --bg-panel: #1a1a1a;
-  --bg-card: #222222;
-  --bg-hover: #2c2c2c;
-  
-  --text-main: #f5f5f5;
-  --text-muted: #888888;
-  
-  --accent-silver: #d4d4d4;
-  --accent-white: #ffffff;
-  --accent-green: #10b981;
-  
-  --border: #333333;
-  --border-light: #444444;
-  
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.5);
-  --shadow-md: 0 10px 20px rgba(0,0,0,0.6);
-  --shadow-float: 0 20px 40px rgba(0,0,0,0.8);
-
+  --bg-main: #000000;
+  --bg-card: #0a0a0a;
+  --bg-surface: #1c1c1e;
+  --text-primary: #f5f5f7;
+  --text-secondary: #86868b;
+  --border-light: rgba(255, 255, 255, 0.1);
+  --accent-green: #34c759;
+  --accent-red: #ff3b30;
   --reel-h: 100px;
-  --sidebar-w: 240px;
 }
 
-* {
-  margin: 0; padding: 0; box-sizing: border-box;
-  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; letter-spacing: -0.02em; }
 ::-webkit-scrollbar { display: none; }
-* { scrollbar-width: none; -ms-overflow-style: none; }
-
-html, body {
-  width: 100%; height: 100%; overflow: hidden;
-  background: var(--bg-base); color: var(--text-main);
-  background-image: radial-gradient(circle at 50% 0%, #1e1e1e 0%, #121212 70%);
+body { 
+  color: var(--text-primary); font-size: 15px; line-height: 1.5; overflow-x: hidden; min-height: 100vh; 
+  background-color: var(--bg-main); padding-top: 100px; 
 }
 
-body.no-anim *, body.no-anim *::before, body.no-anim *::after {
-  animation: none !important; transition: none !important;
+/* ═══════ МИНИМАЛИСТИЧНАЯ ШАПКА ═══════ */
+.top-header { 
+  position: fixed; top: 0; left: 0; width: 100%; height: 80px; z-index: 1000; 
+  background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
 }
+.header-inner { max-width: 900px; margin: 0 auto; height: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+.top-brand { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 600; color: var(--text-primary); cursor: pointer; }
+.top-brand i { color: var(--accent-green); font-size: 22px; }
 
-.app-container { display: flex; width: 100%; height: 100%; position: relative; }
-
-/* ============ ЛЕВОЕ МЕНЮ (ПК) ============ */
-.sidebar {
-  width: var(--sidebar-w); background: var(--bg-panel);
-  border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; padding: 25px 20px;
-  gap: 10px; flex-shrink: 0; z-index: 100;
-  height: 100%;
+.user-balance { 
+  display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 500; color: var(--text-primary);
 }
+.user-balance img { width: 20px; opacity: 0.8; }
 
-.sidebar-logo { 
-  display: flex; align-items: center; gap: 15px;
-  font-size: 20px; font-weight: 900; color: #fff;
-  margin-bottom: 30px; padding-left: 10px; cursor: pointer;
+.profile-btn { 
+  background: var(--bg-surface); border: 1px solid var(--border-light); width: 40px; height: 40px; border-radius: 50%; 
+  cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; padding: 0;
 }
-.sidebar-logo img { width: 36px; height: 36px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+.profile-btn:hover { background: #2c2c2e; }
+.profile-btn img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
 
-.nav-btn { 
-  width: 100%; height: 50px; border-radius: 12px; 
-  background: transparent; border: 1px solid transparent; 
-  color: var(--text-muted); font-size: 16px; font-weight: 600; cursor: pointer; 
-  transition: all 0.2s ease; display: flex; align-items: center; 
-  gap: 15px; padding: 0 15px;
+/* ═══════ КОНТЕНТ ═══════ */
+.content-wrapper { width: 100%; max-width: 900px; margin: 0 auto; padding: 30px 20px 60px 20px; }
+
+/* СЕТКА ИГР */
+.games-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+  gap: 20px; 
 }
-.nav-btn i { font-size: 22px; }
-.nav-btn:hover { background: rgba(255,255,255,0.05); color: var(--text-main); }
-.nav-btn.active { 
-  background: var(--bg-card); color: var(--accent-white); 
-  border-color: var(--border-light); 
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+.game-card { 
+  background: var(--bg-card); border: 1px solid var(--border-light); 
+  padding: 25px 15px; text-align: center; cursor: pointer; border-radius: 16px; 
+  display: flex; flex-direction: column; align-items: center; transition: 0.2s;
 }
+.game-card:hover { border-color: var(--text-secondary); background: var(--bg-surface); }
+.game-icon { width: 60px; height: 60px; margin-bottom: 15px; object-fit: contain; }
+.game-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.game-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.play-btn { background: transparent; border: none; color: var(--accent-green); padding: 8px; font-size: 13px; font-weight: 500; width: 100%; transition: 0.2s; }
+.game-card:hover .play-btn { color: #2cd64d; }
 
-/* ============ ВЕРХНЯЯ ПАНЕЛЬ ============ */
-.main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; height: 100%; position: relative; }
+/* ПРОФИЛЬ */
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+.back-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; transition: 0.2s; }
+.back-btn:hover { color: var(--text-primary); }
 
-.topbar {
-  height: 72px; background: var(--bg-panel);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 30px; flex-shrink: 0; z-index: 90;
+.profile-card { display: flex; align-items: center; gap: 20px; background: var(--bg-card); border: 1px solid var(--border-light); padding: 25px; border-radius: 20px; margin-bottom: 30px; }
+.profile-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; background: #000; }
+.profile-info h2 { color: var(--text-primary); font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+.profile-info p { color: var(--text-secondary); font-size: 14px; }
+.btn { padding: 14px 20px; font-weight: 500; font-size: 14px; cursor: pointer; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; transition: 0.2s; }
+.btn-green { background: var(--accent-green); color: #000; width: 100%; }
+.btn-green:hover { background: #40d360; }
+.btn-gray { background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--border-light); }
+.btn-gray:hover { background: #2c2c2e; }
+
+/* СТАТИСТИКА */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border-light); padding: 20px 15px; text-align: center; border-radius: 16px; }
+.stat-icon { font-size: 24px; color: var(--text-secondary); margin-bottom: 10px; display: block; }
+.stat-value { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.stat-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ФОРМА */
+.form-box { background: var(--bg-card); padding: 25px; border-radius: 20px; border: 1px solid var(--border-light); margin-bottom: 25px; }
+.form-label { font-size: 12px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; margin-bottom: 10px; display: block; }
+.inp { width: 100%; padding: 16px; background: #000; border: 1px solid var(--border-light); color: var(--text-primary); font-size: 15px; outline: none; border-radius: 12px; margin-bottom: 20px; transition: 0.2s; }
+.inp:focus { border-color: var(--text-secondary); }
+.btn-row { display: flex; gap: 12px; }
+
+/* ═══════ ИГРОВОЙ ЭКРАН (3D ЭФФЕКТ) ═══════ */
+#game-screen { 
+  position: fixed; inset: 0; background: var(--bg-main); z-index: 9999; 
+  display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; 
+  perspective: 1200px; /* Включаем 3D-перспективу */
 }
-
-.topbar-left { display: flex; align-items: center; }
-.topbar-title { font-size: 20px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; }
-.topbar-title i { color: var(--accent-silver); font-size: 24px; }
-
-.topbar-right { display: flex; align-items: center; gap: 15px; }
-.balance-box {
-  background: var(--bg-card); border: 1px solid var(--border-light);
-  padding: 8px 20px; border-radius: 30px;
-  display: flex; align-items: center; gap: 10px;
-  font-weight: 800; font-size: 18px; color: var(--accent-green);
-  font-family: 'Courier New', monospace;
-  transition: all 0.3s ease; cursor: pointer;
-  white-space: nowrap;
-}
-.balance-box:hover { transform: translateY(-2px); border-color: var(--accent-green); }
-.balance-box img { width: 22px; height: 22px; object-fit: contain; }
-.avatar-btn { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--accent-silver); cursor: pointer; object-fit: cover; background: #000; }
-
-/* ============ НИЖНЕЕ МЕНЮ (МОБИЛКИ) ============ */
-.mobile-nav {
-  display: none; 
-  position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
-  background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border); z-index: 1000;
-  justify-content: space-around; align-items: center;
-  padding-bottom: env(safe-area-inset-bottom);
-}
-.mobile-nav .nav-btn {
-  width: 60px; height: 60px; flex-direction: column; justify-content: center; gap: 4px; padding: 0;
-  font-size: 10px; border-radius: 12px;
-}
-.mobile-nav .nav-btn i { font-size: 24px; }
-.mobile-nav .nav-btn.active { background: transparent; box-shadow: none; border: none; color: var(--accent-white); }
-.mobile-nav .nav-btn.active::after {
-  content: ''; position: absolute; bottom: 5px; width: 20px; height: 3px;
-  background: var(--accent-white); border-radius: 2px;
-}
-
-/* ============ КОНТЕНТ ============ */
-.scroll-area { flex: 1; overflow-y: auto; padding: 30px; padding-bottom: 100px; scroll-behavior: smooth; }
-.tab-panel { display: none; animation: fadeIn 0.4s ease; }
-.tab-panel.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Баннер MEGA JACKPOT */
-.hero-banner { 
-  width: 100%; min-height: 200px; 
-  border-radius: 24px; overflow: hidden; position: relative; 
-  margin-bottom: 30px; border: 1px solid var(--border); 
-  background-image: linear-gradient(135deg, rgba(18,18,18,0.85) 0%, rgba(18,18,18,0.6) 100%), url('https://images.pexels.com/photos/29825629/pexels-photo-29825629.jpeg?auto=compress&cs=tinysrgb&w=1200'); 
-  background-size: cover; background-position: center; 
-  box-shadow: var(--shadow-md); display: flex; align-items: center; padding: 40px; 
-}
-.hero-overlay { position: relative; z-index: 2; max-width: 500px; }
-.hero-title { font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 10px; }
-.hero-title span { color: var(--accent-silver); }
-.hero-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
-.hero-btn { 
-  background: var(--accent-white); color: #000; border: none; padding: 12px 28px; 
-  font-size: 14px; font-weight: 800; border-radius: 12px; cursor: pointer; 
-  transition: 0.3s; text-transform: uppercase; display: flex; align-items: center; gap: 10px; 
-}
-.hero-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,255,255,0.3); }
-.hero-btn img { width: 20px; height: 20px; }
-
-/* Сетка слотов */
-.category-section { margin-bottom: 40px; }
-.section-title { font-size: 22px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-.section-title i { color: var(--accent-silver); font-size: 26px; }
-.machine-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
-
-.machine-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; position: relative; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
-.machine-card:hover { transform: translateY(-5px); border-color: var(--border-light); box-shadow: 0 15px 30px rgba(0,0,0,0.6); z-index: 10; }
-.mc-visual { width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #2c2c2c 0%, #1a1a1a 100%); padding: 25px; }
-.mc-visual img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease; }
-.machine-card:hover .mc-visual img { transform: scale(1.1); }
-.mc-info { padding: 15px; display: flex; flex-direction: column; align-items: center; border-top: 1px solid var(--border); }
-.mc-name { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 4px; text-align: center; }
-.mc-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 15px; text-transform: uppercase; }
-.mc-play-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); font-weight: 700; font-size: 13px; text-align: center; transition: 0.3s; }
-.machine-card:hover .mc-play-btn { background: #fff; color: #000; border-color: #fff; }
-
-/* ============ ИГРОВОЙ ЭКРАН ============ */
-#game-screen { position: fixed; inset: 0; z-index: 5000; background: var(--bg-base); display: none; flex-direction: column; }
 #game-screen.active { display: flex; }
-.game-header { height: 72px; background: var(--bg-panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; }
-.back-btn, .info-btn { background: var(--bg-card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 10px; color: var(--text-muted); font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
-.back-btn:hover, .info-btn:hover { color: #fff; border-color: #fff; }
-.game-bal { font-family: 'Courier New', monospace; font-size: 20px; font-weight: 800; color: var(--accent-green); }
 
-.game-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.slot-box { width: 100%; max-width: 600px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 24px; padding: 35px; box-shadow: var(--shadow-float); position: relative; }
+.game-header { position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+.back-btn-game { background: transparent; border: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 8px; }
+.back-btn-game:hover { color: var(--text-primary); }
 
-.reels-container { background: #0a0a0a; padding: 15px; border-radius: 16px; border: 1px solid #222; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; position: relative; }
-.reel-window { height: var(--reel-h); background: #111; border-radius: 12px; position: relative; overflow: hidden; border: 1px solid #333; z-index: 2; }
-.reel-strip { position: absolute; top: 0; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; transition: transform 0.4s ease; }
-.reel-item { height: var(--reel-h); width: 100%; display: flex; align-items: center; justify-content: center; padding: 15%; }
-.reel-item img { width: 100%; height: 100%; object-fit: contain; }
-.reel-strip.spinning { animation: spinBlur 0.15s linear infinite; filter: blur(4px); }
-@keyframes spinBlur { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }
-
-.win-line { stroke: var(--accent-green); stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 0 8px var(--accent-green)); animation: drawLine 0.6s ease forwards; }
-@keyframes drawLine { from { stroke-dasharray: 1000; stroke-dashoffset: 1000; } to { stroke-dasharray: 1000; stroke-dashoffset: 0; } }
-.reel-window.winning { border-color: var(--accent-green); box-shadow: 0 0 20px var(--accent-green); z-index: 2; }
-
-.controls { background: #0a0a0a; border: 1px solid var(--border); border-radius: 16px; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 20px; }
-.bet-input { display: flex; align-items: center; gap: 8px; }
-.bet-input img { width: 20px; height: 20px; }
-.bet-input span { color: var(--text-muted); font-size: 14px; font-weight: 600; }
-.bet-input input { width: 90px; background: transparent; border: none; color: #fff; font-family: 'Courier New', monospace; font-size: 18px; font-weight: 800; outline: none; text-align: right; }
-.bet-btns { display: flex; gap: 8px; }
-.bet-btns button { background: var(--bg-card); border: 1px solid var(--border); color: #fff; padding: 10px 15px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s; }
-.bet-btns button:hover { background: var(--bg-hover); }
-.bet-btns button.max { background: #fff; color: #000; border: none; }
-
-.action-buttons { display: flex; }
-.spin-btn { width: 100%; padding: 22px; background: #ffffff; color: #000; font-size: 22px; font-weight: 900; letter-spacing: 2px; border: none; border-radius: 16px; cursor: pointer; transition: 0.2s; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 12px; }
-.spin-btn img { width: 32px; height: 32px; }
-.spin-btn:hover:not(:disabled) { transform: translateY(-2px); background: #eee; }
-.spin-btn:disabled { opacity: 0.5; cursor: not-allowed; background: #555; }
-
-/* ============ ПАНЕЛИ ============ */
-.panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 30px; max-width: 600px; margin: 0 auto; }
-.panel-title { font-size: 22px; font-weight: 800; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; color: #fff; }
-.prof-head { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; background: var(--bg-panel); padding: 20px; border-radius: 20px; border: 1px solid var(--border); }
-.prof-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-silver); background: #000; }
-.prof-info h3 { font-size: 24px; margin-bottom: 5px; font-weight: 800; color: #fff; }
-
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.stat-box { 
-  background: var(--bg-panel); padding: 20px; border-radius: 16px; 
-  border: 1px solid var(--border); display: flex; flex-direction: column; gap: 5px; 
-  min-width: 0;
+/* Объемный контейнер для слотов */
+.slot-container { 
+  background: var(--bg-card); border: 1px solid var(--border-light); padding: 30px; width: 100%; max-width: 440px; border-radius: 24px; 
+  transform: rotateX(5deg); /* Легкий наклон для 3D-эффекта */
+  box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform-style: preserve-3d;
 }
-.stat-lbl { font-size: 13px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
-.stat-val { 
-  font-size: 22px; font-weight: 900; color: #fff; 
-  word-break: break-all;
-  line-height: 1.2;
+.reels { 
+  background: #000; padding: 15px; border: 1px solid var(--border-light); display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; 
+  border-radius: 16px; position: relative; transform: translateZ(20px); /* Выдвигаем барабаны вперед */
+  box-shadow: inset 0 10px 20px rgba(0,0,0,1), inset 0 -10px 20px rgba(0,0,0,1);
 }
+.reel-window { height: calc(var(--reel-h) * 3); background: #050505; position: relative; overflow: hidden; border-radius: 8px; }
+.reel-strip { position: absolute; top: 0; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; }
+.reel-item { height: var(--reel-h); width: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.reel-item img { width: 80%; height: 80%; object-fit: contain; }
+.reel-item.winning { background: rgba(52, 199, 89, 0.15); border-radius: 8px; }
 
-/* Топ */
-.top-item { display: flex; align-items: center; gap: 15px; padding: 15px 20px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 10px; }
-.top-item.self { border-color: var(--accent-green); background: rgba(16, 185, 129, 0.05); }
-.top-rank { font-weight: 900; color: var(--text-muted); width: 30px; font-size: 18px; }
-.top-name { flex: 1; font-weight: 700; font-size: 16px; color: #fff; }
-.top-bal { font-family: 'Courier New', monospace; color: var(--accent-green); font-weight: 800; font-size: 16px; }
+.game-controls { display: flex; flex-direction: column; gap: 15px; transform: translateZ(10px); }
+.bet-box { display: flex; align-items: center; justify-content: space-between; background: #000; padding: 15px 20px; border-radius: 16px; border: 1px solid var(--border-light); }
+.bet-box span { color: var(--text-secondary); font-weight: 500; }
+.bet-box input { width: 100px; background: transparent; border: none; color: var(--text-primary); font-size: 20px; text-align: right; font-weight: 600; outline: none; }
+.bet-btns { display: flex; gap: 10px; }
+.bet-btns button { flex: 1; background: var(--bg-surface); border: 1px solid var(--border-light); color: var(--text-primary); padding: 14px; cursor: pointer; font-weight: 500; border-radius: 12px; transition: 0.2s; }
+.bet-btns button:hover { background: #2c2c2e; }
+.spin-btn-big { background: var(--accent-green); color: #000; border: none; padding: 20px; font-size: 18px; font-weight: 600; cursor: pointer; border-radius: 16px; width: 100%; transition: 0.2s; }
+.spin-btn-big:hover { background: #40d360; }
+.spin-btn-big:disabled { background: var(--bg-surface); color: var(--text-secondary); cursor: not-allowed; }
 
-/* Окна */
-.window-overlay { position: fixed; inset: 0; z-index: 10000; display: none; background: rgba(0,0,0,0.6); }
-.window-overlay.active { display: block; }
-.floating-window { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); background: var(--bg-panel); border: 1px solid var(--border-light); border-radius: 20px; width: 90%; max-width: 450px; display: flex; flex-direction: column; max-height: 80vh; }
-.window-header { padding: 15px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-.window-title { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-.close-btn { background: transparent; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; }
-.window-body { padding: 20px; overflow-y: auto; }
-
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 10000; display: none; align-items: center; justify-content: center; }
-.modal.active { display: flex; }
-.modal-box { background: var(--bg-card); border: 1px solid var(--border-light); width: 90%; max-width: 400px; border-radius: 24px; padding: 30px; }
-.inp { width: 100%; padding: 14px; background: var(--bg-base); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-size: 16px; margin-bottom: 15px; outline: none; }
-.btn { width: 100%; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; border: none; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-.btn-green { background: var(--accent-green); color: #000; }
-.btn-gray { background: var(--bg-hover); color: #fff; border: 1px solid var(--border); }
-
-.win-popup { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 10005; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+/* ═══════ МИНИМАЛИСТИЧНЫЙ ПОПАП ═══════ */
+.win-popup { position: fixed; inset: 0; z-index: 10005; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
 .win-popup.active { opacity: 1; pointer-events: auto; }
-.win-box { background: var(--bg-panel); border: 2px solid var(--accent-white); width: 90%; max-width: 350px; border-radius: 24px; overflow: hidden; transform: scale(0.8); transition: transform 0.4s; text-align: center; }
+.win-box { 
+  background: var(--bg-card); border: 1px solid var(--border-light); width: 90%; max-width: 320px; text-align: center; 
+  border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); transform: scale(0.95); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
 .win-popup.active .win-box { transform: scale(1); }
-.win-title { background: var(--accent-white); color: #000; font-weight: 900; padding: 20px; font-size: 22px; }
-.win-amount { padding: 40px 30px; font-size: 44px; font-weight: 900; font-family: 'Courier New', monospace; color: #fff; }
+.win-title { color: var(--text-secondary); font-weight: 500; padding: 25px 20px 10px 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; }
+.win-amount { padding: 0 20px 30px 20px; font-size: 48px; font-weight: 600; color: var(--accent-green); letter-spacing: -0.03em; }
 
-.bottom-bar { position: fixed; bottom: -100px; left: 0; width: 100%; background: var(--accent-white); color: #000; padding: 15px; text-align: center; font-size: 22px; font-weight: 900; z-index: 10010; transition: bottom 0.4s; }
-.bottom-bar.active { bottom: 0; }
+/* СТРАНИЦЫ */
+.page-view { display: none; }
+.page-view.active { display: block; }
 
-/* ============ АДАПТИВ ============ */
-@media (max-width: 1024px) {
-  :root { --sidebar-w: 80px; }
-  .sidebar { padding: 20px 10px; align-items: center; }
-  .sidebar-logo span { display: none; }
-  .nav-btn span { display: none; }
-  .nav-btn { justify-content: center; padding: 0; }
-}
-
-@media (max-width: 768px) {
-  :root { --reel-h: 80px; }
-  
-  .sidebar { display: none; }
-  .mobile-nav { display: flex; }
-  
-  .topbar { padding: 0 15px; height: 60px; }
-  .topbar-title { font-size: 16px; }
-  .main-content { padding-bottom: 70px; }
-  
-  .hero-banner { min-height: 160px; height: auto; padding: 20px; flex-direction: column; align-items: flex-start; justify-content: center; }
-  .hero-title { font-size: 24px; }
-  .hero-desc { font-size: 13px; margin-bottom: 15px; }
-  .hero-btn { padding: 10px 20px; font-size: 13px; }
-  
-  .machine-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .mc-visual { height: 100px; padding: 15px; }
-  .mc-name { font-size: 14px; }
-  
-  .slot-box { padding: 15px; }
-  .controls { flex-direction: column; gap: 12px; }
-  .bet-input { width: 100%; justify-content: flex-start; }
-  .bet-input input { text-align: right; flex: 1; }
-  .bet-btns { width: 100%; }
-  .bet-btns button { flex: 1; }
-  
-  .spin-btn { font-size: 18px; padding: 18px; }
-  .spin-btn img { width: 26px; height: 26px; }
-  
-  .floating-window { top: 70px; width: 95%; max-width: 400px; }
-  
-  .stats-grid { grid-template-columns: 1fr; gap: 10px; }
-  .stat-box { padding: 15px; }
-  .stat-val { font-size: 18px; }
-}
-
+/* АДАПТИВ */
 @media (max-width: 480px) {
-  :root { --reel-h: 65px; }
-  .slot-box { padding: 10px; }
-  .reels-container { gap: 6px; padding: 10px; }
-  .reel-item { padding: 10%; }
-  .bet-input input { font-size: 16px; }
-  .spin-btn { padding: 15px; font-size: 16px; gap: 8px; }
-  .spin-btn img { width: 22px; height: 22px; }
-  .mc-visual { height: 90px; }
-  .topbar-title { font-size: 14px; }
-  .balance-box { font-size: 14px; padding: 6px 12px; }
-  .balance-box img { width: 18px; height: 18px; }
+  :root { --reel-h: 75px; }
+  body { padding-top: 80px; }
+  .top-brand { font-size: 16px; }
+  .user-balance { font-size: 14px; }
+  .profile-btn { width: 36px; height: 36px; }
+  .profile-btn img { width: 28px; height: 28px; }
+  .profile-card { flex-direction: column; text-align: center; padding: 20px; }
+  .slot-container { padding: 20px; border-radius: 20px; transform: rotateX(3deg); } /* Меньше наклон на телефонах */
+  .reels { gap: 6px; padding: 8px; }
+  .game-header { height: 70px; }
 }
 </style>
 </head>
 <body>
 
-<div class="app-container" id="lobby-view">
-  
-  <aside class="sidebar">
-    <div class="sidebar-logo" onclick="showTab('lobby')">
-      <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Gem%20stone/3D/gem_stone_3d.png" alt="Logo">
-      <span>CASINO DROP</span>
+<!-- ШАПКА -->
+<div class="top-header">
+  <div class="header-inner">
+    <div class="top-brand" onclick="showPage('lobby')">
+      <i class="ph-bold ph-diamonds-four"></i> Kesug Slots
     </div>
-    
-    <button class="nav-btn active" data-tab="lobby" onclick="showTab('lobby')">
-      <i class="ph-bold ph-squares-four"></i><span>Лобби</span>
-    </button>
-    <button class="nav-btn" data-tab="top" onclick="showTab('top')">
-      <i class="ph-bold ph-trophy"></i><span>Топ игроков</span>
-    </button>
-    <button class="nav-btn" data-tab="profile" onclick="showTab('profile')">
-      <i class="ph-bold ph-user-circle"></i><span>Профиль</span>
-    </button>
-    <button class="nav-btn" data-tab="settings" onclick="showTab('settings')">
-      <i class="ph-bold ph-gear"></i><span>Настройки</span>
-    </button>
-    <button class="nav-btn" onclick="toggleWindow('history-window')">
-      <i class="ph-bold ph-clock-counter-clockwise"></i><span>История</span>
-    </button>
-  </aside>
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <div class="user-balance" id="ui-balance-wrap">
+        <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png" alt="Wallet">
+        <span id="ui-balance">0 ₽</span>
+      </div>
+      <button class="profile-btn" onclick="showPage('profile')">
+        <img id="nav-avatar" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png">
+      </button>
+    </div>
+  </div>
+</div>
 
-  <main class="main-content">
-    <header class="topbar">
-      <div class="topbar-left">
-        <div class="topbar-title">
-          <i class="ph-bold ph-crown"></i> CASINO DROP
+<div class="content-wrapper">
+  <main>
+    <!-- ЛОББИ -->
+    <div class="page-view active" id="page-lobby">
+      <div class="games-grid" id="machine-grid"></div>
+    </div>
+
+    <!-- ПРОФИЛЬ -->
+    <div class="page-view" id="page-profile">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('lobby')"><i class="ph-bold ph-arrow-left"></i> На главную</button>
+      </div>
+      
+      <div class="profile-card">
+        <img id="profile-big-avatar" class="profile-avatar" src="">
+        <div class="profile-info">
+          <h2 id="profile-big-nick">Игрок</h2>
+          <p id="profile-big-id">ID: #0000</p>
         </div>
       </div>
       
-      <div class="topbar-right">
-        <div class="balance-box" onclick="openEditModal()">
-          <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png" alt="Wallet">
-          <span id="ui-balance">1000.00</span>
-        </div>
-        <img id="ui-avatar-top" class="avatar-btn" src="" onerror="this.src='https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png'">
-      </div>
-    </header>
+      <button class="btn btn-green" onclick="showPage('edit-profile')" style="margin-bottom: 30px;"><i class="ph-bold ph-pencil"></i> Редактировать</button>
 
-    <div class="scroll-area" id="main-scroll-area">
-      <div class="tab-panel active" id="tab-lobby">
+      <div class="stat-grid">
+        <div class="stat-card"><i class="ph-bold ph-arrows-clockwise stat-icon"></i><div class="stat-value" id="stat-spins">0</div><div class="stat-label">Спинов</div></div>
+        <div class="stat-card"><i class="ph-bold ph-coins stat-icon"></i><div class="stat-value" id="stat-bet">0 ₽</div><div class="stat-label">Ставок</div></div>
+        <div class="stat-card"><i class="ph-bold ph-trophy stat-icon"></i><div class="stat-value" id="stat-won">0 ₽</div><div class="stat-label">Выиграно</div></div>
+        <div class="stat-card"><i class="ph-bold ph-trend-up stat-icon"></i><div class="stat-value" id="stat-maxwin">0 ₽</div><div class="stat-label">Макс. выигрыш</div></div>
+        <div class="stat-card"><i class="ph-bold ph-wallet stat-icon"></i><div class="stat-value" id="stat-balance">0 ₽</div><div class="stat-label">Баланс</div></div>
+        <div class="stat-card"><i class="ph-bold ph-arrows-down-up stat-icon"></i><div class="stat-value" id="stat-profit">0 ₽</div><div class="stat-label">Прибыль</div></div>
+      </div>
+    </div>
+
+    <!-- РЕДАКТИРОВАНИЕ -->
+    <div class="page-view" id="page-edit-profile">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('profile')"><i class="ph-bold ph-arrow-left"></i> Назад</button>
+      </div>
+      
+      <div class="form-box">
+        <label class="form-label">Никнейм</label>
+        <input type="text" id="input-nick" class="inp" maxlength="15">
         
-        <div class="hero-banner">
-          <div class="hero-overlay">
-            <div class="hero-title">MEGA <span>JACKPOT</span></div>
-            <div class="hero-desc">Испытай удачу на наших эксклюзивных автоматах. Выиграй до 5 000 000 ₽ прямо сейчас!</div>
-            <button class="hero-btn" onclick="claimGift()" id="btn-claim-gift">
-              <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Wrapped%20gift/3D/wrapped_gift_3d.png" alt="Gift">
-              Забрать бонус
-            </button>
-            <div id="gift-timer" style="margin-top:15px; font-size:13px; color:var(--text-muted); font-weight:700;"></div>
-          </div>
-        </div>
-        
-        <div id="machine-categories"></div>
+        <label class="form-label">Аватар</label>
+        <button class="btn btn-gray" onclick="document.getElementById('upload-avatar').click()" style="width: 100%;"><i class="ph-bold ph-image"></i> Загрузить</button>
+        <input type="file" id="upload-avatar" accept="image/*" style="display:none">
       </div>
-
-      <div class="tab-panel" id="tab-top">
-        <div class="panel">
-          <div class="panel-title"><i class="ph-bold ph-trophy"></i> Топ игроков</div>
-          <div id="top-list"></div>
-        </div>
-      </div>
-
-      <div class="tab-panel" id="tab-profile">
-        <div class="panel" style="position: relative;">
-          <div class="prof-head">
-            <img id="ui-avatar" class="prof-avatar" src="" onerror="this.src='https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png'">
-            <div class="prof-info" style="flex:1; text-align: left;">
-              <h3 id="ui-nick">Игрок</h3>
-            </div>
-            <button class="prof-edit" onclick="openEditModal()" style="background: var(--bg-card); border: 1px solid var(--border-light); padding: 10px; border-radius: 10px; cursor: pointer; color: #fff;"><i class="ph-bold ph-pencil-simple" style="font-size:20px;"></i></button>
-          </div>
-          <div class="stats-grid">
-            <div class="stat-box">
-              <span class="stat-lbl">Спины</span>
-              <span class="stat-val" id="stat-spins">0</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-lbl">Выиграно</span>
-              <span class="stat-val" id="stat-won" style="color:var(--accent-green);">0</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-lbl">Макс. куш</span>
-              <span class="stat-val" id="stat-max">0</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-lbl">Winrate</span>
-              <span class="stat-val" id="stat-winrate">0%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-panel" id="tab-settings">
-        <div class="panel">
-          <div class="panel-title"><i class="ph-bold ph-gear"></i> Настройки</div>
-          <button class="btn btn-gray" onclick="toggleSound()" style="display:flex; justify-content:space-between;">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <i class="ph-bold ph-speaker-high" style="font-size:24px;"></i>
-              <span>Звук</span>
-            </div>
-            <span id="sound-status" style="color:var(--accent-green); font-weight:800;">ВКЛ</span>
-          </button>
-          <button class="btn btn-gray" onclick="toggleAnimations()" style="display:flex; justify-content:space-between;">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <i class="ph-bold ph-sparkle" style="font-size:24px;"></i>
-              <span>Анимации</span>
-            </div>
-            <span id="anim-status" style="color:var(--accent-green); font-weight:800;">ВКЛ</span>
-          </button>
-        </div>
+      
+      <div class="btn-row">
+        <button class="btn btn-green" onclick="saveProfile()">Сохранить</button>
+        <button class="btn btn-gray" onclick="showPage('profile')">Отмена</button>
       </div>
     </div>
   </main>
-
-  <nav class="mobile-nav">
-    <button class="nav-btn active" data-tab="lobby" onclick="showTab('lobby')">
-      <i class="ph-bold ph-squares-four"></i><span>Лобби</span>
-    </button>
-    <button class="nav-btn" data-tab="top" onclick="showTab('top')">
-      <i class="ph-bold ph-trophy"></i><span>Топ</span>
-    </button>
-    <button class="nav-btn" data-tab="profile" onclick="showTab('profile')">
-      <i class="ph-bold ph-user-circle"></i><span>Профиль</span>
-    </button>
-    <button class="nav-btn" data-tab="settings" onclick="showTab('settings')">
-      <i class="ph-bold ph-gear"></i><span>Настройки</span>
-    </button>
-  </nav>
 </div>
 
+<!-- ИГРОВОЙ ЭКРАН -->
 <div id="game-screen">
   <div class="game-header">
-    <button class="back-btn" onclick="closeMachine()">
-      <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Left%20arrow/3D/left_arrow_3d.png" alt="Back" style="width:18px; margin-right:5px;">
-      Назад
-    </button>
-    <div style="display:flex; align-items:center; gap:15px;">
-      <button class="info-btn" onclick="openPaytable()">
-        <i class="ph-bold ph-info" style="font-size:20px;"></i>
-      </button>
-      <div class="game-bal"><span id="game-balance">1000.00</span> ₽</div>
+    <button class="back-btn-game" onclick="closeMachine()"><i class="ph-bold ph-arrow-left"></i> Назад</button>
+    <div class="user-balance" style="font-size: 15px;">
+      <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png" alt="Wallet" style="width: 18px;">
+      <span id="game-balance">1000 ₽</span>
     </div>
   </div>
-  <div class="game-content">
-    <div class="slot-box" id="slot-box">
-      
-      <div class="reels-container" id="main-reels">
-        <svg id="win-lines-svg" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></svg>
-        
-        <div class="reel-window" id="reel-win-0"><div class="reel-strip" id="reel-strip-0"></div></div>
-        <div class="reel-window" id="reel-win-1"><div class="reel-strip" id="reel-strip-1"></div></div>
-        <div class="reel-window" id="reel-win-2"><div class="reel-strip" id="reel-strip-2"></div></div>
-        <div class="reel-window" id="reel-win-3"><div class="reel-strip" id="reel-strip-3"></div></div>
-        <div class="reel-window" id="reel-win-4"><div class="reel-strip" id="reel-strip-4"></div></div>
-        <div class="reel-window" id="reel-win-5"><div class="reel-strip" id="reel-strip-5"></div></div>
-        <div class="reel-window" id="reel-win-6"><div class="reel-strip" id="reel-strip-6"></div></div>
-        <div class="reel-window" id="reel-win-7"><div class="reel-strip" id="reel-strip-7"></div></div>
-        <div class="reel-window" id="reel-win-8"><div class="reel-strip" id="reel-strip-8"></div></div>
+
+  <div class="slot-container">
+    <div class="reels" id="main-reels">
+      <div class="reel-window"><div class="reel-strip" id="reel-0"></div></div>
+      <div class="reel-window"><div class="reel-strip" id="reel-1"></div></div>
+      <div class="reel-window"><div class="reel-strip" id="reel-2"></div></div>
+    </div>
+
+    <div class="game-controls">
+      <div class="bet-box">
+        <span>Ставка</span>
+        <input type="number" id="game-bet" value="100" min="10" max="50000">
       </div>
-      
-      <div class="controls">
-        <div class="bet-input">
-          <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Coin/3D/coin_3d.png" alt="Coin">
-          <span>Ставка</span>
-          <input type="number" id="game-bet" value="100" min="10" max="50000" step="10">
-        </div>
-        <div class="bet-btns">
-          <button onclick="changeBet(-10)">-10</button>
-          <button onclick="changeBet(10)">+10</button>
-          <button class="max" onclick="maxBet()">MAX</button>
-        </div>
+      <div class="bet-btns">
+        <button onclick="changeBet(-50)">-50</button>
+        <button onclick="changeBet(50)">+50</button>
+        <button onclick="maxBet()">MAX</button>
       </div>
-      
-      <div class="action-buttons">
-        <button class="spin-btn" id="btn-spin" onclick="spin()">
-          <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Slot%20machine/3D/slot_machine_3d.png" alt="Spin">
-          Крутить
-        </button>
-      </div>
+      <button class="spin-btn-big" id="btn-spin" onclick="spin()">Крутить</button>
     </div>
   </div>
 </div>
 
-<div class="modal" id="edit-modal">
-  <div class="modal-box">
-    <h2 style="margin-bottom:25px; font-size:22px; font-weight:800; display:flex; align-items:center; gap:10px;">
-      <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png" style="width:28px;">
-      Профиль
-    </h2>
-    <input type="text" id="input-nick" class="inp" placeholder="Никнейм" maxlength="15">
-    <button class="btn btn-gray" onclick="document.getElementById('upload-avatar').click()">
-      <i class="ph-bold ph-image" style="font-size:24px;"></i> Сменить аватар (до 1.5 МБ)
-    </button>
-    <input type="file" id="upload-avatar" accept="image/*,image/gif" style="display:none">
-    <button class="btn btn-green" onclick="saveProfile()">
-      <i class="ph-bold ph-check-circle" style="font-size:24px;"></i> Сохранить
-    </button>
-    <button class="btn btn-gray" onclick="document.getElementById('edit-modal').classList.remove('active')">
-      <i class="ph-bold ph-x-circle" style="font-size:24px;"></i> Отмена
-    </button>
-  </div>
-</div>
-
-<div class="window-overlay" id="history-window">
-  <div class="floating-window">
-    <div class="window-header">
-      <div class="window-title">
-        <i class="ph-bold ph-clock-counter-clockwise" style="color:var(--accent-silver);"></i>
-        История выплат
-      </div>
-      <button class="close-btn" onclick="toggleWindow('history-window')"><i class="ph-bold ph-x"></i></button>
-    </div>
-    <div class="window-body" id="history-list"></div>
-  </div>
-</div>
-
-<div class="window-overlay" id="paytable-window">
-  <div class="floating-window">
-    <div class="window-header">
-      <div class="window-title">
-        <i class="ph-bold ph-list-dashes" style="color:var(--accent-silver);"></i>
-        Таблица выплат
-      </div>
-      <button class="close-btn" onclick="toggleWindow('paytable-window')"><i class="ph-bold ph-x"></i></button>
-    </div>
-    <div class="window-body" id="paytable-list"></div>
-  </div>
-</div>
-
+<!-- ПОПАП ВЫИГРЫША -->
 <div class="win-popup" id="win-popup">
   <div class="win-box">
-    <div class="win-title" id="win-title">BIG WIN</div>
+    <div class="win-title" id="win-title">Выигрыш</div>
     <div class="win-amount" id="win-amount">0 ₽</div>
   </div>
 </div>
 
-<div class="bottom-bar" id="bottom-bar">Выигрыш: <span id="bottom-bar-amount">0 ₽</span></div>
-
 <script>
-// ============ БАЗА СЛОТОВ ============
-// ВНИМАНИЕ: Коэффициенты сильно урезаны, чтобы игра была сложной!
 const MACHINES = [
-  { id: 'classic', name: 'Classic', desc: 'Фрукты', symbols: ['🍒','🍋','🍀','🔔','💎','7️⃣'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'sweetbonanza', name: 'Sweet Bonanza', desc: 'Pragmatic', symbols: ['🍬','🍭','🍩','🍎','🍇','🍉'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'gatesofolympus', name: 'Gates of Olympus', desc: 'Pragmatic', symbols: ['⚡','🏛️','💎','👑','🔱','⚱️'], triple: [2,4,6,12,20,50], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'bigbass', name: 'Big Bass', desc: 'Pragmatic', symbols: ['🎣','🐟','🐊','🚤','🦆','🪝'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'bookofra', name: 'Book of Ra', desc: 'Novomatic', symbols: ['📖','🏺','🦅','🐍','🏛️','👑'], triple: [2,4,6,12,20,40], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'starburst', name: 'Starburst', desc: 'NetEnt', symbols: ['⭐','💎','🔔','7️⃣','🍒','🍋'], triple: [2,3,4,8,12,20], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'moneytrain', name: 'Money Train', desc: 'Relax Gaming', symbols: ['🚂','💰','💎','🎩','🐒','🌴'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'winter', name: 'Winter', desc: 'Зима', symbols: ['❄️','⛄','🎄','🎁','🦌','🧣'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'cyber', name: 'Cyberpunk', desc: 'Неон', symbols: ['🤖','💻','🔋','⚡','🕶️','🌐'], triple: [2,4,6,12,20,40], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'jungle', name: 'Jungle', desc: 'Джунгли', symbols: ['🦁','🐯','🐵','🐍','🌴','🗿'], triple: [2,4,6,12,20,40], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'dragon', name: 'Dragon', desc: 'Драконы', symbols: ['🐉','🔥','🥚','⚔️','🛡️','👑'], triple: [3,6,10,20,40,80], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'ocean', name: 'Ocean', desc: 'Море', symbols: ['🐟','🐬','🦈','🐙','⚓','🧜‍♀️'], triple: [2,3,4,8,12,20], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'pets', name: 'Pets', desc: 'Питомцы', symbols: ['🐶','🐱','🐰','🦊','🐼','🐨'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'stars', name: 'Stars', desc: 'Звезды', symbols: ['🌕','⭐','🌟','☀️','🌠','🌍'], triple: [2,3,4,8,12,20], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'razortooth', name: 'Razor Shark', desc: 'Push Gaming', symbols: ['🦈','🦷','🐟','🌊','💎','⚓'], triple: [2,3,4,8,12,20], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'reactoonz', name: 'Reactoonz', desc: 'Play’n GO', symbols: ['👾','🌌','🔋','⚡','💥','🌟'], triple: [2,3,4,8,12,20], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'moneytrain3', name: 'Money Train 3', desc: 'Relax Gaming', symbols: ['🚂','💰','💎','🎩','🐒','🌴'], triple: [2,4,8,20,50,100], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'snakearena', name: 'Snake Arena', desc: 'Relax Gaming', symbols: ['🐍','⚔️','🛡️','🏆','👑','💎'], triple: [2,4,6,12,20,40], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'templetumble', name: 'Temple Tumble', desc: 'Relax Gaming', symbols: ['🗿','🐍','🐯','💎','🏛️','👑'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'tombstone', name: 'Tombstone', desc: 'Nolimit City', symbols: ['🤠','🔫','🐍','🦂','💀','💰'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'sanquentin', name: 'San Quentin', desc: 'Nolimit City', symbols: ['👮','🔫','💰','💊','📱','💀'], triple: [2,4,8,20,50,100], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'twinspin', name: 'Twin Spin', desc: 'NetEnt', symbols: ['🍒','🍋','🔔','7️⃣','💎','⭐'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'divinefortune', name: 'Divine Fortune', desc: 'NetEnt', symbols: ['🦉','⚡','🏛️','👑','💎','🏆'], triple: [2,4,6,12,20,40], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'deadordealive', name: 'Dead or Alive', desc: 'NetEnt', symbols: ['🤠','🔫','💰','🐍','🦂','💀'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'jackbeanstalk', name: 'Jack & Beanstalk', desc: 'NetEnt', symbols: ['🌱','🌰','🐄','🪓','💰','👑'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'gonzo', name: "Gonzo's Quest", desc: 'NetEnt', symbols: ['🗿','🐍','🦅','👺','🏆','📜'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'riseofolympus', name: 'Rise of Olympus', desc: 'Play’n GO', symbols: ['⚡','🌊','💀','👑','🔱','🏛️'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'moonprincess', name: 'Moon Princess', desc: 'Play’n GO', symbols: ['🌙','⭐','💎','👑','🔮','🏆'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'wolfgold', name: 'Wolf Gold', desc: 'Pragmatic', symbols: ['🐺','🦅','🐴','💰','🌑','🏔️'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'greatrhino', name: 'Great Rhino', desc: 'Pragmatic', symbols: ['🦏','🦒','🦓','🌴','🏆','👑'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'madamedestiny', name: 'Madame Destiny', desc: 'Pragmatic', symbols: ['🔮','🌙','⭐','💎','👑','🏆'], triple: [2,4,6,12,20,40], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'wildmachine', name: 'The Wild Machine', desc: 'Pragmatic', symbols: ['⚙️','🔋','⚡','🤖','💎','👑'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'chaoscrew', name: 'Chaos Crew', desc: 'Hacksaw', symbols: ['💀','👾','🔫','💥','🎩','💎'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'doghouse', name: 'The Dog House', desc: 'Pragmatic', symbols: ['🐶','🦴','🐾','🏠','🐕','🐩'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'doghouse2', name: 'Dog House Megaways', desc: 'Pragmatic', symbols: ['🐶','🐕','🦴','🐾','🏠','🎾'], triple: [2,4,6,12,20,40], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'firestrike', name: 'Fire Strike', desc: 'Pragmatic', symbols: ['🔥','💥','⚡','🧨','🚀','☄️'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: '5lions', name: '5 Lions Gold', desc: 'Pragmatic', symbols: ['🦁','🐉','🐢','🐟','💰','🏮'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'jars', name: "Jammin' Jars", desc: 'Push Gaming', symbols: ['🍓','🍇','🍊','🍋','🍒','🍉'], triple: [2,3,5,10,15,25], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'wildswarm', name: 'Wild Swarm', desc: 'Push Gaming', symbols: ['🐝','🍯','🐝','🏆','💎','👑'], triple: [2,4,6,12,20,40], pair: [0.1,0.2,0.3,0.5,1,2] },
-  { id: 'bandit', name: 'Le Bandit', desc: 'Hacksaw', symbols: ['🦝','🤠','🔫','💰','💎','👑'], triple: [2,4,8,15,30,60], pair: [0.1,0.2,0.3,0.5,1,2] },
-  
-  // ЗИМНИЕ СЛОТЫ (Чуть выгоднее, но всё еще сложно)
-  { id: 'snowqueen', name: 'Snow Queen', desc: 'Снежная Королева', symbols: ['❄️','👸','💎','👑','🦌','⛄'], triple: [5,10,20,50,100,250], pair: [0.2,0.5,1,2,5,10], isWinter: true },
-  { id: 'frozen', name: 'Frozen Diamonds', desc: 'Замороженные бриллианты', symbols: ['💎','❄️','🧊','⭐','👑','🏔️'], triple: [5,10,20,50,100,250], pair: [0.2,0.5,1,2,5,10], isWinter: true },
-  { id: 'icewolf', name: 'Ice Wolf', desc: 'Ледяной волк', symbols: ['🐺','❄️','🌕','🦌','💎','👑'], triple: [5,10,20,50,100,250], pair: [0.2,0.5,1,2,5,10], isWinter: true },
-  { id: 'santa', name: "Santa's Gifts", desc: 'Подарки Санты', symbols: ['🎅','🎁','🦌','❄️','🔔','⭐'], triple: [5,10,20,50,100,250], pair: [0.2,0.5,1,2,5,10], isWinter: true },
-  { id: 'polar', name: 'Polar Cash', desc: 'Полярный кэш', symbols: ['🐻‍❄️','❄️','🧊','💎','⭐','🐧'], triple: [5,10,20,50,100,250], pair: [0.2,0.5,1,2,5,10], isWinter: true },
-  { id: 'snowstorm', name: 'Snow Storm', desc: 'Снежная буря', symbols: ['🌨️','❄️','⛄','🎄','💎','👑'], triple: [5,10,20,50,100,250], pair: [0.2,0.5,1,2,5,10], isWinter: true }
-];
-
-const CATEGORIES = [
-  { id: 'popular', title: 'Популярные', icon: 'ph-fire', machines: ['sweetbonanza', 'gatesofolympus', 'bigbass', 'moneytrain', 'moneytrain3', 'divinefortune', 'gonzo', 'riseofolympus', 'moonprincess', 'madamedestiny', '5lions', 'stars'] },
-  { id: 'winter', title: '❄ Зимняя Коллекция', icon: 'ph-snowflake', machines: ['snowqueen', 'frozen', 'icewolf', 'santa', 'polar', 'snowstorm'], isWinter: true },
-  { id: 'classic', title: 'Классика и Фрукты', icon: 'ph-diamond', machines: ['classic', 'starburst', 'twinspin', 'jars'] },
-  { id: 'adventure', title: 'Приключения', icon: 'ph-compass', machines: ['bookofra', 'winter', 'cyber', 'jungle', 'dragon', 'ocean', 'reactoonz', 'snakearena', 'templetumble', 'jackbeanstalk', 'wildmachine'] },
-  { id: 'action', title: 'Экшн и Хоррор', icon: 'ph-skull', machines: ['tombstone', 'sanquentin', 'deadordealive', 'chaoscrew', 'firestrike', 'bandit'] },
-  { id: 'animals', title: 'Животные', icon: 'ph-paw-print', machines: ['pets', 'razortooth', 'wolfgold', 'greatrhino', 'doghouse', 'doghouse2', 'wildswarm'] }
+  { id: 'classic', name: 'Classic', desc: 'Фрукты', symbols: ['🍒','🍋','🍀','🔔','💎','7️⃣'], triple: [2,3,5,10,15,25] },
+  { id: 'gatesofolympus', name: 'Gates of Olympus', desc: 'Pragmatic', symbols: ['⚡','🏛️','💎','👑','🔱','⚱️'], triple: [2,4,6,12,20,50] },
+  { id: 'bigbass', name: 'Big Bass', desc: 'Pragmatic', symbols: ['🎣','🐟','🐊','🚤','🦆','🪝'], triple: [2,3,5,10,15,25] },
+  { id: 'bookofra', name: 'Book of Ra', desc: 'Novomatic', symbols: ['📖','🏺','🦅','🐍','🏛️','👑'], triple: [2,4,6,12,20,40] },
+  { id: 'starburst', name: 'Starburst', desc: 'NetEnt', symbols: ['⭐','💎','🔔','7️⃣','🍒','🍋'], triple: [2,3,4,8,12,20] },
+  { id: 'moneytrain', name: 'Money Train', desc: 'Relax Gaming', symbols: ['🚂','💰','💎','🎩','🐒','🌴'], triple: [2,4,8,15,30,60] },
+  { id: 'winter', name: 'Winter', desc: 'Зима', symbols: ['❄️','⛄','🎄','🎁','🦌','🧣'], triple: [2,3,5,10,15,25] },
+  { id: 'cyber', name: 'Cyberpunk', desc: 'Неон', symbols: ['🤖','💻','🔋','⚡','🕶️','🌐'], triple: [2,4,6,12,20,40] },
+  { id: 'jungle', name: 'Jungle', desc: 'Джунгли', symbols: ['🦁','🐯','🐵','🐍','🌴','🗿'], triple: [2,4,6,12,20,40] },
+  { id: 'dragon', name: 'Dragon', desc: 'Драконы', symbols: ['🐉','🔥','🥚','⚔️','🛡️','👑'], triple: [3,6,10,20,40,80] },
+  { id: 'ocean', name: 'Ocean', desc: 'Море', symbols: ['🐟','🐬','🦈','🐙','⚓','🧜‍♀️'], triple: [2,3,4,8,12,20] },
+  { id: 'pets', name: 'Pets', desc: 'Питомцы', symbols: ['🐶','🐱','🐰','🦊','🐼','🐨'], triple: [2,3,5,10,15,25] },
+  { id: 'stars', name: 'Stars', desc: 'Звезды', symbols: ['🌕','⭐','🌟','☀️','🌠','🌍'], triple: [2,3,4,8,12,20] },
+  { id: 'razortooth', name: 'Razor Shark', desc: 'Push Gaming', symbols: ['🦈','🦷','🐟','🌊','💎','⚓'], triple: [2,3,4,8,12,20] },
+  { id: 'reactoonz', name: 'Reactoonz', desc: 'Play’n GO', symbols: ['👾','🌌','🔋','⚡','💥','🌟'], triple: [2,3,4,8,12,20] },
+  { id: 'moneytrain3', name: 'Money Train 3', desc: 'Relax Gaming', symbols: ['🚂','💰','💎','🎩','🐒','🌴'], triple: [2,4,8,20,50,100] },
+  { id: 'snakearena', name: 'Snake Arena', desc: 'Relax Gaming', symbols: ['🐍','⚔️','🛡️','🏆','👑','💎'], triple: [2,4,6,12,20,40] },
+  { id: 'templetumble', name: 'Temple Tumble', desc: 'Relax Gaming', symbols: ['🗿','🐍','🐯','💎','🏛️','👑'], triple: [2,3,5,10,15,25] },
+  { id: 'tombstone', name: 'Tombstone', desc: 'Nolimit City', symbols: ['🤠','🔫','🐍','🦂','💀','💰'], triple: [2,4,8,15,30,60] },
+  { id: 'sanquentin', name: 'San Quentin', desc: 'Nolimit City', symbols: ['👮','🔫','💰','💊','📱','💀'], triple: [2,4,8,20,50,100] },
+  { id: 'twinspin', name: 'Twin Spin', desc: 'NetEnt', symbols: ['🍒','🍋','🔔','7️⃣','💎','⭐'], triple: [2,3,5,10,15,25] },
+  { id: 'divinefortune', name: 'Divine Fortune', desc: 'NetEnt', symbols: ['🦉','⚡','🏛️','👑','💎','🏆'], triple: [2,4,6,12,20,40] },
+  { id: 'deadordealive', name: 'Dead or Alive', desc: 'NetEnt', symbols: ['🤠','🔫','💰','🐍','🦂','💀'], triple: [2,4,8,15,30,60] },
+  { id: 'jackbeanstalk', name: 'Jack & Beanstalk', desc: 'NetEnt', symbols: ['🌱','🌰','🐄','🪓','💰','👑'], triple: [2,3,5,10,15,25] },
+  { id: 'gonzo', name: "Gonzo's Quest", desc: 'NetEnt', symbols: ['🗿','🐍','🦅','👺','🏆','📜'], triple: [2,4,8,15,30,60] },
+  { id: 'riseofolympus', name: 'Rise of Olympus', desc: 'Play’n GO', symbols: ['⚡','🌊','💀','👑','🔱','🏛️'], triple: [2,4,8,15,30,60] },
+  { id: 'moonprincess', name: 'Moon Princess', desc: 'Play’n GO', symbols: ['🌙','⭐','💎','👑','🔮','🏆'], triple: [2,3,5,10,15,25] },
+  { id: 'wolfgold', name: 'Wolf Gold', desc: 'Pragmatic', symbols: ['🐺','🦅','🐴','💰','🌑','🏔️'], triple: [2,3,5,10,15,25] },
+  { id: 'greatrhino', name: 'Great Rhino', desc: 'Pragmatic', symbols: ['🦏','🦒','🦓','🌴','🏆','👑'], triple: [2,3,5,10,15,25] },
+  { id: 'madamedestiny', name: 'Madame Destiny', desc: 'Pragmatic', symbols: ['🔮','🌙','⭐','💎','👑','🏆'], triple: [2,4,6,12,20,40] },
+  { id: 'wildmachine', name: 'The Wild Machine', desc: 'Pragmatic', symbols: ['⚙️','🔋','⚡','🤖','💎','👑'], triple: [2,4,8,15,30,60] },
+  { id: 'chaoscrew', name: 'Chaos Crew', desc: 'Hacksaw', symbols: ['💀','👾','🔫','💥','🎩','💎'], triple: [2,4,8,15,30,60] },
+  { id: 'doghouse', name: 'The Dog House', desc: 'Pragmatic', symbols: ['🐶','🦴','🐾','🏠','🐕','🐩'], triple: [2,3,5,10,15,25] },
+  { id: 'doghouse2', name: 'Dog House Megaways', desc: 'Pragmatic', symbols: ['🐶','🐕','🦴','🐾','🏠','🎾'], triple: [2,4,6,12,20,40] },
+  { id: 'firestrike', name: 'Fire Strike', desc: 'Pragmatic', symbols: ['🔥','💥','⚡','🧨','🚀','☄️'], triple: [2,4,8,15,30,60] },
+  { id: '5lions', name: '5 Lions Gold', desc: 'Pragmatic', symbols: ['🦁','🐉','🐢','🐟','💰','🏮'], triple: [2,3,5,10,15,25] },
+  { id: 'jars', name: "Jammin' Jars", desc: 'Push Gaming', symbols: ['🍓','🍇','🍊','🍋','🍒','🍉'], triple: [2,3,5,10,15,25] },
+  { id: 'wildswarm', name: 'Wild Swarm', desc: 'Push Gaming', symbols: ['🐝','🍯','🐝','🏆','💎','👑'], triple: [2,4,6,12,20,40] },
+  { id: 'bandit', name: 'Le Bandit', desc: 'Hacksaw', symbols: ['🦝','🤠','🔫','💰','💎','👑'], triple: [2,4,8,15,30,60] }
 ];
 
 const ICON_MAP = {
-  '🍬': 'https://cdn3d.iconscout.com/3d/premium/thumb/candy-5184998-4339676.png',
-  '🍭': 'https://cdn3d.iconscout.com/3d/premium/thumb/lollipop-5185005-4339683.png',
-  '🍩': 'https://cdn3d.iconscout.com/3d/premium/thumb/donut-5163563-4315874.png',
-  '🍎': 'https://cdn3d.iconscout.com/3d/premium/thumb/apple-5163561-4315872.png',
-  '🍇': 'https://cdn3d.iconscout.com/3d/premium/thumb/grapes-5163564-4315875.png',
-  '🍉': 'https://cdn3d.iconscout.com/3d/premium/thumb/watermelon-5163570-4315881.png',
-  '🍒': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cherries/3D/cherries_3d.png',
-  '🍋': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Lemon/3D/lemon_3d.png',
-  '🍀': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Four%20leaf%20clover/3D/four_leaf_clover_3d.png',
-  '🔔': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Bell/3D/bell_3d.png',
-  '💎': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Gem%20stone/3D/gem_stone_3d.png',
-  '7️⃣': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Keycap%207/3D/keycap_7_3d.png',
-  '⚡': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/High%20voltage/3D/high_voltage_3d.png',
-  '👑': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crown/3D/crown_3d.png',
-  '⭐': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Star/3D/star_3d.png',
-  '🔥': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fire/3D/fire_3d.png',
-  '💰': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png',
-  '🤖': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Robot/3D/robot_3d.png',
-  '🐶': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dog%20face/3D/dog_face_3d.png',
-  '🐱': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cat%20face/3D/cat_face_3d.png',
-  '🐟': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fish/3D/fish_3d.png',
-  '🦈': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Shark/3D/shark_3d.png',
-  '🐉': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dragon/3D/dragon_3d.png',
-  '❄️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Snowflake/3D/snowflake_3d.png',
-  '🎁': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Wrapped%20gift/3D/wrapped_gift_3d.png',
-  '🎩': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Top%20hat/3D/top_hat_3d.png',
-  '💀': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Skull/3D/skull_3d.png',
-  '🤠': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cowboy%20hat%20face/3D/cowboy_hat_face_3d.png',
-  '🦁': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Lion/3D/lion_3d.png',
-  '🐯': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Tiger%20face/3D/tiger_face_3d.png',
-  '🐵': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Monkey%20face/3D/monkey_face_3d.png',
-  '🐍': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Snake/3D/snake_3d.png',
-  '🌴': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Palm%20tree/3D/palm_tree_3d.png',
-  '👾': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Alien%20monster/3D/alien_monster_3d.png',
-  '🚂': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Locomotive/3D/locomotive_3d.png',
-  '🏆': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Trophy/3D/trophy_3d.png',
-  '🍓': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Strawberry/3D/strawberry_3d.png',
-  '🐝': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Honeybee/3D/honeybee_3d.png',
-  '🦝': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Raccoon/3D/raccoon_3d.png',
-  '🦉': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Owl/3D/owl_3d.png',
-  '🔱': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Trident%20emblem/3D/trident_emblem_3d.png',
-  '🏛️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Classical%20building/3D/classical_building_3d.png',
-  '⚱️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Funeral%20urn/3D/funeral_urn_3d.png',
-  '🎣': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fishing%20pole/3D/fishing_pole_3d.png',
-  '🐊': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crocodile/3D/crocodile_3d.png',
-  '🚤': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Speedboat/3D/speedboat_3d.png',
-  '🦆': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Duck/3D/duck_3d.png',
-  '📖': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Open%20book/3D/open_book_3d.png',
-  '🏺': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Amphora/3D/amphora_3d.png',
-  '🦅': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Eagle/3D/eagle_3d.png',
-  '🐺': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Wolf/3D/wolf_3d.png',
-  '🐴': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Horse%20face/3D/horse_face_3d.png',
-  '🌑': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/New%20moon/3D/new_moon_3d.png',
-  '🏔️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Snow-capped%20mountain/3D/snow-capped_mountain_3d.png',
-  '🦏': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Rhinoceros/3D/rhinoceros_3d.png',
-  '🦒': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Giraffe/3D/giraffe_3d.png',
-  '🦓': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Zebra/3D/zebra_3d.png',
-  '🔮': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crystal%20ball/3D/crystal_ball_3d.png',
-  '🌙': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crescent%20moon/3D/crescent_moon_3d.png',
-  '⚙️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Gear/3D/gear_3d.png',
-  '🔋': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Battery/3D/battery_3d.png',
-  '💥': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Collision/3D/collision_3d.png',
-  '🦴': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Bone/3D/bone_3d.png',
-  '🐾': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Paw%20prints/3D/paw_prints_3d.png',
-  '🏠': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/House/3D/house_3d.png',
-  '🐕': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dog/3D/dog_3d.png',
-  '🐩': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Poodle/3D/poodle_3d.png',
-  '🎾': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Tennis/3D/tennis_3d.png',
-  '🧨': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Firecracker/3D/firecracker_3d.png',
-  '🚀': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Rocket/3D/rocket_3d.png',
-  '☄️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Comet/3D/comet_3d.png',
-  '🐢': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Turtle/3D/turtle_3d.png',
-  '🏮': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Red%20paper%20lantern/3D/red_paper_lantern_3d.png',
-  '🍊': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Tangerine/3D/tangerine_3d.png',
-  '🍯': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Honey%20pot/3D/honey_pot_3d.png',
-  '🦂': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Scorpion/3D/scorpion_3d.png',
-  '🔫': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Water%20pistol/3D/water_pistol_3d.png',
-  '👮': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Police%20officer/3D/police_officer_3d.png',
-  '💊': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Pill/3D/pill_3d.png',
-  '📱': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Mobile%20phone/3D/mobile_phone_3d.png',
-  '🌱': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Seedling/3D/seedling_3d.png',
-  '🌰': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Chestnut/3D/chestnut_3d.png',
-  '🐄': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cow/3D/cow_3d.png',
-  '🪓': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Axe/3D/axe_3d.png',
-  '👺': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Goblin/3D/goblin_3d.png',
-  '📜': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Scroll/3D/scroll_3d.png',
-  '🌊': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Water%20wave/3D/water_wave_3d.png',
-  '🦷': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Tooth/3D/tooth_3d.png',
-  '⚓': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Anchor/3D/anchor_3d.png',
-  '🧜‍♀️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Mermaid/3D/mermaid_3d.png',
-  '🐰': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Rabbit%20face/3D/rabbit_face_3d.png',
-  '🦊': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fox/3D/fox_3d.png',
-  '🐼': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Panda/3D/panda_3d.png',
-  '🐨': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Koala/3D/koala_3d.png',
-  '🌕': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Full%20moon/3D/full_moon_3d.png',
-  '🌟': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Glowing%20star/3D/glowing_star_3d.png',
-  '☀️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Sun/3D/sun_3d.png',
-  '🌠': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Shooting%20star/3D/shooting_star_3d.png',
-  '🌍': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Globe%20showing%20Europe-Africa/3D/globe_showing_europe-africa_3d.png',
-  '🌌': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Milky%20way/3D/milky_way_3d.png',
-  '⚔️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crossed%20swords/3D/crossed_swords_3d.png',
-  '🛡️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Shield/3D/shield_3d.png',
-  '🗿': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Moai/3D/moai_3d.png',
-  '🥚': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Egg/3D/egg_3d.png',
-  '🐙': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Octopus/3D/octopus_3d.png',
-  '🐬': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dolphin/3D/dolphin_3d.png',
-  '💻': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Laptop/3D/laptop_3d.png',
-  '🕶️': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Sunglasses/3D/sunglasses_3d.png',
-  '🌐': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Globe%20with%20meridians/3D/globe_with_meridians_3d.png',
-  '⛄': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Snowman%20without%20snow/3D/snowman_without_snow_3d.png',
-  '🎄': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Christmas%20tree/3D/christmas_tree_3d.png',
-  '🦌': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Deer/3D/deer_3d.png',
-  '🧣': 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Scarf/3D/scarf_3d.png'
+  '🍒':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cherries/3D/cherries_3d.png', '🍋':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Lemon/3D/lemon_3d.png', '🍀':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Four%20leaf%20clover/3D/four_leaf_clover_3d.png', '🔔':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Bell/3D/bell_3d.png', '💎':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Gem%20stone/3D/gem_stone_3d.png', '7️⃣':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Keycap%207/3D/keycap_7_3d.png', '⚡':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/High%20voltage/3D/high_voltage_3d.png', '👑':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crown/3D/crown_3d.png', '⭐':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Star/3D/star_3d.png', '🔥':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fire/3D/fire_3d.png', '💰':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png', '🤖':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Robot/3D/robot_3d.png', '🐶':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dog%20face/3D/dog_face_3d.png', '🐱':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cat%20face/3D/cat_face_3d.png', '🐟':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fish/3D/fish_3d.png', '🦈':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Shark/3D/shark_3d.png', '🐉':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dragon/3D/dragon_3d.png', '❄️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Snowflake/3D/snowflake_3d.png', '🎁':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Wrapped%20gift/3D/wrapped_gift_3d.png', '🎩':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Top%20hat/3D/top_hat_3d.png', '💀':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Skull/3D/skull_3d.png', '🤠':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cowboy%20hat%20face/3D/cowboy_hat_face_3d.png', '🦁':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Lion/3D/lion_3d.png', '🐯':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Tiger%20face/3D/tiger_face_3d.png', '🐵':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Monkey%20face/3D/monkey_face_3d.png', '🐍':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Snake/3D/snake_3d.png', '🌴':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Palm%20tree/3D/palm_tree_3d.png', '👾':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Alien%20monster/3D/alien_monster_3d.png', '🚂':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Locomotive/3D/locomotive_3d.png', '🏆':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Trophy/3D/trophy_3d.png', '🍓':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Strawberry/3D/strawberry_3d.png', '🐝':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Honeybee/3D/honeybee_3d.png', '🦝':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Raccoon/3D/raccoon_3d.png', '🦉':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Owl/3D/owl_3d.png', '🔱':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Trident%20emblem/3D/trident_emblem_3d.png', '🏛️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Classical%20building/3D/classical_building_3d.png', '⚱️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Funeral%20urn/3D/funeral_urn_3d.png', '🎣':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fishing%20pole/3D/fishing_pole_3d.png', '🐊':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crocodile/3D/crocodile_3d.png', '🚤':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Speedboat/3D/speedboat_3d.png', '🦆':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Duck/3D/duck_3d.png', '🪝':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Hook/3D/hook_3d.png', '📖':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Open%20book/3D/open_book_3d.png', '🏺':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Amphora/3D/amphora_3d.png', '🦅':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Eagle/3D/eagle_3d.png', '🐺':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Wolf/3D/wolf_3d.png', '🐴':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Horse%20face/3D/horse_face_3d.png', '🌑':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/New%20moon/3D/new_moon_3d.png', '🏔️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Snow-capped%20mountain/3D/snow-capped_mountain_3d.png', '🦏':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Rhinoceros/3D/rhinoceros_3d.png', '🦒':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Giraffe/3D/giraffe_3d.png', '🦓':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Zebra/3D/zebra_3d.png', '🔮':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crystal%20ball/3D/crystal_ball_3d.png', '🌙':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crescent%20moon/3D/crescent_moon_3d.png', '⚙️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Gear/3D/gear_3d.png', '🔋':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Battery/3D/battery_3d.png', '💥':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Collision/3D/collision_3d.png', '🦴':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Bone/3D/bone_3d.png', '🐾':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Paw%20prints/3D/paw_prints_3d.png', '🏠':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/House/3D/house_3d.png', '🐕':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dog/3D/dog_3d.png', '🐩':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Poodle/3D/poodle_3d.png', '🎾':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Tennis/3D/tennis_3d.png', '🧨':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Firecracker/3D/firecracker_3d.png', '🚀':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Rocket/3D/rocket_3d.png', '☄️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Comet/3D/comet_3d.png', '🐢':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Turtle/3D/turtle_3d.png', '🏮':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Red%20paper%20lantern/3D/red_paper_lantern_3d.png', '🍊':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Tangerine/3D/tangerine_3d.png', '🍯':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Honey%20pot/3D/honey_pot_3d.png', '🦂':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Scorpion/3D/scorpion_3d.png', '🔫':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Water%20pistol/3D/water_pistol_3d.png', '👮':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Police%20officer/3D/police_officer_3d.png', '💊':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Pill/3D/pill_3d.png', '📱':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Mobile%20phone/3D/mobile_phone_3d.png', '🌱':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Seedling/3D/seedling_3d.png', '🌰':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Chestnut/3D/chestnut_3d.png', '🐄':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cow/3D/cow_3d.png', '🪓':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Axe/3D/axe_3d.png', '👺':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Goblin/3D/goblin_3d.png', '📜':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Scroll/3D/scroll_3d.png', '🌊':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Water%20wave/3D/water_wave_3d.png', '🦷':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Tooth/3D/tooth_3d.png', '⚓':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Anchor/3D/anchor_3d.png', '🧜‍♀️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Mermaid/3D/mermaid_3d.png', '🐰':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Rabbit%20face/3D/rabbit_face_3d.png', '🦊':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fox/3D/fox_3d.png', '🐼':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Panda/3D/panda_3d.png', '🐨':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Koala/3D/koala_3d.png', '🌕':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Full%20moon/3D/full_moon_3d.png', '🌟':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Glowing%20star/3D/glowing_star_3d.png', '☀️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Sun/3D/sun_3d.png', '🌠':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Shooting%20star/3D/shooting_star_3d.png', '🌍':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Globe%20showing%20Europe-Africa/3D/globe_showing_europe-africa_3d.png', '🌌':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Milky%20way/3D/milky_way_3d.png', '⚔️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Crossed%20swords/3D/crossed_swords_3d.png', '🛡️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Shield/3D/shield_3d.png', '🗿':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Moai/3D/moai_3d.png', '🥚':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Egg/3D/egg_3d.png', '🐙':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Octopus/3D/octopus_3d.png', '🐬':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dolphin/3D/dolphin_3d.png', '💻':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Laptop/3D/laptop_3d.png', '🕶️':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Sunglasses/3D/sunglasses_3d.png', '🌐':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Globe%20with%20meridians/3D/globe_with_meridians_3d.png', '⛄':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Snowman%20without%20snow/3D/snowman_without_snow_3d.png', '🎄':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Christmas%20tree/3D/christmas_tree_3d.png', '🦌':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Deer/3D/deer_3d.png', '🧣':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Scarf/3D/scarf_3d.png', '🎰':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Slot%20machine/3D/slot_machine_3d.png', '🎲':'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Game%20die/3D/game_die_3d.png'
 };
 
 function getIconUrl(emoji) {
-  if (ICON_MAP[emoji]) return ICON_MAP[emoji];
-  try {
-    const code = twemoji.convert.toCodePoint(emoji);
-    return `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.3/assets/svg/${code}.svg`;
-  } catch (e) { return null; }
+  return ICON_MAP[emoji] || 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Gem%20stone/3D/gem_stone_3d.png';
 }
 
-// ============ СОСТОЯНИЕ ============
 const state = {
-  playerId: localStorage.getItem('casino_player_id') || 'player_' + Math.random().toString(36).substr(2, 9),
-  balance: parseFloat(localStorage.getItem('tl_balance')) || 1000,
+  playerId: localStorage.getItem('kasino_player_id') || 'player_' + Math.random().toString(36).substr(2, 9),
+  balance: parseFloat(localStorage.getItem('ks_balance')) || 1000,
   bet: 100,
-  avatar: localStorage.getItem('tl_avatar') || '',
-  nickname: localStorage.getItem('tl_nickname') || 'Игрок',
-  sound: localStorage.getItem('tl_sound') !== 'false',
-  noAnim: localStorage.getItem('tl_no_anim') === 'true',
-  lastGift: parseInt(localStorage.getItem('tl_last_gift')) || 0,
-  history: JSON.parse(localStorage.getItem('tl_history')) || [],
-  stats: { spins: 0, won: 0, maxWin: 0, totalBet: 0 }
+  avatar: localStorage.getItem('ks_avatar') || '',
+  nickname: localStorage.getItem('ks_nickname') || 'Игрок',
+  stats: JSON.parse(localStorage.getItem('ks_stats')) || { spins: 0, won: 0, maxWin: 0, totalBet: 0 }
 };
-localStorage.setItem('casino_player_id', state.playerId);
+localStorage.setItem('kasino_player_id', state.playerId);
 
-try {
-  const savedStats = JSON.parse(localStorage.getItem('tl_stats'));
-  if (savedStats) {
-    state.stats.spins = parseInt(savedStats.spins) || 0;
-    state.stats.won = parseFloat(savedStats.won) || 0;
-    state.stats.maxWin = parseFloat(savedStats.maxWin) || 0;
-    state.stats.totalBet = parseFloat(savedStats.totalBet) || 0;
-  }
-} catch(e) {}
+let currentMachine = null, isSpinning = false;
 
-let currentMachine = null, isSpinning = false, audioCtx = null, bottomBarTimer = null;
-if (state.noAnim) document.body.classList.add('no-anim');
+window.showPage = (id) => {
+  document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('page-' + id);
+  if (el) el.classList.add('active');
 
-window.toggleWindow = (id) => {
-  const win = document.getElementById(id);
-  win.classList.toggle('active');
-  if (id === 'history-window' && win.classList.contains('active')) renderHistory();
+  if (id === 'profile') renderProfileStats();
+  if (id === 'edit-profile') document.getElementById('input-nick').value = state.nickname;
 };
 
-// ============ СЕРВЕР ============
-async function saveToServer() {
-  try {
-    localStorage.setItem('tl_balance', state.balance);
-    localStorage.setItem('tl_nickname', state.nickname);
-    localStorage.setItem('tl_avatar', state.avatar);
-    localStorage.setItem('tl_stats', JSON.stringify(state.stats));
-    localStorage.setItem('tl_history', JSON.stringify(state.history));
-  } catch (e) {}
-  try {
-    await fetch('/api/save.php', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ player_id: state.playerId, balance: state.balance, nickname: state.nickname, avatar_url: state.avatar, stats: state.stats })
-    });
-  } catch (e) {}
-}
-
-// ============ НАВИГАЦИЯ ============
-function showTab(name) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  
-  document.querySelectorAll(`.nav-btn[data-tab="${name}"]`).forEach(b => b.classList.add('active'));
-  
-  if (name === 'top') loadTop();
-  if (name === 'profile') updateProfileUI();
-}
-
-// ============ ЛОББИ ============
-function renderLobby() {
-  const container = document.getElementById('machine-categories');
-  container.innerHTML = CATEGORIES.map(cat => {
-    const catMachines = cat.machines.map(id => MACHINES.find(m => m.id === id)).filter(Boolean);
-    return `
-      <div class="category-section">
-        <div class="section-title">
-          <i class="ph-bold ${cat.icon}"></i>
-          ${cat.title}
-        </div>
-        <div class="machine-grid">
-          ${catMachines.map(m => {
-            const firstSymbol = m.symbols[0];
-            const iconUrl = getIconUrl(firstSymbol);
-            const visualContent = iconUrl 
-              ? `<img src="${iconUrl}" alt="${m.name}" loading="lazy" onerror="this.outerHTML='<div style=\\'font-size:50px;\\'>${firstSymbol}</div>'">`
-              : `<div style="font-size:50px;">${firstSymbol}</div>`;
-            return `
-              <div class="machine-card" onclick="openMachine('${m.id}')">
-                <div class="mc-visual">${visualContent}</div>
-                <div class="mc-info">
-                  <div class="mc-name">${m.name}</div>
-                  <div class="mc-desc">${m.desc}</div>
-                  <div class="mc-play-btn">ИГРАТЬ</div>
-                </div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-// ============ ТОП ============
-async function loadTop() {
-  const list = document.getElementById('top-list');
-  list.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">Загрузка...</div>';
-  
-  try {
-    const res = await fetch('/api/leaderboard.php');
-    const data = await res.json();
-    if (Array.isArray(data) && data.length > 0) {
-      renderTop(data);
-    } else {
-      list.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">Пусто</div>';
-    }
-  } catch (e) {
-    let fake = [
-      { nickname: 'Whale', balance: state.balance * 5 + 1000000 },
-      { nickname: 'CryptoKing', balance: state.balance * 3 + 500000 },
-      { nickname: 'Lucky', balance: state.balance * 2 + 100000 },
-      { nickname: state.nickname, balance: state.balance, player_id: state.playerId }
-    ];
-    renderTop(fake);
-  }
-}
-
-function renderTop(players) {
-  const list = document.getElementById('top-list');
-  players.sort((a, b) => (parseFloat(b.balance) || 0) - (parseFloat(a.balance) || 0));
-  
-  list.innerHTML = players.map((p, i) => {
-    const isSelf = p.player_id === state.playerId;
-    return `
-      <div class="top-item ${isSelf ? 'self' : ''}">
-        <div class="top-rank">#${i+1}</div>
-        <div class="top-name">${p.nickname || 'Игрок'}${isSelf ? ' (Вы)' : ''}</div>
-        <div class="top-bal">${Math.floor(p.balance).toLocaleString('ru-RU')} ₽</div>
-      </div>
-    `;
-  }).join('');
-}
-
-// ============ ПРОФИЛЬ ============
-function updateProfileUI() {
-  document.getElementById('ui-nick').textContent = state.nickname;
-  const src = state.avatar || 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png';
-  document.getElementById('ui-avatar').src = src;
-  document.getElementById('ui-avatar-top').src = src;
-  
-  const s = state.stats;
-  document.getElementById('stat-spins').textContent = s.spins;
-  document.getElementById('stat-won').textContent = Math.floor(s.won).toLocaleString('ru-RU');
-  document.getElementById('stat-max').textContent = Math.floor(s.maxWin).toLocaleString('ru-RU');
-  let wr = s.totalBet > 0 ? Math.floor((s.won / s.totalBet) * 100) : 0;
-  document.getElementById('stat-winrate').textContent = wr + '%';
-}
-
-window.openEditModal = () => {
-  document.getElementById('input-nick').value = state.nickname;
-  document.getElementById('edit-modal').classList.add('active');
-};
-window.saveProfile = () => {
-  const v = document.getElementById('input-nick').value.trim();
-  if (v) { state.nickname = v; saveToServer(); updateProfileUI(); updateUI(); }
-  document.getElementById('edit-modal').classList.remove('active');
-};
-document.getElementById('upload-avatar').addEventListener('change', (e) => {
-  const f = e.target.files[0]; if (!f) return;
-  if (f.size > 1.5 * 1024 * 1024) return alert('Файл слишком большой! Максимум 1.5 МБ.');
-  const rd = new FileReader();
-  rd.onload = (ev) => { state.avatar = ev.target.result; saveToServer(); updateProfileUI(); };
-  rd.readAsDataURL(f);
-});
-
-// ============ PAYTABLE ============
-window.openPaytable = () => {
-  if (!currentMachine) return;
-  const list = document.getElementById('paytable-list');
-  list.innerHTML = currentMachine.symbols.map((sym, i) => {
-    const iconUrl = getIconUrl(sym);
-    const img = iconUrl ? `<img src="${iconUrl}" style="width:40px; height:40px;">` : `<span style="font-size:24px;">${sym}</span>`;
-    return `
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border);">
-        <div>${img}</div>
-        <div style="display:flex; gap:20px; text-align:right;">
-          <div><div style="font-size:10px; color:var(--text-muted);">x2</div><div style="font-family:'Courier New'; font-weight:800; color:var(--accent-green);">${currentMachine.pair[i]}</div></div>
-          <div><div style="font-size:10px; color:var(--text-muted);">x3</div><div style="font-family:'Courier New'; font-weight:800; color:#fff;">${currentMachine.triple[i]}</div></div>
-        </div>
-      </div>
-    `;
-  }).join('');
-  toggleWindow('paytable-window');
-};
-
-// ============ ИСТОРИЯ ============
-function renderHistory() {
-  const list = document.getElementById('history-list');
-  if (!state.history || state.history.length === 0) {
-    list.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">Пока нет выигрышей</div>';
-    return;
-  }
-  list.innerHTML = state.history.map(h => {
-    const date = new Date(h.time);
-    const timeStr = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-    return `
-      <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border);">
-        <div><div style="font-weight:800; font-size:14px;">${h.game}</div><div style="font-size:11px; color:var(--text-muted);">${timeStr}</div></div>
-        <div style="font-family:'Courier New'; font-weight:900; color:var(--accent-green);">+${h.win.toLocaleString('ru-RU')} ₽</div>
-      </div>
-    `;
-  }).join('');
-}
-function addHistory(gameName, winAmount) {
-  state.history.unshift({ game: gameName, win: winAmount, time: Date.now() });
-  if (state.history.length > 50) state.history.pop();
-  saveToServer();
-}
-
-// ============ ИГРА ============
-function openMachine(id) {
-  currentMachine = MACHINES.find(m => m.id === id);
-  if (!currentMachine) return;
-  
-  document.getElementById('win-lines-svg').innerHTML = '';
-  for(let i=0; i<9; i++) {
-    const strip = document.getElementById('reel-strip-' + i);
-    const symbol = currentMachine.symbols[i % currentMachine.symbols.length];
-    const iconUrl = getIconUrl(symbol);
-    const content = iconUrl
-      ? `<img src="${iconUrl}" loading="lazy" onerror="this.outerHTML='<div style=\\'font-size:40px;\\'>${symbol}</div>'">`
-      : `<div style="font-size:40px;">${symbol}</div>`;
-    strip.innerHTML = `<div class="reel-item">${content}</div>`;
-    strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; strip.classList.remove('spinning');
-    document.getElementById('reel-win-' + i).classList.remove('winning');
-  }
-  
-  document.getElementById('lobby-view').style.display = 'none';
-  document.getElementById('game-screen').classList.add('active');
-  updateUI();
-}
-
-function closeMachine() {
-  document.getElementById('game-screen').classList.remove('active');
-  document.getElementById('lobby-view').style.display = 'flex';
-  currentMachine = null;
-  showTab('lobby');
-  updateUI();
+function saveToLocal() {
+  localStorage.setItem('ks_balance', state.balance);
+  localStorage.setItem('ks_nickname', state.nickname);
+  localStorage.setItem('ks_stats', JSON.stringify(state.stats));
+  localStorage.setItem('ks_avatar', state.avatar);
 }
 
 function updateUI() {
-  const fmt = Math.floor(state.balance).toLocaleString('ru-RU');
+  const fmt = Math.floor(state.balance).toLocaleString('ru-RU') + ' ₽';
   document.getElementById('ui-balance').textContent = fmt;
   document.getElementById('game-balance').textContent = fmt;
-  if (document.activeElement !== document.getElementById('game-bet')) document.getElementById('game-bet').value = state.bet;
+  const betInput = document.getElementById('game-bet');
+  if (betInput && document.activeElement !== betInput) betInput.value = state.bet;
 }
+
+function updateProfileUI() {
+  const defaultAvatar = 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png';
+  const currentAvatar = state.avatar || defaultAvatar;
+  
+  document.getElementById('profile-big-avatar').src = currentAvatar;
+  document.getElementById('nav-avatar').src = currentAvatar;
+  
+  document.getElementById('profile-big-nick').textContent = state.nickname;
+  document.getElementById('profile-big-id').textContent = `ID: #${state.playerId.slice(-4).toUpperCase()}`;
+}
+
+function renderProfileStats() {
+  document.getElementById('stat-spins').textContent = (state.stats.spins || 0).toLocaleString('ru-RU');
+  document.getElementById('stat-bet').textContent = Math.floor(state.stats.totalBet || 0).toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('stat-won').textContent = Math.floor(state.stats.won || 0).toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('stat-maxwin').textContent = Math.floor(state.stats.maxWin || 0).toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('stat-balance').textContent = Math.floor(state.balance).toLocaleString('ru-RU') + ' ₽';
+  
+  const profit = (state.stats.won || 0) - (state.stats.totalBet || 0);
+  const profitEl = document.getElementById('stat-profit');
+  profitEl.textContent = (profit >= 0 ? '+' : '') + Math.floor(profit).toLocaleString('ru-RU') + ' ₽';
+  profitEl.style.color = profit >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+}
+
+function renderLobby() {
+  const grid = document.getElementById('machine-grid');
+  grid.innerHTML = MACHINES.map(m => `
+    <div class="game-card" onclick="openMachine('${m.id}')">
+      <img src="${getIconUrl(m.symbols[0])}" class="game-icon">
+      <div class="game-title">${m.name}</div>
+      <div class="game-desc">${m.desc}</div>
+      <button class="play-btn">Играть</button>
+    </div>
+  `).join('');
+}
+
+window.saveProfile = () => {
+  const v = document.getElementById('input-nick').value.trim();
+  if (v) { state.nickname = v; saveToLocal(); updateProfileUI(); updateUI(); }
+  showPage('profile');
+};
+
+document.getElementById('upload-avatar').addEventListener('change', (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = (ev) => { state.avatar = ev.target.result; saveToLocal(); updateProfileUI(); };
+  rd.readAsDataURL(f);
+});
+
+window.openMachine = (id) => {
+  currentMachine = MACHINES.find(m => m.id === id);
+  if (!currentMachine) return;
+  
+  for (let col = 0; col < 3; col++) {
+    const strip = document.getElementById('reel-' + col);
+    strip.style.transition = 'none';
+    strip.style.transform = 'translateY(0)';
+    strip.innerHTML = '';
+    for (let row = 0; row < 3; row++) {
+      const symbol = currentMachine.symbols[(col + row) % currentMachine.symbols.length];
+      strip.innerHTML += `<div class="reel-item"><img src="${getIconUrl(symbol)}"></div>`;
+    }
+  }
+  document.getElementById('game-screen').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  updateUI();
+};
+
+window.closeMachine = () => {
+  document.getElementById('game-screen').classList.remove('active');
+  document.body.style.overflow = '';
+  currentMachine = null;
+  updateUI();
+};
 
 window.changeBet = (amt) => {
   if (isSpinning) return;
   state.bet = Math.max(10, Math.min(state.balance, state.bet + amt, 50000));
   document.getElementById('game-bet').value = state.bet;
 };
+
 window.maxBet = () => {
   if (isSpinning) return;
   state.bet = Math.min(state.balance, 50000);
   if (state.bet < 10) state.bet = 10;
   document.getElementById('game-bet').value = state.bet;
 };
-document.getElementById('game-bet').addEventListener('input', (e) => {
-  let v = parseFloat(e.target.value);
-  if (isNaN(v)) return;
-  if (v < 10) v = 10; if (v > state.balance) v = state.balance; if (v > 50000) v = 50000;
-  state.bet = v;
-});
+
+const WIN_LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+function generateResult(syms) {
+  let result = Array.from({ length: 9 }, () => syms[Math.floor(Math.random() * syms.length)]);
+  const hasAnyTriple = WIN_LINES.some(l => result[l[0]] === result[l[1]] && result[l[1]] === result[l[2]]);
+  if (hasAnyTriple) return result;
+  if (Math.random() < 0.15) {
+    const line = WIN_LINES[Math.floor(Math.random() * WIN_LINES.length)];
+    const s = syms[Math.floor(Math.random() * syms.length)];
+    line.forEach(idx => result[idx] = s);
+  }
+  return result;
+}
 
 window.spin = () => {
   if (isSpinning || !currentMachine) return;
-  initAudio();
-  
-  document.getElementById('win-lines-svg').innerHTML = '';
-  
-  if (state.balance < state.bet) {
-    alert('Мало средств!');
-    return;
-  }
-  
+  if (state.balance < state.bet) { alert('Мало средств!'); return; }
+
   isSpinning = true;
   document.getElementById('btn-spin').disabled = true;
+  
   state.balance -= state.bet;
-  state.stats.spins = (parseInt(state.stats.spins) || 0) + 1;
-  state.stats.totalBet = (parseFloat(state.stats.totalBet) || 0) + state.bet;
-  
-  saveToServer(); updateUI();
-  
-  document.querySelectorAll('.reel-window').forEach(w => w.classList.remove('winning'));
-  
+  state.stats.spins++;
+  state.stats.totalBet += state.bet;
+  saveToLocal(); updateUI();
+  document.querySelectorAll('.reel-item').forEach(el => el.classList.remove('winning'));
+
   const syms = currentMachine.symbols;
-  let result = Array.from({length: 9}, () => syms[Math.floor(Math.random()*syms.length)]);
-  // Уменьшили шанс на халявную линию с 5% до 2%
-  if (Math.random() < 0.02) { const s = syms[Math.floor(Math.random()*syms.length)]; result[3]=s; result[4]=s; result[5]=s; }
+  const result = generateResult(syms);
+  const reelHeight = document.querySelector('.reel-window').offsetHeight / 3;
+  const ITEMS = 20;
+  const DURATION = 1500;
 
-  if (state.noAnim) {
-    for(let i=0; i<9; i++) {
-      const strip = document.getElementById('reel-strip-' + i);
-      const symbol = result[i];
-      const iconUrl = getIconUrl(symbol);
-      const content = iconUrl
-        ? `<img src="${iconUrl}" loading="lazy" onerror="this.outerHTML='<div style=\\'font-size:40px;\\'>${symbol}</div>'">`
-        : `<div style="font-size:40px;">${symbol}</div>`;
-      strip.innerHTML = `<div class="reel-item">${content}</div>`;
-    }
-    checkWin(result); return;
-  }
-
-  const interval = setInterval(() => playTone(900, 0.04, 'square', 0.04), 100);
-  const reelHeight = document.querySelector('.reel-window').offsetHeight;
-  
   for (let col = 0; col < 3; col++) {
-    const cells = [col, col+3, col+6];
-    cells.forEach(idx => {
-      const strip = document.getElementById('reel-strip-' + idx);
-      let html = '';
-      for(let k=0; k<15; k++) {
-        const randSym = syms[Math.floor(Math.random()*syms.length)];
-        const randUrl = getIconUrl(randSym);
-        const content = randUrl
-          ? `<img src="${randUrl}" loading="lazy" onerror="this.outerHTML='<div style=\\'font-size:40px;\\'>${randSym}</div>'">`
-          : `<div style="font-size:40px;">${randSym}</div>`;
-        html += `<div class="reel-item">${content}</div>`;
-      }
-      const finalSym = result[idx];
-      const finalUrl = getIconUrl(finalSym);
-      const finalContent = finalUrl
-        ? `<img src="${finalUrl}" loading="lazy" onerror="this.outerHTML='<div style=\\'font-size:40px;\\'>${finalSym}</div>'">`
-        : `<div style="font-size:40px;">${finalSym}</div>`;
-      html += `<div class="reel-item">${finalContent}</div>`;
-      
-      strip.innerHTML = html;
-      strip.style.transition = 'none'; strip.style.transform = 'translateY(0)';
-      void strip.offsetWidth; strip.classList.add('spinning');
-    });
-
-    setTimeout(() => {
-      cells.forEach(idx => {
-        const strip = document.getElementById('reel-strip-' + idx);
-        strip.classList.remove('spinning');
-        strip.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)`;
-        strip.style.transform = `translateY(-${15 * reelHeight}px)`;
-      });
-      playTone(400, 0.1, 'sine', 0.1);
-    }, 800 + col * 300);
+    const strip = document.getElementById('reel-' + col);
+    let html = '';
+    for (let k = 0; k < ITEMS; k++) html += `<div class="reel-item"><img src="${getIconUrl(syms[Math.floor(Math.random() * syms.length)])}"></div>`;
+    html += `<div class="reel-item"><img src="${getIconUrl(result[col])}"></div>`;
+    html += `<div class="reel-item"><img src="${getIconUrl(result[col + 3])}"></div>`;
+    html += `<div class="reel-item"><img src="${getIconUrl(result[col + 6])}"></div>`;
+    strip.innerHTML = html;
+    strip.style.transition = 'none';
+    strip.style.transform = 'translateY(0)';
   }
-  
-  setTimeout(() => { clearInterval(interval); checkWin(result); }, 800 + 600 + 400);
+
+  void document.body.offsetHeight;
+
+  for (let col = 0; col < 3; col++) {
+    const strip = document.getElementById('reel-' + col);
+    strip.style.transition = `transform ${DURATION}ms cubic-bezier(0.1, 0.7, 0.1, 1) ${col * 200}ms`;
+    strip.style.transform = `translateY(-${ITEMS * reelHeight}px)`;
+  }
+
+  setTimeout(() => { checkWin(result); }, DURATION + 400 + 100);
 };
 
 function checkWin(res) {
-  let win = 0; const syms = currentMachine.symbols; let wc = new Set();
-  let winningLines = [];
-  
-  [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].forEach(l => {
-    const [a,b,c] = l; const s1=res[a], s2=res[b], s3=res[c];
-    
-    // Тройка (x3) платит СРАЗУ ОТ СТАВКИ (state.bet), а не от bp = bet/8
-    if (s1===s2 && s2===s3) { 
-      win += state.bet * currentMachine.triple[syms.indexOf(s1)]; 
-      wc.add(a); wc.add(b); wc.add(c); 
-      winningLines.push([a,b,c]);
-    }
-    // Пара (x2) тоже платит от ставки
-    else if (s1===s2 || s2===s3 || s1===s3) {
-      const sym = s1===s2?s1:(s2===s3?s2:s1);
-      win += state.bet * currentMachine.pair[syms.indexOf(sym)];
-      if (s1===s2) { wc.add(a); wc.add(b); winningLines.push([a,b]); } 
-      else if (s2===s3) { wc.add(b); wc.add(c); winningLines.push([b,c]); } 
-      else { wc.add(a); wc.add(c); winningLines.push([a,c]); }
+  let win = 0;
+  const syms = currentMachine.symbols;
+  let winningCells = new Set();
+
+  WIN_LINES.forEach(l => {
+    if (res[l[0]] === res[l[1]] && res[l[1]] === res[l[2]]) {
+      win += state.bet * currentMachine.triple[syms.indexOf(res[l[0]])];
+      l.forEach(idx => winningCells.add(idx));
     }
   });
-  
-  // Snow Jackpot (0.05% шанс теперь, было 0.3%)
-  let isSnowJackpot = false;
-  if (currentMachine.isWinter && Math.random() < 0.0005) {
-    const jackpot = Math.floor(Math.random() * 45000000) + 5000000;
-    win += jackpot;
-    isSnowJackpot = true;
-  }
-  
+
   win = Math.floor(win);
-  
+
   if (win > 0) {
-    wc.forEach(i => document.getElementById('reel-win-'+i).classList.add('winning'));
-    if (winningLines.length > 0) drawWinLines(winningLines);
-    
+    winningCells.forEach(idx => {
+      const col = idx % 3, row = Math.floor(idx / 3);
+      const strip = document.getElementById('reel-' + col);
+      const items = strip.querySelectorAll('.reel-item');
+      const targetItem = items[items.length - 3 + row];
+      if (targetItem) targetItem.classList.add('winning');
+    });
+
     state.balance += win;
-    state.stats.won = (parseFloat(state.stats.won) || 0) + win;
-    if (win > (parseFloat(state.stats.maxWin) || 0)) state.stats.maxWin = win;
+    state.stats.won += win;
+    if (win > state.stats.maxWin) state.stats.maxWin = win;
+    saveToLocal(); updateUI();
     
-    addHistory(currentMachine.name, win);
-    saveToServer(); updateUI(); updateProfileUI();
-    showBottomBar(win);
-    
-    // "MEGA WIN" теперь только если выигрыш больше 50 ставок (раньше было 5)
-    if (isSnowJackpot || win >= state.bet * 50) { showWinPopup('MEGA WIN', win); playMegaWinSound(); }
-    else { playWinSound(); }
-  } else {
-    playTone(300, 0.15, 'sine', 0.08);
+    // Минималистичный показ выигрыша
+    document.getElementById('win-title').textContent = 'Выигрыш';
+    document.getElementById('win-amount').textContent = win.toLocaleString('ru-RU') + ' ₽';
+    document.getElementById('win-popup').classList.add('active');
+    setTimeout(() => document.getElementById('win-popup').classList.remove('active'), 2000);
   }
-  
+
   isSpinning = false;
   document.getElementById('btn-spin').disabled = false;
 }
 
-function drawWinLines(lines) {
-  const svg = document.getElementById('win-lines-svg');
-  svg.innerHTML = '';
-  const containerRect = document.getElementById('main-reels').getBoundingClientRect();
-  lines.forEach((line, index) => {
-    const startIdx = line[0];
-    const endIdx = line[line.length - 1];
-    const startEl = document.getElementById(`reel-win-${startIdx}`);
-    const endEl = document.getElementById(`reel-win-${endIdx}`);
-    if (!startEl || !endEl) return;
-    const startRect = startEl.getBoundingClientRect();
-    const endRect = endEl.getBoundingClientRect();
-    const lineEl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    lineEl.setAttribute('x1', startRect.left - containerRect.left + startRect.width / 2);
-    lineEl.setAttribute('y1', startRect.top - containerRect.top + startRect.height / 2);
-    lineEl.setAttribute('x2', endRect.left - containerRect.left + endRect.width / 2);
-    lineEl.setAttribute('y2', endRect.top - containerRect.top + endRect.height / 2);
-    lineEl.setAttribute('class', 'win-line');
-    lineEl.style.animationDelay = `${index * 0.15}s`;
-    svg.appendChild(lineEl);
-  });
-}
-
-function showBottomBar(amt) {
-  const b = document.getElementById('bottom-bar');
-  document.getElementById('bottom-bar-amount').textContent = Math.floor(amt).toLocaleString('ru-RU') + ' ₽';
-  b.classList.add('active');
-  clearTimeout(bottomBarTimer);
-  bottomBarTimer = setTimeout(() => b.classList.remove('active'), 3000);
-}
-
-function animateValue(obj, start, end, duration) {
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    obj.innerHTML = Math.floor((1 - Math.pow(1 - progress, 4)) * (end - start) + start).toLocaleString('ru-RU') + ' ₽';
-    if (progress < 1) window.requestAnimationFrame(step);
-  };
-  window.requestAnimationFrame(step);
-}
-
-function showWinPopup(title, amt) {
-  document.getElementById('win-title').textContent = title;
-  const amountEl = document.getElementById('win-amount');
-  amountEl.textContent = '0 ₽';
-  document.getElementById('win-popup').classList.add('active');
-  animateValue(amountEl, 0, amt, 1200);
-  setTimeout(() => document.getElementById('win-popup').classList.remove('active'), 3500);
-}
-
-// ============ ЗВУК ============
-function initAudio() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-}
-function playTone(f, d, t='sine', v=0.1) {
-  if (!state.sound || !audioCtx) return;
-  try {
-    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-    o.type = t; o.frequency.value = f;
-    g.gain.setValueAtTime(v, audioCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + d);
-    o.connect(g); g.connect(audioCtx.destination);
-    o.start(); o.stop(audioCtx.currentTime + d);
-  } catch(e) {}
-}
-function playWinSound() { [523, 659, 784, 1047].forEach((n, i) => setTimeout(() => playTone(n, 0.2, 'sine', 0.15), i * 90)); }
-function playMegaWinSound() { [523, 659, 784, 1047, 1319, 1568, 2093].forEach((n, i) => setTimeout(() => playTone(n, 0.3, 'triangle', 0.2), i * 100)); }
-
-// ============ ПОДАРОК ============
-function checkGiftCooldown() {
-  const btn = document.getElementById('btn-claim-gift'), tm = document.getElementById('gift-timer');
-  if (!btn) return;
-  const left = 24*60*60*1000 - (Date.now() - state.lastGift);
-  if (left > 0) {
-    btn.disabled = true; btn.innerHTML = 'Уже забрано';
-    const h = Math.floor(left/3600000), m = Math.floor((left%3600000)/60000);
-    tm.textContent = `Доступно через ${h}ч ${m}м`;
-  } else {
-    btn.disabled = false; 
-    btn.innerHTML = `<img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Wrapped%20gift/3D/wrapped_gift_3d.png" alt="Gift"> Забрать бонус`; 
-    tm.textContent = '';
-  }
-}
-window.claimGift = () => {
-  initAudio();
-  if (Date.now() - state.lastGift < 24*60*60*1000) return;
-  const r = Math.floor(Math.random() * (5000000 - 5000 + 1)) + 5000;
-  state.balance += r; state.lastGift = Date.now();
-  localStorage.setItem('tl_last_gift', state.lastGift);
-  saveToServer(); updateUI(); checkGiftCooldown();
-  showWinPopup('БОНУС', r); playMegaWinSound();
-};
-
-// ============ НАСТРОЙКИ ============
-window.toggleSound = () => {
-  state.sound = !state.sound;
-  localStorage.setItem('tl_sound', state.sound);
-  document.getElementById('sound-status').textContent = state.sound ? 'ВКЛ' : 'ВЫКЛ';
-  document.getElementById('sound-status').style.color = state.sound ? 'var(--accent-green)' : '#ff4444';
-};
-window.toggleAnimations = () => {
-  state.noAnim = !state.noAnim;
-  document.body.classList.toggle('no-anim');
-  localStorage.setItem('tl_no_anim', state.noAnim);
-  document.getElementById('anim-status').textContent = state.noAnim ? 'ВЫКЛ' : 'ВКЛ';
-  document.getElementById('anim-status').style.color = state.noAnim ? '#ff4444' : 'var(--accent-green)';
-};
-
-// ============ СТАРТ ============
+// Инициализация
 renderLobby();
 updateUI();
 updateProfileUI();
-checkGiftCooldown();
 </script>
 </body>
-</noscript>
-<div style="text-align: center;"><div style="position:relative; top:0; margin-right:auto;margin-left:auto; z-index:99999">
-
-</div></div>
 </html>

@@ -1090,6 +1090,57 @@ body::before,
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
 
+
+
+/* ═══════ MOBILE HEADER: BALANCE ON ITS OWN ROW ═══════ */
+@media (max-width: 700px) {
+  body { padding-top: 118px; }
+
+  .header-glass {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 36px 36px;
+    grid-template-areas:
+      "brand settings profile"
+      "balance balance balance";
+    align-items: center;
+    column-gap: 8px;
+    row-gap: 8px;
+    padding: 8px 12px;
+  }
+
+  /* Promote the header controls into the grid so the balance can sit below. */
+  .header-right { display: contents; }
+  .top-brand { grid-area: brand; min-width: 0; white-space: nowrap; }
+  .header-icon-btn { grid-area: settings; width: 36px; height: 36px; }
+  .header-icon-btn i { font-size: 16px; }
+  .profile-btn { grid-area: profile; width: 36px; height: 36px; }
+  .profile-btn img { width: 28px; height: 28px; }
+
+  .user-balance {
+    grid-area: balance;
+    justify-self: center;
+    width: fit-content;
+    max-width: 100%;
+    min-width: 0;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1.25;
+    padding: 6px 13px;
+  }
+  .user-balance img { width: 18px; flex: 0 0 auto; }
+  .user-balance span { min-width: 0; font-variant-numeric: tabular-nums; }
+
+  .header-glass .user-balance,
+  .header-glass .header-icon-btn,
+  .header-glass .profile-btn { position: relative; z-index: 1; }
+
+  .top-header.is-scrolled .header-glass { border-radius: 24px; }
+}
+
+@media (max-width: 480px) {
+  body { padding-top: 116px; }
+}
+
 </style>
 </head>
 <body class="is-loading">

@@ -19,6 +19,8 @@
   --text-muted: #8b8b93;
   --border: #2d2d33;
   --accent-green: #d6ad5b;
+  --accent-rgb: 214, 173, 91;
+  --accent-soft: rgba(214, 173, 91, 0.15);
   --accent-gold: #f4d889;
   --accent-red: #ef4444;
   --glass-bg: rgba(30, 30, 35, 0.6);
@@ -46,71 +48,233 @@ body {
   color: var(--text-main); font-size: 15px; line-height: 1.55; overflow-x: hidden; min-height: 100vh; 
   background-color: var(--bg-main); padding-top: 108px; 
 }
+/* ═══════ KESUG SLOTS — LOADING 2.0 ═══════ */
 
-/* ═══════ ФИРМЕННЫЙ ЭКРАН ЗАГРУЗКИ ═══════ */
-body.is-loading { overflow: hidden; }
+body.is-loading {
+  overflow: hidden;
+}
+
 .ks-loader {
-  position: fixed; inset: 0; z-index: 20000; display: grid; place-items: center;
-  overflow: hidden; isolation: isolate; background: #101012;
-  opacity: 1; visibility: visible; pointer-events: auto;
-  transition: opacity .68s cubic-bezier(.2,.7,.2,1), visibility 0s linear .68s;
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(214,173,91,.10), transparent 48%),
+    linear-gradient(145deg, #15130f, #090a0b 65%, #15110b);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity .75s cubic-bezier(.2,.7,.2,1), visibility 0s linear .75s;
 }
-.ks-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-.ks-loader::before, .ks-loader::after {
-  content: ''; position: absolute; pointer-events: none; border-radius: 50%; filter: blur(2px);
+
+.ks-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
-.ks-loader::before {
-  width: min(75vw, 720px); aspect-ratio: 1; left: -25%; top: -42%;
-  background: radial-gradient(circle, rgba(214,173,91,.17), rgba(214,173,91,.035) 42%, transparent 70%);
-  animation: loaderAura 5.5s ease-in-out infinite alternate;
-}
+
+.ks-loader::before,
 .ks-loader::after {
-  width: min(68vw, 620px); aspect-ratio: 1; right: -27%; bottom: -45%;
-  background: radial-gradient(circle, rgba(214,173,91,.12), rgba(214,173,91,.025) 45%, transparent 70%);
-  animation: loaderAura 6.5s ease-in-out -1.5s infinite alternate-reverse;
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(3px);
 }
+
+.ks-loader::before {
+  width: min(80vw, 760px);
+  aspect-ratio: 1;
+  left: -30%;
+  top: -45%;
+  background: radial-gradient(circle, rgba(214,173,91,.20), rgba(214,173,91,.04) 43%, transparent 70%);
+  animation: loaderAura 7s ease-in-out infinite alternate;
+}
+
+.ks-loader::after {
+  width: min(75vw, 680px);
+  aspect-ratio: 1;
+  right: -30%;
+  bottom: -48%;
+  background: radial-gradient(circle, rgba(214,173,91,.14), rgba(214,173,91,.025) 45%, transparent 70%);
+  animation: loaderAura 8s ease-in-out -2s infinite alternate-reverse;
+}
+
 .ks-loader-grid {
-  position: absolute; inset: 0; pointer-events: none; opacity: .18;
-  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-  background-size: 54px 54px; mask-image: radial-gradient(ellipse at center, #000 5%, transparent 78%);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .13;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(ellipse at center, #000 5%, transparent 78%);
 }
+
 .ks-loader-content {
-  position: relative; z-index: 1; width: min(390px, calc(100vw - 52px));
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  animation: loaderContentIn .85s cubic-bezier(.18,.82,.24,1) both;
+  position: relative;
+  z-index: 1;
+  width: min(410px, calc(100vw - 48px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: loaderContentIn 1s cubic-bezier(.18,.82,.24,1) both;
 }
+
 .ks-loader-emblem {
-  position: relative; width: 76px; height: 76px; display: grid; place-items: center;
-  margin-bottom: 24px; border: 1px solid rgba(214,173,91,.38); border-radius: 23px;
-  background: linear-gradient(145deg, rgba(45,36,22,.88), rgba(18,20,20,.92));
-  box-shadow: 0 0 0 7px rgba(214,173,91,.035), 0 12px 42px rgba(0,0,0,.38), 0 0 38px rgba(214,173,91,.14), inset 0 1px 0 rgba(255,255,255,.11);
-  transform: rotate(-7deg); animation: loaderEmblemFloat 3.4s ease-in-out infinite;
+  position: relative;
+  width: 88px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 27px;
+  border: 1px solid rgba(214,173,91,.48);
+  border-radius: 27px;
+  background: linear-gradient(145deg, rgba(57,43,22,.95), rgba(17,19,19,.96));
+  box-shadow:
+    0 0 0 8px rgba(214,173,91,.035),
+    0 15px 50px rgba(0,0,0,.45),
+    0 0 48px rgba(214,173,91,.19),
+    inset 0 1px 0 rgba(255,255,255,.14);
+  animation: loaderEmblemFloat 4s ease-in-out infinite;
 }
+
 .ks-loader-emblem::before {
-  content: ''; position: absolute; inset: -8px; border: 1px solid rgba(214,173,91,.12);
-  border-radius: 27px; transform: rotate(14deg);
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border: 1px solid rgba(214,173,91,.18);
+  border-radius: 31px;
+  transform: rotate(12deg);
 }
+
 .ks-loader-emblem::after {
-  content: ''; position: absolute; inset: -17px; border: 1px solid rgba(214,173,91,.07);
-  border-radius: 31px; transform: rotate(27deg);
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border: 1px solid rgba(214,173,91,.08);
+  border-radius: 36px;
+  transform: rotate(24deg);
 }
-.ks-loader-emblem i { position: relative; z-index: 1; color: #f0cf83; font-size: 35px; filter: drop-shadow(0 0 12px rgba(214,173,91,.62)); }
-.ks-loader-wordmark { display: flex; align-items: baseline; gap: 8px; color: #fff; font-size: clamp(25px, 6vw, 32px); font-weight: 800; letter-spacing: .13em; line-height: 1.1; }
-.ks-loader-wordmark span:last-child { color: #f0cf83; text-shadow: 0 0 22px rgba(214,173,91,.22); }
-.ks-loader-caption { margin-top: 11px; color: rgba(228,228,231,.55); font-size: 10px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
-.ks-loader-progress { position: relative; width: 100%; height: 3px; margin-top: 35px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.075); box-shadow: 0 0 0 1px rgba(255,255,255,.025); }
+
+.ks-loader-emblem i {
+  position: relative;
+  z-index: 1;
+  color: #f4d58e;
+  font-size: 39px;
+  filter: drop-shadow(0 0 15px rgba(214,173,91,.72));
+}
+
+.ks-loader-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  color: #fff;
+  font-size: clamp(27px, 6vw, 35px);
+  font-weight: 850;
+  letter-spacing: .15em;
+  line-height: 1.1;
+  text-shadow: 0 4px 25px rgba(0,0,0,.5);
+}
+
+.ks-loader-wordmark span:last-child {
+  color: #f0cf83;
+  text-shadow: 0 0 25px rgba(214,173,91,.30);
+}
+
+.ks-loader-caption {
+  margin-top: 13px;
+  color: rgba(228,228,231,.58);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+}
+
+.ks-loader-progress {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  margin-top: 39px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255,255,255,.09);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.025);
+}
+
 .ks-loader-progress span {
-  position: absolute; inset: 0 auto 0 0; width: 38%; border-radius: inherit;
-  background: linear-gradient(90deg, transparent, #d6ad5b 45%, #f7e5b4 100%);
-  box-shadow: 0 0 13px rgba(214,173,91,.55); animation: loaderProgress 1.45s cubic-bezier(.55,.05,.35,.95) infinite;
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 38%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, #d6ad5b 45%, #fff0c4 100%);
+  box-shadow: 0 0 17px rgba(214,173,91,.7);
+  animation: loaderProgress 1.6s cubic-bezier(.55,.05,.35,.95) infinite;
 }
-.ks-loader-status { display: flex; align-items: center; gap: 9px; margin-top: 15px; color: rgba(228,228,231,.42); font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
-.ks-loader-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #d6ad5b; box-shadow: 0 0 12px rgba(214,173,91,.85); animation: loaderDot 1s ease-in-out infinite; }
-@keyframes loaderAura { from { transform: translate3d(-2%, -1%, 0) scale(.92); opacity: .7; } to { transform: translate3d(3%, 2%, 0) scale(1.08); opacity: 1; } }
-@keyframes loaderContentIn { from { opacity: 0; transform: translateY(18px) scale(.97); filter: blur(7px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
-@keyframes loaderEmblemFloat { 0%, 100% { transform: translateY(0) rotate(-7deg); } 50% { transform: translateY(-7px) rotate(-2deg); } }
-@keyframes loaderProgress { 0% { transform: translateX(-110%); } 100% { transform: translateX(285%); } }
-@keyframes loaderDot { 0%, 100% { opacity: .45; transform: scale(.78); } 50% { opacity: 1; transform: scale(1.18); } }
+
+.ks-loader-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 17px;
+  color: rgba(228,228,231,.55);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.ks-loader-status-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: #e4bd6e;
+  box-shadow: 0 0 13px rgba(214,173,91,.9);
+  animation: loaderDot 1.2s ease-in-out infinite;
+}
+
+@keyframes loaderAura {
+  from { transform: translate3d(-2%, -1%, 0) scale(.92); opacity: .65; }
+  to { transform: translate3d(3%, 2%, 0) scale(1.08); opacity: 1; }
+}
+
+@keyframes loaderContentIn {
+  from { opacity: 0; transform: translateY(22px) scale(.96); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes loaderEmblemFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+@keyframes loaderProgress {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(285%); }
+}
+
+@keyframes loaderDot {
+  0%, 100% { opacity: .4; transform: scale(.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-loader::before,
+  .ks-loader::after,
+  .ks-loader-content,
+  .ks-loader-emblem,
+  .ks-loader-progress span,
+  .ks-loader-status-dot {
+    animation: none !important;
+  }
+}
 
 /* ═══════ ПАРЯЩАЯ ШАПКА ═══════ */
 .top-header { 
@@ -547,14 +711,23 @@ body, button, input { font-family: 'Manrope', sans-serif; }
   --bg-main: #100e0a;
   --bg-card: #201b13;
   --bg-input: #0b0906;
+
   --text-main: #eee7d9;
   --text-white: #fffaf0;
   --text-muted: #aa9d86;
+
   --border: #403321;
+
   --accent-green: #d6ad5b;
   --accent-gold: #f4d889;
+  --accent-rgb: 214, 173, 91;
+  --accent-soft: rgba(214, 173, 91, .15);
+
   --glass-bg: rgba(29, 25, 17, .66);
   --glass-border: rgba(245, 220, 165, .22);
+
+  --shadow-main: 0 10px 30px rgba(0,0,0,.5);
+  --reel-h: 85px;
 }
 
 body {
@@ -683,18 +856,56 @@ body::after {
   border-color: #f0cf83;
   box-shadow: 0 0 18px rgba(214,173,91,.48), inset 0 0 16px rgba(214,173,91,.13);
 }
-.bet-box { border-color: rgba(214,173,91,.24); background: rgba(10,8,5,.72); }
-.bet-box input { color: #f0cf83; }
-.bet-btns button:hover { background: rgba(214,173,91,.12); border-color: rgba(214,173,91,.55); }
-.spin-btn-big { color: #1a1205; }
-.win-box { border-color: #d6ad5b; }
-.win-title { background: linear-gradient(105deg, #b98736, #f4d889, #d6ad5b); color: #1a1205; }
-.win-popup.mega .win-box { border-color: #f4d889; box-shadow: 0 0 60px rgba(214,173,91,.48), inset 0 0 20px rgba(214,173,91,.2); }
-.win-popup.mega .win-title { background: linear-gradient(105deg, #d6ad5b, #fff0c2, #d6ad5b); }
-.ks-project-footer a { color: #f0cf83; }
+.bet-box {
+  border-color: rgba(var(--accent-rgb), .24);
+  background: rgba(10,8,5,.72);
+}
 
-@media (prefers-reduced-motion: reduce) {
-  #game-screen::before { display: none; }
+.bet-box input {
+  color: var(--accent-gold);
+}
+
+.bet-btns button:hover {
+  background: var(--accent-soft);
+  border-color: rgba(var(--accent-rgb), .55);
+}
+
+.spin-btn-big {
+  color: #1a1205;
+}
+
+.win-box {
+  border-color: var(--accent-green);
+}
+
+.win-title {
+  background: linear-gradient(
+    105deg,
+    var(--accent-green),
+    var(--accent-gold),
+    var(--accent-green)
+  );
+  color: #1a1205;
+}
+
+.win-popup.mega .win-box {
+  border-color: var(--accent-gold);
+  box-shadow:
+    0 0 60px rgba(var(--accent-rgb), .48),
+    inset 0 0 20px rgba(var(--accent-rgb), .2);
+}
+
+.win-popup.mega .win-title {
+  background: linear-gradient(
+    105deg,
+    var(--accent-green),
+    #fff,
+    var(--accent-green)
+  );
+}
+
+.ks-project-footer a {
+  color: var(--accent-gold);
 }
 
 
@@ -715,9 +926,13 @@ body::after {
   align-items: center; min-height: 300px; margin: 2px 0 38px; padding: 34px 40px;
   border: 1px solid rgba(225, 190, 119, .25); border-radius: 27px;
   background:
-    radial-gradient(ellipse at 85% 48%, rgba(211, 166, 83, .16), transparent 37%),
-    linear-gradient(118deg, rgba(35, 29, 19, .98) 0%, rgba(23, 20, 15, .98) 52%, rgba(42, 31, 17, .94) 100%);
-  box-shadow: 0 24px 55px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,244,218,.08);
+  radial-gradient(ellipse at 85% 48%, var(--lobby-glow, rgba(211, 166, 83, .16)), transparent 37%),
+  linear-gradient(118deg,
+    var(--lobby-bg-1, rgba(35, 29, 19, .98)) 0%,
+    var(--lobby-bg-2, rgba(23, 20, 15, .98)) 52%,
+    var(--lobby-bg-3, rgba(42, 31, 17, .94)) 100%);
+transition: background 1.5s ease, border-color 1.5s ease;
+box-shadow: 0 24px 55px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,244,218,.08);
 }
 .lobby-hero::before {
   content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -730,6 +945,116 @@ body::after {
   transform: rotate(22deg); animation: heroAmbientSweep 13s ease-in-out infinite;
 }
 .hero-copy { position: relative; z-index: 2; max-width: 650px; }
+/* ═══════ KESUG MUSIC ═══════ */
+
+.kesug-music-widget {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 340px;
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: rgba(15, 13, 10, .55);
+  border: 1px solid rgba(211, 166, 83, .2);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+}
+
+.kesug-music-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.kesug-music-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(211, 166, 83, .12);
+  color: #d3a653;
+  font-size: 21px;
+}
+
+.kesug-music-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.kesug-music-text strong {
+  color: #f3e5c8;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kesug-music-text span {
+  color: rgba(231, 215, 184, .55);
+  font-size: 11px;
+}
+.kesug-music-add {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(211, 166, 83, .12);
+  color: #d3a653;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  flex-shrink: 0;
+}
+
+.kesug-music-add:hover {
+  background: rgba(211, 166, 83, .22);
+  color: #f2c879;
+}
+.kesug-music-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.kesug-music-controls button {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: #d9c49b;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background .2s, color .2s;
+}
+
+.kesug-music-controls button:hover {
+  background: rgba(211, 166, 83, .12);
+  color: #f2c879;
+}
+
+#kesug-music-toggle {
+  width: 36px;
+  height: 36px;
+  background: #c49a50;
+  color: #17120a;
+  font-size: 17px;
+}
+
+#kesug-music-toggle:hover {
+  background: #e0b96f;
+}
 .hero-eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #d9b56f; font-size: 10px; font-weight: 800; letter-spacing: .2em; }
 .hero-eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #e9c878; box-shadow: 0 0 12px rgba(233,200,120,.8); }
 .hero-eyebrow-divider { width: 20px; height: 1px; background: rgba(226,193,130,.42); }
@@ -926,6 +1251,28 @@ body::after {
 .setting-row-copy strong { color: #eee5d3; font-size: 11px; font-weight: 800; }
 .setting-row-copy small { color: rgba(213,202,181,.48); font-size: 9px; line-height: 1.45; }
 .setting-row input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.theme-select {
+  max-width: 125px;
+  padding: 9px 10px;
+  border: 1px solid rgba(var(--accent-rgb), .35);
+  border-radius: 10px;
+  outline: none;
+  color: var(--text-main);
+  background: var(--bg-input);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.theme-select:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 3px;
+}
+
+.theme-select option {
+  color: #fff;
+  background: #1e1e22;
+}
 .setting-switch { position: relative; width: 38px; height: 22px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.12); border-radius: 99px; background: rgba(255,255,255,.09); transition: background .22s ease, border-color .22s ease; }
 .setting-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: #a69b86; box-shadow: 0 1px 4px rgba(0,0,0,.25); transition: transform .22s cubic-bezier(.2,.8,.2,1), background .22s ease; }
 .setting-row input:checked + .setting-switch { background: linear-gradient(100deg,#b8873d,#f0d28f); border-color: rgba(240,207,131,.55); }
@@ -1190,7 +1537,28 @@ body::before,
 @media (prefers-reduced-motion:reduce) {
   .ks-onboarding.is-visible, .ks-onboarding-card { animation:none !important; }
 }
+.lobby-clock {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 12px 0 18px;
+}
 
+#lobby-clock-time {
+  color: var(--accent-gold);
+  font-size: 25px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+}
+
+#lobby-clock-date {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
 </style>
 </head>
 <body class="is-loading">
@@ -1256,7 +1624,14 @@ body::before,
       <section class="lobby-hero" aria-labelledby="lobby-hero-title">
         <div class="hero-copy">
           <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> KESUG SLOTS <span class="hero-eyebrow-divider"></span> GOLD EDITION</div>
-          <p class="hero-greeting">С возвращением, <strong id="lobby-welcome-nick">Игрок</strong></p>
+          <p class="hero-greeting">
+  <span id="lobby-greeting-text">С возвращением</span>,
+  <strong id="lobby-welcome-nick">Игрок</strong>
+</p>
+          <div class="lobby-clock">
+  <span id="lobby-clock-time">00:00:00</span>
+  <span id="lobby-clock-date">Загрузка даты...</span>
+</div>
           <h1 id="lobby-hero-title">ТВОЯ КОЛЛЕКЦИЯ<br><span>ИГРОВЫХ МИРОВ</span></h1>
           <p class="hero-description">Исследуй тематические автоматы, находи знакомые миры и сохраняй свой игровой профиль. Здесь используются только виртуальные очки.</p>
           <div class="hero-actions">
@@ -1269,6 +1644,40 @@ body::before,
             <div class="hero-fact"><i class="ph ph-user-circle"></i><span>ЛОКАЛЬНЫЙ ПРОФИЛЬ</span></div>
           </div>
         </div>
+        <!-- KESUG MUSIC -->
+<div class="kesug-music-widget" id="kesug-music-widget">
+  <div class="kesug-music-info">
+    <div class="kesug-music-icon">
+      <i class="ph-fill ph-music-notes"></i>
+    </div>
+    <div class="kesug-music-text">
+      <strong id="kesug-music-title">Ничего не играет</strong>
+      <span id="kesug-music-artist">Ожидание музыки</span>
+    </div>
+  </div>
+  <label class="kesug-music-add" title="Добавить музыку">
+  <i class="ph-bold ph-plus"></i>
+  <input
+    type="file"
+    id="kesug-music-files"
+    accept="audio/*"
+    multiple
+    hidden
+  >
+</label>
+  <div class="kesug-music-controls">
+    <button type="button" id="kesug-music-prev" aria-label="Предыдущий трек">
+      <i class="ph-bold ph-skip-back"></i>
+    </button>
+    <button type="button" id="kesug-music-toggle" aria-label="Воспроизведение">
+      <i class="ph-fill ph-play"></i>
+    </button>
+    <button type="button" id="kesug-music-next" aria-label="Следующий трек">
+      <i class="ph-bold ph-skip-forward"></i>
+    </button>
+  </div>
+</div>
+<!-- /KESUG MUSIC -->
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-visual-glow"></div>
           <div class="hero-orbit hero-orbit-one"></div>
@@ -1389,6 +1798,24 @@ body::before,
           <div class="settings-group-heading"><div><span class="section-kicker">APPEARANCE</span><h3>Внешний вид</h3></div><i class="ph ph-palette"></i></div>
           <label class="setting-row" for="setting-compact-cards"><span class="setting-row-icon"><i class="ph-bold ph-squares-four"></i></span><span class="setting-row-copy"><strong>Компактные карточки</strong><small>Показывать больше автоматов в каталоге.</small></span><input id="setting-compact-cards" type="checkbox" onchange="updateSetting('compactCards', this.checked)"><span class="setting-switch"></span></label>
           <label class="setting-row" for="setting-ambient"><span class="setting-row-icon"><i class="ph-bold ph-sun-horizon"></i></span><span class="setting-row-copy"><strong>Атмосферный фон</strong><small>Золотистые световые пятна и декоративная сетка.</small></span><input id="setting-ambient" type="checkbox" onchange="updateSetting('ambientBackground', this.checked)"><span class="setting-switch"></span></label>
+          <div class="setting-row theme-setting">
+  <span class="setting-row-icon">
+    <i class="ph-bold ph-palette"></i>
+  </span>
+  <span class="setting-row-copy">
+    <strong>Цветовая тема</strong>
+    <small>Измени основной цвет интерфейса.</small>
+  </span>
+  <select id="setting-theme" class="theme-select" onchange="changeInterfaceTheme(this.value)">
+    <option value="gold">Золотая</option>
+    <option value="blue">Синяя</option>
+    <option value="purple">Фиолетовая</option>
+    <option value="green">Зелёная</option>
+    <option value="red">Красная</option>
+    <option value="pink">Розовая</option>
+    <option value="cyan">Бирюзовая</option>
+  </select>
+</div>
         </section>
         <section class="settings-group">
           <div class="settings-group-heading"><div><span class="section-kicker">MOTION</span><h3>Анимации</h3></div><i class="ph ph-sparkle"></i></div>
@@ -1527,9 +1954,16 @@ function readLocalJSON(key, fallback) {
   }
 }
 
-const DEFAULT_SETTINGS = { compactCards: false, ambientBackground: true, reduceEffects: false };
+const DEFAULT_SETTINGS = {
+  compactCards: false,
+  ambientBackground: true,
+  reduceEffects: false,
+  theme: 'gold'
+};
+
 const shouldShowNewPlayerSetup = !localStorage.getItem('kasino_player_id') && localStorage.getItem('ks_onboarding_done') !== '1';
 const savedSettings = readLocalJSON('ks_settings', {});
+
 const state = {
   playerId: localStorage.getItem('kasino_player_id') || 'player_' + Math.random().toString(36).substr(2, 9),
   balance: parseFloat(localStorage.getItem('ks_balance')) || 1000,
@@ -1538,7 +1972,7 @@ const state = {
   nickname: localStorage.getItem('ks_nickname') || 'Игрок',
   stats: readLocalJSON('ks_stats', { spins: 0, won: 0, maxWin: 0, totalBet: 0 }),
   favorites: readLocalJSON('ks_favorites', []),
-  settings: { ...DEFAULT_SETTINGS, ...(savedSettings && typeof savedSettings === 'object' ? savedSettings : {}) }
+  settings: { ...DEFAULT_SETTINGS, ...savedSettings }
 };
 if (!Array.isArray(state.favorites)) state.favorites = [];
 state.favorites = [...new Set(state.favorites.filter(id => typeof id === 'string' && MACHINES.some(machine => machine.id === id)))];
@@ -1751,23 +2185,56 @@ function applySettings() {
   document.body.classList.toggle('reduce-effects', !!state.settings.reduceEffects);
   document.body.classList.toggle('no-ambient', !state.settings.ambientBackground);
   document.documentElement.style.scrollBehavior = state.settings.reduceEffects ? 'auto' : 'smooth';
+
+  const themes = {
+    gold:   { color: '#d6ad5b', rgb: '214, 173, 91', gold: '#f4d889' },
+    blue:   { color: '#4b9cff', rgb: '75, 156, 255', gold: '#a8d0ff' },
+    purple: { color: '#a879ff', rgb: '168, 121, 255', gold: '#d2b8ff' },
+    green:  { color: '#42c98b', rgb: '66, 201, 139', gold: '#a1f0c9' },
+    red:    { color: '#ef6262', rgb: '239, 98, 98', gold: '#ffb0b0' },
+    pink:   { color: '#ed78b7', rgb: '237, 120, 183', gold: '#ffc1df' },
+    cyan:   { color: '#38c9c1', rgb: '56, 201, 193', gold: '#a0f3ed' }
+  };
+
+  const theme = themes[state.settings.theme] || themes.gold;
+  const root = document.documentElement;
+
+  root.style.setProperty('--accent-green', theme.color);
+  root.style.setProperty('--accent-rgb', theme.rgb);
+  root.style.setProperty('--accent-gold', theme.gold);
 }
 
 function syncSettingsControls() {
   const compact = document.getElementById('setting-compact-cards');
   const ambient = document.getElementById('setting-ambient');
   const reduced = document.getElementById('setting-reduced-motion');
+  const theme = document.getElementById('setting-theme');
+
   if (compact) compact.checked = !!state.settings.compactCards;
   if (ambient) ambient.checked = !!state.settings.ambientBackground;
   if (reduced) reduced.checked = !!state.settings.reduceEffects;
+  if (theme) theme.value = state.settings.theme || 'gold';
 }
 
 window.updateSetting = (key, value) => {
   if (!Object.prototype.hasOwnProperty.call(DEFAULT_SETTINGS, key)) return;
+
   state.settings[key] = Boolean(value);
   saveToLocal();
   applySettings();
   showToast('Настройка сохранена');
+};
+
+window.changeInterfaceTheme = (theme) => {
+  const allowedThemes = ['gold', 'blue', 'purple', 'green', 'red', 'pink', 'cyan'];
+
+  if (!allowedThemes.includes(theme)) return;
+
+  state.settings.theme = theme;
+  saveToLocal();
+  applySettings();
+
+  showToast('Цветовая тема сохранена');
 };
 
 window.resetInterfaceSettings = () => {
@@ -2168,7 +2635,228 @@ if (onboardingAvatarInput) {
   // Не задерживаем вход в игру, если внешний ресурс загружается слишком долго.
   window.setTimeout(hideLoader, 3200);
 })();
+function updateLobbyClock() {
+  const timeElement = document.getElementById('lobby-clock-time');
+  const dateElement = document.getElementById('lobby-clock-date');
 
+  if (!timeElement || !dateElement) return;
+
+  const now = new Date();
+
+  timeElement.textContent = now.toLocaleTimeString('ru-RU', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+
+  dateElement.textContent = now.toLocaleDateString('ru-RU', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+function updateLobbyGreeting() {
+  const element = document.getElementById('lobby-greeting-text');
+  if (!element) return;
+
+  const hour = new Date().getHours();
+
+  if (hour >= 5 && hour < 12) {
+    element.textContent = 'Доброе утро';
+  } else if (hour >= 12 && hour < 18) {
+    element.textContent = 'Добрый день';
+  } else if (hour >= 18 && hour < 23) {
+    element.textContent = 'Добрый вечер';
+  } else {
+    element.textContent = 'Доброй ночи';
+  }
+}
+function updateLobbyAtmosphere() {
+  const hero = document.querySelector('.lobby-hero');
+  if (!hero) return;
+
+  const hour = new Date().getHours();
+
+  const atmospheres = {
+    morning: {
+      glow: 'rgba(211, 166, 83, .18)',
+      bg1: 'rgba(48, 37, 22, .98)',
+      bg2: 'rgba(27, 23, 16, .98)',
+      bg3: 'rgba(55, 38, 19, .94)',
+      border: 'rgba(225, 190, 119, .30)'
+    },
+    day: {
+      glow: 'rgba(190, 165, 105, .13)',
+      bg1: 'rgba(38, 35, 27, .98)',
+      bg2: 'rgba(24, 24, 21, .98)',
+      bg3: 'rgba(43, 39, 29, .94)',
+      border: 'rgba(210, 195, 155, .25)'
+    },
+    evening: {
+      glow: 'rgba(150, 105, 190, .18)',
+      bg1: 'rgba(38, 27, 43, .98)',
+      bg2: 'rgba(23, 19, 29, .98)',
+      bg3: 'rgba(43, 29, 48, .94)',
+      border: 'rgba(180, 145, 205, .28)'
+    },
+    night: {
+      glow: 'rgba(75, 115, 190, .18)',
+      bg1: 'rgba(22, 31, 49, .98)',
+      bg2: 'rgba(15, 20, 32, .98)',
+      bg3: 'rgba(23, 32, 53, .94)',
+      border: 'rgba(120, 155, 210, .25)'
+    }
+  };
+
+  let current;
+
+  if (hour >= 5 && hour < 12) current = atmospheres.morning;
+  else if (hour >= 12 && hour < 18) current = atmospheres.day;
+  else if (hour >= 18 && hour < 23) current = atmospheres.evening;
+  else current = atmospheres.night;
+
+  hero.style.setProperty('--lobby-glow', current.glow);
+  hero.style.setProperty('--lobby-bg-1', current.bg1);
+  hero.style.setProperty('--lobby-bg-2', current.bg2);
+  hero.style.setProperty('--lobby-bg-3', current.bg3);
+  hero.style.borderColor = current.border;
+}
+updateLobbyClock();
+updateLobbyGreeting();
+updateLobbyAtmosphere();
+
+setInterval(updateLobbyClock, 1000);
+setInterval(updateLobbyAtmosphere, 60000);
+// ═══════ KESUG MUSIC PLAYER ═══════
+
+(() => {
+  const audio = new Audio();
+  audio.preload = 'metadata';
+
+  const title = document.getElementById('kesug-music-title');
+  const artist = document.getElementById('kesug-music-artist');
+  const toggle = document.getElementById('kesug-music-toggle');
+    const fileInput = document.getElementById('kesug-music-files');
+  const localFiles = [];
+
+  fileInput?.addEventListener('change', () => {
+    const files = Array.from(fileInput.files || [])
+      .filter(file => file.type.startsWith('audio/'));
+
+    if (!files.length) {
+      showToast('Аудиофайлы не найдены');
+      return;
+    }
+
+    localFiles.forEach(url => URL.revokeObjectURL(url));
+    localFiles.length = 0;
+
+    const tracks = files.map(file => {
+      const url = URL.createObjectURL(file);
+      localFiles.push(url);
+
+      return {
+        title: file.name.replace(/\.[^/.]+$/, ''),
+        artist: 'Моя музыка',
+        src: url
+      };
+    });
+
+    window.kesugMusic.setPlaylist(tracks);
+    window.kesugMusic.play();
+
+    showToast(`Добавлено треков: ${tracks.length}`);
+    fileInput.value = '';
+  });
+
+  let playlist = [];
+  let currentTrack = 0;
+
+  function updateMusicUI() {
+    const track = playlist[currentTrack];
+
+    if (title) title.textContent = track?.title || 'Ничего не играет';
+    if (artist) artist.textContent = track?.artist || 'Ожидание музыки';
+
+    if (toggle) {
+      toggle.innerHTML = audio.paused
+        ? '<i class="ph-fill ph-play"></i>'
+        : '<i class="ph-fill ph-pause"></i>';
+    }
+  }
+
+  function playTrack(index) {
+    if (!playlist.length) {
+      showToast('Сначала добавь музыку в плеер');
+      return;
+    }
+
+    currentTrack = (index + playlist.length) % playlist.length;
+    audio.src = playlist[currentTrack].src;
+
+    audio.play().then(() => {
+      updateMusicUI();
+      updateMediaSession();
+    }).catch(() => {
+      showToast('Не удалось запустить музыку');
+    });
+  }
+
+  function updateMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+
+    const track = playlist[currentTrack];
+    if (!track) return;
+
+    if ('MediaMetadata' in window) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: track.title,
+        artist: track.artist,
+        album: 'Kesug Slots'
+      });
+    }
+
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', () => playTrack(currentTrack - 1));
+    navigator.mediaSession.setActionHandler('nexttrack', () => playTrack(currentTrack + 1));
+  }
+
+  toggle?.addEventListener('click', () => {
+    if (!playlist.length) {
+      showToast('Музыка пока не добавлена');
+      return;
+    }
+
+    if (audio.paused) audio.play();
+    else audio.pause();
+  });
+
+  document.getElementById('kesug-music-prev')
+    ?.addEventListener('click', () => playTrack(currentTrack - 1));
+
+  document.getElementById('kesug-music-next')
+    ?.addEventListener('click', () => playTrack(currentTrack + 1));
+
+  audio.addEventListener('play', updateMusicUI);
+  audio.addEventListener('pause', updateMusicUI);
+  audio.addEventListener('ended', () => playTrack(currentTrack + 1));
+
+  window.kesugMusic = {
+    setPlaylist(tracks) {
+      playlist = Array.isArray(tracks) ? tracks : [];
+      currentTrack = 0;
+      updateMusicUI();
+    },
+    play: () => playTrack(currentTrack),
+    pause: () => audio.pause(),
+    audio
+  };
+
+  updateMusicUI();
+})();
 // Инициализация
 applySettings();
 syncSettingsControls();

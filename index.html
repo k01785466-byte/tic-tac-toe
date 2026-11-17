@@ -2038,61 +2038,6 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 updateHeaderOnScroll();
 
-// Более мягкая прокрутка колёсиком на компьютерах с мышью/тачпадом.
-// На телефонах, при открытом игровом экране и при системном reduced-motion
-// остаётся стандартное поведение браузера.
-(() => {
-  const desktopPointer = window.matchMedia('(min-width: 769px) and (pointer: fine)');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!desktopPointer.matches || reduceMotion.matches) return;
-
-  let targetScrollY = window.scrollY;
-  let currentScrollY = window.scrollY;
-  let scrollFrame = null;
-
-  // Колёсико должно двигать страницу, а не запускать браузерный zoom.
-  window.addEventListener('wheel', (event) => {
-    if (event.ctrlKey || event.metaKey) return;
-    if (document.getElementById('game-screen').classList.contains('active')) return;
-    if (event.target.closest('input, textarea, select, [data-native-scroll]')) return;
-
-    event.preventDefault();
-
-    let delta = event.deltaY;
-    if (event.deltaMode === 1) delta *= 16;
-    else if (event.deltaMode === 2) delta *= window.innerHeight;
-
-    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    // Синхронизируем цель, если пользователь перед этим перетащил ползунок прокрутки.
-    if (Math.abs(targetScrollY - window.scrollY) > window.innerHeight) {
-      targetScrollY = window.scrollY;
-      currentScrollY = window.scrollY;
-    }
-    targetScrollY = Math.max(0, Math.min(maxScroll, targetScrollY + delta * 1.08));
-
-    if (scrollFrame === null) {
-      currentScrollY = window.scrollY;
-      scrollFrame = window.requestAnimationFrame(animateWheelScroll);
-    }
-  }, { passive: false });
-
-  function animateWheelScroll() {
-    const distance = targetScrollY - currentScrollY;
-    currentScrollY += distance * 0.22;
-
-    if (Math.abs(distance) < 0.9) {
-      currentScrollY = targetScrollY;
-      window.scrollTo({ top: currentScrollY, behavior: 'instant' });
-      scrollFrame = null;
-      return;
-    }
-
-    window.scrollTo({ top: currentScrollY, behavior: 'instant' });
-    scrollFrame = window.requestAnimationFrame(animateWheelScroll);
-  }
-})();
-
-
 
 // Первая настройка профиля показывается только при первом запуске в этом браузере.
 const KESUG_DEFAULT_AVATAR = 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png';

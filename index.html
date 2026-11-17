@@ -26,6 +26,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
 ::-webkit-scrollbar { display: none; }
 body { 
   color: var(--text-main); font-size: 14px; line-height: 1.5; overflow-x: hidden; min-height: 100vh; 
@@ -35,13 +36,30 @@ body {
 /* ═══════ ПАРЯЩАЯ ШАПКА ═══════ */
 .top-header { 
   position: fixed; top: 15px; left: 50%; transform: translateX(-50%); 
-  width: 95%; max-width: 800px; z-index: 1000; 
+  width: 95%; max-width: 800px; z-index: 1000;
 }
+/* В самом верху остаются только логотип, баланс и аватар.
+   При прокрутке контейнер плавно превращается в стеклянную шапку. */
 .header-glass { 
-  background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--glass-border); border-radius: 50px; padding: 10px 20px;
-  display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-main);
-  transition: 0.3s;
+  background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+  border: 1px solid transparent; border-radius: 0; padding: 10px 20px;
+  display: flex; justify-content: space-between; align-items: center; box-shadow: none;
+  transform: scale(.985);
+  transition:
+    background-color .38s ease,
+    backdrop-filter .38s ease,
+    -webkit-backdrop-filter .38s ease,
+    border-color .38s ease,
+    border-radius .38s ease,
+    box-shadow .38s ease,
+    padding .38s ease,
+    transform .38s cubic-bezier(.2,.75,.25,1);
+}
+.top-header.is-scrolled .header-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-color: var(--glass-border); border-radius: 50px;
+  box-shadow: var(--shadow-main); transform: scale(1);
 }
 .top-brand { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: var(--text-white); cursor: pointer; transition: 0.3s; }
 .top-brand:hover { transform: scale(1.02); text-shadow: 0 0 15px rgba(16,185,129,0.5); }
@@ -174,6 +192,12 @@ body {
 .page-view { display: none; animation: fadeIn 0.2s ease; }
 .page-view.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Уважаем системную настройку уменьшения анимации. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .header-glass { transition: none; }
+}
 
 /* АДАПТИВ */
 @media (max-width: 480px) {
@@ -583,6 +607,78 @@ function checkWin(res) {
   isSpinning = false;
   document.getElementById('btn-spin').disabled = false;
 }
+
+// Плавное превращение верхней панели в стеклянную шапку.
+const topHeader = document.querySelector('.top-header');
+const HEADER_SCROLL_THRESHOLD = 28;
+let headerScrollTicking = false;
+
+function updateHeaderOnScroll() {
+  topHeader.classList.toggle('is-scrolled', window.scrollY > HEADER_SCROLL_THRESHOLD);
+  headerScrollTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!headerScrollTicking) {
+    window.requestAnimationFrame(updateHeaderOnScroll);
+    headerScrollTicking = true;
+  }
+}, { passive: true });
+updateHeaderOnScroll();
+
+// Более мягкая прокрутка колёсиком на компьютерах с мышью/тачпадом.
+// На телефонах, при открытом игровом экране и при системном reduced-motion
+// остаётся стандартное поведение браузера.
+(() => {
+  const desktopPointer = window.matchMedia('(min-width: 769px) and (pointer: fine)');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!desktopPointer.matches || reduceMotion.matches) return;
+
+  let targetScrollY = window.scrollY;
+  let currentScrollY = window.scrollY;
+  let scrollFrame = null;
+
+  // Колёсико должно двигать страницу, а не запускать браузерный zoom.
+  window.addEventListener('wheel', (event) => {
+    if (event.ctrlKey || event.metaKey) return;
+    if (document.getElementById('game-screen').classList.contains('active')) return;
+    if (event.target.closest('input, textarea, select, [data-native-scroll]')) return;
+
+    event.preventDefault();
+
+    let delta = event.deltaY;
+    if (event.deltaMode === 1) delta *= 16;
+    else if (event.deltaMode === 2) delta *= window.innerHeight;
+
+    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    // Синхронизируем цель, если пользователь перед этим перетащил ползунок прокрутки.
+    if (Math.abs(targetScrollY - window.scrollY) > window.innerHeight) {
+      targetScrollY = window.scrollY;
+      currentScrollY = window.scrollY;
+    }
+    targetScrollY = Math.max(0, Math.min(maxScroll, targetScrollY + delta * 1.08));
+
+    if (scrollFrame === null) {
+      currentScrollY = window.scrollY;
+      scrollFrame = window.requestAnimationFrame(animateWheelScroll);
+    }
+  }, { passive: false });
+
+  function animateWheelScroll() {
+    const distance = targetScrollY - currentScrollY;
+    currentScrollY += distance * 0.16;
+
+    if (Math.abs(distance) < 0.65) {
+      currentScrollY = targetScrollY;
+      window.scrollTo({ top: currentScrollY, behavior: 'instant' });
+      scrollFrame = null;
+      return;
+    }
+
+    window.scrollTo({ top: currentScrollY, behavior: 'instant' });
+    scrollFrame = window.requestAnimationFrame(animateWheelScroll);
+  }
+})();
 
 // Инициализация
 renderLobby();

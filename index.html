@@ -4,181 +4,204 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Kesug Slots</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='0' fill='%23000'/%3E%3Cpath d='M32 12 L52 32 L32 52 L12 32 Z' fill='%2334c759'/%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='0' fill='%23222'/%3E%3Cpath d='M32 12 L52 32 L32 52 L12 32 Z' fill='%2310b981'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23fbbf24'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 <style>
 :root {
-  --bg-main: #000000;
-  --bg-card: #0a0a0a;
-  --bg-surface: #1c1c1e;
-  --text-primary: #f5f5f7;
-  --text-secondary: #86868b;
-  --border-light: rgba(255, 255, 255, 0.1);
-  --accent-green: #34c759;
-  --accent-red: #ff3b30;
-  --reel-h: 100px;
+  --bg-main: #121214;
+  --bg-card: #1e1e22;
+  --bg-input: #09090b;
+  --text-main: #e4e4e7;
+  --text-white: #ffffff;
+  --text-muted: #8b8b93;
+  --border: #2d2d33;
+  --accent-green: #10b981;
+  --accent-gold: #fbbf24;
+  --accent-red: #ef4444;
+  --glass-bg: rgba(30, 30, 35, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --shadow-main: 0 10px 30px rgba(0,0,0,0.5);
+  --reel-h: 85px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; letter-spacing: -0.02em; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
 ::-webkit-scrollbar { display: none; }
 body { 
-  color: var(--text-primary); font-size: 15px; line-height: 1.5; overflow-x: hidden; min-height: 100vh; 
+  color: var(--text-main); font-size: 14px; line-height: 1.5; overflow-x: hidden; min-height: 100vh; 
   background-color: var(--bg-main); padding-top: 100px; 
 }
 
-/* ═══════ МИНИМАЛИСТИЧНАЯ ШАПКА ═══════ */
+/* ═══════ ПАРЯЩАЯ ШАПКА ═══════ */
 .top-header { 
-  position: fixed; top: 0; left: 0; width: 100%; height: 80px; z-index: 1000; 
-  background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-light);
+  position: fixed; top: 15px; left: 50%; transform: translateX(-50%); 
+  width: 95%; max-width: 800px; z-index: 1000; 
 }
-.header-inner { max-width: 900px; margin: 0 auto; height: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-.top-brand { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 600; color: var(--text-primary); cursor: pointer; }
+.header-glass { 
+  background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border); border-radius: 50px; padding: 10px 20px;
+  display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-main);
+  transition: 0.3s;
+}
+.top-brand { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: var(--text-white); cursor: pointer; transition: 0.3s; }
+.top-brand:hover { transform: scale(1.02); text-shadow: 0 0 15px rgba(16,185,129,0.5); }
 .top-brand i { color: var(--accent-green); font-size: 22px; }
 
+.header-right { display: flex; align-items: center; gap: 12px; }
 .user-balance { 
-  display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 500; color: var(--text-primary);
+  display: flex; align-items: center; gap: 6px; font-family: monospace; font-size: 16px; font-weight: 800; 
+  color: var(--accent-green); padding: 8px 16px; background: rgba(16, 185, 129, 0.1); border-radius: 30px; border: 1px solid rgba(16, 185, 129, 0.2);
 }
-.user-balance img { width: 20px; opacity: 0.8; }
+.user-balance img { width: 18px; }
 
 .profile-btn { 
-  background: var(--bg-surface); border: 1px solid var(--border-light); width: 40px; height: 40px; border-radius: 50%; 
+  background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); width: 42px; height: 42px; border-radius: 50%; 
   cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; padding: 0;
 }
-.profile-btn:hover { background: #2c2c2e; }
-.profile-btn img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.profile-btn:hover { border-color: var(--accent-green); background: rgba(255,255,255,0.1); }
+.profile-btn img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
 
 /* ═══════ КОНТЕНТ ═══════ */
-.content-wrapper { width: 100%; max-width: 900px; margin: 0 auto; padding: 30px 20px 60px 20px; }
+.content-wrapper { width: 100%; max-width: 800px; margin: 0 auto; padding: 20px 15px 50px 15px; }
 
 /* СЕТКА ИГР */
 .games-grid { 
   display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-  gap: 20px; 
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+  gap: 15px; 
 }
 .game-card { 
-  background: var(--bg-card); border: 1px solid var(--border-light); 
-  padding: 25px 15px; text-align: center; cursor: pointer; border-radius: 16px; 
+  background: var(--bg-card); border: 1px solid var(--border); 
+  padding: 20px 15px; text-align: center; cursor: pointer; border-radius: 16px; 
   display: flex; flex-direction: column; align-items: center; transition: 0.2s;
 }
-.game-card:hover { border-color: var(--text-secondary); background: var(--bg-surface); }
-.game-icon { width: 60px; height: 60px; margin-bottom: 15px; object-fit: contain; }
-.game-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-.game-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-.play-btn { background: transparent; border: none; color: var(--accent-green); padding: 8px; font-size: 13px; font-weight: 500; width: 100%; transition: 0.2s; }
-.game-card:hover .play-btn { color: #2cd64d; }
+.game-card:hover { border-color: var(--accent-green); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+.game-icon { width: 60px; height: 60px; margin-bottom: 12px; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); transition: 0.3s; }
+.game-card:hover .game-icon { transform: scale(1.1); }
+.game-title { font-size: 14px; font-weight: 700; color: var(--text-white); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.game-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.play-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; padding: 10px; font-size: 12px; font-weight: 700; text-transform: uppercase; width: 100%; border-radius: 8px; transition: 0.2s; }
+.game-card:hover .play-btn { background: var(--accent-green); color: #000; border-color: var(--accent-green); }
 
 /* ПРОФИЛЬ */
-.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
-.back-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; transition: 0.2s; }
-.back-btn:hover { color: var(--text-primary); }
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.back-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; }
+.back-btn:hover { background: var(--border); color: #fff; }
 
-.profile-card { display: flex; align-items: center; gap: 20px; background: var(--bg-card); border: 1px solid var(--border-light); padding: 25px; border-radius: 20px; margin-bottom: 30px; }
-.profile-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; background: #000; }
-.profile-info h2 { color: var(--text-primary); font-size: 22px; font-weight: 600; margin-bottom: 4px; }
-.profile-info p { color: var(--text-secondary); font-size: 14px; }
-.btn { padding: 14px 20px; font-weight: 500; font-size: 14px; cursor: pointer; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; transition: 0.2s; }
+.profile-card { display: flex; align-items: center; gap: 20px; background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 16px; margin-bottom: 20px; }
+.profile-avatar { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--accent-green); object-fit: cover; background: #000; }
+.profile-info h2 { color: #fff; font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+.profile-info p { color: var(--accent-green); font-family: monospace; font-weight: 600; font-size: 14px; }
+.btn { padding: 12px 20px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; transition: 0.2s; }
 .btn-green { background: var(--accent-green); color: #000; width: 100%; }
-.btn-green:hover { background: #40d360; }
-.btn-gray { background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--border-light); }
-.btn-gray:hover { background: #2c2c2e; }
+.btn-green:hover { background: #34d399; }
+.btn-gray { background: var(--border); color: #fff; }
+.btn-gray:hover { background: #3f3f46; }
 
 /* СТАТИСТИКА */
-.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; }
-.stat-card { background: var(--bg-card); border: 1px solid var(--border-light); padding: 20px 15px; text-align: center; border-radius: 16px; }
-.stat-icon { font-size: 24px; color: var(--text-secondary); margin-bottom: 10px; display: block; }
-.stat-value { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
-.stat-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); padding: 15px 10px; text-align: center; border-radius: 16px; }
+.stat-icon { font-size: 22px; color: var(--text-muted); margin-bottom: 6px; display: block; }
+.stat-value { font-family: monospace; font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+.stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
 
 /* ФОРМА */
-.form-box { background: var(--bg-card); padding: 25px; border-radius: 20px; border: 1px solid var(--border-light); margin-bottom: 25px; }
-.form-label { font-size: 12px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; margin-bottom: 10px; display: block; }
-.inp { width: 100%; padding: 16px; background: #000; border: 1px solid var(--border-light); color: var(--text-primary); font-size: 15px; outline: none; border-radius: 12px; margin-bottom: 20px; transition: 0.2s; }
-.inp:focus { border-color: var(--text-secondary); }
-.btn-row { display: flex; gap: 12px; }
+.form-box { background: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 20px; }
+.form-label { font-size: 12px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; display: block; }
+.inp { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: #fff; font-size: 15px; outline: none; border-radius: 10px; margin-bottom: 15px; }
+.inp:focus { border-color: var(--accent-green); }
+.btn-row { display: flex; gap: 10px; }
 
-/* ═══════ ИГРОВОЙ ЭКРАН (3D ЭФФЕКТ) ═══════ */
+/* ═══════ ИГРОВОЙ ЭКРАН ═══════ */
 #game-screen { 
   position: fixed; inset: 0; background: var(--bg-main); z-index: 9999; 
-  display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; 
-  perspective: 1200px; /* Включаем 3D-перспективу */
+  display: none; flex-direction: column; align-items: center; justify-content: center; padding: 15px; 
 }
 #game-screen.active { display: flex; }
 
-.game-header { position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
-.back-btn-game { background: transparent; border: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 8px; }
-.back-btn-game:hover { color: var(--text-primary); }
+.game-header { 
+  position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 500px; height: 60px; 
+  background: var(--glass-bg); backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 30px;
+  display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-shadow: var(--shadow-main);
+}
+.back-btn-game { background: transparent; border: none; color: var(--text-muted); font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 8px; border-radius: 8px; }
+.back-btn-game:hover { color: #fff; background: rgba(255,255,255,0.05); }
 
-/* Объемный контейнер для слотов */
-.slot-container { 
-  background: var(--bg-card); border: 1px solid var(--border-light); padding: 30px; width: 100%; max-width: 440px; border-radius: 24px; 
-  transform: rotateX(5deg); /* Легкий наклон для 3D-эффекта */
-  box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
-  transform-style: preserve-3d;
-}
-.reels { 
-  background: #000; padding: 15px; border: 1px solid var(--border-light); display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; 
-  border-radius: 16px; position: relative; transform: translateZ(20px); /* Выдвигаем барабаны вперед */
-  box-shadow: inset 0 10px 20px rgba(0,0,0,1), inset 0 -10px 20px rgba(0,0,0,1);
-}
-.reel-window { height: calc(var(--reel-h) * 3); background: #050505; position: relative; overflow: hidden; border-radius: 8px; }
+.slot-container { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; width: 100%; max-width: 440px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); margin-top: 60px; }
+.reels { background: #000; padding: 10px; border: 2px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; border-radius: 12px; position: relative; }
+.reel-window { height: calc(var(--reel-h) * 3); background: #0a0a0a; position: relative; overflow: hidden; border-radius: 8px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
 .reel-strip { position: absolute; top: 0; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; }
 .reel-item { height: var(--reel-h); width: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .reel-item img { width: 80%; height: 80%; object-fit: contain; }
-.reel-item.winning { background: rgba(52, 199, 89, 0.15); border-radius: 8px; }
+.reel-item.winning { background: rgba(16, 185, 129, 0.15); border: 2px solid var(--accent-green); border-radius: 8px; box-shadow: 0 0 15px rgba(16,185,129,0.4); z-index: 2; }
 
-.game-controls { display: flex; flex-direction: column; gap: 15px; transform: translateZ(10px); }
-.bet-box { display: flex; align-items: center; justify-content: space-between; background: #000; padding: 15px 20px; border-radius: 16px; border: 1px solid var(--border-light); }
-.bet-box span { color: var(--text-secondary); font-weight: 500; }
-.bet-box input { width: 100px; background: transparent; border: none; color: var(--text-primary); font-size: 20px; text-align: right; font-weight: 600; outline: none; }
-.bet-btns { display: flex; gap: 10px; }
-.bet-btns button { flex: 1; background: var(--bg-surface); border: 1px solid var(--border-light); color: var(--text-primary); padding: 14px; cursor: pointer; font-weight: 500; border-radius: 12px; transition: 0.2s; }
-.bet-btns button:hover { background: #2c2c2e; }
-.spin-btn-big { background: var(--accent-green); color: #000; border: none; padding: 20px; font-size: 18px; font-weight: 600; cursor: pointer; border-radius: 16px; width: 100%; transition: 0.2s; }
-.spin-btn-big:hover { background: #40d360; }
-.spin-btn-big:disabled { background: var(--bg-surface); color: var(--text-secondary); cursor: not-allowed; }
+.game-controls { display: flex; flex-direction: column; gap: 15px; }
+.bet-box { display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border); }
+.bet-box span { color: var(--text-muted); font-weight: 600; }
+.bet-box input { width: 100px; background: transparent; border: none; color: var(--accent-green); font-family: monospace; font-size: 20px; text-align: right; font-weight: 800; outline: none; }
+.bet-btns { display: flex; gap: 8px; }
+.bet-btns button { flex: 1; background: var(--bg-input); border: 1px solid var(--border); color: #fff; padding: 12px; cursor: pointer; font-weight: 700; border-radius: 10px; transition: 0.2s; }
+.bet-btns button:hover { background: var(--border); }
+.spin-btn-big { background: var(--accent-green); color: #000; border: none; padding: 16px; font-size: 18px; font-weight: 900; text-transform: uppercase; cursor: pointer; border-radius: 12px; width: 100%; transition: 0.2s; box-shadow: 0 4px 15px rgba(16,185,129,0.3); }
+.spin-btn-big:hover { background: #34d399; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+.spin-btn-big:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; box-shadow: none; transform: none; }
 
-/* ═══════ МИНИМАЛИСТИЧНЫЙ ПОПАП ═══════ */
-.win-popup { position: fixed; inset: 0; z-index: 10005; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+/* ═══════ КРАСИВЫЙ ПОПАП ВЫИГРЫША ═══════ */
+.win-popup { position: fixed; inset: 0; z-index: 10005; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
 .win-popup.active { opacity: 1; pointer-events: auto; }
 .win-box { 
-  background: var(--bg-card); border: 1px solid var(--border-light); width: 90%; max-width: 320px; text-align: center; 
-  border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); transform: scale(0.95); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  background: linear-gradient(135deg, #1e1e22 0%, #0a0a0b 100%); 
+  border: 2px solid var(--accent-green); width: 90%; max-width: 320px; text-align: center; border-radius: 24px; 
+  overflow: hidden; box-shadow: 0 0 60px rgba(16,185,129,0.4), inset 0 0 20px rgba(16,185,129,0.2); 
+  transform: scale(0.8); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 .win-popup.active .win-box { transform: scale(1); }
-.win-title { color: var(--text-secondary); font-weight: 500; padding: 25px 20px 10px 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; }
-.win-amount { padding: 0 20px 30px 20px; font-size: 48px; font-weight: 600; color: var(--accent-green); letter-spacing: -0.03em; }
+.win-popup.mega .win-box { border-color: var(--accent-gold); box-shadow: 0 0 60px rgba(251,191,36,0.5), inset 0 0 20px rgba(251,191,36,0.2); }
 
-/* СТРАНИЦЫ */
-.page-view { display: none; }
+.win-title { 
+  background: var(--accent-green); color: #000; font-weight: 900; padding: 15px; font-size: 20px; text-transform: uppercase; letter-spacing: 1px;
+}
+.win-popup.mega .win-title { background: var(--accent-gold); }
+
+.win-amount { 
+  padding: 30px 20px; font-size: 48px; font-weight: 900; font-family: monospace; color: #fff; 
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+  animation: popScale 0.5s ease-out;
+}
+@keyframes popScale { 0% { transform: scale(0.5); opacity: 0; } 80% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+
+/* Страницы */
+.page-view { display: none; animation: fadeIn 0.2s ease; }
 .page-view.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
 /* АДАПТИВ */
 @media (max-width: 480px) {
-  :root { --reel-h: 75px; }
-  body { padding-top: 80px; }
+  :root { --reel-h: 65px; }
+  body { padding-top: 90px; }
+  .top-header { top: 10px; width: 94%; }
+  .header-glass { padding: 8px 15px; border-radius: 30px; }
   .top-brand { font-size: 16px; }
-  .user-balance { font-size: 14px; }
+  .top-brand i { font-size: 18px; }
+  .user-balance { font-size: 14px; padding: 6px 12px; }
   .profile-btn { width: 36px; height: 36px; }
   .profile-btn img { width: 28px; height: 28px; }
-  .profile-card { flex-direction: column; text-align: center; padding: 20px; }
-  .slot-container { padding: 20px; border-radius: 20px; transform: rotateX(3deg); } /* Меньше наклон на телефонах */
-  .reels { gap: 6px; padding: 8px; }
-  .game-header { height: 70px; }
+  .profile-card { flex-direction: column; text-align: center; padding: 20px 15px; }
+  .slot-container { padding: 15px; border-radius: 16px; margin-top: 60px; }
+  .reels { gap: 5px; padding: 5px; }
+  .game-header { top: 10px; width: 94%; height: 55px; border-radius: 30px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ШАПКА -->
+<!-- ПАРЯЩАЯ ШАПКА -->
 <div class="top-header">
-  <div class="header-inner">
+  <div class="header-glass">
     <div class="top-brand" onclick="showPage('lobby')">
       <i class="ph-bold ph-diamonds-four"></i> Kesug Slots
     </div>
-    <div style="display: flex; align-items: center; gap: 20px;">
+    <div class="header-right">
       <div class="user-balance" id="ui-balance-wrap">
         <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png" alt="Wallet">
         <span id="ui-balance">0 ₽</span>
@@ -211,7 +234,7 @@ body {
         </div>
       </div>
       
-      <button class="btn btn-green" onclick="showPage('edit-profile')" style="margin-bottom: 30px;"><i class="ph-bold ph-pencil"></i> Редактировать</button>
+      <button class="btn btn-green" onclick="showPage('edit-profile')" style="margin-bottom: 20px;"><i class="ph-bold ph-pencil"></i> Редактировать</button>
 
       <div class="stat-grid">
         <div class="stat-card"><i class="ph-bold ph-arrows-clockwise stat-icon"></i><div class="stat-value" id="stat-spins">0</div><div class="stat-label">Спинов</div></div>
@@ -250,8 +273,8 @@ body {
 <div id="game-screen">
   <div class="game-header">
     <button class="back-btn-game" onclick="closeMachine()"><i class="ph-bold ph-arrow-left"></i> Назад</button>
-    <div class="user-balance" style="font-size: 15px;">
-      <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png" alt="Wallet" style="width: 18px;">
+    <div class="user-balance" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+      <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png" alt="Wallet">
       <span id="game-balance">1000 ₽</span>
     </div>
   </div>
@@ -278,10 +301,10 @@ body {
   </div>
 </div>
 
-<!-- ПОПАП ВЫИГРЫША -->
+<!-- КРАСИВЫЙ ПОПАП ВЫИГРЫША -->
 <div class="win-popup" id="win-popup">
   <div class="win-box">
-    <div class="win-title" id="win-title">Выигрыш</div>
+    <div class="win-title" id="win-title">WIN</div>
     <div class="win-amount" id="win-amount">0 ₽</div>
   </div>
 </div>
@@ -545,11 +568,16 @@ function checkWin(res) {
     if (win > state.stats.maxWin) state.stats.maxWin = win;
     saveToLocal(); updateUI();
     
-    // Минималистичный показ выигрыша
-    document.getElementById('win-title').textContent = 'Выигрыш';
+    // Красивый показ выигрыша
+    const isMega = win >= state.bet * 20;
+    const popup = document.getElementById('win-popup');
+    
+    popup.classList.toggle('mega', isMega);
+    document.getElementById('win-title').textContent = isMega ? 'MEGA WIN' : 'WIN';
     document.getElementById('win-amount').textContent = win.toLocaleString('ru-RU') + ' ₽';
-    document.getElementById('win-popup').classList.add('active');
-    setTimeout(() => document.getElementById('win-popup').classList.remove('active'), 2000);
+    
+    popup.classList.add('active');
+    setTimeout(() => popup.classList.remove('active'), 2500);
   }
 
   isSpinning = false;

@@ -3448,12 +3448,18 @@ syncSettingsControls();
 const API = 'https://cazinooo.hostingem.ru/api/admin-api.php';
 
 // ФУНКЦИИ ДЛЯ СВЯЗИ С СЕРВЕРОМ
+
 async function saveToServer() {
   try {
-    const avatarForServer = String(state.avatar || '').startsWith('data:') ? '' : (state.avatar || '');
+    const avatarForServer = String(state.avatar || '').startsWith('data:')
+      ? ''
+      : (state.avatar || '');
+
     const response = await fetch(API + '?action=save', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         player_id: state.playerId,
         balance: state.balance,
@@ -3462,9 +3468,28 @@ async function saveToServer() {
         stats: state.stats
       })
     });
-    if (!response.ok) throw new Error('HTTP ' + response.status);
+
+    const result = await response.text();
+
+    if (!response.ok) {
+      throw new Error('HTTP ' + response.status + ': ' + result);
+    }
+
+    console.log('KESUG SAVE RESPONSE:', result);
+
+    if (!result.trim()) {
+      throw new Error('Сервер вернул пустой ответ');
+    }
+
+    const data = JSON.parse(result);
+
+    if (!data.ok) {
+      throw new Error('Сервер не подтвердил сохранение');
+    }
+
+    console.log('KESUG: игрок сохранён на сервере!');
   } catch (e) {
-    console.log('Kesug Slots: серверное сохранение недоступно', e);
+    console.error('KESUG SAVE ERROR:', e);
   }
 }
 

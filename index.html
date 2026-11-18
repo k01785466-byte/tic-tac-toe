@@ -1206,6 +1206,7 @@ box-shadow: 0 24px 55px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,244,218,.08);
 .header-icon-btn:hover { color: #fff0c8; border-color: rgba(214,173,91,.48); background: rgba(var(--accent-rgb),.10); box-shadow: 0 0 20px rgba(var(--accent-rgb),.10); transform: translateY(-2px); }
 .header-icon-btn:hover i { transform: rotate(35deg); }
 .header-right { gap: 10px; }
+.ks-bookmarks-trigger:hover i { transform: translateY(-2px) scale(1.08); }
 .favorites-chip { display: inline-flex; align-items: center; gap: 6px; }
 .favorites-chip i { color: #e7c77f; font-size: 13px; }
 .favorites-chip span { min-width: 18px; padding: 1px 5px; border-radius: 99px; background: rgba(var(--accent-rgb),.13); color: #e6ca8e; font-size: 9px; }
@@ -1449,10 +1450,10 @@ body::before,
 
   .header-glass {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 36px 36px 36px;
+    grid-template-columns: minmax(0, 1fr) 36px 36px 36px 36px;
     grid-template-areas:
-      "brand settings more profile"
-      "balance balance balance balance";
+      "brand settings more bookmarks profile"
+      "balance balance balance balance balance";
     align-items: center;
     column-gap: 8px;
     row-gap: 8px;
@@ -1466,6 +1467,7 @@ body::before,
   .header-icon-btn i { font-size: 16px; }
   .ks-more-trigger { grid-area: more; width: 36px; min-width: 36px; height: 36px; padding: 0; }
   .ks-more-trigger span { display: none; }
+  .ks-bookmarks-trigger { grid-area: bookmarks; width: 36px; height: 36px; }
   .profile-btn { grid-area: profile; width: 36px; height: 36px; }
   .profile-btn img { width: 28px; height: 28px; }
 
@@ -2350,10 +2352,10 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
 @media (max-width: 700px) {
   .header-glass {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 36px 36px 36px !important;
+    grid-template-columns: minmax(0, 1fr) 36px 36px 36px 36px !important;
     grid-template-areas:
-      "brand settings more profile"
-      "balance balance balance balance" !important;
+      "brand settings more bookmarks profile"
+      "balance balance balance balance balance" !important;
     align-items: center !important;
     justify-items: stretch !important;
     column-gap: 8px !important;
@@ -2405,6 +2407,18 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
     transform: none;
   }
   .header-right > .ks-more-trigger span { display: none !important; }
+  .header-right > .ks-bookmarks-trigger {
+    grid-area: bookmarks !important;
+    box-sizing: border-box !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 !important;
+    flex: 0 0 36px !important;
+    justify-self: center !important;
+  }
   .header-right > .profile-btn {
     grid-area: profile !important;
     box-sizing: border-box !important;
@@ -2427,22 +2441,65 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
 }
 
 @media (max-width: 380px) {
+  /* Keep all four controls in their own grid cells; five columns are required. */
   .header-glass {
-    grid-template-columns: minmax(0, 1fr) 34px 34px 34px !important;
-    column-gap: 6px !important;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
+    grid-template-columns: minmax(0, 1fr) 32px 32px 32px 32px !important;
+    grid-template-areas:
+      "brand settings more bookmarks profile"
+      "balance balance balance balance balance" !important;
+    column-gap: 4px !important;
+    row-gap: 7px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
   }
+  .top-brand { font-size: 14px !important; }
+  .top-brand > i { font-size: 15px !important; }
   .header-right > .header-icon-btn:not(.ks-more-trigger),
   .header-right > .ks-more-trigger,
+  .header-right > .ks-bookmarks-trigger,
   .header-right > .profile-btn {
-    width: 34px !important;
-    min-width: 34px !important;
-    max-width: 34px !important;
-    height: 34px !important;
-    min-height: 34px !important;
-    flex-basis: 34px !important;
+    box-sizing: border-box !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    flex: 0 0 32px !important;
+    justify-self: center !important;
   }
+  .header-right > .header-icon-btn i { font-size: 14px !important; }
+  .header-right > .profile-btn img {
+    width: 25px !important;
+    height: 25px !important;
+    max-width: 25px !important;
+    max-height: 25px !important;
+  }
+}
+</style>
+
+<style id="ks-bookmarks-header-click-and-mobile-fix">
+/* The bookmarks shortcut uses the same registered feature dispatcher as the More menu. */
+.ks-bookmarks-trigger { position: relative; z-index: 2; touch-action: manipulation; }
+@media (max-width: 700px) {
+  .header-glass {
+    grid-template-columns: minmax(0, 1fr) 36px 36px 36px 36px !important;
+    grid-template-areas:
+      "brand settings more bookmarks profile"
+      "balance balance balance balance balance" !important;
+  }
+}
+@media (max-width: 380px) {
+  .header-glass {
+    grid-template-columns: minmax(0, 1fr) 32px 32px 32px 32px !important;
+    grid-template-areas:
+      "brand settings more bookmarks profile"
+      "balance balance balance balance balance" !important;
+    column-gap: 4px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .top-brand { font-size: 14px !important; }
+  .top-brand > i { font-size: 15px !important; }
 }
 </style>
 
@@ -2491,6 +2548,275 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
 :root.ks-night-mode { --accent-green:#7c9dff !important; --accent-gold:#b7c9ff !important; --accent-rgb:112,143,230 !important; --bg-main:#050811 !important; --bg-card:#0b1120 !important; --bg-input:#050914 !important; --border:#1b2a49 !important; --text-muted:#8291ad !important; --glass-bg:rgba(7,12,25,.9) !important; --ks-page-mid:#0a1530 !important; --ks-page-end:#030610 !important; }
 @media(max-width:700px) { .ks-cinema-stage { min-height:185px; padding:18px 12px; } .ks-cinema-stage-mark { font-size:40px; } .ks-more-symbol-grid,.ks-gallery-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 @media(prefers-reduced-motion:reduce) { .ks-cinema-stage::before,.ks-cinema-stage::after,.ks-cinema-stage.is-playing .ks-cinema-stage-mark,.ks-lab-preview.motion { animation:none !important; } }
+</style>
+
+
+<style id="kesug-duels-elo-styles">
+.ks-more-duels .ks-more-icon { color:var(--accent-gold); }
+.ks-duel-rating-card,.ks-duel-panel { margin-top:13px; padding:16px; border:1px solid var(--border); border-radius:16px; background:linear-gradient(145deg,rgba(var(--accent-rgb),.09),var(--bg-card)); }
+.ks-duel-rating-card { display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+.ks-duel-overline,.ks-duel-label { display:block; color:var(--text-muted); font-size:9px; font-weight:900; letter-spacing:.12em; }
+.ks-duel-elo { display:block; margin-top:5px; color:var(--text-white); font:900 30px 'Space Grotesk','Manrope',sans-serif; }
+.ks-duel-elo small { color:var(--accent-gold); font-size:11px; }
+.ks-duel-tier { display:inline-block; margin-top:3px; color:var(--accent-gold); font-size:11px; font-weight:800; }
+.ks-duel-record { display:flex; gap:13px; flex-wrap:wrap; color:var(--text-muted); font-size:10px; }
+.ks-duel-record span { display:grid; gap:3px; }
+.ks-duel-record b { color:var(--text-white); font-size:16px; }
+.ks-duel-panel h4 { margin:0 0 13px; color:var(--text-white); font-size:13px; font-weight:900; }
+.ks-duel-label { margin:13px 0 6px; }
+.ks-duel-panel .ks-more-select,.ks-duel-panel .ks-more-input { width:100%; box-sizing:border-box; }
+.ks-duel-stake-chips { display:flex; gap:7px; flex-wrap:wrap; margin-top:8px; }
+.ks-duel-stake-chips button { padding:7px 11px; border:1px solid var(--border); border-radius:9px; color:var(--text-main); background:var(--bg-card); font-size:10px; font-weight:800; cursor:pointer; }
+.ks-duel-stake-chips button:hover { border-color:var(--accent-gold); }
+.ks-duel-balance { margin-top:13px; color:var(--text-muted); font-size:10px; }
+.ks-duel-balance strong { color:var(--accent-green); }
+.ks-duel-rules { display:grid; gap:5px; margin-top:13px; padding:11px; border:1px solid rgba(var(--accent-rgb),.18); border-radius:11px; background:rgba(var(--accent-rgb),.05); }
+.ks-duel-rules b { color:var(--text-white); font-size:10px; }
+.ks-duel-rules span,.ks-duel-disclaimer,.ks-duel-muted { color:var(--text-muted); font-size:10px; line-height:1.55; }
+.ks-duel-start { width:100%; margin-top:13px; }
+.ks-duel-last { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:11px; border:1px solid var(--border); border-radius:11px; background:var(--bg-card); font-size:10px; }
+.ks-duel-last strong { color:var(--text-white); }
+.ks-duel-last span { color:var(--accent-gold); font-weight:800; }
+.ks-duel-history { display:grid; gap:7px; }
+.ks-duel-history-row { display:flex; align-items:center; gap:9px; padding:9px 10px; border:1px solid var(--border); border-radius:10px; background:var(--bg-card); color:var(--text-muted); font-size:10px; }
+.ks-duel-history-row strong { color:var(--text-white); }
+.ks-duel-history-row small { margin-left:auto; color:var(--text-muted); }
+.ks-duel-history-row b { color:var(--accent-gold); }
+.ks-duel-match-top { display:flex; justify-content:space-between; gap:10px; color:var(--text-muted); font-size:10px; font-weight:800; }
+.ks-duel-score { display:flex; align-items:center; justify-content:center; gap:22px; margin:17px 0 8px; }
+.ks-duel-score div { display:grid; min-width:72px; justify-items:center; gap:2px; }
+.ks-duel-score b { color:var(--text-white); font:900 32px 'Space Grotesk','Manrope',sans-serif; }
+.ks-duel-score span { color:var(--text-muted); font-size:9px; font-weight:900; letter-spacing:.12em; }
+.ks-duel-score > strong { color:var(--accent-gold); font-size:21px; }
+.ks-duel-outcome { margin:10px 0; color:var(--accent-gold); text-align:center; font-size:12px; font-weight:900; }
+.ks-duel-boards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.ks-duel-player-card { min-width:0; padding:11px; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); }
+.ks-duel-player-card.is-player { border-color:rgba(var(--accent-rgb),.42); }
+.ks-duel-player-head { display:flex; justify-content:space-between; gap:6px; align-items:center; margin-bottom:9px; }
+.ks-duel-player-head strong { overflow:hidden; color:var(--text-white); font-size:10px; text-overflow:ellipsis; white-space:nowrap; }
+.ks-duel-player-head span { flex:0 0 auto; color:var(--text-muted); font-size:9px; }
+.ks-duel-reels { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px; }
+.ks-duel-cell { display:grid; min-width:0; aspect-ratio:1; place-items:center; border:1px solid var(--border); border-radius:7px; background:rgba(var(--accent-rgb),.07); }
+.ks-duel-cell img { width:78%; height:78%; object-fit:contain; }
+.ks-duel-payout { margin-top:9px; color:var(--text-muted); font-size:9px; }
+.ks-duel-payout b { color:var(--accent-gold); }
+.ks-duel-waiting { display:grid; justify-items:center; gap:7px; padding:27px 18px; border:1px dashed var(--border); border-radius:14px; background:rgba(var(--accent-rgb),.04); text-align:center; }
+.ks-duel-waiting span { font-size:36px; }
+.ks-duel-waiting strong { color:var(--text-white); font-size:12px; }
+.ks-duel-waiting small { max-width:360px; color:var(--text-muted); font-size:10px; line-height:1.5; }
+.ks-duel-match-actions { display:flex; gap:9px; flex-wrap:wrap; margin-top:14px; }
+.ks-duel-match-actions .ks-more-action { flex:1 1 190px; }
+.ks-duel-match-actions .ks-more-secondary { flex:0 1 auto; }
+.ks-duel-result-card { display:grid; justify-items:center; gap:7px; padding:22px 15px; border:1px solid var(--border); border-radius:16px; background:var(--bg-card); text-align:center; }
+.ks-duel-result-card.is-win { border-color:rgba(62,193,130,.45); background:rgba(62,193,130,.07); }
+.ks-duel-result-card.is-loss { border-color:rgba(210,106,106,.35); }
+.ks-duel-result-icon { font-size:34px; }
+.ks-duel-result-card h4 { margin:0; color:var(--text-white); font-size:18px; }
+.ks-duel-result-card p { margin:0; color:var(--text-muted); font-size:11px; }
+.ks-duel-rating-change { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:12px; }
+.ks-duel-rating-change div { display:grid; gap:5px; padding:11px 8px; border:1px solid var(--border); border-radius:11px; background:var(--bg-card); text-align:center; }
+.ks-duel-rating-change span { color:var(--text-muted); font-size:9px; }
+.ks-duel-rating-change b { color:var(--text-white); font-size:15px; }
+.ks-duel-rating-change b.is-positive,.ks-duel-net .is-positive { color:var(--accent-green); }
+.ks-duel-rating-change b.is-negative,.ks-duel-net .is-negative { color:var(--accent-red); }
+.ks-duel-net { margin:12px 0 0; color:var(--text-muted); font-size:10px; }
+.ks-duel-net strong { display:block; margin-top:4px; }
+@media(max-width:560px) {
+  .ks-duel-rating-card { align-items:flex-start; }
+  .ks-duel-record { width:100%; justify-content:space-between; }
+  .ks-duel-boards { grid-template-columns:1fr; }
+  .ks-duel-player-card { display:grid; grid-template-columns:minmax(0,1fr) 1.15fr; gap:9px; align-items:center; }
+  .ks-duel-player-head { grid-column:1 / -1; margin:0; }
+  .ks-duel-payout { margin:0; }
+  .ks-duel-rating-change { gap:5px; }
+  .ks-duel-rating-change div { padding:9px 4px; }
+  .ks-duel-rating-change b { font-size:13px; }
+}
+</style>
+
+
+<style id="kesug-visual-banner-system">
+/* KESUG VISUAL BANNERS — consistent artwork panels across the interface. */
+.ks-more-tile.ks-more-tile-bannered {
+  min-height: 166px; padding: 0 !important; gap: 0 !important; overflow: hidden;
+  border-radius: 17px; background: var(--bg-card); isolation: isolate;
+}
+.ks-more-tile-bannered .ks-more-banner {
+  position: relative; width: 100%; height: 88px; min-height: 88px; flex: 0 0 88px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  box-sizing: border-box; overflow: hidden; padding: 13px 14px;
+  border: 0; border-bottom: 1px solid rgba(255,255,255,.15); border-radius: 0;
+  color: #fff; background: linear-gradient(122deg,var(--feature-banner-a),var(--feature-banner-b));
+}
+.ks-more-tile-bannered .ks-more-banner::before,
+.ks-more-tile-bannered .ks-more-banner::after { content:""; position:absolute; pointer-events:none; border-radius:50%; }
+.ks-more-tile-bannered .ks-more-banner::before { width:112px;height:112px;right:-23px;top:-55px;background:rgba(255,255,255,.14); }
+.ks-more-tile-bannered .ks-more-banner::after { width:72px;height:72px;right:38px;bottom:-54px;border:1px solid rgba(255,255,255,.24);box-shadow:0 0 0 10px rgba(255,255,255,.045),0 0 0 21px rgba(255,255,255,.035); }
+.ks-more-banner-symbol { position:relative;z-index:1;width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.26);border-radius:16px;background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.15);backdrop-filter:blur(8px);font-size:28px; }
+.ks-more-banner-symbol i { font-size:29px; }
+.ks-more-banner-kicker { position:relative;z-index:1;margin-left:auto;color:rgba(255,255,255,.88);font-size:9px;font-weight:900;letter-spacing:.16em;text-align:right; }
+.ks-more-tile-bannered > strong { display:block;margin:11px 13px 0;padding:0;color:var(--text-white);font-size:12px;line-height:1.25; }
+.ks-more-tile-bannered > small { display:block;margin:5px 13px 13px;padding:0;color:var(--text-muted);font-size:10px;line-height:1.45; }
+.ks-more-tile-bannered:hover .ks-more-banner { filter:saturate(1.12) brightness(1.06); }
+.ks-more-tile-bannered.ks-more-reaction { grid-column:span 2; }
+
+.ks-feature-hero {
+  position:relative;display:grid;grid-template-columns:minmax(140px, .8fr) minmax(0,1.5fr);align-items:stretch;gap:clamp(14px,2.8vw,28px);
+  min-height:154px;margin:0 0 20px;padding:18px;overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:20px;
+  color:#fff;background:linear-gradient(115deg,var(--feature-banner-a),var(--feature-banner-b));isolation:isolate;
+  box-shadow:0 16px 38px rgba(0,0,0,.16);
+}
+.ks-feature-hero::before,.ks-feature-hero::after {content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none;}
+.ks-feature-hero::before {width:260px;height:260px;right:-70px;top:-150px;background:rgba(255,255,255,.13);}
+.ks-feature-hero::after {width:170px;height:170px;right:16%;bottom:-125px;border:1px solid rgba(255,255,255,.25);box-shadow:0 0 0 18px rgba(255,255,255,.04),0 0 0 38px rgba(255,255,255,.035);}
+.ks-feature-hero-art {position:relative;min-height:116px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:rgba(8,12,24,.12);}
+.ks-feature-hero-orbit {position:absolute;width:112px;height:112px;border:1px solid rgba(255,255,255,.34);border-radius:50%;box-shadow:0 0 0 13px rgba(255,255,255,.055),0 0 0 27px rgba(255,255,255,.035);}
+.ks-feature-hero-symbol {position:relative;z-index:1;width:76px;height:76px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.32);border-radius:24px;background:rgba(255,255,255,.14);box-shadow:0 12px 30px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.16);font-size:42px;backdrop-filter:blur(8px);}
+.ks-feature-hero-symbol i {font-size:42px;}
+.ks-feature-hero-kicker {position:absolute;left:11px;bottom:9px;color:rgba(255,255,255,.72);font-size:8px;font-weight:900;letter-spacing:.16em;}
+.ks-feature-hero-copy {position:relative;z-index:1;align-self:center;min-width:0;}
+.ks-feature-hero-brand {display:block;margin-bottom:8px;color:rgba(255,255,255,.7);font-size:8px;font-weight:900;letter-spacing:.2em;}
+.ks-feature-hero-copy h3 {margin:0!important;color:#fff!important;font:800 clamp(22px,3.5vw,32px) 'Space Grotesk','Manrope',sans-serif!important;letter-spacing:-.04em;line-height:1.08;}
+.ks-feature-hero-copy p {max-width:540px;margin:8px 0 0!important;color:rgba(255,255,255,.82)!important;font-size:11px!important;line-height:1.55!important;}
+.ks-more-detail-tools {margin:0 0 12px;}
+
+/* Give the other main sections the same editorial banner feel without changing their controls. */
+.page-view:not(#page-lobby):not(#page-more):not(#page-more-detail) > .page-header {
+  position:relative;min-height:56px;margin:0 0 20px;padding:10px 13px;overflow:hidden;
+  border:1px solid rgba(var(--accent-rgb),.18);border-radius:15px;
+  background:radial-gradient(ellipse at 90% 0%,rgba(var(--accent-rgb),.18),transparent 42%),linear-gradient(115deg,rgba(var(--accent-rgb),.075),var(--bg-card));
+}
+.page-view:not(#page-lobby):not(#page-more):not(#page-more-detail) > .page-header::after {
+  content:"";position:absolute;right:8%;top:-35px;width:100px;height:100px;border:1px solid rgba(var(--accent-rgb),.16);border-radius:50%;pointer-events:none;
+  box-shadow:0 0 0 12px rgba(var(--accent-rgb),.025),0 0 0 25px rgba(var(--accent-rgb),.02);
+}
+.catalog-heading-row {position:relative;padding:15px 17px;overflow:hidden;border:1px solid rgba(var(--accent-rgb),.2);border-radius:18px;background:radial-gradient(ellipse at 95% 0%,rgba(var(--accent-rgb),.16),transparent 36%),linear-gradient(110deg,rgba(var(--accent-rgb),.07),var(--bg-card));}
+.catalog-heading-row::after {content:"";position:absolute;right:10%;top:-45px;width:118px;height:118px;border:1px solid rgba(var(--accent-rgb),.15);border-radius:50%;pointer-events:none;box-shadow:0 0 0 13px rgba(var(--accent-rgb),.025),0 0 0 27px rgba(var(--accent-rgb),.02);}
+.catalog-heading-copy,.catalog-count-card {position:relative;z-index:1;}
+
+@media (max-width:700px) {
+  .ks-more-grid {gap:9px!important;}
+  .ks-more-tile.ks-more-tile-bannered {min-height:148px;border-radius:14px;}
+  .ks-more-tile-bannered .ks-more-banner {height:76px;min-height:76px;flex-basis:76px;padding:10px;}
+  .ks-more-banner-symbol {width:44px;height:44px;flex-basis:44px;border-radius:13px;font-size:24px;}
+  .ks-more-banner-symbol i {font-size:25px;}
+  .ks-more-banner-kicker {font-size:7px;letter-spacing:.11em;}
+  .ks-more-tile-bannered > strong {margin:9px 10px 0;font-size:11px;}
+  .ks-more-tile-bannered > small {margin:4px 10px 10px;font-size:9px;}
+  .ks-feature-hero {grid-template-columns:86px minmax(0,1fr);gap:13px;min-height:128px;padding:12px;border-radius:16px;margin-bottom:15px;}
+  .ks-feature-hero-art {min-height:100px;}
+  .ks-feature-hero-orbit {width:74px;height:74px;}
+  .ks-feature-hero-symbol {width:54px;height:54px;border-radius:17px;font-size:30px;}
+  .ks-feature-hero-symbol i {font-size:30px;}
+  .ks-feature-hero-kicker {left:6px;bottom:6px;font-size:6px;letter-spacing:.08em;}
+  .ks-feature-hero-brand {font-size:7px;margin-bottom:6px;}
+  .ks-feature-hero-copy h3 {font-size:21px!important;}
+  .ks-feature-hero-copy p {font-size:9px!important;margin-top:6px!important;}
+  .page-view:not(#page-lobby):not(#page-more):not(#page-more-detail) > .page-header {padding:8px 9px;min-height:48px;margin-bottom:15px;border-radius:12px;}
+  .catalog-heading-row {padding:12px;border-radius:14px;}
+}
+@media (prefers-reduced-motion:reduce) {.ks-more-banner,.ks-feature-hero {animation:none!important;transition:none!important;}}
+body.lite-mode .ks-more-banner,body.lite-mode .ks-feature-hero {backdrop-filter:none!important;box-shadow:none!important;}
+</style>
+
+
+<style id="kesug-global-visual-system">
+/* KESUG GLOBAL VISUAL SYSTEM — extend the banner language to the full game. */
+:root { --ks-banner-glow: rgba(var(--accent-rgb),.18); }
+.lobby-hero,.catalog-heading-row,.ks-more-header,.ks-feature-hero,
+.profile-card,.settings-hero,.form-box,.settings-group,.profile-data-panel,
+.settings-info-card,.stat-card,.catalog-count-card,.catalog-toolbar,
+.game-card,.game-header,.slot-container,.machine-balance-card,.ks-project-footer,
+.ks-music-library-toolbar,.ks-music-link-panel,.ks-music-library-section {
+  border-color:rgba(var(--accent-rgb),.22);
+}
+/* Main page: a consistent glass frame around all feature blocks. */
+#page-lobby .catalog-section { position:relative; }
+#page-lobby .catalog-tools,
+#page-lobby .catalog-toolbar,
+#page-lobby .catalog-count-card { box-shadow:0 12px 30px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.035); }
+.catalog-heading-row { box-shadow:0 16px 36px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.055); }
+/* Profile becomes a proper identity banner. */
+.profile-card {
+  position:relative;isolation:isolate;overflow:hidden;
+  background:radial-gradient(ellipse at 88% 8%,rgba(var(--accent-rgb),.22),transparent 38%),linear-gradient(115deg,rgba(var(--accent-rgb),.12),var(--bg-card) 62%);
+  box-shadow:0 18px 42px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.05);
+}
+.profile-card::after {content:"PLAYER IDENTITY";position:absolute;right:18px;top:15px;color:rgba(var(--accent-rgb),.58);font-size:8px;font-weight:900;letter-spacing:.2em;pointer-events:none;}
+.profile-avatar {border:3px solid rgba(var(--accent-rgb),.45);box-shadow:0 0 0 7px rgba(var(--accent-rgb),.08),0 12px 28px rgba(0,0,0,.22);}
+.stat-card {position:relative;overflow:hidden;background:radial-gradient(ellipse at 100% 0%,rgba(var(--accent-rgb),.12),transparent 54%),var(--bg-card);box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 10px 25px rgba(0,0,0,.12);}
+.stat-card::before,.settings-group::before,.profile-data-panel::before,.settings-info-card::before,.form-box::before,.slot-container::before {content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent-green),rgba(var(--accent-rgb),.12),transparent);pointer-events:none;}
+.profile-data-panel,.settings-info-card {position:relative;overflow:hidden;background:radial-gradient(ellipse at 95% 0%,rgba(var(--accent-rgb),.11),transparent 40%),var(--bg-card);box-shadow:0 14px 34px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.045);}
+/* Settings and profile editor. */
+.settings-hero {position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(var(--accent-rgb),.28);border-radius:20px;background:radial-gradient(ellipse at 90% 0%,rgba(var(--accent-rgb),.23),transparent 42%),linear-gradient(115deg,rgba(var(--accent-rgb),.14),var(--bg-card) 74%);box-shadow:0 18px 40px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.055);}
+.settings-hero::after {content:"CUSTOMIZE YOUR SPACE";position:absolute;right:18px;bottom:13px;color:rgba(var(--accent-rgb),.44);font-size:8px;font-weight:900;letter-spacing:.18em;pointer-events:none;}
+.settings-hero-icon {border:1px solid rgba(var(--accent-rgb),.28);background:linear-gradient(145deg,rgba(var(--accent-rgb),.28),rgba(var(--accent-rgb),.08));box-shadow:0 12px 24px rgba(0,0,0,.14);}
+.settings-group {position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(var(--accent-rgb),.055),var(--bg-card) 46%);box-shadow:0 14px 34px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.035);}
+.settings-group-heading {position:relative;margin:-2px -2px 12px;padding:10px 12px;border:1px solid rgba(var(--accent-rgb),.12);border-radius:12px;background:linear-gradient(100deg,rgba(var(--accent-rgb),.10),transparent 85%);}
+.form-box {position:relative;overflow:hidden;border:1px solid rgba(var(--accent-rgb),.2);background:radial-gradient(ellipse at 100% 0%,rgba(var(--accent-rgb),.13),transparent 42%),var(--bg-card);box-shadow:0 18px 42px rgba(0,0,0,.18);}
+/* Game cards and the slot screen. */
+.game-card {overflow:hidden;box-shadow:0 14px 32px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.04);}
+.game-card-art {position:relative;overflow:hidden;}
+.game-card-art::after {content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.075),transparent 40%,rgba(0,0,0,.10));}
+.game-header {border:1px solid rgba(var(--accent-rgb),.24);background:radial-gradient(ellipse at 88% 0%,rgba(var(--accent-rgb),.2),transparent 42%),linear-gradient(110deg,var(--glass-bg),rgba(10,14,24,.78));box-shadow:0 14px 36px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.07);}
+.slot-container {position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(var(--accent-rgb),.23);background:radial-gradient(ellipse at 50% 0%,rgba(var(--accent-rgb),.14),transparent 48%),linear-gradient(155deg,var(--bg-card),var(--bg-main));box-shadow:0 24px 56px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.055);}
+.machine-balance-card {background:linear-gradient(105deg,rgba(var(--accent-rgb),.12),var(--bg-input));border:1px solid rgba(var(--accent-rgb),.2);}
+.reel-window {border-color:rgba(var(--accent-rgb),.34)!important;box-shadow:inset 0 0 24px rgba(var(--accent-rgb),.07),0 6px 18px rgba(0,0,0,.22)!important;}
+.game-controls .bet-box,.game-controls .bet-btns,.spin-btn-big,.ks-autoplay-control {box-shadow:0 10px 24px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.045);}
+/* All interactive surfaces pick up the current theme accent consistently. */
+.btn,.hero-primary-btn,.spin-btn-big,.play-btn,.ks-more-tile,.back-btn,.back-btn-game {transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease,filter .2s ease;}
+.btn:focus-visible,.ks-more-tile:focus-visible,.header-icon-btn:focus-visible,.game-card button:focus-visible {outline:2px solid var(--accent-green);outline-offset:3px;}
+.ks-project-footer {border-top:1px solid rgba(var(--accent-rgb),.16);background:linear-gradient(90deg,transparent,rgba(var(--accent-rgb),.05),transparent);}
+/* My Music library page. */
+.ks-music-manager {display:grid;gap:16px;}
+.ks-music-library-toolbar,.ks-music-link-panel,.ks-music-library-section {position:relative;overflow:hidden;border:1px solid rgba(var(--accent-rgb),.20);border-radius:17px;background:radial-gradient(ellipse at 100% 0%,rgba(var(--accent-rgb),.13),transparent 43%),var(--bg-card);padding:15px;box-shadow:0 13px 32px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.04);}
+.ks-music-library-toolbar {display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(110deg,rgba(50,75,144,.35),rgba(var(--accent-rgb),.08),var(--bg-card));}
+.ks-music-library-current {display:flex;align-items:center;gap:11px;min-width:0;}
+.ks-music-library-current small,.ks-music-panel-heading small {display:block;color:var(--text-muted);font-size:9px;font-weight:800;letter-spacing:.12em;}
+.ks-music-library-current strong {display:block;margin-top:3px;color:var(--text-white);font-size:18px;}
+.ks-music-live-dot {width:11px;height:11px;flex:0 0 11px;border-radius:50%;background:#6bdbad;box-shadow:0 0 0 5px rgba(107,219,173,.12),0 0 18px rgba(107,219,173,.5);}
+.ks-music-import-button {display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 14px;border:1px solid rgba(var(--accent-rgb),.34);border-radius:12px;background:rgba(var(--accent-rgb),.14);color:var(--text-white);font-size:11px;font-weight:800;cursor:pointer;}
+.ks-music-panel-heading {display:flex;align-items:center;gap:11px;margin-bottom:12px;}
+.ks-music-panel-heading > i {width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(var(--accent-rgb),.25);border-radius:12px;background:rgba(var(--accent-rgb),.12);color:var(--accent-green);font-size:19px;}
+.ks-music-panel-heading strong {display:block;color:var(--text-white);font-size:13px;}
+.ks-music-panel-heading small {margin-top:3px;letter-spacing:0;font-weight:600;}
+.ks-music-link-fields {display:grid;gap:9px;}
+.ks-music-link-fields > div {display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.ks-music-link-fields input {width:100%;min-width:0;height:42px;padding:0 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg-input);color:var(--text-main);font:600 11px Manrope,sans-serif;}
+.ks-music-link-fields input:focus {outline:2px solid rgba(var(--accent-rgb),.35);border-color:var(--accent-green);}
+.ks-music-link-fields .btn {justify-self:start;}
+.ks-music-library-heading {display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.ks-music-library-heading h4 {margin:3px 0 0;color:var(--text-white);font:800 18px 'Space Grotesk',Manrope,sans-serif;}
+.ks-music-refresh,.ks-music-track-actions button {width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--border);border-radius:11px;background:rgba(var(--accent-rgb),.08);color:var(--text-main);cursor:pointer;}
+.ks-music-track-list {display:grid;gap:8px;}
+.ks-music-track-row {display:flex;align-items:center;gap:11px;min-width:0;padding:10px;border:1px solid rgba(var(--accent-rgb),.13);border-radius:13px;background:linear-gradient(105deg,rgba(var(--accent-rgb),.055),rgba(255,255,255,.015));}
+.ks-music-track-art {width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border:1px solid rgba(var(--accent-rgb),.2);border-radius:12px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.23),rgba(95,123,206,.16));color:var(--accent-green);font-size:20px;}
+.ks-music-track-meta {display:grid;gap:2px;min-width:0;flex:1;}
+.ks-music-track-meta strong,.ks-music-track-meta span {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ks-music-track-meta strong {color:var(--text-white);font-size:11px;}
+.ks-music-track-meta span {color:var(--text-muted);font-size:10px;}
+.ks-music-track-meta small {color:var(--accent-green);font-size:7px;font-weight:900;letter-spacing:.1em;}
+.ks-music-track-actions {display:flex;gap:6px;}
+.ks-music-track-actions button {width:32px;height:32px;font-size:14px;}
+.ks-music-track-actions button[data-music-action="remove"] {color:#e78c8c;}
+.ks-music-empty {display:grid;justify-items:center;gap:7px;padding:25px 14px;border:1px dashed rgba(var(--accent-rgb),.24);border-radius:13px;color:var(--text-muted);text-align:center;}
+.ks-music-empty > i {color:var(--accent-green);font-size:28px;}
+.ks-music-empty strong {color:var(--text-white);font-size:12px;}
+.ks-music-empty span {max-width:380px;font-size:10px;line-height:1.55;}
+.ks-music-storage-note {display:flex;align-items:flex-start;gap:8px;margin:0;color:var(--text-muted);font-size:9px;line-height:1.55;}
+.ks-music-storage-note i {flex:0 0 auto;margin-top:1px;color:var(--accent-green);}
+@media(max-width:600px) {
+  .profile-card::after {right:11px;top:10px;font-size:6px;}
+  .settings-hero::after {right:10px;bottom:8px;font-size:6px;}
+  .ks-music-library-toolbar {align-items:stretch;flex-direction:column;}
+  .ks-music-import-button {width:100%;}
+  .ks-music-link-fields > div {grid-template-columns:1fr;}
+  .ks-music-track-row {gap:8px;padding:8px;}
+  .ks-music-track-art {width:36px;height:36px;flex-basis:36px;}
+  .ks-music-track-actions {gap:4px;}
+  .ks-music-track-actions button {width:29px;height:29px;}
+}
+body.lite-mode .profile-card,body.lite-mode .settings-hero,body.lite-mode .settings-group,body.lite-mode .stat-card,body.lite-mode .slot-container,body.lite-mode .ks-music-library-toolbar,body.lite-mode .ks-music-link-panel,body.lite-mode .ks-music-library-section {box-shadow:none!important;backdrop-filter:none!important;}
 </style>
 
 </head>
@@ -2543,6 +2869,7 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
       </div>
       <button class="header-icon-btn" type="button" onclick="showPage('settings')" aria-label="Настройки" title="Настройки"><i class="ph-bold ph-sliders-horizontal"></i></button>
       <button class="header-icon-btn ks-more-trigger" type="button" onclick="openMoreMenu()" aria-label="Ещё функции" title="Ещё функции"><i class="ph-bold ph-squares-four"></i><span>Ещё</span></button>
+      <button class="header-icon-btn ks-bookmarks-trigger" type="button" onclick="window.useMoreFeature('bookmarks')" aria-label="Закладки" title="Закладки"><i class="ph-bold ph-bookmark-simple" aria-hidden="true"></i></button>
       <button class="profile-btn" onclick="showPage('profile')">
         <img id="nav-avatar" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png">
       </button>
@@ -2835,6 +3162,7 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('favorites')"><span class="ks-more-icon"><i class="ph-fill ph-star"></i></span><strong>Избранное</strong><small>Сохранённые автоматы</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('search')"><span class="ks-more-icon"><i class="ph-bold ph-magnifying-glass"></i></span><strong>Поиск</strong><small>Найти нужный автомат</small></button>
       <button class="ks-more-tile ks-more-reaction" type="button" onclick="useMoreFeature('reaction')"><span class="ks-more-icon"><i class="ph-fill ph-lightning"></i></span><strong>Игры на реакцию</strong><small>Проверь скорость и точность</small></button>
+      <button class="ks-more-tile ks-more-duels" type="button" onclick="useMoreFeature('duels')"><span class="ks-more-icon"><i class="ph-fill ph-sword"></i></span><strong>Дуэли</strong><small>Сражайся с ботами и повышай ELO</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('combinations')"><span class="ks-more-icon">🧩</span><strong>Комбинации</strong><small>Энциклопедия символов и сочетаний</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('archive')"><span class="ks-more-icon">🗂️</span><strong>Архив</strong><small>Старые события и полученные награды</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('cinema')"><span class="ks-more-icon">🎬</span><strong>Кинозал</strong><small>Игровые заставки и сцены</small></button>
@@ -2857,6 +3185,7 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('downloads')"><span class="ks-more-icon">📥</span><strong>Загрузки</strong><small>Доступные игровые файлы</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('converter')"><span class="ks-more-icon">🪙</span><strong>Конвертер</strong><small>Форматы игровых единиц</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('constructor')"><span class="ks-more-icon">🧱</span><strong>Конструктор</strong><small>Собственный набор символов</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('music')"><span class="ks-more-icon"><i class="ph-fill ph-music-notes"></i></span><strong>Моя музыка</strong><small>Твоя библиотека треков и плейлист</small></button>
     </div>
   </section>
 </div>
@@ -3892,8 +4221,7 @@ updateLobbyAtmosphere();
 
 setInterval(updateLobbyClock, 1000);
 setInterval(updateLobbyAtmosphere, 60000);
-// ═══════ KESUG MUSIC PLAYER ═══════
-
+// ═══════ KESUG MUSIC PLAYER + PERSONAL LIBRARY ═══════
 (() => {
   const audio = new Audio();
   audio.preload = 'metadata';
@@ -3901,48 +4229,81 @@ setInterval(updateLobbyAtmosphere, 60000);
   const title = document.getElementById('kesug-music-title');
   const artist = document.getElementById('kesug-music-artist');
   const toggle = document.getElementById('kesug-music-toggle');
-    const fileInput = document.getElementById('kesug-music-files');
-  const localFiles = [];
-
-  fileInput?.addEventListener('change', () => {
-    const files = Array.from(fileInput.files || [])
-      .filter(file => file.type.startsWith('audio/'));
-
-    if (!files.length) {
-      showToast('Аудиофайлы не найдены');
-      return;
-    }
-
-    localFiles.forEach(url => URL.revokeObjectURL(url));
-    localFiles.length = 0;
-
-    const tracks = files.map(file => {
-      const url = URL.createObjectURL(file);
-      localFiles.push(url);
-
-      return {
-        title: file.name.replace(/\.[^/.]+$/, ''),
-        artist: 'Моя музыка',
-        src: url
-      };
-    });
-
-    window.kesugMusic.setPlaylist(tracks);
-    window.kesugMusic.play();
-
-    showToast(`Добавлено треков: ${tracks.length}`);
-    fileInput.value = '';
-  });
-
+  const fileInput = document.getElementById('kesug-music-files');
+  const DB_NAME = 'KesugSlotsMusicLibrary';
+  const DB_VERSION = 1;
+  const STORE_NAME = 'tracks';
   let playlist = [];
   let currentTrack = 0;
+  const objectUrls = new Map();
+
+  function openMusicDB() {
+    if (!('indexedDB' in window)) return Promise.reject(new Error('IndexedDB недоступен в этом браузере'));
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onupgradeneeded = () => {
+        const db = request.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+      };
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error || new Error('Не удалось открыть музыкальную библиотеку'));
+    });
+  }
+
+  async function storeRequest(mode, action) {
+    const db = await openMusicDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, mode);
+      const store = tx.objectStore(STORE_NAME);
+      let request;
+      try { request = action(store); }
+      catch (error) { db.close(); reject(error); return; }
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error || new Error('Ошибка музыкальной библиотеки'));
+      tx.oncomplete = () => db.close();
+      tx.onerror = () => { db.close(); reject(tx.error || new Error('Не удалось сохранить музыкальные данные')); };
+      tx.onabort = () => { db.close(); reject(tx.error || new Error('Операция с музыкой отменена')); };
+    });
+  }
+
+  function safeTrackId() {
+    return (window.crypto && typeof crypto.randomUUID === 'function')
+      ? crypto.randomUUID()
+      : `track_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  }
+
+  function sourceFor(record) {
+    if (record.src) return record.src;
+    if (!record.blob) return '';
+    if (!objectUrls.has(record.id)) objectUrls.set(record.id, URL.createObjectURL(record.blob));
+    return objectUrls.get(record.id);
+  }
+
+  async function getLibraryRecords() {
+    const result = await storeRequest('readonly', store => store.getAll());
+    return Array.isArray(result) ? result.sort((a, b) => (a.addedAt || 0) - (b.addedAt || 0)) : [];
+  }
+
+  async function reloadLibrary() {
+    const previousId = playlist[currentTrack]?.id;
+    const records = await getLibraryRecords();
+    playlist = records.map(record => ({
+      id: record.id,
+      title: record.title || 'Без названия',
+      artist: record.artist || 'Моя музыка',
+      src: sourceFor(record),
+      kind: record.kind || (record.blob ? 'file' : 'link')
+    })).filter(track => !!track.src);
+    const preserved = playlist.findIndex(track => track.id === previousId);
+    currentTrack = preserved >= 0 ? preserved : 0;
+    updateMusicUI();
+    return records;
+  }
 
   function updateMusicUI() {
     const track = playlist[currentTrack];
-
     if (title) title.textContent = track?.title || 'Ничего не играет';
-    if (artist) artist.textContent = track?.artist || 'Ожидание музыки';
-
+    if (artist) artist.textContent = track?.artist || (playlist.length ? 'Моя музыка' : 'Ожидание музыки');
     if (toggle) {
       toggle.innerHTML = audio.paused
         ? '<i class="ph-fill ph-play"></i>'
@@ -3950,62 +4311,115 @@ setInterval(updateLobbyAtmosphere, 60000);
     }
   }
 
+  function updateMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+    const track = playlist[currentTrack];
+    if (!track) return;
+    if ('MediaMetadata' in window) {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: track.title, artist: track.artist, album: 'Kesug Slots · Моя музыка' });
+    }
+    try {
+      navigator.mediaSession.setActionHandler('play', () => audio.play());
+      navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+      navigator.mediaSession.setActionHandler('previoustrack', () => playTrack(currentTrack - 1));
+      navigator.mediaSession.setActionHandler('nexttrack', () => playTrack(currentTrack + 1));
+    } catch (_) { /* Не все браузеры поддерживают все действия Media Session. */ }
+  }
+
   function playTrack(index) {
     if (!playlist.length) {
-      showToast('Сначала добавь музыку в плеер');
-      return;
+      if (typeof showToast === 'function') showToast('Сначала добавь треки в «Мою музыку»');
+      return Promise.resolve(false);
     }
-
     currentTrack = (index + playlist.length) % playlist.length;
-    audio.src = playlist[currentTrack].src;
-
-    audio.play().then(() => {
+    const track = playlist[currentTrack];
+    audio.src = track.src;
+    updateMusicUI();
+    return audio.play().then(() => {
       updateMusicUI();
       updateMediaSession();
+      return true;
     }).catch(() => {
-      showToast('Не удалось запустить музыку');
+      updateMusicUI();
+      if (typeof showToast === 'function') showToast('Не удалось запустить трек. Проверь ссылку или формат файла.');
+      return false;
     });
   }
 
-  function updateMediaSession() {
-    if (!('mediaSession' in navigator)) return;
-
-    const track = playlist[currentTrack];
-    if (!track) return;
-
-    if ('MediaMetadata' in window) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: track.title,
-        artist: track.artist,
-        album: 'Kesug Slots'
-      });
+  async function importFiles(files) {
+    const accepted = Array.from(files || []).filter(file => file && (file.type.startsWith('audio/') || /\.(mp3|m4a|aac|ogg|oga|wav|flac|opus|webm)$/i.test(file.name)));
+    if (!accepted.length) throw new Error('Не найдены поддерживаемые аудиофайлы');
+    for (const file of accepted) {
+      await storeRequest('readwrite', store => store.put({
+        id: safeTrackId(),
+        title: file.name.replace(/\.[^/.]+$/, ''),
+        artist: 'Моя музыка',
+        blob: file,
+        kind: 'file',
+        mime: file.type || 'audio/mpeg',
+        addedAt: Date.now() + Math.random()
+      }));
     }
+    await reloadLibrary();
+    if (typeof showToast === 'function') showToast(`Добавлено треков: ${accepted.length}. Они сохранены в этом браузере.`);
+    return accepted.length;
+  }
 
-    navigator.mediaSession.setActionHandler('play', () => audio.play());
-    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', () => playTrack(currentTrack - 1));
-    navigator.mediaSession.setActionHandler('nexttrack', () => playTrack(currentTrack + 1));
+  async function addRemoteTrack(urlValue, titleValue, artistValue) {
+    let parsed;
+    try { parsed = new URL(String(urlValue || '').trim()); }
+    catch (_) { throw new Error('Вставь прямую ссылку на аудиофайл'); }
+    if (parsed.protocol !== 'https:') throw new Error('Для веб-плеера нужна безопасная HTTPS-ссылка');
+    let fallbackTitle = parsed.pathname.split('/').pop() || 'Интернет-трек';
+    try { fallbackTitle = decodeURIComponent(fallbackTitle); } catch (_) { /* Оставляем исходное имя, если URL содержит некорректное percent-кодирование. */ }
+    const trackTitle = String(titleValue || '').trim() || fallbackTitle;
+    const trackArtist = String(artistValue || '').trim() || 'Моя музыка · ссылка';
+    const record = { id: safeTrackId(), title: trackTitle.slice(0, 100), artist: trackArtist.slice(0, 100), src: parsed.href, kind: 'link', addedAt: Date.now() };
+    await storeRequest('readwrite', store => store.put(record));
+    await reloadLibrary();
+    return record;
+  }
+
+  async function playLibraryTrack(id) {
+    await reloadLibrary();
+    const index = playlist.findIndex(track => track.id === id);
+    if (index < 0) throw new Error('Трек не найден в библиотеке');
+    return playTrack(index);
+  }
+
+  async function removeLibraryTrack(id) {
+    const current = playlist[currentTrack];
+    if (current && current.id === id) {
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+    }
+    await storeRequest('readwrite', store => store.delete(id));
+    if (objectUrls.has(id)) {
+      URL.revokeObjectURL(objectUrls.get(id));
+      objectUrls.delete(id);
+    }
+    await reloadLibrary();
   }
 
   toggle?.addEventListener('click', () => {
     if (!playlist.length) {
-      showToast('Музыка пока не добавлена');
+      if (typeof showToast === 'function') showToast('Добавь треки через «Моя музыка»');
       return;
     }
-
-    if (audio.paused) audio.play();
+    if (audio.paused) playTrack(currentTrack);
     else audio.pause();
   });
-
-  document.getElementById('kesug-music-prev')
-    ?.addEventListener('click', () => playTrack(currentTrack - 1));
-
-  document.getElementById('kesug-music-next')
-    ?.addEventListener('click', () => playTrack(currentTrack + 1));
-
+  document.getElementById('kesug-music-prev')?.addEventListener('click', () => playTrack(currentTrack - 1));
+  document.getElementById('kesug-music-next')?.addEventListener('click', () => playTrack(currentTrack + 1));
   audio.addEventListener('play', updateMusicUI);
   audio.addEventListener('pause', updateMusicUI);
   audio.addEventListener('ended', () => playTrack(currentTrack + 1));
+  fileInput?.addEventListener('change', async () => {
+    try { await importFiles(fileInput.files); }
+    catch (error) { if (typeof showToast === 'function') showToast(error.message || 'Не удалось добавить музыку'); }
+    finally { fileInput.value = ''; }
+  });
 
   window.kesugMusic = {
     setPlaylist(tracks) {
@@ -4015,9 +4429,17 @@ setInterval(updateLobbyAtmosphere, 60000);
     },
     play: () => playTrack(currentTrack),
     pause: () => audio.pause(),
+    getLibrary: getLibraryRecords,
+    reloadLibrary,
+    importFiles,
+    addRemoteTrack,
+    playLibraryTrack,
+    removeLibraryTrack,
+    getPlaylist: () => playlist.slice(),
     audio
   };
 
+  reloadLibrary().catch(error => console.warn('Kesug Music: не удалось загрузить библиотеку', error));
   updateMusicUI();
 })();
 // Инициализация
@@ -4145,17 +4567,173 @@ showPage('lobby');
   };
   let activeMoreFeature = '';
   const moreFeatureNames = {
-    'daily-bonus':'Забрать бонус','random-slot':'Случайный слот','history':'История','autoplay':'Автоигра','appearance':'Оформление','achievements':'Достижения','promo':'Промокод','stats':'Статистика','challenges':'Испытания','sounds':'Звуки','effects':'Эффекты','favorites':'Избранное','search':'Поиск','reaction':'Игры на реакцию',
-    combinations:'Комбинации',archive:'Архив',cinema:'Кинозал',gallery:'Галерея',lab:'Лаборатория',masks:'Маски',titles:'Титулы',bookmarks:'Закладки',navigator:'Навигатор',schedule:'Расписание',openings:'Открытия',quiz:'Викторина',minigames:'Мини-игры',editor:'Редактор',journal:'Журнал',goals:'Мои цели','random-effect':'Случайный эффект',night:'Ночной режим',cleanup:'Очистка',downloads:'Загрузки',converter:'Конвертер',constructor:'Конструктор'
+    'daily-bonus':'Забрать бонус','random-slot':'Случайный слот','history':'История','autoplay':'Автоигра','appearance':'Оформление','achievements':'Достижения','promo':'Промокод','stats':'Статистика','challenges':'Испытания','sounds':'Звуки','effects':'Эффекты','favorites':'Избранное','search':'Поиск','reaction':'Игры на реакцию',duels:'Дуэли',
+    combinations:'Комбинации',archive:'Архив',cinema:'Кинозал',gallery:'Галерея',lab:'Лаборатория',masks:'Маски',titles:'Титулы',bookmarks:'Закладки',navigator:'Навигатор',schedule:'Расписание',openings:'Открытия',quiz:'Викторина',minigames:'Мини-игры',editor:'Редактор',journal:'Журнал',goals:'Мои цели','random-effect':'Случайный эффект',night:'Ночной режим',cleanup:'Очистка',downloads:'Загрузки',converter:'Конвертер',constructor:'Конструктор',music:'Моя музыка'
   };
+  const MORE_FEATURE_VISUALS = {
+    'daily-bonus': { a: '#45317e', b: '#bd83f2', kicker: 'DAILY REWARD', icon: 'ph-fill ph-gift' },
+    'random-slot': { a: '#713515', b: '#eaa04c', kicker: 'RANDOM PICK', icon: 'ph-fill ph-dice-five' },
+    history: { a: '#174b67', b: '#63b7d2', kicker: 'TIMELINE', icon: 'ph-bold ph-scroll' },
+    autoplay: { a: '#185642', b: '#65c99b', kicker: 'AUTO PLAY', icon: 'ph-fill ph-repeat' },
+    appearance: { a: '#60336f', b: '#d58be2', kicker: 'YOUR STYLE', icon: 'ph-fill ph-palette' },
+    achievements: { a: '#654817', b: '#e7b95d', kicker: 'ACHIEVEMENTS', icon: 'ph-fill ph-trophy' },
+    promo: { a: '#6d2d49', b: '#e8789e', kicker: 'BONUS CODE', icon: 'ph-fill ph-ticket' },
+    stats: { a: '#1a426f', b: '#61a6e7', kicker: 'ANALYTICS', icon: 'ph-fill ph-chart-line-up' },
+    challenges: { a: '#73501c', b: '#e6a94c', kicker: 'CHALLENGES', icon: 'ph-fill ph-target' },
+    sounds: { a: '#234c69', b: '#68b3d6', kicker: 'SOUND', icon: 'ph-fill ph-speaker-high' },
+    effects: { a: '#482c79', b: '#ae8bf0', kicker: 'VISUAL FX', icon: 'ph-fill ph-sparkle' },
+    favorites: { a: '#76521b', b: '#f0c35f', kicker: 'FAVORITES', icon: 'ph-fill ph-star' },
+    search: { a: '#214b78', b: '#79ace6', kicker: 'FIND A GAME', icon: 'ph-bold ph-magnifying-glass' },
+    reaction: { a: '#713619', b: '#ee914a', kicker: 'REFLEX TEST', icon: 'ph-fill ph-lightning' },
+    duels: { a: '#702b3d', b: '#ec7182', kicker: 'BOT ARENA', icon: 'ph-fill ph-sword' },
+    combinations: { a: '#2c5869', b: '#74c8d2', kicker: 'SYMBOL GUIDE', icon: 'ph-fill ph-puzzle-piece' },
+    archive: { a: '#414d68', b: '#9caecb', kicker: 'COLLECTION', icon: 'ph-fill ph-archive' },
+    cinema: { a: '#5d3159', b: '#d47bc1', kicker: 'CINEMA', icon: 'ph-fill ph-film-strip' },
+    gallery: { a: '#20516b', b: '#76c0dc', kicker: 'GALLERY', icon: 'ph-fill ph-images' },
+    lab: { a: '#285b51', b: '#83cbb0', kicker: 'EXPERIMENTS', icon: 'ph-fill ph-flask' },
+    masks: { a: '#693e68', b: '#d18bbd', kicker: 'AVATAR STYLE', icon: 'ph-fill ph-masks-theater' },
+    titles: { a: '#735323', b: '#dfbe70', kicker: 'PLAYER TITLES', icon: 'ph-fill ph-medal' },
+    bookmarks: { a: '#31516e', b: '#86b8e4', kicker: 'SAVED PAGES', icon: 'ph-fill ph-bookmark-simple' },
+    navigator: { a: '#245d59', b: '#73c9ba', kicker: 'QUICK ACCESS', icon: 'ph-fill ph-compass' },
+    schedule: { a: '#3e5778', b: '#9dbce6', kicker: 'EVENT CALENDAR', icon: 'ph-fill ph-calendar-dots' },
+    openings: { a: '#6e502b', b: '#d6a66b', kicker: 'OPENING LOG', icon: 'ph-fill ph-package' },
+    quiz: { a: '#345579', b: '#85b8f0', kicker: 'KESUG QUIZ', icon: 'ph-fill ph-brain' },
+    minigames: { a: '#633966', b: '#d18bd7', kicker: 'ARCADE', icon: 'ph-fill ph-game-controller' },
+    editor: { a: '#704a35', b: '#dca57e', kicker: 'CUSTOM DESIGN', icon: 'ph-fill ph-paint-brush' },
+    journal: { a: '#3b5364', b: '#8bb4c7', kicker: 'ACTIVITY LOG', icon: 'ph-fill ph-notebook' },
+    goals: { a: '#4e632c', b: '#b1cc77', kicker: 'PERSONAL GOALS', icon: 'ph-fill ph-flag-checkered' },
+    'random-effect': { a: '#654187', b: '#c09aeb', kicker: 'SURPRISE STYLE', icon: 'ph-fill ph-magic-wand' },
+    night: { a: '#293d70', b: '#8295df', kicker: 'DARK ATMOSPHERE', icon: 'ph-fill ph-moon-stars' },
+    cleanup: { a: '#4b6260', b: '#a6c8bf', kicker: 'MAINTENANCE', icon: 'ph-fill ph-broom' },
+    downloads: { a: '#315a78', b: '#83c2e5', kicker: 'FILES', icon: 'ph-fill ph-download-simple' },
+    converter: { a: '#66512e', b: '#d7b873', kicker: 'UNIT TOOLS', icon: 'ph-fill ph-arrows-left-right' },
+    constructor: { a: '#3e5960', b: '#91c9c9', kicker: 'BUILD YOUR SET', icon: 'ph-fill ph-cubes' },
+    music: { a: '#243d73', b: '#8e8bf2', kicker: 'YOUR SOUND LIBRARY', icon: 'ph-fill ph-music-notes' }
+  };
+
+  function decorateMoreTiles() {
+    document.querySelectorAll('#ks-more-grid .ks-more-tile').forEach(tile => {
+      const match = (tile.getAttribute('onclick') || '').match(/useMoreFeature\('([^']+)'\)/);
+      const key = match ? match[1] : '';
+      const visual = MORE_FEATURE_VISUALS[key];
+      if (!visual || tile.dataset.bannerReady === '1') return;
+      tile.dataset.featureKey = key;
+      tile.classList.add('ks-more-tile-bannered');
+      tile.dataset.bannerReady = '1';
+      tile.style.setProperty('--feature-banner-a', visual.a);
+      tile.style.setProperty('--feature-banner-b', visual.b);
+      const icon = tile.querySelector('.ks-more-icon');
+      if (icon) {
+        const oldIcon = icon.innerHTML;
+        icon.className = 'ks-more-banner';
+        icon.setAttribute('aria-hidden', 'true');
+        icon.innerHTML = `<span class="ks-more-banner-symbol">${oldIcon}</span><span class="ks-more-banner-kicker">${visual.kicker}</span><span class="ks-more-banner-orbit"></span>`;
+      }
+    });
+  }
+
   function showDetail(title, subtitle, html) {
     const content = document.getElementById('ks-more-detail-content');
     if (!content) return;
     const bookmarkBar = activeMoreFeature && activeMoreFeature !== 'bookmarks'
       ? `<div class="ks-more-detail-tools"><button class="ks-more-secondary" type="button" onclick="saveCurrentMoreBookmark()">📌 В закладки</button></div>`
       : '';
-    content.innerHTML = `${bookmarkBar}<h3>${title}</h3><p>${subtitle || ''}</p>${html || ''}`;
+    const visual = MORE_FEATURE_VISUALS[activeMoreFeature] || { a: '#344b6c', b: '#7ca9d7', kicker: 'KESUG FEATURE', icon: 'ph-fill ph-sparkles' };
+    const safeIcon = visual.icon.startsWith('ph-') ? `<i class="${visual.icon}"></i>` : visual.icon;
+    const featureHero = `<section class="ks-feature-hero" style="--feature-banner-a:${visual.a};--feature-banner-b:${visual.b}" aria-label="${title}">
+      <div class="ks-feature-hero-art"><span class="ks-feature-hero-orbit"></span><span class="ks-feature-hero-symbol">${safeIcon}</span><span class="ks-feature-hero-kicker">${visual.kicker}</span></div>
+      <div class="ks-feature-hero-copy"><span class="ks-feature-hero-brand">KESUG SLOTS · EXTRA SPACE</span><h3>${title}</h3><p>${subtitle || ''}</p></div>
+    </section>`;
+    content.innerHTML = `${bookmarkBar}${featureHero}${html || ''}`;
     showPage('more-detail');
+  }
+
+  function musicText(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
+  }
+
+  async function renderMyMusicList() {
+    const list = document.getElementById('ks-my-music-list');
+    const count = document.getElementById('ks-my-music-count');
+    if (!list || !window.kesugMusic) return;
+    try {
+      const tracks = await window.kesugMusic.getLibrary();
+      if (count) count.textContent = String(tracks.length);
+      if (!tracks.length) {
+        list.innerHTML = '<div class="ks-music-empty"><i class="ph-fill ph-music-notes"></i><strong>Библиотека пока пуста</strong><span>Добавь аудиофайл с устройства или вставь прямую HTTPS-ссылку на свой трек.</span></div>';
+        return;
+      }
+      list.innerHTML = tracks.slice().reverse().map(track => {
+        const id = musicText(track.id);
+        const name = musicText(track.title || 'Без названия');
+        const by = musicText(track.artist || 'Моя музыка');
+        const origin = track.kind === 'link' ? 'ОНЛАЙН-ССЫЛКА' : 'ФАЙЛ В БРАУЗЕРЕ';
+        return `<div class="ks-music-track-row" data-track-id="${id}">
+          <div class="ks-music-track-art"><i class="ph-fill ph-music-notes"></i></div>
+          <div class="ks-music-track-meta"><strong>${name}</strong><span>${by}</span><small>${origin}</small></div>
+          <div class="ks-music-track-actions"><button type="button" data-music-action="play" data-track-id="${id}" aria-label="Воспроизвести ${name}"><i class="ph-fill ph-play"></i></button><button type="button" data-music-action="remove" data-track-id="${id}" aria-label="Удалить ${name}"><i class="ph-bold ph-trash"></i></button></div>
+        </div>`;
+      }).join('');
+    } catch (error) {
+      list.innerHTML = `<div class="ks-music-empty"><strong>Не удалось открыть библиотеку</strong><span>${musicText(error.message || 'Проверь поддержку локального хранилища браузером.')}</span></div>`;
+    }
+  }
+
+  function openMyMusic() {
+    showDetail('Моя музыка', 'Добавляй свои аудиофайлы, собирай библиотеку и запускай треки в общем плеере Kesug.', `
+      <div class="ks-music-manager">
+        <section class="ks-music-library-toolbar">
+          <div class="ks-music-library-current"><span class="ks-music-live-dot"></span><div><small>ТВОЯ МЕДИАТЕКА</small><strong><span id="ks-my-music-count">0</span> треков</strong></div></div>
+          <label class="ks-music-import-button"><i class="ph-bold ph-plus"></i> Добавить файлы<input id="ks-my-music-files" type="file" accept="audio/*,.mp3,.m4a,.aac,.ogg,.wav,.flac,.opus" multiple hidden></label>
+        </section>
+        <section class="ks-music-link-panel">
+          <div class="ks-music-panel-heading"><i class="ph-fill ph-link-simple"></i><div><strong>Добавить по ссылке</strong><small>Подойдут прямые HTTPS-ссылки на аудиофайлы</small></div></div>
+          <div class="ks-music-link-fields"><input id="ks-my-music-url" type="url" inputmode="url" placeholder="https://.../track.mp3" autocomplete="off"><div><input id="ks-my-music-title" type="text" maxlength="100" placeholder="Название трека"><input id="ks-my-music-artist" type="text" maxlength="100" placeholder="Исполнитель"></div><button id="ks-my-music-add-link" class="btn btn-green" type="button"><i class="ph-bold ph-plus-circle"></i> Добавить ссылку</button></div>
+        </section>
+        <section class="ks-music-library-section"><div class="ks-music-library-heading"><div><span class="section-kicker">YOUR COLLECTION</span><h4>Медиатека</h4></div><button type="button" id="ks-my-music-refresh" class="ks-music-refresh" aria-label="Обновить библиотеку"><i class="ph-bold ph-arrows-clockwise"></i></button></div><div id="ks-my-music-list" class="ks-music-track-list"><div class="ks-music-empty">Загрузка библиотеки...</div></div></section>
+        <p class="ks-music-storage-note"><i class="ph-fill ph-info"></i> Файлы с устройства хранятся в памяти этого браузера. Чтобы треки открывались на разных устройствах, загрузи свои или разрешённые аудиофайлы в папку <b>music</b> репозитория и добавь сюда их прямые HTTPS-ссылки.</p>
+      </div>`);
+
+    const filePicker = document.getElementById('ks-my-music-files');
+    filePicker?.addEventListener('change', async () => {
+      try {
+        const added = await window.kesugMusic.importFiles(filePicker.files);
+        if (added) showToast(`В «Мою музыку» добавлено: ${added}`);
+      } catch (error) { showToast(error.message || 'Не удалось добавить файлы'); }
+      finally { filePicker.value = ''; await renderMyMusicList(); }
+    });
+
+    document.getElementById('ks-my-music-add-link')?.addEventListener('click', async () => {
+      const url = document.getElementById('ks-my-music-url')?.value || '';
+      const trackTitle = document.getElementById('ks-my-music-title')?.value || '';
+      const trackArtist = document.getElementById('ks-my-music-artist')?.value || '';
+      try {
+        await window.kesugMusic.addRemoteTrack(url, trackTitle, trackArtist);
+        document.getElementById('ks-my-music-url').value = '';
+        document.getElementById('ks-my-music-title').value = '';
+        document.getElementById('ks-my-music-artist').value = '';
+        showToast('Ссылка добавлена в библиотеку');
+        await renderMyMusicList();
+      } catch (error) { showToast(error.message || 'Не удалось добавить ссылку'); }
+    });
+
+    document.getElementById('ks-my-music-refresh')?.addEventListener('click', renderMyMusicList);
+    document.getElementById('ks-my-music-list')?.addEventListener('click', async event => {
+      const button = event.target.closest('button[data-music-action]');
+      if (!button) return;
+      const id = button.dataset.trackId;
+      try {
+        if (button.dataset.musicAction === 'play') {
+          const played = await window.kesugMusic.playLibraryTrack(id);
+          if (played) showToast('Воспроизведение запущено');
+        } else if (button.dataset.musicAction === 'remove') {
+          await window.kesugMusic.removeLibraryTrack(id);
+          showToast('Трек удалён из библиотеки');
+          await renderMyMusicList();
+        }
+      } catch (error) { showToast(error.message || 'Не удалось выполнить действие'); }
+    });
+    renderMyMusicList();
   }
 
   function bonusStatusText() {
@@ -4169,6 +4747,7 @@ showPage('lobby');
     if (bonus) bonus.textContent = bonusStatusText();
     if (sounds) sounds.textContent = state.settings.soundEnabled ? 'Включены' : 'Выключены';
     if (effects) effects.textContent = state.settings.reduceEffects ? 'Анимации уменьшены' : 'Анимации включены';
+    decorateMoreTiles();
   }
 
   window.useMoreFeature = key => {
@@ -4198,6 +4777,7 @@ showPage('lobby');
         return;
       }
       case 'reaction': return openReactionGames();
+      case 'duels': return openDuelHub();
       case 'combinations': return openCombinations();
       case 'archive': return openArchive();
       case 'cinema': return openCinema();
@@ -4220,6 +4800,7 @@ showPage('lobby');
       case 'downloads': return openDownloads();
       case 'converter': return openConverter();
       case 'constructor': return openSymbolConstructor();
+      case 'music': return openMyMusic();
       default: return;
     }
   };
@@ -4227,6 +4808,250 @@ showPage('lobby');
 
   const readArray = key => { const value = readJSON(key, []); return Array.isArray(value) ? value : []; };
   const writeLimited = (key, value, limit = 100) => writeJSON(key, Array.isArray(value) ? value.slice(0, limit) : []);
+
+  // DUELS — local competitive mode against a simulated bot. Uses virtual points only.
+  const DUEL_PROFILE_KEY = 'ks_duel_profile';
+  const DUEL_ACTIVE_KEY = 'ks_duel_active_match';
+  const DUEL_LAST_KEY = 'ks_duel_last_result';
+  const DUEL_HISTORY_KEY = 'ks_duel_history';
+  const DUEL_BOTS = ['ByteBot', 'NeonFox', 'LuckyByte', 'Nova', 'Pixel', 'RoboSpin', 'TurboAI'];
+  let activeDuel = readJSON(DUEL_ACTIVE_KEY, null);
+  let duelRolling = false;
+  if (!activeDuel || !MACHINES.some(machine => machine.id === activeDuel.machineId) || !Number.isFinite(Number(activeDuel.stake)) || !Array.isArray(activeDuel.rounds)) {
+    activeDuel = null;
+    localStorage.removeItem(DUEL_ACTIVE_KEY);
+  }
+
+  function getDuelProfile() {
+    const stored = readJSON(DUEL_PROFILE_KEY, {});
+    const profile = {
+      elo: Math.max(100, Math.min(3000, Math.floor(Number(stored.elo) || 1000))),
+      matches: Math.max(0, Math.floor(Number(stored.matches) || 0)),
+      wins: Math.max(0, Math.floor(Number(stored.wins) || 0)),
+      losses: Math.max(0, Math.floor(Number(stored.losses) || 0)),
+      draws: Math.max(0, Math.floor(Number(stored.draws) || 0))
+    };
+    return profile;
+  }
+  function saveDuelProfile(profile) { writeJSON(DUEL_PROFILE_KEY, profile); }
+  function getDuelTier(elo) {
+    if (elo >= 2000) return { name: 'Алмаз', icon: '💎' };
+    if (elo >= 1700) return { name: 'Платина', icon: '🔷' };
+    if (elo >= 1400) return { name: 'Золото', icon: '🥇' };
+    if (elo >= 1100) return { name: 'Серебро', icon: '🥈' };
+    return { name: 'Бронза', icon: '🥉' };
+  }
+  function getDuelExpectedScore(playerElo, opponentElo) {
+    return 1 / (1 + Math.pow(10, (opponentElo - playerElo) / 400));
+  }
+  function formatSigned(value) { return `${value > 0 ? '+' : ''}${fmt(value)}`; }
+  function saveActiveDuel() {
+    if (activeDuel) writeJSON(DUEL_ACTIVE_KEY, activeDuel);
+    else localStorage.removeItem(DUEL_ACTIVE_KEY);
+  }
+
+  window.openDuelHub = () => {
+    activeDuel = activeDuel || readJSON(DUEL_ACTIVE_KEY, null);
+    if (activeDuel) renderDuelMatch();
+    else renderDuelSetup();
+  };
+  window.setDuelStake = amount => {
+    const input = document.getElementById('ks-duel-stake');
+    if (input) input.value = String(Math.max(10, Math.min(50000, Math.floor(Number(amount) || 10))));
+  };
+
+  function renderDuelSetup() {
+    const profile = getDuelProfile();
+    const tier = getDuelTier(profile.elo);
+    const machineOptions = MACHINES.map(machine => `<option value="${escapeHtml(machine.id)}">${escapeHtml(machine.name)}</option>`).join('');
+    const latest = readJSON(DUEL_LAST_KEY, null);
+    const history = readArray(DUEL_HISTORY_KEY).slice(0, 5);
+    const latestHtml = latest ? `<div class="ks-duel-last"><strong>${latest.outcome === 'win' ? '🏆 Победа' : latest.outcome === 'draw' ? '🤝 Ничья' : '⚔️ Поражение'}</strong><span>${formatSigned(Number(latest.eloChange)||0)} ELO · ${formatSigned(Number(latest.netChange)||0)} очков</span></div>` : '';
+    const historyHtml = history.length ? `<div class="ks-duel-history">${history.map(item => `<div class="ks-duel-history-row"><span>${item.outcome === 'win' ? '🏆' : item.outcome === 'draw' ? '🤝' : '➖'}</span><strong>${escapeHtml(item.botName || 'Бот')}</strong><small>${new Date(item.finishedAt).toLocaleDateString('ru-RU')}</small><b>${formatSigned(Number(item.eloChange)||0)} ELO</b></div>`).join('')}</div>` : '<p class="ks-duel-muted">Завершённые дуэли появятся здесь.</p>';
+    showDetail('Дуэли', 'Сразись с ботом в выбранном автомате. Победы повышают рейтинг ELO, поражения снижают его.', `
+      <div class="ks-duel-rating-card">
+        <div><span class="ks-duel-overline">ТВОЙ РЕЙТИНГ</span><strong class="ks-duel-elo">${fmt(profile.elo)} <small>ELO</small></strong><span class="ks-duel-tier">${tier.icon} ${tier.name}</span></div>
+        <div class="ks-duel-record"><span><b>${profile.wins}</b> побед</span><span><b>${profile.losses}</b> поражений</span><span><b>${profile.draws}</b> ничьих</span></div>
+      </div>
+      <div class="ks-duel-panel">
+        <h4>⚔️ Новая дуэль</h4>
+        <label class="ks-duel-label" for="ks-duel-machine">ВЫБЕРИ АВТОМАТ</label>
+        <select id="ks-duel-machine" class="ks-more-select">${machineOptions}</select>
+        <label class="ks-duel-label" for="ks-duel-stake">ВИРТУАЛЬНАЯ СТАВКА</label>
+        <input id="ks-duel-stake" class="ks-more-input" type="number" min="10" max="50000" step="10" value="100">
+        <div class="ks-duel-stake-chips"><button type="button" onclick="setDuelStake(100)">100</button><button type="button" onclick="setDuelStake(500)">500</button><button type="button" onclick="setDuelStake(1000)">1 000</button><button type="button" onclick="setDuelStake(5000)">5 000</button><button type="button" onclick="setDuelStake(10000)">10 000</button></div>
+        <div class="ks-duel-balance">Твой баланс: <strong>${fmt(state.balance)} виртуальных очков</strong></div>
+        <div class="ks-duel-rules"><b>Формат: до 5 раундов</b><span>Первая сторона, набравшая 3 победы, выигрывает матч. При победе получаешь общий виртуальный банк — 2× ставка. При ничьей ставка возвращается.</span></div>
+        <button class="ks-more-action ks-duel-start" type="button" onclick="startKesugDuel()">Найти бота и начать дуэль</button>
+        <p class="ks-duel-disclaimer">Только виртуальные очки Kesug. Реальные деньги не используются. Рейтинг хранится локально в этом браузере.</p>
+      </div>
+      ${latestHtml ? `<div class="ks-duel-panel"><h4>Последняя дуэль</h4>${latestHtml}</div>` : ''}
+      <div class="ks-duel-panel"><h4>Последние матчи</h4>${historyHtml}</div>
+    `);
+  }
+
+  window.startKesugDuel = () => {
+    if (activeDuel) { renderDuelMatch(); return; }
+    const machineId = document.getElementById('ks-duel-machine')?.value;
+    const stake = Math.floor(Number(document.getElementById('ks-duel-stake')?.value));
+    const machine = MACHINES.find(item => item.id === machineId);
+    if (!machine) { showToast('Выбери автомат для дуэли'); return; }
+    if (!Number.isFinite(stake) || stake < 10 || stake > 50000) { showToast('Ставка должна быть от 10 до 50 000 виртуальных очков'); return; }
+    if (stake > state.balance) { showToast('Недостаточно виртуальных очков для этой ставки'); return; }
+    const profile = getDuelProfile();
+    const offset = (Math.floor(Math.random() * 9) - 4) * 25;
+    const botElo = Math.max(100, Math.min(3000, Math.round((profile.elo + offset) / 25) * 25));
+    const botName = DUEL_BOTS[Math.floor(Math.random() * DUEL_BOTS.length)];
+    activeDuel = {
+      id: `${Date.now()}_${Math.random().toString(36).slice(2,7)}`,
+      machineId,
+      stake,
+      botName,
+      botElo,
+      playerEloAtStart: profile.elo,
+      playerWins: 0,
+      botWins: 0,
+      draws: 0,
+      roundsPlayed: 0,
+      rounds: [],
+      startedAt: new Date().toISOString()
+    };
+    state.balance -= stake;
+    saveToLocal();
+    updateUI();
+    saveActiveDuel();
+    if (window.ksLogActivity) window.ksLogActivity('Дуэль', `Начата дуэль против ${botName} · ставка ${fmt(stake)} виртуальных очков`);
+    renderDuelMatch();
+  };
+
+  function calculateDuelPayout(machine, result, stake) {
+    let payout = 0;
+    WIN_LINES.forEach(line => {
+      const symbol = result[line[0]];
+      if (symbol === result[line[1]] && symbol === result[line[2]]) {
+        const symbolIndex = machine.symbols.indexOf(symbol);
+        const multiplier = Number(machine.triple[symbolIndex]) || 0;
+        payout += stake * multiplier;
+      }
+    });
+    return Math.floor(payout);
+  }
+
+  function renderDuelBoard(name, rating, result, payout, isPlayer) {
+    const cells = Array.isArray(result) && result.length === 9
+      ? result.map(symbol => `<div class="ks-duel-cell"><img src="${getIconUrl(symbol)}" alt="${escapeHtml(symbol)}"></div>`).join('')
+      : '<div class="ks-duel-empty">Ожидает раунда</div>';
+    return `<div class="ks-duel-player-card ${isPlayer ? 'is-player' : 'is-bot'}"><div class="ks-duel-player-head"><strong>${escapeHtml(name)}</strong><span>${fmt(rating)} ELO</span></div><div class="ks-duel-reels">${cells}</div><div class="ks-duel-payout">Выигрыш за раунд: <b>${fmt(payout || 0)}</b></div></div>`;
+  }
+
+  function renderDuelMatch(rolling = false) {
+    if (!activeDuel) { renderDuelSetup(); return; }
+    const machine = MACHINES.find(item => item.id === activeDuel.machineId);
+    if (!machine) { activeDuel = null; saveActiveDuel(); renderDuelSetup(); return; }
+    const lastRound = activeDuel.rounds[activeDuel.rounds.length - 1] || null;
+    const score = `<div class="ks-duel-score"><div><b>${activeDuel.playerWins}</b><span>ТЫ</span></div><strong>:</strong><div><b>${activeDuel.botWins}</b><span>БОТ</span></div></div>`;
+    const roundLabel = `Раунд ${Math.min(activeDuel.roundsPlayed + (lastRound ? 0 : 1), 5)} из 5`;
+    const outcomeText = lastRound ? (lastRound.result === 'player' ? 'Ты выиграл раунд!' : lastRound.result === 'bot' ? 'Бот выиграл раунд' : 'Раунд завершился вничью') : 'Первый раунд ещё не сыгран';
+    const boards = lastRound
+      ? `<div class="ks-duel-boards">${renderDuelBoard(state.nickname, activeDuel.playerEloAtStart, lastRound.playerResult, lastRound.playerPayout, true)}${renderDuelBoard(activeDuel.botName, activeDuel.botElo, lastRound.botResult, lastRound.botPayout, false)}</div>`
+      : `<div class="ks-duel-waiting"><span>🎰</span><strong>Автомат: ${escapeHtml(machine.name)}</strong><small>Когда начнётся раунд, оба участника получат собственный результат на одном и том же автомате.</small></div>`;
+    const actionText = rolling ? 'Крутятся барабаны…' : lastRound ? 'Следующий раунд' : 'Сыграть первый раунд';
+    showDetail('Дуэль', `Ты против ${activeDuel.botName} · ${escapeHtml(machine.name)} · виртуальная ставка ${fmt(activeDuel.stake)} очков`, `
+      <div class="ks-duel-match-top"><span>${roundLabel}</span><span>Банк матча: ${fmt(activeDuel.stake * 2)} очков</span></div>
+      ${score}
+      <div class="ks-duel-outcome">${rolling ? '🎲 Барабаны вращаются…' : outcomeText}</div>
+      ${boards}
+      <div class="ks-duel-match-actions"><button class="ks-more-action" type="button" ${rolling ? 'disabled' : ''} onclick="playKesugDuelRound()">${actionText}</button><button class="ks-more-secondary" type="button" onclick="concedeKesugDuel()">Сдаться</button></div>
+      <p class="ks-duel-disclaimer">Результаты обоих участников генерируются отдельно по правилам выбранного автомата. Все очки виртуальные.</p>
+    `);
+  }
+
+  window.playKesugDuelRound = () => {
+    if (!activeDuel || duelRolling) return;
+    const machine = MACHINES.find(item => item.id === activeDuel.machineId);
+    if (!machine) return;
+    duelRolling = true;
+    renderDuelMatch(true);
+    window.setTimeout(() => {
+      if (!activeDuel) { duelRolling = false; return; }
+      const playerResult = generateResult(machine.symbols);
+      const botResult = generateResult(machine.symbols);
+      const playerPayout = calculateDuelPayout(machine, playerResult, activeDuel.stake);
+      const botPayout = calculateDuelPayout(machine, botResult, activeDuel.stake);
+      const result = playerPayout > botPayout ? 'player' : botPayout > playerPayout ? 'bot' : 'draw';
+      activeDuel.roundsPlayed += 1;
+      if (result === 'player') activeDuel.playerWins += 1;
+      else if (result === 'bot') activeDuel.botWins += 1;
+      else activeDuel.draws += 1;
+      activeDuel.rounds.push({ number: activeDuel.roundsPlayed, playerResult, botResult, playerPayout, botPayout, result });
+      saveActiveDuel();
+      duelRolling = false;
+      if (activeDuel.playerWins >= 3 || activeDuel.botWins >= 3 || activeDuel.roundsPlayed >= 5) finishKesugDuel();
+      else renderDuelMatch();
+    }, document.body.classList.contains('lite-mode') ? 180 : 700);
+  };
+
+  function finishKesugDuel(forcedOutcome = null) {
+    if (!activeDuel) return;
+    const match = activeDuel;
+    const profile = getDuelProfile();
+    const outcome = forcedOutcome || (match.playerWins > match.botWins ? 'win' : match.botWins > match.playerWins ? 'loss' : 'draw');
+    const actualScore = outcome === 'win' ? 1 : outcome === 'loss' ? 0 : 0.5;
+    const expected = getDuelExpectedScore(profile.elo, match.botElo);
+    const eloChange = Math.round(32 * (actualScore - expected));
+    const eloBefore = profile.elo;
+    profile.elo = Math.max(100, Math.min(3000, profile.elo + eloChange));
+    profile.matches += 1;
+    if (outcome === 'win') profile.wins += 1;
+    else if (outcome === 'loss') profile.losses += 1;
+    else profile.draws += 1;
+    saveDuelProfile(profile);
+
+    const payout = outcome === 'win' ? match.stake * 2 : outcome === 'draw' ? match.stake : 0;
+    state.balance += payout;
+    const result = {
+      ...match,
+      outcome,
+      eloBefore,
+      eloAfter: profile.elo,
+      eloChange: profile.elo - eloBefore,
+      payout,
+      netChange: payout - match.stake,
+      finishedAt: new Date().toISOString()
+    };
+    writeJSON(DUEL_LAST_KEY, result);
+    const history = readArray(DUEL_HISTORY_KEY);
+    history.unshift(result);
+    writeLimited(DUEL_HISTORY_KEY, history, 30);
+    activeDuel = null;
+    saveActiveDuel();
+    saveToLocal();
+    updateUI();
+    duelRolling = false;
+    if (window.ksLogActivity) window.ksLogActivity('Дуэль', `${outcome === 'win' ? 'Победа' : outcome === 'loss' ? 'Поражение' : 'Ничья'} против ${match.botName} · ${formatSigned(result.eloChange)} ELO`);
+    renderDuelResult(result);
+  }
+
+  window.concedeKesugDuel = () => {
+    if (!activeDuel || duelRolling) return;
+    if (!window.confirm('Сдаться? Ставка будет потеряна, а рейтинг ELO уменьшится.')) return;
+    finishKesugDuel('loss');
+  };
+
+  function renderDuelResult(result) {
+    const won = result.outcome === 'win';
+    const draw = result.outcome === 'draw';
+    const title = won ? '🏆 Победа!' : draw ? '🤝 Ничья' : '⚔️ Бот победил';
+    const subtitle = won ? `Ты забрал банк ${fmt(result.payout)} виртуальных очков.` : draw ? 'Ставка возвращена на баланс.' : 'В этой дуэли победил бот. Попробуй ещё раз!';
+    const rows = (result.rounds || []).map(round => `<div class="ks-duel-history-row"><span>Раунд ${round.number}</span><strong>${fmt(round.playerPayout)} : ${fmt(round.botPayout)}</strong><b>${round.result === 'player' ? 'Ты' : round.result === 'bot' ? 'Бот' : 'Ничья'}</b></div>`).join('');
+    showDetail('Результат дуэли', `${escapeHtml(result.botName)} · ${escapeHtml(MACHINES.find(m => m.id === result.machineId)?.name || 'Автомат')}`, `
+      <div class="ks-duel-result-card ${won ? 'is-win' : draw ? 'is-draw' : 'is-loss'}"><span class="ks-duel-result-icon">${won ? '🏆' : draw ? '🤝' : '⚔️'}</span><h4>${title}</h4><p>${subtitle}</p></div>
+      <div class="ks-duel-rating-change"><div><span>ELO до матча</span><b>${fmt(result.eloBefore)}</b></div><div><span>Изменение</span><b class="${result.eloChange >= 0 ? 'is-positive' : 'is-negative'}">${formatSigned(result.eloChange)}</b></div><div><span>Новый ELO</span><b>${fmt(result.eloAfter)}</b></div></div>
+      <div class="ks-duel-panel"><h4>Счёт раундов</h4><div class="ks-duel-history">${rows || '<p class="ks-duel-muted">Матч завершён без сыгранных раундов.</p>'}</div><p class="ks-duel-net">Изменение баланса: <strong class="${result.netChange >= 0 ? 'is-positive' : 'is-negative'}">${formatSigned(result.netChange)} виртуальных очков</strong></p></div>
+      <div class="ks-duel-match-actions"><button class="ks-more-action" type="button" onclick="openDuelHub()">Новая дуэль</button><button class="ks-more-secondary" type="button" onclick="showMoreHome()">Все функции</button></div>
+    `);
+  }
+
 
   window.ksLogActivity = (type, description) => {
     const list = readArray('ks_account_journal');
@@ -4800,6 +5625,66 @@ showPage('lobby');
   renderMoreHome();
 })();
 </script>
+
+
+
+<style id="ks-bookmarks-mobile-grid-final-fix">
+/* Final mobile header layout: keep settings and bookmarks in different grid cells.
+   The previous broad selector also matched .ks-bookmarks-trigger, assigning both
+   controls to the settings area. */
+@media (max-width: 700px) {
+  .header-glass {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) repeat(4, 36px) !important;
+    grid-template-areas:
+      "brand settings more bookmarks profile"
+      "balance balance balance balance balance" !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    column-gap: 8px !important;
+    row-gap: 8px !important;
+  }
+  .header-right { display: contents !important; }
+  .top-brand { grid-area: brand !important; min-width: 0 !important; }
+  html body .header-right > .header-icon-btn:not(.ks-more-trigger):not(.ks-bookmarks-trigger) {
+    grid-area: settings !important;
+    justify-self: center !important;
+  }
+  html body .header-right > .ks-more-trigger { grid-area: more !important; justify-self: center !important; }
+  html body .header-right > .header-icon-btn.ks-bookmarks-trigger {
+    grid-area: bookmarks !important;
+    justify-self: center !important;
+    position: relative !important;
+    z-index: 3 !important;
+    margin: 0 !important;
+    touch-action: manipulation;
+  }
+  html body .header-right > .profile-btn { grid-area: profile !important; justify-self: center !important; }
+  .header-right > .user-balance { grid-area: balance !important; justify-self: center !important; }
+}
+@media (max-width: 380px) {
+  .header-glass {
+    grid-template-columns: minmax(0, 1fr) repeat(4, 32px) !important;
+    grid-template-areas:
+      "brand settings more bookmarks profile"
+      "balance balance balance balance balance" !important;
+    column-gap: 4px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  html body .header-right > .header-icon-btn:not(.ks-more-trigger):not(.ks-bookmarks-trigger),
+  html body .header-right > .ks-more-trigger,
+  html body .header-right > .header-icon-btn.ks-bookmarks-trigger,
+  html body .header-right > .profile-btn {
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    flex: 0 0 32px !important;
+  }
+}
+</style>
 
 </body>
 </html>

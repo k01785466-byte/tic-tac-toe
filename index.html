@@ -2313,6 +2313,10 @@ body.lite-mode .win-box {
 .ks-more-featured { border-color:rgba(var(--accent-rgb),.42); background:linear-gradient(145deg,rgba(var(--accent-rgb),.16),var(--bg-card)); }
 .ks-more-featured .ks-more-icon { color:var(--bg-main); background:linear-gradient(145deg,var(--accent-gold),var(--accent-green)); border-color:rgba(var(--accent-rgb),.45); }
 .ks-more-reaction { grid-column:span 2; }
+ .ks-more-detail-page { min-height: min(58vh, 620px); margin-top: 4px; }
+.ks-more-detail-page .ks-more-detail-content { width:100%; }
+.ks-more-detail-page .ks-more-detail-content h3 { margin:0; }
+@media (max-width:700px) { .ks-more-detail-page { min-height: calc(100dvh - 190px); padding:18px 14px; } }
 .ks-more-detail[hidden] { display:none !important; }
 .ks-more-detail { animation:ksMorePageIn .24s ease both; }
 .ks-more-back { display:inline-flex; align-items:center; gap:7px; margin:0 0 16px; padding:9px 12px; border:1px solid rgba(var(--accent-rgb),.25); border-radius:10px; color:var(--accent-gold); background:rgba(var(--accent-rgb),.07); font:700 11px 'Manrope',sans-serif; cursor:pointer; }
@@ -2792,10 +2796,15 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('search')"><span class="ks-more-icon"><i class="ph-bold ph-magnifying-glass"></i></span><strong>Поиск</strong><small>Найти нужный автомат</small></button>
       <button class="ks-more-tile ks-more-reaction" type="button" onclick="useMoreFeature('reaction')"><span class="ks-more-icon"><i class="ph-fill ph-lightning"></i></span><strong>Игры на реакцию</strong><small>Проверь скорость и точность</small></button>
     </div>
-    <div class="ks-more-detail" id="ks-more-detail" hidden>
-      <button class="ks-more-back" type="button" onclick="showMoreHome()"><i class="ph-bold ph-arrow-left"></i> Все функции</button>
-      <div class="ks-more-detail-content" id="ks-more-detail-content"></div>
-    </div>
+  </section>
+</div>
+<div class="page-view" id="page-more-detail">
+  <div class="page-header">
+    <button class="back-btn" type="button" onclick="showMoreHome()"><i class="ph-bold ph-arrow-left"></i> Все функции</button>
+    <span class="settings-page-label"><i class="ph-bold ph-squares-four"></i> ДОПОЛНИТЕЛЬНАЯ ФУНКЦИЯ</span>
+  </div>
+  <section class="ks-more-page ks-more-detail-page" aria-live="polite">
+    <div class="ks-more-detail-content" id="ks-more-detail-content"></div>
   </section>
 </div>
 
@@ -4213,7 +4222,8 @@ showPage('lobby');
 
   function closeMenu() {
     const page = document.getElementById('page-more');
-    if (page && page.classList.contains('active')) showPage('lobby');
+    const detailPage = document.getElementById('page-more-detail');
+    if ((page && page.classList.contains('active')) || (detailPage && detailPage.classList.contains('active'))) showPage('lobby');
   }
   window.openMoreMenu = () => {
     renderMoreHome();
@@ -4221,21 +4231,14 @@ showPage('lobby');
   };
   window.closeMoreMenu = closeMenu;
   window.showMoreHome = () => {
-    const grid = document.getElementById('ks-more-grid');
-    const detail = document.getElementById('ks-more-detail');
-    if (grid) grid.hidden = false;
-    if (detail) detail.hidden = true;
     renderMoreHome();
+    showPage('more');
   };
   function showDetail(title, subtitle, html) {
-    const grid = document.getElementById('ks-more-grid');
-    const detail = document.getElementById('ks-more-detail');
     const content = document.getElementById('ks-more-detail-content');
-    if (!detail || !content) return;
-    if (grid) grid.hidden = true;
-    detail.hidden = false;
+    if (!content) return;
     content.innerHTML = `<h3>${title}</h3><p>${subtitle || ''}</p>${html || ''}`;
-    detail.scrollTop = 0;
+    showPage('more-detail');
   }
 
   function bonusStatusText() {
@@ -4397,112 +4400,23 @@ showPage('lobby');
     const rows = list.map(item=>`<div class="ks-more-row"><span class="ks-more-row-icon">${item[3]}</span><div class="ks-more-row-copy"><strong>${item[1]}</strong><small>${item[2]}</small></div><strong style="color:${item[4]?'var(--accent-green)':'var(--text-muted)'}">${item[4]?'✓':'—'}</strong></div>`).join('');
     showDetail('Достижения', `Открыто ${unlocked} из ${list.length}. Прогресс рассчитывается по локальной статистике.`, `<div class="ks-more-list">${rows}</div>`);
   }
-  // Promo codes are read from promocodes.json next to the HTML file.
-  // Edit that JSON file to add, disable or expire codes without editing this source.
-  let promoConfigCache = null;
-  let promoConfigPromise = null;
-
-  async function loadPromoConfig(forceReload = false) {
-    if (forceReload) {
-      promoConfigCache = null;
-      promoConfigPromise = null;
-    }
-    if (promoConfigCache) return promoConfigCache;
-    if (!promoConfigPromise) {
-      promoConfigPromise = fetch(new URL('./promocodes.json', document.baseURI), {
-        cache: 'no-store',
-        credentials: 'same-origin'
-      }).then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      }).then(data => {
-        if (!data || !Array.isArray(data.codes)) throw new Error('В promocodes.json отсутствует массив codes');
-        const codes = [];
-        const seen = new Set();
-        for (const entry of data.codes) {
-          if (!entry || typeof entry !== 'object') continue;
-          const code = String(entry.code || '').trim().toUpperCase().replace(/\s+/g, '');
-          const reward = Number(entry.reward);
-          if (!/^[A-Z0-9_-]{3,30}$/.test(code)) continue;
-          if (!Number.isSafeInteger(reward) || reward < 1 || reward > 10000000) continue;
-          if (entry.enabled === false || seen.has(code)) continue;
-          seen.add(code);
-          codes.push({
-            code,
-            reward,
-            description: typeof entry.description === 'string' ? entry.description.slice(0, 100) : '',
-            startsAt: typeof entry.startsAt === 'string' ? entry.startsAt : '',
-            expiresAt: typeof entry.expiresAt === 'string' ? entry.expiresAt : ''
-          });
-        }
-        promoConfigCache = codes;
-        return codes;
-      }).catch(error => {
-        promoConfigPromise = null;
-        throw error;
-      });
-    }
-    return promoConfigPromise;
+  function openPromo() {
+    showDetail('Промокод', 'Активируй промокод и получи виртуальные очки. Каждый код действует один раз на этом устройстве.', `<div class="ks-more-info-card"><form class="ks-more-form" onsubmit="event.preventDefault();redeemMorePromo()"><input class="ks-more-input" id="ks-promo-input" maxlength="30" autocomplete="off" placeholder="ВВЕДИ ПРОМОКОД"><button class="ks-more-action" type="submit">Активировать</button></form><p style="margin-top:12px;color:var(--text-muted);font-size:10px">Доступные коды: KESUGSTART · KESUG2026 · LITEBONUS</p><div id="ks-promo-result" aria-live="polite" style="margin-top:9px;font-size:11px"></div></div>`);
   }
-
-  function isPromoDateValid(promo) {
-    const now = Date.now();
-    if (promo.startsAt) {
-      const start = Date.parse(promo.startsAt);
-      if (!Number.isFinite(start) || now < start) return false;
-    }
-    if (promo.expiresAt) {
-      const end = Date.parse(promo.expiresAt);
-      if (!Number.isFinite(end) || now > end) return false;
-    }
-    return true;
-  }
-
-  async function openPromo() {
-    showDetail('Промокод', 'Коды загружаются из отдельного файла promocodes.json. Каждый код можно использовать один раз на этом устройстве.', `<div class="ks-more-info-card"><form class="ks-more-form" onsubmit="event.preventDefault();redeemMorePromo()"><input class="ks-more-input" id="ks-promo-input" maxlength="30" autocomplete="off" autocapitalize="characters" placeholder="ВВЕДИ ПРОМОКОД"><button class="ks-more-action" id="ks-promo-submit" type="submit">Активировать</button></form><p id="ks-promo-file-status" style="margin-top:12px;color:var(--text-muted);font-size:10px" aria-live="polite">Загружаю promocodes.json…</p><div id="ks-promo-result" aria-live="polite" style="margin-top:9px;font-size:11px"></div></div>`);
-    const status = document.getElementById('ks-promo-file-status');
-    try {
-      const codes = await loadPromoConfig(true);
-      if (status) status.textContent = `Файл подключён · активных кодов: ${codes.length}`;
-    } catch (error) {
-      console.warn('Kesug Slots: не удалось загрузить promocodes.json', error);
-      if (status) status.textContent = 'Не удалось загрузить promocodes.json. Положи его рядом с HTML-файлом на хостинге и обнови страницу.';
-    }
-  }
-
-  window.redeemMorePromo = async () => {
+  window.redeemMorePromo = () => {
     const input = document.getElementById('ks-promo-input');
     const output = document.getElementById('ks-promo-result');
-    const submit = document.getElementById('ks-promo-submit');
-    const code = String(input?.value || '').trim().toUpperCase().replace(/\s+/g, '');
-    const usedRaw = readJSON('ks_used_promos', []);
-    const used = Array.isArray(usedRaw) ? usedRaw : [];
-    if (!code) { if (output) output.textContent = 'Введи промокод.'; return; }
-    if (submit) submit.disabled = true;
-    if (output) output.textContent = 'Проверяю промокод…';
-    try {
-      const codes = await loadPromoConfig();
-      const promo = codes.find(item => item.code === code);
-      if (!promo) { if (output) output.textContent = 'Такого активного промокода нет.'; return; }
-      if (!isPromoDateValid(promo)) { if (output) output.textContent = 'Срок действия этого промокода ещё не начался или уже закончился.'; return; }
-      if (used.includes(code)) { if (output) output.textContent = 'Этот промокод уже использован на этом устройстве.'; return; }
-      const reward = promo.reward;
-      used.push(code);
-      if (!writeJSON('ks_used_promos', used)) {
-        if (output) output.textContent = 'Не удалось сохранить использование кода. Проверь свободное место в браузере.';
-        return;
-      }
-      state.balance += reward;
-      saveToLocal();
-      updateUI();
-      if (output) output.textContent = `Готово! Начислено ${fmt(reward)} виртуальных очков.`;
-      showToast(`Промокод активирован: +${fmt(reward)}`);
-    } catch (error) {
-      console.warn('Kesug Slots: ошибка проверки промокода', error);
-      if (output) output.textContent = 'Не удалось прочитать promocodes.json. Проверь, что файл загружен рядом с HTML и содержит корректный JSON.';
-    } finally {
-      if (submit) submit.disabled = false;
-    }
+    const code = String(input?.value||'').trim().toUpperCase().replace(/\s+/g,'');
+    const promoMap = { KESUGSTART:50000, KESUG2026:250000, LITEBONUS:100000 };
+    const used = readJSON('ks_used_promos',[]);
+    if (!code) { if(output) output.textContent='Введи промокод.'; return; }
+    if (!Object.prototype.hasOwnProperty.call(promoMap,code)) { if(output) output.textContent='Такого промокода нет.'; return; }
+    if (used.includes(code)) { if(output) output.textContent='Этот промокод уже использован.'; return; }
+    const reward = promoMap[code];
+    used.push(code); writeJSON('ks_used_promos',used);
+    state.balance += reward; saveToLocal(); updateUI();
+    if(output) output.textContent = `Готово! Начислено ${fmt(reward)} виртуальных очков.`;
+    showToast(`Промокод активирован: +${fmt(reward)}`);
   };
 
   function openDetailedStats() {

@@ -8,7 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" onerror="this.onerror=null;this.href='https://unpkg.com/@phosphor-icons/web@2.1.2/src/regular/style.css'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" onerror="this.onerror=null;this.href='https://unpkg.com/@phosphor-icons/web@2.1.2/src/bold/style.css'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" onerror="this.onerror=null;this.href='https://unpkg.com/@phosphor-icons/web@2.1.2/src/fill/style.css'">
 <style>
 :root {
   --bg-main: #121214;
@@ -1729,7 +1733,7 @@ body.bg-minimal::after { display: none !important; }
 .ks-loader-emblem { border-color: rgba(var(--accent-rgb),.48) !important; box-shadow: 0 0 0 8px rgba(var(--accent-rgb),.035), 0 15px 50px rgba(0,0,0,.45), 0 0 45px rgba(var(--accent-rgb),.16) !important; }
 .ks-loader-emblem i, .ks-loader-wordmark span:last-child { color: var(--accent-gold) !important; }
 .ks-loader-progress span { background: linear-gradient(90deg, transparent, var(--accent-green) 45%, var(--accent-gold) 100%) !important; }
-.ks-onboarding-card, #kesug-music-widget, .kesug-music-widget, #ks-assistant {
+.ks-onboarding-card, #kesug-music-widget, .kesug-music-widget {
   border-color: rgba(var(--accent-rgb),.30) !important;
 }
 .ks-toast {
@@ -1830,18 +1834,6 @@ body.bg-minimal::after { display: none !important; }
 .kesug-music-text strong, .kesug-music-controls button { color: var(--text-white) !important; }
 .kesug-music-text span { color: var(--text-muted) !important; }
 #kesug-music-toggle { color: #101010 !important; background: var(--accent-green) !important; }
-#ks-assistant {
-  color: var(--text-main) !important;
-  background: var(--glass-bg) !important;
-  border-color: rgba(var(--accent-rgb),.42) !important;
-  box-shadow: 0 12px 35px rgba(0,0,0,.4), 0 0 24px rgba(var(--accent-rgb),.08) !important;
-}
-#ks-assistant strong { color: var(--accent-gold) !important; }
-.ks-onboarding-card {
-  color: var(--text-main) !important;
-  border-color: rgba(var(--accent-rgb),.36) !important;
-  background: radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb),.14), transparent 55%), linear-gradient(145deg, var(--bg-card), var(--bg-main) 72%) !important;
-}
 .ks-onboarding-title { color: var(--text-white) !important; }
 .ks-onboarding-description, .ks-onboarding-footnote { color: var(--text-muted) !important; }
 .ks-onboarding-avatar { border-color: rgba(var(--accent-rgb),.55) !important; }
@@ -2454,6 +2446,53 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
 }
 </style>
 
+
+<style id="kesug-expanded-more-features">
+.ks-profile-title-chip[hidden] { display:none !important; }
+.ks-profile-title-chip { display:inline-flex; align-items:center; margin:4px 0 0; padding:4px 8px; border:1px solid rgba(var(--accent-rgb),.3); border-radius:999px; color:var(--accent-gold); background:rgba(var(--accent-rgb),.09); font-size:9px; font-weight:800; letter-spacing:.02em; }
+.ks-lobby-title-chip { vertical-align:middle; margin:0 0 0 5px; }
+#nav-avatar[data-mask="neon"], .profile-avatar[data-mask="neon"] { filter:drop-shadow(0 0 7px #6c9dff) saturate(1.4); }
+#nav-avatar[data-mask="ice"], .profile-avatar[data-mask="ice"] { filter:hue-rotate(155deg) saturate(.85) brightness(1.12); }
+#nav-avatar[data-mask="mono"], .profile-avatar[data-mask="mono"] { filter:grayscale(1) contrast(1.12); }
+#nav-avatar[data-mask="sunset"], .profile-avatar[data-mask="sunset"] { filter:sepia(.38) saturate(1.45) hue-rotate(330deg); }
+#nav-avatar[data-mask="shadow"], .profile-avatar[data-mask="shadow"] { filter:brightness(.72) contrast(1.22) saturate(.8); }
+.ks-more-wide-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:10px; margin-top:12px; }
+.ks-more-option { min-width:0; padding:13px; border:1px solid var(--border); border-radius:13px; color:var(--text-main); background:rgba(var(--accent-rgb),.055); text-align:left; cursor:pointer; }
+.ks-more-option strong { display:block; color:var(--text-white); font-size:11px; }
+.ks-more-option small { display:block; margin-top:4px; color:var(--text-muted); font-size:9px; line-height:1.45; }
+.ks-more-option.is-selected { border-color:var(--accent-green); background:rgba(var(--accent-rgb),.15); }
+.ks-more-symbol-grid,.ks-gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(88px,1fr)); gap:9px; margin-top:12px; }
+.ks-symbol-card,.ks-gallery-card { display:flex; min-width:0; min-height:90px; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:10px 7px; border:1px solid var(--border); border-radius:12px; background:rgba(var(--accent-rgb),.04); color:var(--text-main); text-align:center; }
+.ks-symbol-card img,.ks-gallery-card img { width:42px; height:42px; object-fit:contain; }
+.ks-symbol-card strong,.ks-gallery-card strong { max-width:100%; overflow-wrap:anywhere; color:var(--text-white); font-size:10px; }
+.ks-cinema-stage { position:relative; min-height:220px; display:grid; place-items:center; overflow:hidden; padding:24px; border:1px solid rgba(var(--accent-rgb),.28); border-radius:18px; background:radial-gradient(circle at 50% 40%,rgba(var(--accent-rgb),.24),transparent 48%),linear-gradient(145deg,var(--bg-card),var(--bg-main)); text-align:center; }
+.ks-cinema-stage::before,.ks-cinema-stage::after { content:""; position:absolute; width:180px; height:180px; border:1px solid rgba(var(--accent-rgb),.24); border-radius:50%; animation:ksCinemaOrbit 9s linear infinite; }
+.ks-cinema-stage::after { width:240px; height:240px; animation-duration:14s; animation-direction:reverse; }
+.ks-cinema-stage-content { position:relative; z-index:1; }
+.ks-cinema-stage-mark { display:block; margin-bottom:12px; color:var(--accent-gold); font-size:48px; filter:drop-shadow(0 0 20px rgba(var(--accent-rgb),.45)); }
+.ks-cinema-stage h4 { color:var(--text-white); font:900 22px 'Space Grotesk','Manrope',sans-serif; }
+.ks-cinema-stage p { max-width:420px; margin:7px auto 0; color:var(--text-muted); font-size:11px; line-height:1.55; }
+.ks-cinema-stage.is-playing .ks-cinema-stage-mark { animation:ksCinemaPulse 1.2s ease-in-out infinite alternate; }
+@keyframes ksCinemaOrbit { to { transform:rotate(360deg); } }
+@keyframes ksCinemaPulse { from { transform:scale(.86); opacity:.72; } to { transform:scale(1.12); opacity:1; } }
+.ks-lab-preview { min-height:145px; display:grid; place-items:center; margin-top:12px; border:1px solid var(--border); border-radius:16px; background:radial-gradient(circle at center,rgba(var(--accent-rgb),.16),transparent 58%),var(--bg-card); color:var(--accent-gold); font-size:52px; transition:filter .25s ease,transform .25s ease,text-shadow .25s ease; }
+.ks-lab-preview.glow { text-shadow:0 0 22px var(--accent-gold),0 0 42px var(--accent-green); }
+.ks-lab-preview.blur { filter:blur(1.4px); }
+.ks-lab-preview.motion { animation:ksLabFloat 1.6s ease-in-out infinite alternate; }
+@keyframes ksLabFloat { to { transform:translateY(-8px) rotate(5deg); } }
+.ks-banner-preview { min-height:125px; display:flex; align-items:center; gap:14px; padding:18px; border:1px solid var(--border); border-radius:15px; background:linear-gradient(120deg,rgba(71,145,255,.24),rgba(106,73,190,.16),var(--bg-card)); }
+.ks-banner-preview img { width:54px; height:54px; object-fit:cover; border:2px solid rgba(var(--accent-rgb),.5); border-radius:50%; }
+.ks-more-quiz-answer { width:100%; margin-top:8px; padding:12px; border:1px solid var(--border); border-radius:11px; color:var(--text-main); background:var(--bg-card); text-align:left; cursor:pointer; }
+.ks-more-quiz-answer:disabled { opacity:.7; cursor:default; }
+.ks-more-quiz-answer.is-correct { border-color:#42c98b; background:rgba(66,201,139,.12); }
+.ks-more-quiz-answer.is-wrong { border-color:#d66c72; background:rgba(214,108,114,.10); }
+.ks-more-meter { height:8px; overflow:hidden; border-radius:99px; background:rgba(var(--accent-rgb),.12); }
+.ks-more-meter span { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--accent-green),var(--accent-gold)); }
+:root.ks-night-mode { --accent-green:#7c9dff !important; --accent-gold:#b7c9ff !important; --accent-rgb:112,143,230 !important; --bg-main:#050811 !important; --bg-card:#0b1120 !important; --bg-input:#050914 !important; --border:#1b2a49 !important; --text-muted:#8291ad !important; --glass-bg:rgba(7,12,25,.9) !important; --ks-page-mid:#0a1530 !important; --ks-page-end:#030610 !important; }
+@media(max-width:700px) { .ks-cinema-stage { min-height:185px; padding:18px 12px; } .ks-cinema-stage-mark { font-size:40px; } .ks-more-symbol-grid,.ks-gallery-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(prefers-reduced-motion:reduce) { .ks-cinema-stage::before,.ks-cinema-stage::after,.ks-cinema-stage.is-playing .ks-cinema-stage-mark,.ks-lab-preview.motion { animation:none !important; } }
+</style>
+
 </head>
 <body class="is-loading">
 
@@ -2521,7 +2560,7 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
           <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> KESUG SLOTS</div>
           <p class="hero-greeting">
   <span id="lobby-greeting-text">С возвращением</span>,
-  <strong id="lobby-welcome-nick">Игрок</strong>
+  <strong id="lobby-welcome-nick">Игрок</strong><span id="lobby-title-chip" class="ks-profile-title-chip ks-lobby-title-chip" hidden></span>
 </p>
           <div class="lobby-clock">
   <span id="lobby-clock-time">00:00:00</span>
@@ -2644,6 +2683,7 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
         <img id="profile-big-avatar" class="profile-avatar" src="">
         <div class="profile-info">
           <h2 id="profile-big-nick">Игрок</h2>
+          <span id="profile-title-chip" class="ks-profile-title-chip" hidden></span>
           <p id="profile-big-id">ID: #0000</p>
           <span class="profile-fav-summary"><i class="ph-fill ph-star"></i> <strong id="profile-favorites-count">0</strong> в избранном</span>
         </div>
@@ -2795,6 +2835,28 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('favorites')"><span class="ks-more-icon"><i class="ph-fill ph-star"></i></span><strong>Избранное</strong><small>Сохранённые автоматы</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('search')"><span class="ks-more-icon"><i class="ph-bold ph-magnifying-glass"></i></span><strong>Поиск</strong><small>Найти нужный автомат</small></button>
       <button class="ks-more-tile ks-more-reaction" type="button" onclick="useMoreFeature('reaction')"><span class="ks-more-icon"><i class="ph-fill ph-lightning"></i></span><strong>Игры на реакцию</strong><small>Проверь скорость и точность</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('combinations')"><span class="ks-more-icon">🧩</span><strong>Комбинации</strong><small>Энциклопедия символов и сочетаний</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('archive')"><span class="ks-more-icon">🗂️</span><strong>Архив</strong><small>Старые события и полученные награды</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('cinema')"><span class="ks-more-icon">🎬</span><strong>Кинозал</strong><small>Игровые заставки и сцены</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('gallery')"><span class="ks-more-icon">🖼️</span><strong>Галерея</strong><small>Коллекция игровых изображений</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('lab')"><span class="ks-more-icon">🧪</span><strong>Лаборатория</strong><small>Проверка визуальных эффектов</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('masks')"><span class="ks-more-icon">🎭</span><strong>Маски</strong><small>Оформление аватара</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('titles')"><span class="ks-more-icon">🏅</span><strong>Титулы</strong><small>Титул рядом с никнеймом</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('bookmarks')"><span class="ks-more-icon">📌</span><strong>Закладки</strong><small>Сохранённые игровые страницы</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('navigator')"><span class="ks-more-icon">🧭</span><strong>Навигатор</strong><small>Быстрый переход по разделам</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('schedule')"><span class="ks-more-icon">🗓️</span><strong>Расписание</strong><small>Предстоящие игровые события</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('openings')"><span class="ks-more-icon">📦</span><strong>Открытия</strong><small>История коллекционных предметов</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('quiz')"><span class="ks-more-icon">🧠</span><strong>Викторина</strong><small>Вопросы о мире Kesug</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('minigames')"><span class="ks-more-icon">🕹️</span><strong>Мини-игры</strong><small>Небольшие аркадные развлечения</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('editor')"><span class="ks-more-icon">🎨</span><strong>Редактор</strong><small>Собственный баннер профиля</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('journal')"><span class="ks-more-icon">🧾</span><strong>Журнал</strong><small>Лента действий аккаунта</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('goals')"><span class="ks-more-icon">🔖</span><strong>Мои цели</strong><small>Личные игровые задачи</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('random-effect')"><span class="ks-more-icon">🪄</span><strong>Случайный эффект</strong><small>Случайная тема интерфейса</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('night')"><span class="ks-more-icon">🌙</span><strong>Ночной режим</strong><small>Более спокойная тёмная тема</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('cleanup')"><span class="ks-more-icon">🧹</span><strong>Очистка</strong><small>Удаление временного кэша</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('downloads')"><span class="ks-more-icon">📥</span><strong>Загрузки</strong><small>Доступные игровые файлы</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('converter')"><span class="ks-more-icon">🪙</span><strong>Конвертер</strong><small>Форматы игровых единиц</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('constructor')"><span class="ks-more-icon">🧱</span><strong>Конструктор</strong><small>Собственный набор символов</small></button>
     </div>
   </section>
 </div>
@@ -2999,6 +3061,27 @@ function updateProfileUI() {
   document.getElementById('profile-big-id').textContent = `ID: #${state.playerId.slice(-4).toUpperCase()}`;
   const lobbyNick = document.getElementById('lobby-welcome-nick');
   if (lobbyNick) lobbyNick.textContent = state.nickname;
+  const title = localStorage.getItem('ks_profile_title') || '';
+  ['profile-title-chip', 'lobby-title-chip'].forEach(id => {
+    const chip = document.getElementById(id);
+    if (!chip) return;
+    chip.textContent = title ? `✦ ${title}` : '';
+    chip.hidden = !title;
+  });
+  const mask = localStorage.getItem('ks_avatar_mask') || 'none';
+  [document.getElementById('profile-big-avatar'), document.getElementById('nav-avatar')].forEach(img => {
+    if (img) img.dataset.mask = mask;
+  });
+  const banner = localStorage.getItem('ks_profile_banner') || 'default';
+  const bannerStyles = {
+    default: '', aurora: 'linear-gradient(120deg,rgba(71,145,255,.24),rgba(106,73,190,.16),var(--bg-card))',
+    sunset: 'linear-gradient(120deg,rgba(255,143,94,.25),rgba(205,81,145,.2),var(--bg-card))',
+    forest: 'linear-gradient(120deg,rgba(47,174,115,.25),rgba(26,99,91,.2),var(--bg-card))',
+    gold: 'linear-gradient(120deg,rgba(214,173,91,.27),rgba(111,79,34,.2),var(--bg-card))',
+    ice: 'linear-gradient(120deg,rgba(109,204,255,.25),rgba(76,121,201,.2),var(--bg-card))'
+  };
+  const profileCard = document.querySelector('.profile-card');
+  if (profileCard) profileCard.style.background = bannerStyles[banner] || bannerStyles.default;
 }
 
 function renderProfileStats() {
@@ -3408,7 +3491,7 @@ if (backupInput) {
 
 window.saveProfile = () => {
   const v = document.getElementById('input-nick').value.trim();
-  if (v) { state.nickname = v; saveToLocal(); updateProfileUI(); updateUI(); }
+  if (v) { state.nickname = v; saveToLocal(); updateProfileUI(); updateUI(); if (window.ksLogActivity) window.ksLogActivity('Профиль','Изменён никнейм'); }
   showPage('profile');
 };
 
@@ -3436,14 +3519,12 @@ window.openMachine = (id) => {
   const machineScreen = document.getElementById('game-screen');
   machineScreen.scrollTop = 0;
   machineScreen.classList.add('active');
-  if (window.kesugAssistant) window.kesugAssistant.setSlotActive(true);
   document.body.style.overflow = 'hidden';
   updateUI();
 };
 
 window.closeMachine = () => {
   const screen = document.getElementById('game-screen');
-  if (window.kesugAssistant) window.kesugAssistant.setSlotActive(false);
   screen?.classList.remove('active');
   document.body.style.overflow = '';
   currentMachine = null;
@@ -3486,10 +3567,8 @@ window.spin = () => {
   document.getElementById('btn-spin').disabled = true;
   
   state.balance -= state.bet;
-  if (window.kesugAssistant) {
-  window.kesugAssistant.comment('spin');
-}
   state.stats.spins++;
+  if (window.ksLogActivity) window.ksLogActivity('Раунд',`Запущен автомат ${currentMachine.name}`);
   state.stats.totalBet += state.bet;
   saveToLocal(); updateUI();
   document.querySelectorAll('.reel-item').forEach(el => el.classList.remove('winning'));
@@ -3550,15 +3629,13 @@ function checkWin(res) {
     });
 
     state.balance += win;
+    if (window.ksLogActivity) window.ksLogActivity('Результат',`Получено ${win.toLocaleString('ru-RU')} виртуальных очков в ${currentMachine.name}`);
     state.stats.won += win;
     if (win > state.stats.maxWin) state.stats.maxWin = win;
     saveToLocal(); updateUI();
     
     // Красивый показ выигрыша
     const isMega = win >= state.bet * 20;
-    if (window.kesugAssistant) {
-  window.kesugAssistant.react(win, isMega);
-}
     const popup = document.getElementById('win-popup');
     
     popup.classList.toggle('mega', isMega);
@@ -3943,174 +4020,6 @@ setInterval(updateLobbyAtmosphere, 60000);
 
   updateMusicUI();
 })();
-// ═══════ KESUG ASSISTANT ═══════
-
-(() => {
-  const style = document.createElement('style');
-  style.textContent = `
-    #ks-assistant {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      z-index: 10001;
-      width: min(320px, calc(100vw - 32px));
-      padding: 13px 16px;
-      background: rgba(24, 20, 14, .96);
-      border: 1px solid rgba(211, 166, 83, .4);
-      border-radius: 16px;
-      color: #f3e5c8;
-      box-shadow: 0 12px 35px rgba(0,0,0,.4);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(12px);
-      pointer-events: none;
-      transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
-    }
-
-    #ks-assistant.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    #ks-assistant strong {
-      display: block;
-      color: #d3a653;
-      font-size: 10px;
-      letter-spacing: 1.3px;
-      margin-bottom: 4px;
-    }
-
-    #ks-assistant-text {
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    /* На телефонах помощник показывается компактным уведомлением под шапкой,
-       а не поверх кнопок управления автоматом. */
-    @media (max-width: 640px) {
-      #ks-assistant {
-        left: 50%;
-        right: auto;
-        top: calc(env(safe-area-inset-top, 0px) + 82px);
-        bottom: auto;
-        width: min(290px, calc(100vw - 28px));
-        padding: 9px 12px;
-        border-radius: 12px;
-        transform: translate(-50%, -8px);
-      }
-
-      #ks-assistant.active {
-        transform: translate(-50%, 0);
-      }
-
-      #ks-assistant strong { font-size: 9px; margin-bottom: 2px; }
-      #ks-assistant-text { font-size: 12px; line-height: 1.35; }
-    }
-  `;
-  document.head.appendChild(style);
-
-  const box = document.createElement('div');
-  box.id = 'ks-assistant';
-  box.setAttribute('aria-live', 'polite');
-  box.innerHTML = `
-    <strong>KESUG ASSISTANT</strong>
-    <div id="ks-assistant-text"></div>
-  `;
-  document.body.appendChild(box);
-
-  const winPhrases = [
-    'Ну нихуя ты молодец!',
-    'Да ну нафиг, отличный результат!',
-    'Вот это поворот, чёрт возьми!',
-    'Ничего себе! Хорош!',
-    'Ха! А ты умеешь удивлять!',
-    'Вот это выигрыш, охренеть!'
-  ];
-
-  const megaPhrases = [
-    'ДА ТЫ ЧТО ТВОРИШЬ?! ВОТ ЭТО ЗАНОС!',
-    'ОХРЕНЕТЬ! MEGA WIN!',
-    'Вот это мощь! Разнесло автомат!',
-    'ДА ЛАДНО?! Вот это удача!',
-    'Чёрт возьми, вот это результат!'
-  ];
-
-  const spinPhrases = [
-    'Ну что, погнали!',
-    'Так, посмотрим, что выпадет!',
-    'Крутим! Начинается самое интересное!',
-    'Опа, поехали!'
-  ];
-
-  let lastPhrase = '';
-  let hideTimer = null;
-  let slotActive = false;
-
-  function hideAndStop() {
-    clearTimeout(hideTimer);
-    hideTimer = null;
-    box.classList.remove('active');
-    if ('speechSynthesis' in window) speechSynthesis.cancel();
-  }
-
-  function showPhrase(phrase) {
-    // Помощник работает только пока открыт игровой экран автомата.
-    const gameScreen = document.getElementById('game-screen');
-    if (!slotActive || !gameScreen?.classList.contains('active')) return;
-
-    document.getElementById('ks-assistant-text').textContent = phrase;
-    box.classList.add('active');
-
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => {
-      box.classList.remove('active');
-      hideTimer = null;
-    }, 3200);
-
-    if ('speechSynthesis' in window) {
-      speechSynthesis.cancel();
-      const voice = new SpeechSynthesisUtterance(phrase);
-      voice.lang = 'ru-RU';
-      voice.rate = 1.3;
-      voice.pitch = 1.1;
-      voice.volume = 1;
-      speechSynthesis.speak(voice);
-    }
-  }
-
-  function pickPhrase(phrases) {
-    let phrase;
-    do {
-      phrase = phrases[Math.floor(Math.random() * phrases.length)];
-    } while (phrase === lastPhrase && phrases.length > 1);
-    lastPhrase = phrase;
-    return phrase;
-  }
-
-  window.kesugAssistant = {
-    setSlotActive(active) {
-      slotActive = Boolean(active);
-      if (!slotActive) hideAndStop();
-    },
-
-    stop() {
-      slotActive = false;
-      hideAndStop();
-    },
-
-    react(win, isMega) {
-      if (!slotActive) return;
-      showPhrase(pickPhrase(isMega ? megaPhrases : winPhrases));
-    },
-
-    comment(type) {
-      if (!slotActive || type !== 'spin') return;
-      showPhrase(pickPhrase(spinPhrases));
-    }
-  };
-})();
-
 // Инициализация
 applySettings();
 syncSettingsControls();
@@ -4234,10 +4143,18 @@ showPage('lobby');
     renderMoreHome();
     showPage('more');
   };
+  let activeMoreFeature = '';
+  const moreFeatureNames = {
+    'daily-bonus':'Забрать бонус','random-slot':'Случайный слот','history':'История','autoplay':'Автоигра','appearance':'Оформление','achievements':'Достижения','promo':'Промокод','stats':'Статистика','challenges':'Испытания','sounds':'Звуки','effects':'Эффекты','favorites':'Избранное','search':'Поиск','reaction':'Игры на реакцию',
+    combinations:'Комбинации',archive:'Архив',cinema:'Кинозал',gallery:'Галерея',lab:'Лаборатория',masks:'Маски',titles:'Титулы',bookmarks:'Закладки',navigator:'Навигатор',schedule:'Расписание',openings:'Открытия',quiz:'Викторина',minigames:'Мини-игры',editor:'Редактор',journal:'Журнал',goals:'Мои цели','random-effect':'Случайный эффект',night:'Ночной режим',cleanup:'Очистка',downloads:'Загрузки',converter:'Конвертер',constructor:'Конструктор'
+  };
   function showDetail(title, subtitle, html) {
     const content = document.getElementById('ks-more-detail-content');
     if (!content) return;
-    content.innerHTML = `<h3>${title}</h3><p>${subtitle || ''}</p>${html || ''}`;
+    const bookmarkBar = activeMoreFeature && activeMoreFeature !== 'bookmarks'
+      ? `<div class="ks-more-detail-tools"><button class="ks-more-secondary" type="button" onclick="saveCurrentMoreBookmark()">📌 В закладки</button></div>`
+      : '';
+    content.innerHTML = `${bookmarkBar}<h3>${title}</h3><p>${subtitle || ''}</p>${html || ''}`;
     showPage('more-detail');
   }
 
@@ -4255,6 +4172,7 @@ showPage('lobby');
   }
 
   window.useMoreFeature = key => {
+    activeMoreFeature = key;
     switch (key) {
       case 'daily-bonus': return openDailyBonus();
       case 'random-slot': {
@@ -4280,9 +4198,343 @@ showPage('lobby');
         return;
       }
       case 'reaction': return openReactionGames();
+      case 'combinations': return openCombinations();
+      case 'archive': return openArchive();
+      case 'cinema': return openCinema();
+      case 'gallery': return openGallery();
+      case 'lab': return openLab();
+      case 'masks': return openMasks();
+      case 'titles': return openTitles();
+      case 'bookmarks': return openBookmarks();
+      case 'navigator': return openNavigator();
+      case 'schedule': return openSchedule();
+      case 'openings': return openOpenings();
+      case 'quiz': return openKesugQuiz();
+      case 'minigames': return openMiniGames();
+      case 'editor': return openBannerEditor();
+      case 'journal': return openJournal();
+      case 'goals': return openGoals();
+      case 'random-effect': return applyRandomEffect();
+      case 'night': return toggleNightMode();
+      case 'cleanup': return openCleanup();
+      case 'downloads': return openDownloads();
+      case 'converter': return openConverter();
+      case 'constructor': return openSymbolConstructor();
       default: return;
     }
   };
+
+
+  const readArray = key => { const value = readJSON(key, []); return Array.isArray(value) ? value : []; };
+  const writeLimited = (key, value, limit = 100) => writeJSON(key, Array.isArray(value) ? value.slice(0, limit) : []);
+
+  window.ksLogActivity = (type, description) => {
+    const list = readArray('ks_account_journal');
+    list.unshift({ id: Date.now() + Math.random(), at: new Date().toISOString(), type: String(type||'Событие'), description: String(description||'') });
+    writeLimited('ks_account_journal', list, 150);
+  };
+  function addArchiveRecord(type, title, description) {
+    const list = readArray('ks_event_archive');
+    list.unshift({ id: Date.now() + Math.random(), at: new Date().toISOString(), type, title, description });
+    writeLimited('ks_event_archive', list, 100);
+  }
+  window.ksRecordOpening = item => {
+    if (!item) return;
+    const list = readArray('ks_openings_history');
+    list.unshift({ id: Date.now() + Math.random(), at: new Date().toISOString(), name: String(item.name || 'Коллекционный предмет'), icon: String(item.icon || '🎁'), source: String(item.source || 'Коллекция') });
+    writeLimited('ks_openings_history', list, 100);
+    window.ksLogActivity('Открытие', String(item.name || 'Коллекционный предмет'));
+  };
+  window.saveCurrentMoreBookmark = () => {
+    const key = activeMoreFeature;
+    if (!key || key === 'bookmarks') return;
+    const items = readArray('ks_more_bookmarks');
+    if (items.some(item => item && item.key === key)) { showToast('Эта страница уже в закладках'); return; }
+    items.unshift({ key, title: moreFeatureNames[key] || key, at: new Date().toISOString() });
+    writeLimited('ks_more_bookmarks', items, 50);
+    showToast('Страница сохранена в закладках');
+  };
+  window.openBookmarkedFeature = key => {
+    if (moreFeatureNames[key]) window.useMoreFeature(key);
+  };
+  window.removeMoreBookmark = key => {
+    writeJSON('ks_more_bookmarks', readArray('ks_more_bookmarks').filter(item => item && item.key !== key));
+    openBookmarks();
+  };
+
+  function openCombinations() {
+    const symbols = [...new Set(MACHINES.flatMap(machine => machine.symbols))];
+    const symbolCards = symbols.map(symbol => `<div class="ks-symbol-card"><img src="${getIconUrl(symbol)}" alt="${escapeHtml(symbol)}"><strong>${escapeHtml(symbol)}</strong><small>${MACHINES.filter(m=>m.symbols.includes(symbol)).length} автоматов</small></div>`).join('');
+    const machineRows = MACHINES.map(machine => `<div class="ks-more-row"><span class="ks-more-row-icon">🎰</span><div class="ks-more-row-copy"><strong>${escapeHtml(machine.name)}</strong><small>${machine.symbols.map(escapeHtml).join(' ')} · тройное совпадение: ×${machine.triple.join(' / ×')}</small></div></div>`).join('');
+    showDetail('Комбинации', `Энциклопедия символов Kesug: ${symbols.length} уникальных символов и ${MACHINES.length} автоматов.`, `<div class="ks-more-info-card"><strong>Как читать комбинации</strong><p style="margin-top:6px;color:var(--text-muted);font-size:10px">Три одинаковых символа на одной из игровых линий образуют комбинацию. Множитель зависит от автомата и символа.</p></div><div class="ks-more-symbol-grid">${symbolCards}</div><h4 style="margin:20px 0 8px;color:var(--text-white)">Комбинации по автоматам</h4><div class="ks-more-list">${machineRows}</div>`);
+  }
+
+  function openArchive() {
+    const items = readArray('ks_event_archive');
+    const html = items.length ? `<div class="ks-more-list">${items.map(item=>`<div class="ks-more-row"><span class="ks-more-row-icon">🗂️</span><div class="ks-more-row-copy"><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.type)} · ${new Date(item.at).toLocaleString('ru-RU')} · ${escapeHtml(item.description)}</small></div></div>`).join('')}</div>` : `<div class="ks-more-info-card"><strong>Архив пока пуст</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Здесь будут храниться завершённые события и полученные награды. Например, история ежедневных бонусов уже сохраняется автоматически.</p></div>`;
+    showDetail('Архив', `${items.length} сохранённых записей.`, html);
+  }
+
+  const cinemaScenes = {
+    intro: { title:'Добро пожаловать в Kesug', mark:'✦', desc:'Твоя игровая коллекция начинается здесь. Исследуй автоматы, открывай символы и настраивай профиль.', cls:'intro' },
+    winter: { title:'Зимняя глава', mark:'❄️', desc:'Снежные миры, холодное сияние и праздничные символы зимней коллекции.', cls:'winter' },
+    neon: { title:'Неоновый сектор', mark:'⚡', desc:'Свет цифрового города, яркие символы и энергия ночного каталога.', cls:'neon' }
+  };
+  window.playCinemaScene = id => {
+    const scene = cinemaScenes[id];
+    const stage = document.getElementById('ks-cinema-stage');
+    if (!scene || !stage) return;
+    stage.className = 'ks-cinema-stage is-playing ' + scene.cls;
+    stage.innerHTML = `<div class="ks-cinema-stage-content"><span class="ks-cinema-stage-mark">${scene.mark}</span><h4>${scene.title}</h4><p>${scene.desc}</p><p style="margin-top:14px;color:var(--accent-gold);font-weight:800;letter-spacing:.18em">KESUG SLOTS</p></div>`;
+    window.setTimeout(()=>stage.classList.remove('is-playing'), 4200);
+  };
+  function openCinema() {
+    showDetail('Кинозал', 'Небольшие встроенные заставки мира Kesug — запускай любую сцену.', `<div class="ks-cinema-stage" id="ks-cinema-stage"><div class="ks-cinema-stage-content"><span class="ks-cinema-stage-mark">✦</span><h4>Выбери заставку</h4><p>Нажми на одну из сцен ниже, чтобы посмотреть короткую анимированную заставку.</p></div></div><div class="ks-more-wide-grid"><button class="ks-more-option" onclick="playCinemaScene('intro')"><strong>✦ Основная заставка</strong><small>Добро пожаловать в Kesug</small></button><button class="ks-more-option" onclick="playCinemaScene('winter')"><strong>❄️ Зимняя глава</strong><small>Зимняя атмосфера</small></button><button class="ks-more-option" onclick="playCinemaScene('neon')"><strong>⚡ Неоновый сектор</strong><small>Цифровой мир</small></button></div>`);
+  }
+
+  function openGallery() {
+    const cards = MACHINES.map(machine=>`<button class="ks-gallery-card" type="button" onclick="openMachine('${machine.id}')"><img src="${getIconUrl(machine.symbols[0])}" alt=""><strong>${escapeHtml(machine.name)}</strong><small>${escapeHtml(machine.desc)}</small></button>`).join('');
+    showDetail('Галерея', `Коллекция визуальных символов и обложек из ${MACHINES.length} игровых автоматов.`, `<div class="ks-more-info-card">Изображения берутся из текущего каталога игры. Нажми на карточку, чтобы перейти к соответствующему автомату.</div><div class="ks-gallery-grid">${cards}</div>`);
+  }
+
+  window.toggleKesugLabEffect = (effect, enabled) => {
+    const preview = document.getElementById('ks-lab-preview');
+    if (preview) preview.classList.toggle(effect, Boolean(enabled));
+  };
+  function openLab() {
+    showDetail('Лаборатория', 'Проверяй эффекты на демонстрационном объекте — настройки игры не меняются.', `<div class="ks-more-info-card"><strong>Тестовая сцена</strong><div class="ks-lab-preview" id="ks-lab-preview">✦</div><div class="ks-more-wide-grid"><label class="ks-more-option"><strong><input type="checkbox" onchange="toggleKesugLabEffect('glow',this.checked)"> Свечение</strong><small>Добавляет мягкий ореол</small></label><label class="ks-more-option"><strong><input type="checkbox" onchange="toggleKesugLabEffect('motion',this.checked)"> Движение</strong><small>Плавная анимация объекта</small></label><label class="ks-more-option"><strong><input type="checkbox" onchange="toggleKesugLabEffect('blur',this.checked)"> Размытие</strong><small>Проверка глубины резкости</small></label></div></div>`);
+  }
+
+  const maskOptions = [
+    {id:'none',name:'Оригинал',desc:'Без фильтра'}, {id:'neon',name:'Неон',desc:'Холодное свечение'}, {id:'ice',name:'Лёд',desc:'Морской оттенок'}, {id:'mono',name:'Монохром',desc:'Чёрно-белый стиль'}, {id:'sunset',name:'Закат',desc:'Тёплая палитра'}, {id:'shadow',name:'Тень',desc:'Более тёмный стиль'}
+  ];
+  window.chooseKesugMask = id => {
+    if (!maskOptions.some(x=>x.id===id)) return;
+    localStorage.setItem('ks_avatar_mask', id);
+    updateProfileUI();
+    window.ksLogActivity('Маска', `Выбрано оформление: ${maskOptions.find(x=>x.id===id).name}`);
+    openMasks();
+  };
+  function openMasks() {
+    const active = localStorage.getItem('ks_avatar_mask') || 'none';
+    const cards = maskOptions.map(item=>`<button class="ks-more-option ${active===item.id?'is-selected':''}" onclick="chooseKesugMask('${item.id}')"><strong>${item.name}</strong><small>${item.desc}${active===item.id?' · выбрано':''}</small></button>`).join('');
+    showDetail('Маски', 'Выбери фильтр оформления для своего аватара. Исходное изображение не меняется.', `<div class="ks-more-info-card" style="display:flex;align-items:center;gap:14px"><img src="${state.avatar || 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png'}" data-mask="${active}" class="profile-avatar" style="width:64px;height:64px" alt="Аватар"><div><strong>${escapeHtml(state.nickname)}</strong><p style="margin-top:4px;color:var(--text-muted);font-size:10px">Предпросмотр текущей маски</p></div></div><div class="ks-more-wide-grid">${cards}</div>`);
+  }
+
+  const titleOptions = ['Без титула','Исследователь','Коллекционер','Мастер символов','Знаток Kesug','Ветеран каталога','Покоритель миров','Легенда Kesug'];
+  window.chooseKesugTitle = title => {
+    if (!titleOptions.includes(title)) return;
+    localStorage.setItem('ks_profile_title', title === 'Без титула' ? '' : title);
+    updateProfileUI();
+    window.ksLogActivity('Титул', title === 'Без титула' ? 'Титул снят' : `Установлен титул: ${title}`);
+    openTitles();
+  };
+  function openTitles() {
+    const active = localStorage.getItem('ks_profile_title') || '';
+    const cards = titleOptions.map(title=>`<button class="ks-more-option ${active===title || (!active&&title==='Без титула')?'is-selected':''}" onclick="chooseKesugTitle('${title}')"><strong>${title==='Без титула'?'◇': '🏅'} ${title}</strong><small>${active===title || (!active&&title==='Без титула')?'Текущий титул':'Выбрать этот титул'}</small></button>`).join('');
+    showDetail('Титулы', 'Выбранный титул отображается рядом с никнеймом в лобби и профиле.', `<div class="ks-more-info-card"><strong>Текущий титул</strong><p style="margin-top:5px;color:var(--accent-gold)">${escapeHtml(active || 'Без титула')}</p></div><div class="ks-more-wide-grid">${cards}</div>`);
+  }
+
+  function openBookmarks() {
+    const items = readArray('ks_more_bookmarks');
+    const html = items.length ? `<div class="ks-more-list">${items.map(item=>`<div class="ks-more-row"><span class="ks-more-row-icon">📌</span><div class="ks-more-row-copy"><strong>${escapeHtml(item.title || moreFeatureNames[item.key] || 'Страница')}</strong><small>Сохранено ${item.at ? new Date(item.at).toLocaleDateString('ru-RU') : ''}</small></div><button class="ks-more-secondary" onclick="openBookmarkedFeature('${escapeHtml(item.key)}')">Открыть</button><button class="ks-more-secondary" onclick="removeMoreBookmark('${escapeHtml(item.key)}')" aria-label="Удалить закладку">×</button></div>`).join('')}</div>` : `<div class="ks-more-info-card"><strong>Закладок пока нет</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Открой любую функцию и нажми «В закладки» вверху её страницы.</p></div>`;
+    showDetail('Закладки', `${items.length} сохранённых страниц.`, html);
+  }
+
+  function openNavigator() {
+    const links = [
+      ['Лобби','Главная страница','showPage(\'lobby\')'],['Профиль','Аватар, ник и статистика','showPage(\'profile\')'],['Настройки','Тема и оформление','showPage(\'settings\')'],['Каталог','Список всех автоматов','showPage(\'lobby\');scrollToCatalog()'],['Музыкальный плеер','Твой локальный плейлист','showPage(\'lobby\');document.getElementById(\'kesug-music-widget\')?.scrollIntoView({behavior:\'smooth\',block:\'center\'})'],['Ещё','Все дополнительные функции','showMoreHome()']
+    ];
+    const html = links.map(item=>`<button class="ks-more-option" onclick="${item[2]}"><strong>${item[0]}</strong><small>${item[1]}</small></button>`).join('');
+    showDetail('Навигатор', 'Переходи между основными разделами игры одним нажатием.', `<div class="ks-more-wide-grid">${html}</div>`);
+  }
+
+  function openSchedule() {
+    showDetail('Расписание', 'Предстоящие события Kesug Slots.', `<div class="ks-more-info-card"><strong>Новых событий пока нет</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Когда будут объявлены игровые события, даты и время появятся здесь. Сейчас расписание не содержит подтверждённых мероприятий.</p></div>`);
+  }
+
+  function openOpenings() {
+    const items = readArray('ks_openings_history');
+    const html = items.length ? `<div class="ks-more-list">${items.map(item=>`<div class="ks-more-row"><span class="ks-more-row-icon">${escapeHtml(item.icon || '🎁')}</span><div class="ks-more-row-copy"><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.source)} · ${new Date(item.at).toLocaleString('ru-RU')}</small></div></div>`).join('')}</div>` : `<div class="ks-more-info-card"><strong>История открытий пуста</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Здесь появятся коллекционные предметы после открытия наборов. Пока в игре не зарегистрировано ни одного открытия.</p></div>`;
+    showDetail('Открытия', `${items.length} записей в истории.`, html);
+  }
+
+  const quizQuestions = [
+    {q:'Сколько барабанов показывает основной игровой автомат?',a:['2','3','5'],c:1,why:'В игровом экране используются три барабана.'},
+    {q:'Как называется основной раздел со списком автоматов?',a:['Каталог','Архив','Кинозал'],c:0,why:'Все игровые автоматы собраны в каталоге.'},
+    {q:'Какой символ есть в автомате Classic?',a:['🍒 Вишня','🐬 Дельфин','🚂 Поезд'],c:0,why:'В Classic используются фрукты, клевер, колокольчик, камень и семёрка.'},
+    {q:'Где меняется цвет интерфейса?',a:['В Лаборатории','В Настройках','В Архиве'],c:1,why:'Цветовая тема находится в настройках интерфейса.'},
+    {q:'Что сохраняет раздел «Закладки»?',a:['Любимые страницы функций','Музыкальные файлы','Ставки'],c:0,why:'Закладки помогают быстро возвращаться к нужным разделам.'}
+  ];
+  let quizIndex = 0, quizScore = 0, quizAnswered = false;
+  function renderKesugQuiz() {
+    if (quizIndex >= quizQuestions.length) {
+      const best = Math.max(Number(localStorage.getItem('ks_quiz_best'))||0, quizScore);
+      localStorage.setItem('ks_quiz_best', String(best));
+      showDetail('Викторина завершена', `Правильных ответов: ${quizScore} из ${quizQuestions.length}.`, `<div class="ks-more-info-card"><div style="font-size:34px">${quizScore===quizQuestions.length?'🏆':'🧠'}</div><strong style="display:block;margin-top:8px">${quizScore===quizQuestions.length?'Идеальный результат!':'Хорошая попытка!'}</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Твой лучший результат: ${best}/${quizQuestions.length}.</p><button class="ks-more-action" style="margin-top:12px" onclick="restartKesugQuiz()">Пройти ещё раз</button></div>`);
+      return;
+    }
+    const q = quizQuestions[quizIndex];
+    const answers = q.a.map((answer,index)=>`<button class="ks-more-quiz-answer" type="button" onclick="answerKesugQuiz(${index})">${index+1}. ${answer}</button>`).join('');
+    showDetail('Викторина', `Вопрос ${quizIndex+1} из ${quizQuestions.length} · Очки викторины: ${quizScore}`, `<div class="ks-more-info-card"><strong>${q.q}</strong><div id="ks-quiz-answers">${answers}</div><div id="ks-quiz-feedback" style="min-height:25px;margin-top:10px;color:var(--text-muted);font-size:11px"></div><button id="ks-quiz-next" class="ks-more-action" style="margin-top:8px" disabled onclick="nextKesugQuiz()">Следующий вопрос</button></div>`);
+  }
+  window.answerKesugQuiz = index => {
+    if (quizAnswered) return;
+    quizAnswered = true;
+    const q = quizQuestions[quizIndex];
+    if (index === q.c) quizScore++;
+    document.querySelectorAll('#ks-quiz-answers button').forEach((button,i)=>{
+      button.disabled = true;
+      if (i === q.c) button.classList.add('is-correct');
+      else if (i === index) button.classList.add('is-wrong');
+    });
+    const feedback = document.getElementById('ks-quiz-feedback');
+    if (feedback) feedback.textContent = `${index===q.c?'Верно! ':'Не совсем. '}${q.why}`;
+    const next = document.getElementById('ks-quiz-next');
+    if (next) { next.disabled = false; next.textContent = quizIndex === quizQuestions.length-1 ? 'Результат' : 'Следующий вопрос'; }
+  };
+  window.nextKesugQuiz = () => { if (!quizAnswered) return; quizIndex++; quizAnswered=false; renderKesugQuiz(); };
+  window.restartKesugQuiz = () => { quizIndex=0; quizScore=0; quizAnswered=false; renderKesugQuiz(); };
+  function openKesugQuiz() { quizIndex=0; quizScore=0; quizAnswered=false; renderKesugQuiz(); }
+
+  let miniGameTimer = null, miniGameEnd = 0, miniGameScore = 0, miniGameActive = false;
+  function openMiniGames() {
+    if (miniGameTimer) { clearInterval(miniGameTimer); miniGameTimer=null; }
+    miniGameActive=false; miniGameScore=0;
+    showDetail('Мини-игры', 'Короткая аркада на скорость. За 15 секунд нажми на кнопку как можно больше раз.', `<div class="ks-more-info-card"><div style="display:flex;justify-content:space-between;gap:10px"><strong>Быстрый клик</strong><strong id="ks-mini-timer">15 сек.</strong></div><div style="margin-top:8px;color:var(--text-muted);font-size:11px">Нажатий: <strong id="ks-mini-score">0</strong></div><button id="ks-mini-tap" class="ks-more-tap-button" disabled onclick="tapKesugMiniGame()">Сначала нажми «Старт»</button><button class="ks-more-action" style="margin-top:10px" onclick="startKesugMiniGame()">Старт · 15 секунд</button><p id="ks-mini-result" style="margin-top:9px;color:var(--text-muted);font-size:11px"></p></div>`);
+  }
+  window.startKesugMiniGame = () => {
+    if (miniGameTimer) clearInterval(miniGameTimer);
+    miniGameScore=0; miniGameEnd=Date.now()+15000; miniGameActive=true;
+    const button=document.getElementById('ks-mini-tap');
+    const score=document.getElementById('ks-mini-score');
+    const timer=document.getElementById('ks-mini-timer');
+    const result=document.getElementById('ks-mini-result');
+    if (!button||!score||!timer) return;
+    button.disabled=false; button.textContent='НАЖМИ!'; score.textContent='0'; if(result)result.textContent='Поехали!';
+    miniGameTimer=setInterval(()=>{
+      const left=Math.max(0,miniGameEnd-Date.now());
+      timer.textContent=`${(left/1000).toFixed(1)} сек.`;
+      if(left<=0){clearInterval(miniGameTimer);miniGameTimer=null;miniGameActive=false;button.disabled=true;button.textContent='ВРЕМЯ ВЫШЛО';if(result)result.textContent=`Результат: ${miniGameScore} нажатий.`;window.ksLogActivity('Мини-игра',`Быстрый клик: ${miniGameScore} нажатий`);}
+    },100);
+  };
+  window.tapKesugMiniGame = () => {
+    if(!miniGameActive)return;
+    miniGameScore++;
+    const score=document.getElementById('ks-mini-score');if(score)score.textContent=String(miniGameScore);
+  };
+
+  const bannerOptions = [
+    {id:'default',name:'Стандарт'}, {id:'aurora',name:'Северное сияние'}, {id:'sunset',name:'Закат'}, {id:'forest',name:'Лес'}, {id:'gold',name:'Золото'}, {id:'ice',name:'Лёд'}
+  ];
+  window.chooseKesugBanner = id => {
+    if (!bannerOptions.some(x=>x.id===id)) return;
+    localStorage.setItem('ks_profile_banner',id);
+    updateProfileUI();
+    window.ksLogActivity('Профиль','Изменён баннер профиля');
+    openBannerEditor();
+  };
+  function openBannerEditor() {
+    const active=localStorage.getItem('ks_profile_banner')||'default';
+    const gradients={default:'linear-gradient(120deg,var(--bg-card),var(--bg-main))',aurora:'linear-gradient(120deg,rgba(71,145,255,.35),rgba(106,73,190,.28),var(--bg-card))',sunset:'linear-gradient(120deg,rgba(255,143,94,.35),rgba(205,81,145,.28),var(--bg-card))',forest:'linear-gradient(120deg,rgba(47,174,115,.35),rgba(26,99,91,.28),var(--bg-card))',gold:'linear-gradient(120deg,rgba(214,173,91,.35),rgba(111,79,34,.28),var(--bg-card))',ice:'linear-gradient(120deg,rgba(109,204,255,.35),rgba(76,121,201,.28),var(--bg-card))'};
+    const cards=bannerOptions.map(x=>`<button class="ks-more-option ${active===x.id?'is-selected':''}" onclick="chooseKesugBanner('${x.id}')"><strong>${x.name}</strong><small>${active===x.id?'Текущий баннер':'Применить оформление'}</small></button>`).join('');
+    showDetail('Редактор баннера', 'Создай собственное оформление шапки профиля из готовых цветовых сочетаний.', `<div class="ks-banner-preview" id="ks-banner-preview" style="background:${gradients[active]}"><img src="${state.avatar || 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png'}" alt=""><div><strong style="color:var(--text-white)">${escapeHtml(state.nickname)}</strong><p style="margin-top:4px;color:var(--text-muted);font-size:10px">${escapeHtml(localStorage.getItem('ks_profile_title')||'Игрок Kesug')}</p></div></div><div class="ks-more-wide-grid">${cards}</div>`);
+  }
+
+  function openJournal() {
+    const list=readArray('ks_account_journal');
+    const html=list.length?`<div class="ks-more-list">${list.map(item=>`<div class="ks-more-row"><span class="ks-more-row-icon">🧾</span><div class="ks-more-row-copy"><strong>${escapeHtml(item.type)}</strong><small>${escapeHtml(item.description)} · ${new Date(item.at).toLocaleString('ru-RU')}</small></div></div>`).join('')}</div>`:`<div class="ks-more-info-card"><strong>Журнал пока пуст</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Здесь будут появляться игровые действия: раунды, изменения профиля и полученные награды.</p></div>`;
+    showDetail('Журнал', `${list.length} последних действий аккаунта.`, html);
+  }
+
+  function openGoals() {
+    const goals=readArray('ks_personal_goals');
+    const rows=goals.length?`<div class="ks-more-list">${goals.map(goal=>`<div class="ks-more-row"><input type="checkbox" ${goal.done?'checked':''} onchange="toggleKesugGoal('${goal.id}',this.checked)" aria-label="Отметить цель"><div class="ks-more-row-copy"><strong style="${goal.done?'text-decoration:line-through;opacity:.65':''}">${escapeHtml(goal.text)}</strong><small>${goal.done?'Выполнено':'Личная цель'}</small></div><button class="ks-more-secondary" onclick="removeKesugGoal('${goal.id}')">Удалить</button></div>`).join('')}</div>`:`<div class="ks-more-info-card">Пока нет личных целей. Добавь свою первую цель ниже.</div>`;
+    showDetail('Мои цели', `${goals.filter(x=>x.done).length} из ${goals.length} выполнено.`, `${rows}<form class="ks-more-form" onsubmit="event.preventDefault();addKesugGoal()"><input class="ks-more-input" id="ks-goal-input" maxlength="70" placeholder="Например: открыть 10 автоматов"><button class="ks-more-action">Добавить цель</button></form>`);
+  }
+  window.addKesugGoal = () => {
+    const input=document.getElementById('ks-goal-input');const text=String(input?.value||'').trim();
+    if(!text){showToast('Напиши цель');return;}
+    const goals=readArray('ks_personal_goals');goals.unshift({id:String(Date.now()),text:text.slice(0,70),done:false});writeLimited('ks_personal_goals',goals,50);window.ksLogActivity('Цель',`Добавлена цель: ${text}`);openGoals();
+  };
+  window.toggleKesugGoal = (id,done) => {const goals=readArray('ks_personal_goals');const goal=goals.find(x=>x.id===id);if(goal)goal.done=Boolean(done);writeJSON('ks_personal_goals',goals);openGoals();};
+  window.removeKesugGoal = id => {writeJSON('ks_personal_goals',readArray('ks_personal_goals').filter(x=>x.id!==id));openGoals();};
+
+  function applyRandomEffect() {
+    const themes=['gold','blue','purple','green','red','pink','cyan'];
+    const backgrounds=['aurora','gradient','minimal'];
+    let nextTheme=themes[Math.floor(Math.random()*themes.length)];
+    if(themes.length>1 && nextTheme===state.settings.theme) nextTheme=themes[(themes.indexOf(nextTheme)+1)%themes.length];
+    state.settings.theme=nextTheme;
+    state.settings.backgroundStyle=backgrounds[Math.floor(Math.random()*backgrounds.length)];
+    saveToLocal();applySettings();syncSettingsControls();
+    window.ksLogActivity('Оформление',`Случайная тема: ${nextTheme}`);
+    showDetail('Случайный эффект', 'Интерфейс получил случайное сочетание темы и фона.', `<div class="ks-more-info-card"><div style="font-size:38px">🪄</div><strong style="display:block;margin-top:8px">Новый стиль применён</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Тема: ${nextTheme} · Фон: ${state.settings.backgroundStyle}</p><button class="ks-more-action" style="margin-top:12px" onclick="useMoreFeature('random-effect')">Попробовать ещё</button></div>`);
+  }
+  function toggleNightMode() {
+    const enabled=!document.documentElement.classList.contains('ks-night-mode');
+    document.documentElement.classList.toggle('ks-night-mode',enabled);
+    localStorage.setItem('ks_night_mode',enabled?'1':'0');
+    showDetail('Ночной режим', enabled?'Ночной режим включён. Палитра стала темнее и спокойнее.':'Ночной режим выключен. Возвращена выбранная тема.', `<div class="ks-more-info-card"><strong>${enabled?'🌙 Ночной режим активен':'☀️ Обычный режим активен'}</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Режим меняет только оформление и не затрагивает баланс или профиль.</p><button class="ks-more-action" style="margin-top:12px" onclick="useMoreFeature('night')">${enabled?'Выключить':'Включить'} ночной режим</button></div>`);
+    window.ksLogActivity('Оформление',enabled?'Включён ночной режим':'Выключен ночной режим');
+  }
+  if(localStorage.getItem('ks_night_mode')==='1') document.documentElement.classList.add('ks-night-mode');
+
+  function openCleanup() {
+    showDetail('Очистка', 'Удаляй только временные данные игры. Баланс, профиль, статистика и история не затрагиваются.', `<div class="ks-more-info-card"><strong>Что будет очищено</strong><p style="margin-top:6px;color:var(--text-muted);font-size:11px">Временные ключи кэша Kesug и кэш браузера для текущего сайта, если браузер поддерживает Cache API. Личные игровые данные останутся.</p><button class="ks-more-action" style="margin-top:12px" onclick="clearKesugTemporaryCache()">Очистить временный кэш</button></div>`);
+  }
+  window.clearKesugTemporaryCache = async () => {
+    const ok=window.confirm('Очистить временный кэш? Баланс и профиль сохранятся.');if(!ok)return;
+    let removed=0;
+    try { for(let i=localStorage.length-1;i>=0;i--){const key=localStorage.key(i);if(key && (/^ks_cache_/i.test(key)||/^ks_temp_/i.test(key)||key==='ks_gallery_cache')){localStorage.removeItem(key);removed++;}} } catch(e) {}
+    try { if('caches' in window){const keys=await caches.keys();for(const key of keys){if(key.toLowerCase().includes('kesug')||key.toLowerCase().includes('ks-cache')){if(await caches.delete(key))removed++;}}} } catch(e) {}
+    showToast(`Временный кэш очищен · удалено элементов: ${removed}`);openCleanup();
+  };
+
+  window.downloadKesugCatalog = () => {
+    const data={app:'Kesug Slots',exportedAt:new Date().toISOString(),machines:MACHINES.map(m=>({id:m.id,name:m.name,category:m.desc,symbols:m.symbols,multipliers:m.triple}))};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='kesug-slots-catalog.json';a.click();URL.revokeObjectURL(url);showToast('Каталог подготовлен к загрузке');
+  };
+  window.downloadKesugReadme = () => {
+    const text='KESUG SLOTS\nЛокальный игровой профиль и каталог автоматов.\nВ игре используются только виртуальные очки.\nРезервная копия профиля доступна в разделе Профиль.';
+    const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='kesug-slots-info.txt';a.click();URL.revokeObjectURL(url);
+  };
+  function openDownloads() {
+    showDetail('Загрузки', 'Файлы, которые можно сохранить на своё устройство.', `<div class="ks-more-list"><div class="ks-more-row"><span class="ks-more-row-icon">👤</span><div class="ks-more-row-copy"><strong>Резервная копия профиля</strong><small>Баланс, ник, аватар, настройки, статистика и избранное</small></div><button class="ks-more-secondary" onclick="exportProfileBackup()">Скачать</button></div><div class="ks-more-row"><span class="ks-more-row-icon">🎰</span><div class="ks-more-row-copy"><strong>Каталог автоматов</strong><small>Список игровых автоматов, символов и множителей в JSON</small></div><button class="ks-more-secondary" onclick="downloadKesugCatalog()">Скачать</button></div><div class="ks-more-row"><span class="ks-more-row-icon">📄</span><div class="ks-more-row-copy"><strong>Информация об игре</strong><small>Краткая памятка в TXT</small></div><button class="ks-more-secondary" onclick="downloadKesugReadme()">Скачать</button></div></div>`);
+  }
+
+  window.convertKesugUnits = () => {
+    const input=document.getElementById('ks-convert-input');const format=document.getElementById('ks-convert-format');const output=document.getElementById('ks-convert-output');if(!input||!format||!output)return;
+    const value=Number(String(input.value).replace(',','.'));
+    if(!Number.isFinite(value)||value<0){output.textContent='Введи неотрицательное число.';return;}
+    let result;
+    if(format.value==='compact') result=value>=1e9?(value/1e9).toLocaleString('ru-RU',{maximumFractionDigits:2})+' млрд':value>=1e6?(value/1e6).toLocaleString('ru-RU',{maximumFractionDigits:2})+' млн':value>=1e3?(value/1e3).toLocaleString('ru-RU',{maximumFractionDigits:2})+' тыс.':value.toLocaleString('ru-RU');
+    else if(format.value==='plain') result=Math.floor(value).toLocaleString('ru-RU')+' очков';
+    else result=value.toExponential(3)+' очков';
+    output.textContent=result;
+  };
+  function openConverter() {
+    showDetail('Конвертер', 'Преобразуй количество виртуальных очков между обычной, сокращённой и научной записью.', `<div class="ks-more-info-card"><label style="display:block;color:var(--text-muted);font-size:10px;margin-bottom:6px" for="ks-convert-input">Количество очков</label><input class="ks-more-input" style="width:100%;box-sizing:border-box" id="ks-convert-input" type="number" min="0" step="any" value="1250000" oninput="convertKesugUnits()"><label style="display:block;color:var(--text-muted);font-size:10px;margin:12px 0 6px" for="ks-convert-format">Формат результата</label><select class="ks-more-select" style="width:100%;box-sizing:border-box" id="ks-convert-format" onchange="convertKesugUnits()"><option value="plain">Обычный: 1 250 000</option><option value="compact">Краткий: 1,25 млн</option><option value="scientific">Научный: 1.250e+6</option></select><div style="margin-top:14px;color:var(--text-muted);font-size:10px">Результат</div><strong id="ks-convert-output" style="display:block;margin-top:5px;color:var(--accent-gold);font-size:17px">1 250 000 очков</strong><button class="ks-more-secondary" style="margin-top:12px" onclick="convertKesugUnits()">Пересчитать</button></div>`);
+    window.convertKesugUnits();
+  }
+
+  window.saveKesugSymbolSet = () => {
+    const input=document.getElementById('ks-symbol-input');const output=document.getElementById('ks-symbol-set-preview');
+    const raw=String(input?.value||'').trim();
+    const compact=raw.replace(/[\s,;]+/g,'');
+    const symbols=window.Intl?.Segmenter ? [...new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(compact)].map(part=>part.segment) : Array.from(compact);
+    if(symbols.length<3||symbols.length>8){if(output)output.textContent='Добавь от 3 до 8 символов.';return;}
+    localStorage.setItem('ks_custom_symbol_set',JSON.stringify(symbols));
+    if(output)output.innerHTML=symbols.map(symbol=>`<span style="font-size:28px;margin:4px">${escapeHtml(symbol)}</span>`).join('');
+    showToast('Набор символов сохранён на этом устройстве');
+    window.ksLogActivity('Конструктор',`Сохранён набор из ${symbols.length} символов`);
+  };
+  window.clearKesugSymbolSet = () => {localStorage.removeItem('ks_custom_symbol_set');openSymbolConstructor();};
+  function openSymbolConstructor() {
+    const saved=readArray('ks_custom_symbol_set');
+    const preview=saved.length?saved.map(x=>`<span style="font-size:28px;margin:4px">${escapeHtml(x)}</span>`).join(''):'<span style="color:var(--text-muted);font-size:11px">Набор ещё не создан</span>';
+    showDetail('Конструктор символов', 'Собери личный набор из 3–8 эмодзи. Он сохранится в профиле браузера и будет доступен для дальнейших идей.', `<div class="ks-more-info-card"><strong>Твой набор</strong><div id="ks-symbol-set-preview" style="min-height:48px;margin:10px 0">${preview}</div><label for="ks-symbol-input" style="display:block;margin:10px 0 6px;color:var(--text-muted);font-size:10px">Введи от 3 до 8 символов</label><input id="ks-symbol-input" class="ks-more-input" style="width:100%;box-sizing:border-box" maxlength="24" placeholder="🍒 💎 ⭐ 🔔 🍀"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="ks-more-action" onclick="saveKesugSymbolSet()">Сохранить набор</button><button class="ks-more-secondary" onclick="clearKesugSymbolSet()">Очистить</button></div></div>`);
+  }
 
   function openDailyBonus() {
     const today = dayKey();
@@ -4301,6 +4553,8 @@ showPage('lobby');
     localStorage.setItem('ks_daily_bonus_amount', String(amount));
     localStorage.setItem('ks_daily_bonus_count', String((Number(localStorage.getItem('ks_daily_bonus_count'))||0)+1));
     state.balance += amount;
+    addArchiveRecord('Награда','Ежедневный бонус',`+${fmt(amount)} виртуальных очков`);
+    window.ksLogActivity('Награда',`Ежедневный бонус: +${fmt(amount)} виртуальных очков`);
     saveToLocal(); updateUI();
     showToast(`Бонус получен: +${fmt(amount)} виртуальных очков`);
     openDailyBonus(); renderMoreHome();
@@ -4414,7 +4668,7 @@ showPage('lobby');
     if (used.includes(code)) { if(output) output.textContent='Этот промокод уже использован.'; return; }
     const reward = promoMap[code];
     used.push(code); writeJSON('ks_used_promos',used);
-    state.balance += reward; saveToLocal(); updateUI();
+    state.balance += reward; window.ksLogActivity('Промокод',`Активирован ${code}: +${fmt(reward)} виртуальных очков`); addArchiveRecord('Награда',`Промокод ${code}`,`+${fmt(reward)} виртуальных очков`); saveToLocal(); updateUI();
     if(output) output.textContent = `Готово! Начислено ${fmt(reward)} виртуальных очков.`;
     showToast(`Промокод активирован: +${fmt(reward)}`);
   };

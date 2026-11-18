@@ -1864,6 +1864,52 @@ body.bg-aurora #game-screen {
 }
 </style>
 
+<style id="kesug-lite-mode-styles">
+
+/* ═══════ KESUG SLOTS · LITE MODE ═══════
+   Disables visual effects while keeping layout, controls and game logic intact. */
+body.lite-mode,
+body.lite-mode * ,
+body.lite-mode *::before,
+body.lite-mode *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+body.lite-mode::before,
+body.lite-mode::after,
+body.lite-mode #game-screen::before,
+body.lite-mode .hero-visual-glow,
+body.lite-mode .hero-spark-one,
+body.lite-mode .hero-spark-two,
+body.lite-mode .game-card-art::before {
+  display: none !important;
+  animation: none !important;
+}
+body.lite-mode .top-header.is-scrolled .header-glass,
+body.lite-mode .game-header,
+body.lite-mode .win-popup,
+body.lite-mode .ks-onboarding,
+body.lite-mode .ks-toast,
+body.lite-mode .game-card-category,
+body.lite-mode .favorite-toggle {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+body.lite-mode .slot-container,
+body.lite-mode .settings-group,
+body.lite-mode .profile-data-panel,
+body.lite-mode .settings-info-card,
+body.lite-mode .game-card,
+body.lite-mode .win-box {
+  box-shadow: none !important;
+}
+</style>
 </head>
 <body class="is-loading">
 
@@ -1914,9 +1960,6 @@ body.bg-aurora #game-screen {
       </div>
       <button class="header-icon-btn" type="button" onclick="showPage('settings')" aria-label="Настройки" title="Настройки"><i class="ph-bold ph-sliders-horizontal"></i></button>
         <!-- Кнопка ТОПа -->
-      <button class="header-icon-btn" onclick="showPage('top')" title="Топ игроков">
-        <i class="ph-bold ph-trophy"></i>
-      </button>
       <button class="profile-btn" onclick="showPage('profile')">
         <img id="nav-avatar" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png">
       </button>
@@ -1931,7 +1974,7 @@ body.bg-aurora #game-screen {
       <!-- Главная приветственная область -->
       <section class="lobby-hero" aria-labelledby="lobby-hero-title">
         <div class="hero-copy">
-          <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> KESUG SLOTS <span class="hero-eyebrow-divider"></span> GOLD EDITION</div>
+          <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> KESUG SLOTS</div>
           <p class="hero-greeting">
   <span id="lobby-greeting-text">С возвращением</span>,
   <strong id="lobby-welcome-nick">Игрок</strong>
@@ -2048,15 +2091,6 @@ body.bg-aurora #game-screen {
     </div>
 
     <!-- ПРОФИЛЬ -->
-        <!-- ТОП ИГРОКОВ -->
-    <div class="page-view" id="page-top">
-      <div class="page-header">
-        <button class="back-btn" onclick="showPage('lobby')"><i class="ph-bold ph-arrow-left"></i> На главную</button>
-      </div>
-      <div class="widget" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-top: 15px;">
-        <div id="top-list" style="padding: 0; display: flex; flex-direction: column;"></div>
-      </div>
-    </div>
     <div class="page-view" id="page-profile">
       <div class="page-header">
         <button class="back-btn" onclick="showPage('lobby')"><i class="ph-bold ph-arrow-left"></i> На главную</button>
@@ -2111,6 +2145,10 @@ body.bg-aurora #game-screen {
         <div><span class="section-kicker">KESUG SLOTS</span><h2>Центр настроек</h2><p>Настрой внешний вид и поведение интерфейса под себя.</p></div>
       </section>
       <div class="settings-layout">
+        <section class="settings-group">
+          <div class="settings-group-heading"><div><span class="section-kicker">PERFORMANCE</span><h3>Производительность</h3></div><i class="ph ph-gauge"></i></div>
+          <label class="setting-row" for="setting-lite-mode"><span class="setting-row-icon"><i class="ph-bold ph-leaf"></i></span><span class="setting-row-copy"><strong>Режим Lite</strong><small>Отключает анимации, размытие, тени, свечение и декоративные эффекты для более лёгкой работы.</small></span><input id="setting-lite-mode" type="checkbox" onchange="updateSetting('liteMode', this.checked)"><span class="setting-switch"></span></label>
+        </section>
         <section class="settings-group">
           <div class="settings-group-heading"><div><span class="section-kicker">APPEARANCE</span><h3>Внешний вид</h3></div><i class="ph ph-palette"></i></div>
           <label class="setting-row" for="setting-compact-cards"><span class="setting-row-icon"><i class="ph-bold ph-squares-four"></i></span><span class="setting-row-copy"><strong>Компактные карточки</strong><small>Показывать больше автоматов в каталоге.</small></span><input id="setting-compact-cards" type="checkbox" onchange="updateSetting('compactCards', this.checked)"><span class="setting-switch"></span></label>
@@ -2294,6 +2332,7 @@ const DEFAULT_SETTINGS = {
   compactCards: false,
   ambientBackground: true,
   reduceEffects: false,
+  liteMode: false,
   theme: 'gold',
   backgroundStyle: 'aurora',
   customAccent: '',
@@ -2325,7 +2364,6 @@ window.showPage = (id) => {
   if (el) el.classList.add('active');
 
   if (id === 'profile') renderProfileStats();
-  if (id === 'top') loadTop();
   if (id === 'settings') syncSettingsControls();
   if (id === 'edit-profile') document.getElementById('input-nick').value = state.nickname;
   window.scrollTo({ top: 0, behavior: state.settings.reduceEffects ? 'auto' : 'smooth' });
@@ -2340,7 +2378,7 @@ function saveToLocal() {
   localStorage.setItem('ks_favorites', JSON.stringify(state.favorites));
   localStorage.setItem('ks_settings', JSON.stringify(state.settings));
 
-  // Обновляем серверный профиль для таблицы лидеров с небольшой задержкой.
+  // Сохраняем профиль игрока на сервере с небольшой задержкой.
   queueServerSave();
 }
 
@@ -2544,7 +2582,8 @@ function applySettings() {
 
   body.classList.toggle('compact-cards', !!state.settings.compactCards);
   body.classList.toggle('reduce-effects', !!state.settings.reduceEffects);
-  body.classList.toggle('no-ambient', !state.settings.ambientBackground);
+  body.classList.toggle('lite-mode', !!state.settings.liteMode);
+  body.classList.toggle('no-ambient', !state.settings.ambientBackground || !!state.settings.liteMode);
   body.classList.toggle('bg-aurora', state.settings.backgroundStyle === 'aurora');
   body.classList.toggle('bg-gradient', state.settings.backgroundStyle === 'gradient');
   body.classList.toggle('bg-minimal', state.settings.backgroundStyle === 'minimal');
@@ -2594,6 +2633,7 @@ function syncSettingsControls() {
   const compact = document.getElementById('setting-compact-cards');
   const ambient = document.getElementById('setting-ambient');
   const reduced = document.getElementById('setting-reduced-motion');
+  const lite = document.getElementById('setting-lite-mode');
   const theme = document.getElementById('setting-theme');
   const background = document.getElementById('setting-background');
   const accent = document.getElementById('setting-accent-color');
@@ -2603,6 +2643,7 @@ function syncSettingsControls() {
   if (compact) compact.checked = !!state.settings.compactCards;
   if (ambient) ambient.checked = !!state.settings.ambientBackground;
   if (reduced) reduced.checked = !!state.settings.reduceEffects;
+  if (lite) lite.checked = !!state.settings.liteMode;
   if (theme) theme.value = state.settings.theme || 'gold';
   if (background) background.value = state.settings.backgroundStyle || 'aurora';
   if (accent) accent.value = /^#[0-9a-f]{6}$/i.test(state.settings.customAccent || '') ? state.settings.customAccent : (theme ? ({gold:'#d6ad5b',blue:'#4b9cff',purple:'#a879ff',green:'#42c98b',red:'#ef6262',pink:'#ed78b7',cyan:'#38c9c1'}[theme.value] || '#d6ad5b') : '#d6ad5b');
@@ -2616,7 +2657,11 @@ window.updateSetting = (key, value) => {
   state.settings[key] = Boolean(value);
   saveToLocal();
   applySettings();
-  showToast('Настройка сохранена');
+  if (key === 'liteMode') {
+    showToast(value ? 'Режим Lite включён' : 'Обычный режим включён');
+  } else {
+    showToast('Настройка сохранена');
+  }
 };
 
 window.changeInterfaceTheme = (theme) => {
@@ -2798,11 +2843,13 @@ window.openMachine = (id) => {
     }
   }
   document.getElementById('game-screen').classList.add('active');
+  if (window.kesugAssistant) window.kesugAssistant.setSlotActive(true);
   document.body.style.overflow = 'hidden';
   updateUI();
 };
 
 window.closeMachine = () => {
+  if (window.kesugAssistant) window.kesugAssistant.setSlotActive(false);
   document.getElementById('game-screen').classList.remove('active');
   document.body.style.overflow = '';
   currentMachine = null;
@@ -2856,7 +2903,8 @@ window.spin = () => {
   const result = generateResult(syms);
   const reelHeight = document.querySelector('.reel-window').offsetHeight / 3;
   const ITEMS = 20;
-  const DURATION = 1500;
+  const LITE_MODE = document.body.classList.contains('lite-mode');
+  const DURATION = LITE_MODE ? 0 : 1500;
 
   for (let col = 0; col < 3; col++) {
     const strip = document.getElementById('reel-' + col);
@@ -2878,7 +2926,7 @@ window.spin = () => {
     strip.style.transform = `translateY(-${ITEMS * reelHeight}px)`;
   }
 
-  setTimeout(() => { checkWin(result); }, DURATION + 400 + 100);
+  setTimeout(() => { checkWin(result); }, LITE_MODE ? 0 : DURATION + 500);
 };
 
 function checkWin(res) {
@@ -3307,42 +3355,67 @@ setInterval(updateLobbyAtmosphere, 60000);
       position: fixed;
       right: 24px;
       bottom: 24px;
-      z-index: 99999;
+      z-index: 10001;
       width: min(320px, calc(100vw - 32px));
-      padding: 16px 18px;
+      padding: 13px 16px;
       background: rgba(24, 20, 14, .96);
       border: 1px solid rgba(211, 166, 83, .4);
       border-radius: 16px;
       color: #f3e5c8;
       box-shadow: 0 12px 35px rgba(0,0,0,.4);
       opacity: 0;
+      visibility: hidden;
       transform: translateY(12px);
       pointer-events: none;
-      transition: .25s ease;
+      transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
     }
 
     #ks-assistant.active {
       opacity: 1;
+      visibility: visible;
       transform: translateY(0);
     }
 
     #ks-assistant strong {
       display: block;
       color: #d3a653;
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
+      font-size: 10px;
+      letter-spacing: 1.3px;
+      margin-bottom: 4px;
     }
 
     #ks-assistant-text {
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    /* На телефонах помощник показывается компактным уведомлением под шапкой,
+       а не поверх кнопок управления автоматом. */
+    @media (max-width: 640px) {
+      #ks-assistant {
+        left: 50%;
+        right: auto;
+        top: calc(env(safe-area-inset-top, 0px) + 82px);
+        bottom: auto;
+        width: min(290px, calc(100vw - 28px));
+        padding: 9px 12px;
+        border-radius: 12px;
+        transform: translate(-50%, -8px);
+      }
+
+      #ks-assistant.active {
+        transform: translate(-50%, 0);
+      }
+
+      #ks-assistant strong { font-size: 9px; margin-bottom: 2px; }
+      #ks-assistant-text { font-size: 12px; line-height: 1.35; }
     }
   `;
   document.head.appendChild(style);
 
   const box = document.createElement('div');
   box.id = 'ks-assistant';
+  box.setAttribute('aria-live', 'polite');
   box.innerHTML = `
     <strong>KESUG ASSISTANT</strong>
     <div id="ks-assistant-text"></div>
@@ -3350,7 +3423,7 @@ setInterval(updateLobbyAtmosphere, 60000);
   document.body.appendChild(box);
 
   const winPhrases = [
-    'ну нихуя ты молодец',
+    'Ну нихуя ты молодец!',
     'Да ну нафиг, отличный результат!',
     'Вот это поворот, чёрт возьми!',
     'Ничего себе! Хорош!',
@@ -3366,79 +3439,79 @@ setInterval(updateLobbyAtmosphere, 60000);
     'Чёрт возьми, вот это результат!'
   ];
 
+  const spinPhrases = [
+    'Ну что, погнали!',
+    'Так, посмотрим, что выпадет!',
+    'Крутим! Начинается самое интересное!',
+    'Опа, поехали!'
+  ];
+
   let lastPhrase = '';
-  let hideTimer;
+  let hideTimer = null;
+  let slotActive = false;
 
-  function react(win, isMega) {
-    const phrases = isMega ? megaPhrases : winPhrases;
+  function hideAndStop() {
+    clearTimeout(hideTimer);
+    hideTimer = null;
+    box.classList.remove('active');
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+  }
 
+  function showPhrase(phrase) {
+    // Помощник работает только пока открыт игровой экран автомата.
+    const gameScreen = document.getElementById('game-screen');
+    if (!slotActive || !gameScreen?.classList.contains('active')) return;
+
+    document.getElementById('ks-assistant-text').textContent = phrase;
+    box.classList.add('active');
+
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      box.classList.remove('active');
+      hideTimer = null;
+    }, 3200);
+
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+      const voice = new SpeechSynthesisUtterance(phrase);
+      voice.lang = 'ru-RU';
+      voice.rate = 1.3;
+      voice.pitch = 1.1;
+      voice.volume = 1;
+      speechSynthesis.speak(voice);
+    }
+  }
+
+  function pickPhrase(phrases) {
     let phrase;
     do {
       phrase = phrases[Math.floor(Math.random() * phrases.length)];
     } while (phrase === lastPhrase && phrases.length > 1);
-
     lastPhrase = phrase;
-
-    document.getElementById('ks-assistant-text').textContent = phrase;
-    box.classList.add('active');
-
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => {
-      box.classList.remove('active');
-    }, 4500);
-
-    if ('speechSynthesis' in window) {
-      speechSynthesis.cancel();
-
-      const voice = new SpeechSynthesisUtterance(phrase);
-      voice.lang = 'ru-RU';
-      voice.rate = 1.05;
-      voice.pitch = 1.1;
-      voice.volume = 1;
-
-      speechSynthesis.speak(voice);
-    }
+    return phrase;
   }
 
   window.kesugAssistant = {
-  react,
+    setSlotActive(active) {
+      slotActive = Boolean(active);
+      if (!slotActive) hideAndStop();
+    },
 
-  comment(type) {
-    const comments = {
-      spin: [
-        'Ну что, погнали, нахуй!',
-        'Так, посмотрим, что нам сегодня выпадет!',
-        'Крутим! Надеюсь, автомат не жадничает!',
-        'Опа, начинается самое интересное!'
-      ]
-    };
+    stop() {
+      slotActive = false;
+      hideAndStop();
+    },
 
-    const phrases = comments[type];
-    if (!phrases) return;
+    react(win, isMega) {
+      if (!slotActive) return;
+      showPhrase(pickPhrase(isMega ? megaPhrases : winPhrases));
+    },
 
-    const phrase = phrases[
-      Math.floor(Math.random() * phrases.length)
-    ];
-
-    document.getElementById('ks-assistant-text').textContent = phrase;
-    box.classList.add('active');
-
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => {
-      box.classList.remove('active');
-    }, 4500);
-
-    if ('speechSynthesis' in window) {
-      speechSynthesis.cancel();
-
-      const voice = new SpeechSynthesisUtterance(phrase);
-      voice.lang = 'ru-RU';
-      voice.rate = 1.05;
-      voice.pitch = 1.1;
-      speechSynthesis.speak(voice);
+    comment(type) {
+      if (!slotActive || type !== 'spin') return;
+      showPhrase(pickPhrase(spinPhrases));
     }
-  }
-};
+  };
 })();
 
 // Инициализация
@@ -3448,18 +3521,12 @@ syncSettingsControls();
 const API = 'https://cazinooo.hostingem.ru/api/admin-api.php';
 
 // ФУНКЦИИ ДЛЯ СВЯЗИ С СЕРВЕРОМ
-
 async function saveToServer() {
   try {
-    const avatarForServer = String(state.avatar || '').startsWith('data:')
-      ? ''
-      : (state.avatar || '');
-
+    const avatarForServer = String(state.avatar || '').startsWith('data:') ? '' : (state.avatar || '');
     const response = await fetch(API + '?action=save', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         player_id: state.playerId,
         balance: state.balance,
@@ -3468,28 +3535,9 @@ async function saveToServer() {
         stats: state.stats
       })
     });
-
-    const result = await response.text();
-
-    if (!response.ok) {
-      throw new Error('HTTP ' + response.status + ': ' + result);
-    }
-
-    console.log('KESUG SAVE RESPONSE:', result);
-
-    if (!result.trim()) {
-      throw new Error('Сервер вернул пустой ответ');
-    }
-
-    const data = JSON.parse(result);
-
-    if (!data.ok) {
-      throw new Error('Сервер не подтвердил сохранение');
-    }
-
-    console.log('KESUG: игрок сохранён на сервере!');
+    if (!response.ok) throw new Error('HTTP ' + response.status);
   } catch (e) {
-    console.error('KESUG SAVE ERROR:', e);
+    console.log('Kesug Slots: серверное сохранение недоступно', e);
   }
 }
 
@@ -3517,35 +3565,6 @@ async function loadFromServer() {
   saveToLocal();
   updateUI();
   updateProfileUI();
-}
-
-async function loadTop() {
-  const list = document.getElementById('top-list');
-  if (!list) return; // Защита от ошибки, если нет блока ТОПа
-  list.innerHTML = '<div style="padding: 20px; text-align: center; color: #aaa;">Загрузка...</div>';
-  
-  try {
-    const res = await fetch(API + '?action=leaderboard');
-    const players = await res.json();
-    if (!Array.isArray(players) || players.length === 0) {
-      list.innerHTML = '<div style="padding: 20px; text-align: center; color: #aaa;">Пока никто не играл</div>';
-      return;
-    }
-    list.innerHTML = players.map((p, i) => {
-      const isMe = p.player_id === state.playerId;
-      const crown = i === 0 ? '👑' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`;
-      return `
-        <div style="display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #333; background: ${isMe ? 'rgba(214,173,91,0.1)' : 'transparent'}; border-left: ${isMe ? '3px solid var(--accent-gold)' : '3px solid transparent'};">
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <span style="font-size: 18px; width: 25px; text-align: center;">${crown}</span>
-            <img src="${p.avatar_url || 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png'}" style="width: 30px; height: 30px; border-radius: 50%;">
-            <span style="font-weight: bold; color: ${isMe ? 'var(--accent-gold)' : '#fff'};">${p.nickname}</span>
-          </div>
-          <span style="font-family: monospace; font-weight: bold; color: var(--accent-gold);">${Math.floor(p.balance).toLocaleString('ru-RU')} ₽</span>
-        </div>
-      `;
-    }).join('');
-  } catch (e) { list.innerHTML = '<div style="padding: 20px; text-align: center; color: #ef4444;">Ошибка загрузки</div>'; }
 }
 
 // ЗАПУСК ИГРЫ (вызовы)

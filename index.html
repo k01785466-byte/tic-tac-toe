@@ -1560,6 +1560,310 @@ body::before,
   letter-spacing: 1.2px;
 }
 </style>
+
+
+<style id="kesug-full-interface-customization">
+/* KESUG SLOTS — unified themes: backgrounds, surfaces, outlines and accents */
+html { background: var(--bg-main); }
+body {
+  color: var(--text-main) !important;
+  background: var(--bg-main) !important;
+}
+body.bg-aurora {
+  background:
+    radial-gradient(ellipse at 12% 10%, rgba(var(--accent-rgb), .16), transparent 36%),
+    radial-gradient(ellipse at 88% 76%, rgba(var(--accent-rgb), .10), transparent 39%),
+    linear-gradient(145deg, var(--bg-main), var(--ks-page-mid), var(--ks-page-end)) !important;
+}
+body.bg-gradient {
+  background: linear-gradient(135deg, var(--bg-main) 0%, var(--ks-page-mid) 52%, var(--ks-page-end) 100%) !important;
+}
+body.bg-minimal { background: var(--bg-main) !important; }
+body::before {
+  background:
+    radial-gradient(ellipse at 13% 18%, rgba(var(--accent-rgb), .23), transparent 43%),
+    radial-gradient(ellipse at 87% 28%, rgba(var(--accent-rgb), .15), transparent 44%),
+    radial-gradient(ellipse at 69% 86%, rgba(var(--accent-rgb), .12), transparent 46%) !important;
+}
+body::after {
+  background-image:
+    linear-gradient(rgba(var(--accent-rgb), .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), .035) 1px, transparent 1px),
+    radial-gradient(ellipse at center, transparent 12%, rgba(0,0,0,.30) 100%) !important;
+}
+body.bg-minimal::before,
+body.bg-minimal::after { display: none !important; }
+
+/* Header, cards and panels */
+.top-header.is-scrolled .header-glass,
+.game-header {
+  background: var(--glass-bg) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: 0 15px 42px rgba(0,0,0,.38), 0 0 26px rgba(var(--accent-rgb),.08), inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+.header-glass::after {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(var(--accent-rgb),.18), transparent 48%),
+    radial-gradient(ellipse at 100% 100%, rgba(var(--accent-rgb),.10), transparent 48%) !important;
+}
+.game-card, .stat-card, .profile-card, .form-box,
+.settings-group, .settings-info-card, .profile-data-panel,
+.catalog-empty {
+  color: var(--text-main) !important;
+  background: linear-gradient(145deg, rgba(var(--accent-rgb), .065), var(--bg-card) 66%) !important;
+  border-color: var(--border) !important;
+}
+.game-card::before,
+.lobby-hero::before,
+.hero-visual-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(var(--accent-rgb), .20), transparent 68%) !important;
+}
+.game-card:hover, .stat-card:hover {
+  border-color: rgba(var(--accent-rgb), .68) !important;
+  box-shadow: 0 17px 35px rgba(0,0,0,.35), 0 0 23px rgba(var(--accent-rgb),.12) !important;
+}
+.settings-hero, .lobby-hero {
+  border-color: rgba(var(--accent-rgb), .28) !important;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(var(--accent-rgb), .17), transparent 55%),
+    linear-gradient(120deg, var(--bg-card), var(--bg-main)) !important;
+}
+
+/* Text, icons, borders and interactive controls */
+.top-brand i, .profile-info p, .stat-icon, .settings-page-label i,
+.settings-group-heading > i, .setting-row-icon, .catalog-empty > i,
+.hero-eyebrow, #lobby-clock-time, .ks-project-footer a {
+  color: var(--accent-green) !important;
+}
+.user-balance {
+  color: var(--accent-gold) !important;
+  background: rgba(var(--accent-rgb), .13) !important;
+  border-color: rgba(var(--accent-rgb), .35) !important;
+}
+.profile-btn:hover, .favorite-toggle:hover, .favorite-toggle.is-favorite {
+  border-color: rgba(var(--accent-rgb), .66) !important;
+  color: var(--accent-gold) !important;
+  background: rgba(var(--accent-rgb), .14) !important;
+}
+.btn-green, .hero-primary-btn, .spin-btn-big, .game-card:hover .play-btn {
+  color: #101010 !important;
+  background: linear-gradient(110deg, var(--accent-green), var(--accent-gold), var(--accent-green)) !important;
+  border-color: var(--accent-green) !important;
+  box-shadow: 0 7px 22px rgba(var(--accent-rgb), .20) !important;
+}
+.play-btn { border-color: rgba(var(--accent-rgb), .26) !important; }
+.btn-green:hover, .hero-primary-btn:hover, .spin-btn-big:hover {
+  filter: brightness(1.08) !important;
+  box-shadow: 0 10px 28px rgba(var(--accent-rgb), .30) !important;
+}
+.back-btn:hover, .bet-btns button:hover, .theme-select:focus {
+  border-color: rgba(var(--accent-rgb), .60) !important;
+}
+.theme-select { border-color: rgba(var(--accent-rgb), .35) !important; }
+.setting-switch { border-color: rgba(var(--accent-rgb), .22) !important; }
+.setting-row input:checked + .setting-switch {
+  background: linear-gradient(100deg, var(--accent-green), var(--accent-gold)) !important;
+  border-color: rgba(var(--accent-rgb), .72) !important;
+}
+.setting-row input:focus-visible + .setting-switch { outline-color: var(--accent-gold) !important; }
+.inp:focus, .bet-box:focus-within {
+  border-color: var(--accent-green) !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), .13) !important;
+}
+.inp, .bet-box, .bet-btns button, .theme-select {
+  background-color: var(--bg-input) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border) !important;
+}
+
+/* The slot machine is themed separately so its reels and frame follow the chosen palette. */
+#game-screen {
+  background:
+    radial-gradient(ellipse at 50% 7%, rgba(var(--accent-rgb), .18), transparent 39%),
+    radial-gradient(ellipse at 10% 92%, rgba(var(--accent-rgb), .10), transparent 36%),
+    linear-gradient(145deg, var(--bg-main), var(--ks-page-mid), var(--ks-page-end)) !important;
+}
+#game-screen::before {
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 0 22%, rgba(var(--accent-rgb),.10) 22.2%, transparent 22.7%),
+    linear-gradient(rgba(var(--accent-rgb),.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb),.025) 1px, transparent 1px) !important;
+}
+.slot-container {
+  background: linear-gradient(150deg, rgba(var(--accent-rgb), .12), var(--bg-card) 52%, var(--bg-main)) !important;
+  border-color: rgba(var(--accent-rgb), .46) !important;
+  box-shadow: 0 22px 58px rgba(0,0,0,.52), 0 0 30px rgba(var(--accent-rgb),.09), inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+.slot-container::before {
+  background: radial-gradient(ellipse at 0% 0%, rgba(var(--accent-rgb),.14), transparent 44%), radial-gradient(ellipse at 100% 100%, rgba(var(--accent-rgb),.10), transparent 46%) !important;
+}
+.reels {
+  border-color: rgba(var(--accent-rgb), .50) !important;
+  background: linear-gradient(145deg, var(--bg-input), var(--bg-main)) !important;
+  box-shadow: inset 0 0 24px rgba(var(--accent-rgb),.08), 0 10px 24px rgba(0,0,0,.35) !important;
+}
+.reel-window {
+  border-color: rgba(var(--accent-rgb), .24) !important;
+  background: linear-gradient(180deg, var(--bg-card), var(--bg-input) 55%, var(--bg-card)) !important;
+}
+.reel-item.winning {
+  background: rgba(var(--accent-rgb), .20) !important;
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 18px rgba(var(--accent-rgb), .42), inset 0 0 16px rgba(var(--accent-rgb), .12) !important;
+}
+.bet-box input { color: var(--accent-gold) !important; }
+.win-box { border-color: var(--accent-green) !important; box-shadow: 0 0 50px rgba(var(--accent-rgb),.30), inset 0 0 20px rgba(var(--accent-rgb),.12) !important; }
+.win-title { color: #101010 !important; background: var(--accent-green) !important; }
+
+/* Loading, onboarding, toast and the existing music/assistant widgets */
+.ks-loader {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(var(--accent-rgb),.13), transparent 48%),
+    linear-gradient(145deg, var(--bg-card), var(--bg-main) 65%, var(--ks-page-end)) !important;
+}
+.ks-loader::before, .ks-loader::after {
+  background: radial-gradient(circle, rgba(var(--accent-rgb),.18), rgba(var(--accent-rgb),.035) 45%, transparent 70%) !important;
+}
+.ks-loader-emblem { border-color: rgba(var(--accent-rgb),.48) !important; box-shadow: 0 0 0 8px rgba(var(--accent-rgb),.035), 0 15px 50px rgba(0,0,0,.45), 0 0 45px rgba(var(--accent-rgb),.16) !important; }
+.ks-loader-emblem i, .ks-loader-wordmark span:last-child { color: var(--accent-gold) !important; }
+.ks-loader-progress span { background: linear-gradient(90deg, transparent, var(--accent-green) 45%, var(--accent-gold) 100%) !important; }
+.ks-onboarding-card, #kesug-music-widget, .kesug-music-widget, #ks-assistant {
+  border-color: rgba(var(--accent-rgb),.30) !important;
+}
+.ks-toast {
+  border-color: rgba(var(--accent-rgb),.34) !important;
+  background: var(--glass-bg) !important;
+}
+
+/* Flexible settings controls */
+.theme-color-input {
+  width: 43px;
+  height: 34px;
+  flex: 0 0 43px;
+  padding: 3px;
+  border: 1px solid rgba(var(--accent-rgb),.42);
+  border-radius: 9px;
+  background: var(--bg-input);
+  cursor: pointer;
+}
+.theme-color-input::-webkit-color-swatch-wrapper { padding: 0; }
+.theme-color-input::-webkit-color-swatch { border: 0; border-radius: 5px; }
+.theme-color-input::-moz-color-swatch { border: 0; border-radius: 5px; }
+.setting-scale-copy { display: flex; flex-direction: column; gap: 4px; margin: 2px 0 15px; }
+.setting-scale-copy strong { color: var(--text-main); font-size: 12px; }
+.setting-scale-copy span { color: var(--text-muted); font-size: 10px; line-height: 1.55; }
+.setting-scale-control { display: grid; grid-template-columns: auto minmax(80px,1fr) auto auto; align-items: center; gap: 10px; color: var(--text-muted); font-size: 10px; font-weight: 800; }
+.setting-scale-control input[type="range"] {
+  width: 100%; height: 6px; margin: 0; accent-color: var(--accent-green); cursor: pointer;
+}
+.setting-scale-control output {
+  min-width: 49px; padding: 6px 8px; text-align: center; border: 1px solid rgba(var(--accent-rgb),.30);
+  border-radius: 8px; color: var(--accent-gold); background: rgba(var(--accent-rgb),.08); font-size: 11px;
+}
+.settings-scale-group { min-width: 0; }
+.setting-row-copy strong { color: var(--text-main) !important; }
+.setting-row-copy small { color: var(--text-muted) !important; }
+.settings-info-card strong { color: var(--text-main) !important; }
+.settings-info-card p { color: var(--text-muted) !important; }
+@media (max-width: 700px) {
+  .setting-scale-control { grid-template-columns: auto minmax(70px,1fr) auto; }
+  .setting-scale-control output { grid-column: 1 / -1; justify-self: end; }
+}
+/* Theme-aware decorative details in the lobby, music player and onboarding. */
+.lobby-hero h1 span, .hero-greeting strong, .hero-emblem i,
+.hero-spark, .catalog-count-card strong, .section-kicker,
+.ks-onboarding-kicker, .ks-onboarding-label {
+  color: var(--accent-gold) !important;
+}
+.hero-orbit, .hero-orbit-two, .hero-orbit-three,
+.hero-bottom-line, .hero-eyebrow-divider {
+  border-color: rgba(var(--accent-rgb), .30) !important;
+  background-color: rgba(var(--accent-rgb), .30) !important;
+}
+.hero-emblem {
+  border-color: rgba(var(--accent-rgb), .48) !important;
+  background: linear-gradient(145deg, rgba(var(--accent-rgb),.22), var(--bg-card)) !important;
+  box-shadow: 0 0 0 9px rgba(var(--accent-rgb),.035), 0 18px 55px rgba(0,0,0,.42), 0 0 40px rgba(var(--accent-rgb),.15), inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+.hero-eyebrow-dot { background: var(--accent-gold) !important; box-shadow: 0 0 12px rgba(var(--accent-rgb),.65) !important; }
+.hero-safe-note i { color: var(--accent-green) !important; }
+.catalog-count-card, .catalog-toolbar {
+  border-color: rgba(var(--accent-rgb),.25) !important;
+  background: linear-gradient(115deg, rgba(var(--accent-rgb),.08), var(--bg-card)) !important;
+}
+.category-chip:hover { color: var(--accent-gold) !important; background: rgba(var(--accent-rgb),.09) !important; }
+.category-chip.active {
+  color: #101010 !important;
+  background: linear-gradient(110deg, var(--accent-green), var(--accent-gold)) !important;
+  border-color: rgba(var(--accent-rgb),.48) !important;
+}
+.catalog-search, .catalog-sort-wrap {
+  border-color: rgba(var(--accent-rgb),.26) !important;
+  background: var(--bg-input) !important;
+  color: var(--accent-gold) !important;
+}
+.catalog-search input, .catalog-sort-wrap select { color: var(--text-main) !important; }
+.game-card-art {
+  border-color: rgba(var(--accent-rgb),.32) !important;
+  background: radial-gradient(ellipse at 50% 44%, rgba(var(--accent-rgb),.19), transparent 64%), linear-gradient(145deg, var(--bg-card), var(--bg-input)) !important;
+}
+.game-card-number, .game-card-category { color: var(--accent-gold) !important; }
+.game-card-category { border-color: rgba(var(--accent-rgb),.30) !important; background: rgba(var(--bg-main),.72) !important; }
+.game-card-body .game-title, .catalog-title { color: var(--text-white) !important; }
+.game-card-body .game-desc { color: var(--text-muted) !important; }
+.catalog-empty button, .favorites-chip span {
+  color: var(--accent-gold) !important;
+  border-color: rgba(var(--accent-rgb),.34) !important;
+  background: rgba(var(--accent-rgb),.09) !important;
+}
+.header-icon-btn:hover { color: var(--accent-gold) !important; border-color: rgba(var(--accent-rgb),.5) !important; background: rgba(var(--accent-rgb),.10) !important; }
+.kesug-music-widget {
+  border-color: rgba(var(--accent-rgb),.28) !important;
+  background: linear-gradient(135deg, rgba(var(--accent-rgb),.10), var(--bg-card)) !important;
+}
+.kesug-music-icon, .kesug-music-add {
+  color: var(--accent-gold) !important;
+  background: rgba(var(--accent-rgb),.14) !important;
+}
+.kesug-music-text strong, .kesug-music-controls button { color: var(--text-white) !important; }
+.kesug-music-text span { color: var(--text-muted) !important; }
+#kesug-music-toggle { color: #101010 !important; background: var(--accent-green) !important; }
+#ks-assistant {
+  color: var(--text-main) !important;
+  background: var(--glass-bg) !important;
+  border-color: rgba(var(--accent-rgb),.42) !important;
+  box-shadow: 0 12px 35px rgba(0,0,0,.4), 0 0 24px rgba(var(--accent-rgb),.08) !important;
+}
+#ks-assistant strong { color: var(--accent-gold) !important; }
+.ks-onboarding-card {
+  color: var(--text-main) !important;
+  border-color: rgba(var(--accent-rgb),.36) !important;
+  background: radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb),.14), transparent 55%), linear-gradient(145deg, var(--bg-card), var(--bg-main) 72%) !important;
+}
+.ks-onboarding-title { color: var(--text-white) !important; }
+.ks-onboarding-description, .ks-onboarding-footnote { color: var(--text-muted) !important; }
+.ks-onboarding-avatar { border-color: rgba(var(--accent-rgb),.55) !important; }
+.ks-onboarding-upload, .ks-onboarding-input {
+  border-color: rgba(var(--accent-rgb),.34) !important;
+  color: var(--text-main) !important;
+  background-color: var(--bg-input) !important;
+}
+.ks-onboarding-save { color: #101010 !important; background: linear-gradient(110deg,var(--accent-green),var(--accent-gold)) !important; }
+.setting-row .theme-color-input {
+  position: relative !important;
+  width: 43px !important;
+  height: 34px !important;
+  flex: 0 0 43px !important;
+  opacity: 1 !important;
+  padding: 3px !important;
+}
+body.bg-minimal #game-screen { background: var(--bg-main) !important; }
+body.bg-gradient #game-screen { background: linear-gradient(135deg,var(--bg-main),var(--ks-page-mid),var(--ks-page-end)) !important; }
+body.bg-aurora #game-screen {
+  background: radial-gradient(ellipse at 50% 7%,rgba(var(--accent-rgb),.18),transparent 39%),linear-gradient(145deg,var(--bg-main),var(--ks-page-mid),var(--ks-page-end)) !important;
+}
+</style>
+
 </head>
 <body class="is-loading">
 
@@ -1609,6 +1913,10 @@ body::before,
         <span id="ui-balance">0 ₽</span>
       </div>
       <button class="header-icon-btn" type="button" onclick="showPage('settings')" aria-label="Настройки" title="Настройки"><i class="ph-bold ph-sliders-horizontal"></i></button>
+        <!-- Кнопка ТОПа -->
+      <button class="header-icon-btn" onclick="showPage('top')" title="Топ игроков">
+        <i class="ph-bold ph-trophy"></i>
+      </button>
       <button class="profile-btn" onclick="showPage('profile')">
         <img id="nav-avatar" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png">
       </button>
@@ -1740,6 +2048,15 @@ body::before,
     </div>
 
     <!-- ПРОФИЛЬ -->
+        <!-- ТОП ИГРОКОВ -->
+    <div class="page-view" id="page-top">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('lobby')"><i class="ph-bold ph-arrow-left"></i> На главную</button>
+      </div>
+      <div class="widget" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-top: 15px;">
+        <div id="top-list" style="padding: 0; display: flex; flex-direction: column;"></div>
+      </div>
+    </div>
     <div class="page-view" id="page-profile">
       <div class="page-header">
         <button class="back-btn" onclick="showPage('lobby')"><i class="ph-bold ph-arrow-left"></i> На главную</button>
@@ -1799,27 +2116,46 @@ body::before,
           <label class="setting-row" for="setting-compact-cards"><span class="setting-row-icon"><i class="ph-bold ph-squares-four"></i></span><span class="setting-row-copy"><strong>Компактные карточки</strong><small>Показывать больше автоматов в каталоге.</small></span><input id="setting-compact-cards" type="checkbox" onchange="updateSetting('compactCards', this.checked)"><span class="setting-switch"></span></label>
           <label class="setting-row" for="setting-ambient"><span class="setting-row-icon"><i class="ph-bold ph-sun-horizon"></i></span><span class="setting-row-copy"><strong>Атмосферный фон</strong><small>Золотистые световые пятна и декоративная сетка.</small></span><input id="setting-ambient" type="checkbox" onchange="updateSetting('ambientBackground', this.checked)"><span class="setting-switch"></span></label>
           <div class="setting-row theme-setting">
-  <span class="setting-row-icon">
-    <i class="ph-bold ph-palette"></i>
-  </span>
-  <span class="setting-row-copy">
-    <strong>Цветовая тема</strong>
-    <small>Измени основной цвет интерфейса.</small>
-  </span>
-  <select id="setting-theme" class="theme-select" onchange="changeInterfaceTheme(this.value)">
-    <option value="gold">Золотая</option>
-    <option value="blue">Синяя</option>
-    <option value="purple">Фиолетовая</option>
-    <option value="green">Зелёная</option>
-    <option value="red">Красная</option>
-    <option value="pink">Розовая</option>
-    <option value="cyan">Бирюзовая</option>
-  </select>
-</div>
+            <span class="setting-row-icon"><i class="ph-bold ph-palette"></i></span>
+            <span class="setting-row-copy"><strong>Цветовая тема</strong><small>Перекрашивает акценты, поверхности, карточки и игровой экран.</small></span>
+            <select id="setting-theme" class="theme-select" onchange="changeInterfaceTheme(this.value)">
+              <option value="gold">Золотая</option>
+              <option value="blue">Синяя</option>
+              <option value="purple">Фиолетовая</option>
+              <option value="green">Зелёная</option>
+              <option value="red">Красная</option>
+              <option value="pink">Розовая</option>
+              <option value="cyan">Бирюзовая</option>
+            </select>
+          </div>
+          <div class="setting-row theme-setting">
+            <span class="setting-row-icon"><i class="ph-bold ph-eyedropper"></i></span>
+            <span class="setting-row-copy"><strong>Свой акцентный цвет</strong><small>Выбери собственный оттенок вместо цвета темы.</small></span>
+            <input id="setting-accent-color" class="theme-color-input" type="color" value="#d6ad5b" onchange="changeInterfaceAccent(this.value)" aria-label="Свой акцентный цвет">
+          </div>
+          <div class="setting-row theme-setting">
+            <span class="setting-row-icon"><i class="ph-bold ph-image"></i></span>
+            <span class="setting-row-copy"><strong>Стиль фона</strong><small>Меняет оформление фона всего игрового пространства.</small></span>
+            <select id="setting-background" class="theme-select" onchange="changeInterfaceBackground(this.value)">
+              <option value="aurora">Световая атмосфера</option>
+              <option value="gradient">Градиент</option>
+              <option value="minimal">Минимализм</option>
+            </select>
+          </div>
         </section>
         <section class="settings-group">
           <div class="settings-group-heading"><div><span class="section-kicker">MOTION</span><h3>Анимации</h3></div><i class="ph ph-sparkle"></i></div>
           <label class="setting-row" for="setting-reduced-motion"><span class="setting-row-icon"><i class="ph-bold ph-waveform"></i></span><span class="setting-row-copy"><strong>Уменьшить анимации</strong><small>Отключить декоративные движения и длинные переходы.</small></span><input id="setting-reduced-motion" type="checkbox" onchange="updateSetting('reduceEffects', this.checked)"><span class="setting-switch"></span></label>
+        </section>
+        <section class="settings-group settings-scale-group">
+          <div class="settings-group-heading"><div><span class="section-kicker">INTERFACE SCALE</span><h3>Размер интерфейса</h3></div><i class="ph ph-arrows-out"></i></div>
+          <div class="setting-scale-copy"><strong>Масштаб всей игры</strong><span>Уменьши или увеличь интерфейс целиком — включая лобби, меню и игровой экран.</span></div>
+          <div class="setting-scale-control">
+            <span>80%</span>
+            <input id="setting-ui-scale" type="range" min="80" max="120" step="5" value="100" oninput="changeInterfaceScale(this.value)" aria-label="Размер всего интерфейса">
+            <span>120%</span>
+            <output id="setting-scale-value" for="setting-ui-scale">100%</output>
+          </div>
         </section>
         <section class="settings-info-card">
           <i class="ph-fill ph-info"></i><div><strong>О настройках</strong><p>Настройки сохраняются локально в этом браузере. Очистка данных сайта может удалить их вместе с профилем.</p></div>
@@ -1958,7 +2294,10 @@ const DEFAULT_SETTINGS = {
   compactCards: false,
   ambientBackground: true,
   reduceEffects: false,
-  theme: 'gold'
+  theme: 'gold',
+  backgroundStyle: 'aurora',
+  customAccent: '',
+  uiScale: 100
 };
 
 const shouldShowNewPlayerSetup = !localStorage.getItem('kasino_player_id') && localStorage.getItem('ks_onboarding_done') !== '1';
@@ -1986,6 +2325,7 @@ window.showPage = (id) => {
   if (el) el.classList.add('active');
 
   if (id === 'profile') renderProfileStats();
+  if (id === 'top') loadTop();
   if (id === 'settings') syncSettingsControls();
   if (id === 'edit-profile') document.getElementById('input-nick').value = state.nickname;
   window.scrollTo({ top: 0, behavior: state.settings.reduceEffects ? 'auto' : 'smooth' });
@@ -1999,6 +2339,9 @@ function saveToLocal() {
   localStorage.setItem('ks_avatar', state.avatar);
   localStorage.setItem('ks_favorites', JSON.stringify(state.favorites));
   localStorage.setItem('ks_settings', JSON.stringify(state.settings));
+
+  // Обновляем серверный профиль для таблицы лидеров с небольшой задержкой.
+  queueServerSave();
 }
 
 function updateUI() {
@@ -2180,28 +2523,71 @@ function showToast(message) {
   showToast.timeoutId = window.setTimeout(() => toast.classList.remove('is-visible'), 2300);
 }
 
-function applySettings() {
-  document.body.classList.toggle('compact-cards', !!state.settings.compactCards);
-  document.body.classList.toggle('reduce-effects', !!state.settings.reduceEffects);
-  document.body.classList.toggle('no-ambient', !state.settings.ambientBackground);
-  document.documentElement.style.scrollBehavior = state.settings.reduceEffects ? 'auto' : 'smooth';
-
-  const themes = {
-    gold:   { color: '#d6ad5b', rgb: '214, 173, 91', gold: '#f4d889' },
-    blue:   { color: '#4b9cff', rgb: '75, 156, 255', gold: '#a8d0ff' },
-    purple: { color: '#a879ff', rgb: '168, 121, 255', gold: '#d2b8ff' },
-    green:  { color: '#42c98b', rgb: '66, 201, 139', gold: '#a1f0c9' },
-    red:    { color: '#ef6262', rgb: '239, 98, 98', gold: '#ffb0b0' },
-    pink:   { color: '#ed78b7', rgb: '237, 120, 183', gold: '#ffc1df' },
-    cyan:   { color: '#38c9c1', rgb: '56, 201, 193', gold: '#a0f3ed' }
+function hexToRgb(hex) {
+  const clean = String(hex || '').replace('#', '');
+  if (!/^[0-9a-f]{6}$/i.test(clean)) return { r: 214, g: 173, b: 91 };
+  return {
+    r: parseInt(clean.slice(0, 2), 16),
+    g: parseInt(clean.slice(2, 4), 16),
+    b: parseInt(clean.slice(4, 6), 16)
   };
+}
 
-  const theme = themes[state.settings.theme] || themes.gold;
+function mixColor(rgb, amount = 0.34) {
+  const mix = channel => Math.round(channel + (255 - channel) * amount).toString(16).padStart(2, '0');
+  return '#' + mix(rgb.r) + mix(rgb.g) + mix(rgb.b);
+}
+
+function applySettings() {
+  const body = document.body;
   const root = document.documentElement;
 
-  root.style.setProperty('--accent-green', theme.color);
-  root.style.setProperty('--accent-rgb', theme.rgb);
-  root.style.setProperty('--accent-gold', theme.gold);
+  body.classList.toggle('compact-cards', !!state.settings.compactCards);
+  body.classList.toggle('reduce-effects', !!state.settings.reduceEffects);
+  body.classList.toggle('no-ambient', !state.settings.ambientBackground);
+  body.classList.toggle('bg-aurora', state.settings.backgroundStyle === 'aurora');
+  body.classList.toggle('bg-gradient', state.settings.backgroundStyle === 'gradient');
+  body.classList.toggle('bg-minimal', state.settings.backgroundStyle === 'minimal');
+  root.style.scrollBehavior = state.settings.reduceEffects ? 'auto' : 'smooth';
+
+  const themes = {
+    gold:   { color: '#d6ad5b', page: '#100e0a', mid: '#21180d', end: '#0b0906', card: '#201b13', input: '#0b0906', border: '#403321', muted: '#aa9d86', glass: 'rgba(29,25,17,.74)' },
+    blue:   { color: '#4b9cff', page: '#09111e', mid: '#102542', end: '#070d17', card: '#132239', input: '#080f1b', border: '#294363', muted: '#9aacc4', glass: 'rgba(12,25,43,.78)' },
+    purple: { color: '#a879ff', page: '#100b1c', mid: '#26163d', end: '#0b0813', card: '#211831', input: '#0c0815', border: '#463263', muted: '#b0a0c9', glass: 'rgba(28,18,45,.78)' },
+    green:  { color: '#42c98b', page: '#081710', mid: '#103322', end: '#06100b', card: '#12291e', input: '#07130d', border: '#28533d', muted: '#98b9a5', glass: 'rgba(12,35,23,.78)' },
+    red:    { color: '#ef6262', page: '#1a0b0d', mid: '#3a1418', end: '#100709', card: '#2a171a', input: '#12090b', border: '#593037', muted: '#c1a0a3', glass: 'rgba(43,17,21,.78)' },
+    pink:   { color: '#ed78b7', page: '#190d17', mid: '#3b1930', end: '#100810', card: '#2b1827', input: '#120a11', border: '#59334f', muted: '#c5a2ba', glass: 'rgba(43,19,37,.78)' },
+    cyan:   { color: '#38c9c1', page: '#071718', mid: '#103337', end: '#050f10', card: '#12292b', input: '#071315', border: '#285457', muted: '#96babb', glass: 'rgba(10,38,40,.78)' }
+  };
+
+  const selectedTheme = themes[state.settings.theme] || themes.gold;
+  const customColor = /^#[0-9a-f]{6}$/i.test(state.settings.customAccent || '')
+    ? state.settings.customAccent
+    : selectedTheme.color;
+  const rgb = hexToRgb(customColor);
+  const rgbText = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+  const lightColor = mixColor(rgb, 0.34);
+
+  root.style.setProperty('--accent-green', customColor);
+  root.style.setProperty('--accent-rgb', rgbText);
+  root.style.setProperty('--accent-gold', lightColor);
+  root.style.setProperty('--accent-soft', `rgba(${rgbText}, .15)`);
+
+  root.style.setProperty('--bg-main', selectedTheme.page);
+  root.style.setProperty('--bg-card', selectedTheme.card);
+  root.style.setProperty('--bg-input', selectedTheme.input);
+  root.style.setProperty('--border', selectedTheme.border);
+  root.style.setProperty('--text-muted', selectedTheme.muted);
+  root.style.setProperty('--glass-bg', selectedTheme.glass);
+  root.style.setProperty('--glass-border', `rgba(${rgbText}, .22)`);
+  root.style.setProperty('--ks-page-mid', selectedTheme.mid);
+  root.style.setProperty('--ks-page-end', selectedTheme.end);
+
+  const scale = Math.min(120, Math.max(80, Number(state.settings.uiScale) || 100));
+  state.settings.uiScale = scale;
+  body.style.zoom = `${scale}%`;
+  const scaleOutput = document.getElementById('setting-scale-value');
+  if (scaleOutput) scaleOutput.textContent = `${scale}%`;
 }
 
 function syncSettingsControls() {
@@ -2209,11 +2595,19 @@ function syncSettingsControls() {
   const ambient = document.getElementById('setting-ambient');
   const reduced = document.getElementById('setting-reduced-motion');
   const theme = document.getElementById('setting-theme');
+  const background = document.getElementById('setting-background');
+  const accent = document.getElementById('setting-accent-color');
+  const scale = document.getElementById('setting-ui-scale');
+  const scaleOutput = document.getElementById('setting-scale-value');
 
   if (compact) compact.checked = !!state.settings.compactCards;
   if (ambient) ambient.checked = !!state.settings.ambientBackground;
   if (reduced) reduced.checked = !!state.settings.reduceEffects;
   if (theme) theme.value = state.settings.theme || 'gold';
+  if (background) background.value = state.settings.backgroundStyle || 'aurora';
+  if (accent) accent.value = /^#[0-9a-f]{6}$/i.test(state.settings.customAccent || '') ? state.settings.customAccent : (theme ? ({gold:'#d6ad5b',blue:'#4b9cff',purple:'#a879ff',green:'#42c98b',red:'#ef6262',pink:'#ed78b7',cyan:'#38c9c1'}[theme.value] || '#d6ad5b') : '#d6ad5b');
+  if (scale) scale.value = String(state.settings.uiScale || 100);
+  if (scaleOutput) scaleOutput.textContent = `${state.settings.uiScale || 100}%`;
 }
 
 window.updateSetting = (key, value) => {
@@ -2227,14 +2621,44 @@ window.updateSetting = (key, value) => {
 
 window.changeInterfaceTheme = (theme) => {
   const allowedThemes = ['gold', 'blue', 'purple', 'green', 'red', 'pink', 'cyan'];
-
   if (!allowedThemes.includes(theme)) return;
 
   state.settings.theme = theme;
+  state.settings.customAccent = '';
   saveToLocal();
   applySettings();
+  syncSettingsControls();
+  showToast('Цветовая тема применена ко всему интерфейсу');
+};
 
-  showToast('Цветовая тема сохранена');
+window.changeInterfaceAccent = (color) => {
+  if (!/^#[0-9a-f]{6}$/i.test(String(color || ''))) return;
+  state.settings.customAccent = color;
+  saveToLocal();
+  applySettings();
+  showToast('Свой цвет интерфейса сохранён');
+};
+
+window.changeInterfaceBackground = (style) => {
+  const allowed = ['aurora', 'gradient', 'minimal'];
+  if (!allowed.includes(style)) return;
+  state.settings.backgroundStyle = style;
+  saveToLocal();
+  applySettings();
+  showToast('Стиль фона изменён');
+};
+
+window.changeInterfaceScale = (value) => {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return;
+  const scale = Math.min(120, Math.max(80, Math.round(numeric / 5) * 5));
+  state.settings.uiScale = scale;
+  document.body.style.zoom = `${scale}%`;
+  const range = document.getElementById('setting-ui-scale');
+  const output = document.getElementById('setting-scale-value');
+  if (range && range.value !== String(scale)) range.value = String(scale);
+  if (output) output.textContent = `${scale}%`;
+  saveToLocal();
 };
 
 window.resetInterfaceSettings = () => {
@@ -2309,9 +2733,20 @@ async function importProfileBackup(file) {
     state.favorites = Array.isArray(profile.favorites) ? [...new Set(profile.favorites.filter(id => MACHINES.some(machine => machine.id === id)))] : [];
     const importedSettings = profile.settings && typeof profile.settings === 'object' ? profile.settings : {};
     state.settings = { ...DEFAULT_SETTINGS };
-    Object.keys(DEFAULT_SETTINGS).forEach(key => {
+    ['compactCards', 'ambientBackground', 'reduceEffects'].forEach(key => {
       if (typeof importedSettings[key] === 'boolean') state.settings[key] = importedSettings[key];
     });
+    if (['gold', 'blue', 'purple', 'green', 'red', 'pink', 'cyan'].includes(importedSettings.theme)) {
+      state.settings.theme = importedSettings.theme;
+    }
+    if (['aurora', 'gradient', 'minimal'].includes(importedSettings.backgroundStyle)) {
+      state.settings.backgroundStyle = importedSettings.backgroundStyle;
+    }
+    if (typeof importedSettings.customAccent === 'string' && /^#[0-9a-f]{6}$/i.test(importedSettings.customAccent)) {
+      state.settings.customAccent = importedSettings.customAccent;
+    }
+    const importedScale = Number(importedSettings.uiScale);
+    if (Number.isFinite(importedScale)) state.settings.uiScale = Math.min(120, Math.max(80, Math.round(importedScale / 5) * 5));
 
     saveToLocal();
     applySettings();
@@ -2409,6 +2844,9 @@ window.spin = () => {
   document.getElementById('btn-spin').disabled = true;
   
   state.balance -= state.bet;
+  if (window.kesugAssistant) {
+  window.kesugAssistant.comment('spin');
+}
   state.stats.spins++;
   state.stats.totalBet += state.bet;
   saveToLocal(); updateUI();
@@ -2473,6 +2911,9 @@ function checkWin(res) {
     
     // Красивый показ выигрыша
     const isMega = win >= state.bet * 20;
+    if (window.kesugAssistant) {
+  window.kesugAssistant.react(win, isMega);
+}
     const popup = document.getElementById('win-popup');
     
     popup.classList.toggle('mega', isMega);
@@ -2857,12 +3298,237 @@ setInterval(updateLobbyAtmosphere, 60000);
 
   updateMusicUI();
 })();
+// ═══════ KESUG ASSISTANT ═══════
+
+(() => {
+  const style = document.createElement('style');
+  style.textContent = `
+    #ks-assistant {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 99999;
+      width: min(320px, calc(100vw - 32px));
+      padding: 16px 18px;
+      background: rgba(24, 20, 14, .96);
+      border: 1px solid rgba(211, 166, 83, .4);
+      border-radius: 16px;
+      color: #f3e5c8;
+      box-shadow: 0 12px 35px rgba(0,0,0,.4);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    #ks-assistant.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #ks-assistant strong {
+      display: block;
+      color: #d3a653;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    #ks-assistant-text {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const box = document.createElement('div');
+  box.id = 'ks-assistant';
+  box.innerHTML = `
+    <strong>KESUG ASSISTANT</strong>
+    <div id="ks-assistant-text"></div>
+  `;
+  document.body.appendChild(box);
+
+  const winPhrases = [
+    'ну нихуя ты молодец',
+    'Да ну нафиг, отличный результат!',
+    'Вот это поворот, чёрт возьми!',
+    'Ничего себе! Хорош!',
+    'Ха! А ты умеешь удивлять!',
+    'Вот это выигрыш, охренеть!'
+  ];
+
+  const megaPhrases = [
+    'ДА ТЫ ЧТО ТВОРИШЬ?! ВОТ ЭТО ЗАНОС!',
+    'ОХРЕНЕТЬ! MEGA WIN!',
+    'Вот это мощь! Разнесло автомат!',
+    'ДА ЛАДНО?! Вот это удача!',
+    'Чёрт возьми, вот это результат!'
+  ];
+
+  let lastPhrase = '';
+  let hideTimer;
+
+  function react(win, isMega) {
+    const phrases = isMega ? megaPhrases : winPhrases;
+
+    let phrase;
+    do {
+      phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    } while (phrase === lastPhrase && phrases.length > 1);
+
+    lastPhrase = phrase;
+
+    document.getElementById('ks-assistant-text').textContent = phrase;
+    box.classList.add('active');
+
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      box.classList.remove('active');
+    }, 4500);
+
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+
+      const voice = new SpeechSynthesisUtterance(phrase);
+      voice.lang = 'ru-RU';
+      voice.rate = 1.05;
+      voice.pitch = 1.1;
+      voice.volume = 1;
+
+      speechSynthesis.speak(voice);
+    }
+  }
+
+  window.kesugAssistant = {
+  react,
+
+  comment(type) {
+    const comments = {
+      spin: [
+        'Ну что, погнали, нахуй!',
+        'Так, посмотрим, что нам сегодня выпадет!',
+        'Крутим! Надеюсь, автомат не жадничает!',
+        'Опа, начинается самое интересное!'
+      ]
+    };
+
+    const phrases = comments[type];
+    if (!phrases) return;
+
+    const phrase = phrases[
+      Math.floor(Math.random() * phrases.length)
+    ];
+
+    document.getElementById('ks-assistant-text').textContent = phrase;
+    box.classList.add('active');
+
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      box.classList.remove('active');
+    }, 4500);
+
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+
+      const voice = new SpeechSynthesisUtterance(phrase);
+      voice.lang = 'ru-RU';
+      voice.rate = 1.05;
+      voice.pitch = 1.1;
+      speechSynthesis.speak(voice);
+    }
+  }
+};
+})();
+
 // Инициализация
 applySettings();
 syncSettingsControls();
+// ТВОЙ АДРЕС СЕРВЕРА
+const API = 'https://cazinooo.hostingem.ru/api/admin-api.php';
+
+// ФУНКЦИИ ДЛЯ СВЯЗИ С СЕРВЕРОМ
+async function saveToServer() {
+  try {
+    const avatarForServer = String(state.avatar || '').startsWith('data:') ? '' : (state.avatar || '');
+    const response = await fetch(API + '?action=save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        player_id: state.playerId,
+        balance: state.balance,
+        nickname: state.nickname,
+        avatar_url: avatarForServer,
+        stats: state.stats
+      })
+    });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+  } catch (e) {
+    console.log('Kesug Slots: серверное сохранение недоступно', e);
+  }
+}
+
+let serverSaveTimer = null;
+function queueServerSave() {
+  window.clearTimeout(serverSaveTimer);
+  serverSaveTimer = window.setTimeout(() => {
+    saveToServer();
+  }, 700);
+}
+
+async function loadFromServer() {
+  try {
+    const res = await fetch(API + '?action=load&player_id=' + encodeURIComponent(state.playerId));
+    const data = await res.json();
+    if (data && data.balance !== undefined) {
+      state.balance = Math.max(state.balance, parseFloat(data.balance) || 0);
+      if (data.nickname) state.nickname = data.nickname;
+      if (data.avatar_url && !state.avatar) state.avatar = data.avatar_url;
+      if (data.stats) state.stats = data.stats;
+    }
+  } catch (e) {
+    console.log('Kesug Slots: серверная загрузка недоступна', e);
+  }
+  saveToLocal();
+  updateUI();
+  updateProfileUI();
+}
+
+async function loadTop() {
+  const list = document.getElementById('top-list');
+  if (!list) return; // Защита от ошибки, если нет блока ТОПа
+  list.innerHTML = '<div style="padding: 20px; text-align: center; color: #aaa;">Загрузка...</div>';
+  
+  try {
+    const res = await fetch(API + '?action=leaderboard');
+    const players = await res.json();
+    if (!Array.isArray(players) || players.length === 0) {
+      list.innerHTML = '<div style="padding: 20px; text-align: center; color: #aaa;">Пока никто не играл</div>';
+      return;
+    }
+    list.innerHTML = players.map((p, i) => {
+      const isMe = p.player_id === state.playerId;
+      const crown = i === 0 ? '👑' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`;
+      return `
+        <div style="display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #333; background: ${isMe ? 'rgba(214,173,91,0.1)' : 'transparent'}; border-left: ${isMe ? '3px solid var(--accent-gold)' : '3px solid transparent'};">
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span style="font-size: 18px; width: 25px; text-align: center;">${crown}</span>
+            <img src="${p.avatar_url || 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png'}" style="width: 30px; height: 30px; border-radius: 50%;">
+            <span style="font-weight: bold; color: ${isMe ? 'var(--accent-gold)' : '#fff'};">${p.nickname}</span>
+          </div>
+          <span style="font-family: monospace; font-weight: bold; color: var(--accent-gold);">${Math.floor(p.balance).toLocaleString('ru-RU')} ₽</span>
+        </div>
+      `;
+    }).join('');
+  } catch (e) { list.innerHTML = '<div style="padding: 20px; text-align: center; color: #ef4444;">Ошибка загрузки</div>'; }
+}
+
+// ЗАПУСК ИГРЫ (вызовы)
 renderLobby();
 updateUI();
 updateProfileUI();
+loadFromServer(); // Загружаем данные с сервера при старте
+showPage('lobby');
 </script>
 </body>
 </html>

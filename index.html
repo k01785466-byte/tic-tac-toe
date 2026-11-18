@@ -1910,6 +1910,202 @@ body.lite-mode .win-box {
   box-shadow: none !important;
 }
 </style>
+
+<style id="kesug-machine-layout-fix">
+/* Исправление игрового экрана: кнопки не обрезаются на телефонах. */
+#game-screen {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 88px 18px max(22px, env(safe-area-inset-bottom));
+  justify-content: center;
+  align-items: center;
+}
+#game-screen > .game-header { z-index: 5; }
+.game-header {
+  top: max(12px, env(safe-area-inset-top));
+  width: min(94%, 760px);
+  max-width: 760px;
+  min-height: 58px;
+  height: auto;
+  gap: 10px;
+  padding: 8px 14px;
+}
+.machine-fullscreen-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid rgba(214,173,91,.30);
+  border-radius: 11px;
+  background: rgba(214,173,91,.10);
+  color: var(--accent-gold);
+  font: 700 12px/1.2 'Manrope', sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.machine-fullscreen-btn i { font-size: 17px; }
+.machine-fullscreen-btn.is-active { background: rgba(214,173,91,.2); border-color: rgba(214,173,91,.62); }
+.slot-container {
+  width: min(100%, 560px);
+  max-width: 560px;
+  margin: 0 auto;
+  flex: 0 0 auto;
+}
+#game-screen:fullscreen,
+#game-screen.is-immersive {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: auto;
+  justify-content: center;
+  padding: max(82px, env(safe-area-inset-top) + 66px) 24px max(22px, env(safe-area-inset-bottom));
+}
+#game-screen:fullscreen .slot-container,
+#game-screen.is-immersive .slot-container {
+  width: min(1180px, 100%);
+  max-width: none;
+  margin: auto;
+  padding: clamp(20px, 3vw, 42px);
+}
+#game-screen:fullscreen .reels,
+#game-screen.is-immersive .reels {
+  gap: clamp(10px, 1.5vw, 20px);
+  padding: clamp(10px, 1.5vw, 20px);
+  margin-bottom: clamp(18px, 2.4vh, 30px);
+}
+#game-screen:fullscreen .reel-window,
+#game-screen.is-immersive .reel-window {
+  height: calc(var(--reel-h) * 3);
+}
+@media (min-width: 900px) {
+  #game-screen:fullscreen,
+  #game-screen.is-immersive { padding-left: 4vw; padding-right: 4vw; }
+  #game-screen:fullscreen .slot-container,
+  #game-screen.is-immersive .slot-container { width: min(1320px, 100%); }
+  #game-screen:fullscreen,
+  #game-screen.is-immersive { --reel-h: clamp(90px, 13vh, 155px); }
+  #game-screen:fullscreen .game-controls,
+  #game-screen.is-immersive .game-controls { max-width: 760px; margin: 0 auto; }
+}
+@media (max-width: 600px) {
+  #game-screen {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: max(76px, env(safe-area-inset-top) + 64px) 10px max(18px, env(safe-area-inset-bottom));
+  }
+  .game-header {
+    top: max(8px, env(safe-area-inset-top));
+    width: calc(100% - 20px);
+    min-height: 52px;
+    padding: 6px 9px;
+    gap: 5px;
+    border-radius: 17px;
+  }
+  .back-btn-game { font-size: 12px; padding: 7px 5px; gap: 4px; white-space: nowrap; }
+  .machine-fullscreen-btn { min-height: 36px; padding: 7px 9px; gap: 4px; font-size: 0; }
+  .machine-fullscreen-btn i { font-size: 19px; }
+  .game-header .user-balance { font-size: 13px; gap: 5px; white-space: nowrap; }
+  .game-header .user-balance img { width: 17px; }
+  .slot-container {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 13px 12px 14px;
+    border-radius: 15px;
+  }
+  .reels { gap: 4px; padding: 5px; margin-bottom: 13px; }
+  .game-controls { gap: 10px; }
+  .bet-box { padding: 9px 11px; min-height: 46px; }
+  .bet-box input { width: 88px; font-size: 18px; }
+  .bet-btns { gap: 6px; }
+  .bet-btns button { min-height: 42px; padding: 9px 6px; }
+  .spin-btn-big { min-height: 48px; padding: 12px; }
+  #game-screen:fullscreen,
+  #game-screen.is-immersive {
+    padding: max(76px, env(safe-area-inset-top) + 64px) 10px max(18px, env(safe-area-inset-bottom));
+  }
+  #game-screen:fullscreen .slot-container,
+  #game-screen.is-immersive .slot-container { padding: 13px 12px 14px; }
+}
+@media (max-height: 620px) and (max-width: 900px) {
+  #game-screen { justify-content: flex-start; }
+  #game-screen .slot-container { margin-top: 0; }
+  :root { --reel-h: 54px; }
+}
+
+/* Баланс перенесён внутрь корпуса автомата — рядом с барабанами. */
+.machine-balance-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  margin: 0 0 17px;
+  padding: 13px 16px;
+  border: 1px solid rgba(214,173,91,.34);
+  border-radius: 13px;
+  background: linear-gradient(110deg, rgba(214,173,91,.13), rgba(10,8,5,.52));
+  min-width: 0;
+}
+.machine-balance-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  color: rgba(244,216,137,.72);
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+.machine-balance-label i {
+  flex: 0 0 auto;
+  color: var(--accent-gold);
+  font-size: 19px;
+}
+.machine-balance-card strong {
+  min-width: 0;
+  color: #ffe7ad;
+  font: 800 clamp(18px, 2.3vw, 25px)/1.15 'Space Grotesk', 'Manrope', sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* В полноэкранном режиме на телефоне автомат занимает доступную высоту. */
+@media (max-width: 600px) {
+  .machine-balance-card {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    border-radius: 11px;
+  }
+  .machine-balance-label { font-size: 9px; gap: 7px; }
+  .machine-balance-label i { font-size: 17px; }
+  .machine-balance-card strong { font-size: clamp(17px, 5vw, 22px); }
+  #game-screen.is-immersive {
+    padding-top: max(64px, env(safe-area-inset-top) + 54px);
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+  #game-screen.is-immersive .slot-container {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+  }
+}
+</style>
+
 </head>
 <body class="is-loading">
 
@@ -2231,13 +2427,20 @@ body.lite-mode .win-box {
 <div id="game-screen">
   <div class="game-header">
     <button class="back-btn-game" onclick="closeMachine()"><i class="ph-bold ph-arrow-left"></i> Назад</button>
-    <div class="user-balance" style="background: transparent; border: none; padding: 0; box-shadow: none;">
-      <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Money%20bag/3D/money_bag_3d.png" alt="Wallet">
-      <span id="game-balance">1000 ₽</span>
-    </div>
+    <button class="machine-fullscreen-btn" id="machine-fullscreen-btn" type="button" onclick="toggleMachineFullscreen()" aria-label="Включить полноэкранный режим" title="На весь экран">
+      <i class="ph-bold ph-arrows-out"></i><span>На весь экран</span>
+    </button>
   </div>
 
   <div class="slot-container">
+    <div class="machine-balance-card" aria-label="Текущий баланс">
+      <div class="machine-balance-label">
+        <i class="ph-bold ph-wallet" aria-hidden="true"></i>
+        <span>ТВОЙ БАЛАНС</span>
+      </div>
+      <strong id="game-balance">1000 ₽</strong>
+    </div>
+
     <div class="reels" id="main-reels">
       <div class="reel-window"><div class="reel-strip" id="reel-0"></div></div>
       <div class="reel-window"><div class="reel-strip" id="reel-1"></div></div>
@@ -2848,7 +3051,68 @@ window.openMachine = (id) => {
   updateUI();
 };
 
+function syncMachineFullscreenButton() {
+  const button = document.getElementById('machine-fullscreen-btn');
+  const screen = document.getElementById('game-screen');
+  if (!button || !screen) return;
+  const active = document.fullscreenElement === screen ||
+    document.webkitFullscreenElement === screen ||
+    screen.classList.contains('is-immersive');
+  button.classList.toggle('is-active', active);
+  button.innerHTML = active
+    ? '<i class="ph-bold ph-arrows-in"></i><span>Обычный режим</span>'
+    : '<i class="ph-bold ph-arrows-out"></i><span>На весь экран</span>';
+  button.setAttribute('aria-label', active ? 'Выйти из полноэкранного режима' : 'Включить полноэкранный режим');
+  button.title = active ? 'Обычный режим' : 'На весь экран';
+}
+
+window.toggleMachineFullscreen = async () => {
+  const screen = document.getElementById('game-screen');
+  if (!screen) return;
+
+  const nativeActive = document.fullscreenElement === screen || document.webkitFullscreenElement === screen;
+  const immersiveActive = screen.classList.contains('is-immersive');
+
+  // Сначала корректно выключаем оба варианта, чтобы на телефоне кнопка
+  // всегда могла вернуть обычный режим повторным нажатием.
+  if (nativeActive) {
+    try {
+      if (document.exitFullscreen) await document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    } catch (error) {
+      screen.classList.remove('is-immersive');
+    }
+  } else if (immersiveActive) {
+    screen.classList.remove('is-immersive');
+  } else {
+    const requestFullscreen = screen.requestFullscreen || screen.webkitRequestFullscreen;
+    if (requestFullscreen) {
+      try {
+        await requestFullscreen.call(screen);
+      } catch (error) {
+        // На мобильных браузерах без нативного Fullscreen API используем
+        // полноэкранную раскладку внутри доступной области браузера.
+        screen.classList.add('is-immersive');
+      }
+    } else {
+      screen.classList.add('is-immersive');
+    }
+  }
+  syncMachineFullscreenButton();
+};
+
+document.addEventListener('fullscreenchange', syncMachineFullscreenButton);
+document.addEventListener('webkitfullscreenchange', syncMachineFullscreenButton);
+
 window.closeMachine = () => {
+  const screen = document.getElementById('game-screen');
+  if (document.fullscreenElement === screen) {
+    document.exitFullscreen?.().catch(() => {});
+  } else if (document.webkitFullscreenElement === screen) {
+    document.webkitExitFullscreen?.();
+  }
+  screen?.classList.remove('is-immersive');
+  syncMachineFullscreenButton();
   if (window.kesugAssistant) window.kesugAssistant.setSlotActive(false);
   document.getElementById('game-screen').classList.remove('active');
   document.body.style.overflow = '';

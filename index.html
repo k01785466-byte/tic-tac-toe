@@ -2643,6 +2643,25 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
 
 
 <style id="kesug-visual-banner-system">
+/* Keep Kesug Market visible near the top of Extra Features. */
+.ks-more-tile.ks-more-market.ks-more-tile-bannered {
+  grid-column: span 2;
+  min-height: 184px;
+  border-color: rgba(227,180,95,.55);
+  box-shadow: 0 10px 30px rgba(189,133,52,.12), inset 0 0 0 1px rgba(255,255,255,.025);
+}
+.ks-more-market.ks-more-tile-bannered .ks-more-banner {
+  height: 100px;
+  min-height: 100px;
+  flex-basis: 100px;
+  background: linear-gradient(118deg,#5b3518,#e3b45f 72%,#f4d99a);
+}
+.ks-more-market.ks-more-tile-bannered > strong { font-size: 14px; }
+@media (max-width:700px) {
+  .ks-more-tile.ks-more-market.ks-more-tile-bannered { grid-column: span 2; min-height: 170px; }
+  .ks-more-market.ks-more-tile-bannered .ks-more-banner { height: 88px; min-height: 88px; flex-basis: 88px; }
+}
+
 /* KESUG VISUAL BANNERS — consistent artwork panels across the interface. */
 .ks-more-tile.ks-more-tile-bannered {
   min-height: 166px; padding: 0 !important; gap: 0 !important; overflow: hidden;
@@ -2824,6 +2843,61 @@ body.lite-mode .ks-more-banner,body.lite-mode .ks-feature-hero {backdrop-filter:
   .ks-music-track-actions button {width:29px;height:29px;}
 }
 body.lite-mode .profile-card,body.lite-mode .settings-hero,body.lite-mode .settings-group,body.lite-mode .stat-card,body.lite-mode .slot-container,body.lite-mode .ks-music-library-toolbar,body.lite-mode .ks-music-link-panel,body.lite-mode .ks-music-library-section {box-shadow:none!important;backdrop-filter:none!important;}
+</style>
+
+<style id="kesug-market-styles">
+.ks-more-market .ks-more-icon { color:var(--accent-gold); }
+.ks-market-intro { display:flex; justify-content:space-between; align-items:center; gap:18px; margin:8px 0 14px; padding:20px; border:1px solid var(--border); border-radius:18px; background:linear-gradient(125deg,rgba(214,173,91,.19),rgba(108,77,172,.12),var(--bg-card)); overflow:hidden; }
+.ks-market-intro h3 { margin:5px 0 7px; color:var(--text-white); font:900 clamp(20px,4vw,29px) 'Space Grotesk','Manrope',sans-serif; }
+.ks-market-intro p { max-width:560px; margin:0; color:var(--text-muted); font-size:11px; line-height:1.55; }
+.ks-market-kicker { color:var(--accent-gold); font-size:9px; font-weight:900; letter-spacing:.17em; }
+.ks-market-counter { flex:0 0 auto; display:grid; gap:5px; justify-items:end; padding:12px 15px; border:1px solid rgba(var(--accent-rgb),.25); border-radius:14px; background:rgba(var(--accent-rgb),.08); }
+.ks-market-counter strong { color:var(--text-white); font:900 clamp(22px,4vw,32px) 'Space Grotesk','Manrope',sans-serif; }
+.ks-market-counter small { color:var(--text-muted); font-size:8px; font-weight:900; letter-spacing:.12em; }
+.ks-market-wallet { display:grid; gap:4px; margin:0 0 13px; padding:13px 15px; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); }
+.ks-market-wallet > span:first-child { color:var(--text-muted); font-size:8px; font-weight:900; letter-spacing:.14em; }
+.ks-market-wallet > strong { color:var(--accent-gold); font:900 20px 'Space Grotesk','Manrope',sans-serif; }
+.ks-market-wallet > strong small { color:var(--text-muted); font:700 9px Manrope,sans-serif; }
+.ks-market-wallet > span:nth-of-type(2),.ks-market-owned-total { color:var(--text-muted); font-size:9px; }
+.ks-market-controls { display:grid; grid-template-columns:minmax(130px,1fr) minmax(130px,1fr) minmax(190px,1.3fr); gap:9px; margin:12px 0; }
+.ks-market-controls label { display:grid; gap:5px; color:var(--text-muted); font-size:9px; font-weight:800; }
+.ks-market-controls select,.ks-market-search input { min-width:0; width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:10px; padding:10px 11px; background:var(--bg-input); color:var(--text-main); font:700 10px Manrope,sans-serif; }
+.ks-market-search { display:flex; align-items:end; gap:6px; min-width:0; }
+.ks-market-search button { flex:0 0 40px; height:36px; border:1px solid var(--border); border-radius:10px; background:var(--bg-card); color:var(--accent-gold); font-size:22px; cursor:pointer; }
+.ks-market-results-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin:14px 0 9px; }
+.ks-market-results-head strong { color:var(--text-white); font-size:12px; }
+.ks-market-results-head span { color:var(--text-muted); font-size:9px; }
+.ks-market-clear-search { margin:0 0 10px; border:0; background:none; color:var(--accent-gold); font-size:10px; cursor:pointer; }
+.ks-market-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
+.ks-market-product { min-width:0; overflow:hidden; border:1px solid var(--border); border-radius:15px; background:var(--bg-card); box-shadow:0 8px 24px rgba(0,0,0,.12); }
+.ks-market-product-art { position:relative; display:flex; min-height:104px; flex-direction:column; justify-content:space-between; overflow:hidden; padding:12px; color:#fff; background:linear-gradient(135deg,var(--market-product-color),color-mix(in srgb,var(--market-product-color),#151a28 64%)); }
+.ks-market-product-art::after { content:""; position:absolute; width:140px; height:140px; right:-38px; top:-75px; border:1px solid rgba(255,255,255,.34); border-radius:50%; box-shadow:0 0 0 13px rgba(255,255,255,.06),0 0 0 27px rgba(255,255,255,.045); }
+.ks-market-product-icon { position:relative; z-index:1; font-size:35px; filter:drop-shadow(0 4px 8px rgba(0,0,0,.22)); }
+.ks-market-product-art small { position:relative; z-index:1; max-width:75%; font-size:8px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; opacity:.86; }
+.ks-market-product-art b { position:absolute; z-index:1; top:10px; right:9px; max-width:56%; border:1px solid rgba(255,255,255,.28); border-radius:99px; padding:4px 6px; color:#fff; background:rgba(10,12,18,.22); font-size:7px; letter-spacing:.04em; text-align:right; }
+.ks-market-product-info { display:grid; gap:5px; padding:10px; }
+.ks-market-product-code { color:var(--text-muted); font:800 8px 'Space Grotesk',Manrope,sans-serif; letter-spacing:.08em; }
+.ks-market-product-info > strong { min-height:30px; color:var(--text-white); font-size:10px; line-height:1.45; }
+.ks-market-product-info > small { color:var(--text-muted); font-size:8px; }
+.ks-market-product-buy { display:grid; gap:8px; margin-top:4px; }
+.ks-market-product-buy > span { color:var(--accent-gold); font:900 12px 'Space Grotesk','Manrope',sans-serif; overflow-wrap:anywhere; }
+.ks-market-product-buy > span small { color:var(--text-muted); font:700 8px Manrope,sans-serif; }
+.ks-market-card-action { width:100%; border:1px solid rgba(var(--accent-rgb),.3); border-radius:9px; padding:9px 7px; color:#12151b; background:linear-gradient(100deg,var(--accent-gold),var(--accent-green)); font-size:9px; font-weight:900; cursor:pointer; }
+.ks-market-card-action.is-equipped { border-color:var(--border); color:var(--accent-green); background:rgba(var(--accent-rgb),.1); cursor:default; }
+.ks-market-owned-mark { color:var(--accent-green); font-size:8px; font-weight:800; }
+.ks-market-pagination { display:flex; justify-content:center; align-items:center; gap:12px; margin:15px 0 4px; }
+.ks-market-pagination button { border:1px solid var(--border); border-radius:10px; padding:9px 12px; color:var(--text-main); background:var(--bg-card); font-size:9px; font-weight:800; cursor:pointer; }
+.ks-market-pagination button:disabled { opacity:.38; cursor:default; }
+.ks-market-pagination span { color:var(--text-muted); font:800 10px 'Space Grotesk',Manrope,sans-serif; }
+.ks-market-disclaimer { margin:14px 0 0; color:var(--text-muted); font-size:9px; line-height:1.6; }
+.ks-market-empty { grid-column:1/-1; padding:25px; border:1px dashed var(--border); border-radius:13px; color:var(--text-muted); text-align:center; font-size:11px; }
+:root.ks-market-frame-active #profile-big-avatar,:root.ks-market-frame-active #nav-avatar { outline:3px solid var(--ks-market-frame-color); outline-offset:3px; box-shadow:0 0 0 6px color-mix(in srgb,var(--ks-market-frame-color),transparent 72%); }
+:root.ks-market-banner-active .profile-card { background:linear-gradient(120deg,var(--ks-market-banner-a),var(--ks-market-banner-b),var(--bg-card)) !important; }
+:root.ks-market-effect-active #win-popup .win-box { box-shadow:0 0 0 1px var(--ks-market-effect-color),0 0 42px color-mix(in srgb,var(--ks-market-effect-color),transparent 48%),0 20px 60px rgba(0,0,0,.38); }
+:root.ks-market-slot-active .slot-container { border-color:var(--ks-market-slot-color) !important; box-shadow:0 0 0 2px color-mix(in srgb,var(--ks-market-slot-color),transparent 65%),0 14px 44px rgba(0,0,0,.32) !important; }
+@media(max-width:760px) { .ks-market-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .ks-market-controls { grid-template-columns:repeat(2,minmax(0,1fr)); } .ks-market-search { grid-column:1/-1; } }
+@media(max-width:420px) { .ks-market-intro { align-items:flex-start; flex-direction:column; padding:15px; } .ks-market-counter { justify-items:start; } .ks-market-grid { gap:8px; } .ks-market-product-art { min-height:88px; padding:9px; } .ks-market-product-info { padding:8px; } .ks-market-product-buy > span { font-size:10px; } .ks-market-card-action { padding:8px 4px; } }
+body.lite-mode .ks-market-product,body.lite-mode .ks-market-intro { box-shadow:none !important; }
 </style>
 
 </head>
@@ -3155,6 +3229,7 @@ body.lite-mode .profile-card,body.lite-mode .settings-hero,body.lite-mode .setti
       <div class="ks-more-header-mark" aria-hidden="true"><i class="ph-fill ph-sparkle"></i></div>
     </div>
     <div class="ks-more-grid" id="ks-more-grid">
+      <button class="ks-more-tile ks-more-market ks-more-featured" type="button" onclick="useMoreFeature('market')"><span class="ks-more-icon"><i class="ph-fill ph-storefront"></i></span><strong>Магазин</strong><small>1 000 000 предметов, тем и украшений · Новое</small></button>
       <button class="ks-more-tile ks-more-featured" type="button" onclick="useMoreFeature('daily-bonus')"><span class="ks-more-icon"><i class="ph-fill ph-gift"></i></span><strong>Забрать бонус</strong><small id="ks-bonus-tile-status">Ежедневная награда до 10 млн</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('random-slot')"><span class="ks-more-icon"><i class="ph-fill ph-dice-five"></i></span><strong>Случайный слот</strong><small>Открыть случайный автомат</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('history')"><span class="ks-more-icon"><i class="ph-bold ph-scroll"></i></span><strong>История</strong><small>Последние игровые результаты</small></button>
@@ -4575,7 +4650,7 @@ showPage('lobby');
   let activeMoreFeature = '';
   const moreFeatureNames = {
     'daily-bonus':'Забрать бонус','random-slot':'Случайный слот','history':'История','autoplay':'Автоигра','appearance':'Оформление','achievements':'Достижения','promo':'Промокод','stats':'Статистика','challenges':'Испытания','sounds':'Звуки','effects':'Эффекты','favorites':'Избранное','search':'Поиск','reaction':'Игры на реакцию',duels:'Дуэли',
-    combinations:'Комбинации',archive:'Архив',cinema:'Кинозал',gallery:'Галерея',lab:'Лаборатория',masks:'Маски',titles:'Титулы',bookmarks:'Закладки',navigator:'Навигатор',schedule:'Расписание',openings:'Открытия',quiz:'Викторина',minigames:'Мини-игры',editor:'Редактор',journal:'Журнал',goals:'Мои цели','random-effect':'Случайный эффект',night:'Ночной режим',cleanup:'Очистка',downloads:'Загрузки',converter:'Конвертер',constructor:'Конструктор',music:'Моя музыка'
+    combinations:'Комбинации',archive:'Архив',cinema:'Кинозал',gallery:'Галерея',lab:'Лаборатория',masks:'Маски',titles:'Титулы',bookmarks:'Закладки',navigator:'Навигатор',schedule:'Расписание',openings:'Открытия',quiz:'Викторина',minigames:'Мини-игры',editor:'Редактор',journal:'Журнал',goals:'Мои цели','random-effect':'Случайный эффект',night:'Ночной режим',cleanup:'Очистка',downloads:'Загрузки',converter:'Конвертер',constructor:'Конструктор',music:'Моя музыка',market:'Магазин'
   };
   const MORE_FEATURE_VISUALS = {
     'daily-bonus': { a: '#45317e', b: '#bd83f2', kicker: 'DAILY REWARD', icon: 'ph-fill ph-gift' },
@@ -4615,7 +4690,8 @@ showPage('lobby');
     downloads: { a: '#315a78', b: '#83c2e5', kicker: 'FILES', icon: 'ph-fill ph-download-simple' },
     converter: { a: '#66512e', b: '#d7b873', kicker: 'UNIT TOOLS', icon: 'ph-fill ph-arrows-left-right' },
     constructor: { a: '#3e5960', b: '#91c9c9', kicker: 'BUILD YOUR SET', icon: 'ph-fill ph-cubes' },
-    music: { a: '#243d73', b: '#8e8bf2', kicker: 'YOUR SOUND LIBRARY', icon: 'ph-fill ph-music-notes' }
+    music: { a: '#243d73', b: '#8e8bf2', kicker: 'YOUR SOUND LIBRARY', icon: 'ph-fill ph-music-notes' },
+    market: { a: '#67401e', b: '#e3b45f', kicker: 'KESUG MARKET · 1M ITEMS', icon: 'ph-fill ph-storefront' }
   };
 
   function decorateMoreTiles() {
@@ -4743,6 +4819,249 @@ showPage('lobby');
     renderMyMusicList();
   }
 
+  // KESUG MARKET — one million procedurally-defined virtual cosmetic items.
+  // Only the current page (18 cards) is generated, so the catalogue stays lightweight.
+  const MARKET_TOTAL_ITEMS = 1000000;
+  const MARKET_PAGE_SIZE = 18;
+  const MARKET_OWNED_KEY = 'ks_market_owned_v1';
+  const MARKET_EQUIPPED_KEY = 'ks_market_equipped_v1';
+  let marketPage = 0;
+  let marketCategory = 'all';
+  let marketSort = 'premium';
+  let marketSearchId = null;
+
+  const MARKET_CATEGORIES = [
+    { id:'themes', name:'Темы', label:'Темы интерфейса', icon:'🎨', families:['Aurora','Nebula','Solaris','Eclipse','Prism','Quantum','Nova','Eternity'], colors:['#d7a84d','#5b9cff','#a779ee','#37c99b','#ed6872','#e77bb9','#35c6c8'] },
+    { id:'backgrounds', name:'Фоны', label:'Фоны профиля и экранов', icon:'🌌', families:['Starfield','Deep Space','Mirage','Northern Lights','Monolith','Dreamscape','Skyline','Afterglow'], colors:['#243e78','#533c83','#276a68','#7c4b65','#48586c','#8c6538','#32658b'] },
+    { id:'frames', name:'Рамки', label:'Рамки аватара', icon:'🖼️', families:['Crown','Phantom','Royal','Circuit','Glacier','Imperial','Pulse','Celestial'], colors:['#d7ad5c','#9c83e8','#53b8d1','#4bc58f','#dc718d','#a6b9d5','#e2a45a'] },
+    { id:'banners', name:'Баннеры', label:'Баннеры профиля', icon:'🏞️', families:['Grand Hall','Neon City','Aurora Bay','Golden Era','Crystal Peak','Night Drive','Emerald Gate','Solar Crown'], colors:['#d5a64b','#5b95d1','#a66ed1','#48aa86','#d56c79','#4b6ba8','#b58a63'] },
+    { id:'titles', name:'Титулы', label:'Титулы игрока', icon:'🏅', families:['Pathfinder','Collector','Champion','Architect','Visionary','Legend','Pioneer','Overlord'], colors:['#d6ad5b','#7ba6d8','#b28ae2','#58bd91','#e47b81','#d6a2be','#7dc4cf'] },
+    { id:'masks', name:'Маски', label:'Маски аватара', icon:'🎭', families:['Neon Veil','Ice Mirror','Shadow','Sunset','Mono','Prism','Phantom','Aurora'], colors:['#56b8d8','#9a80e4','#79879a','#e38a62','#aeb7c3','#d17bc0','#58bd9a'] },
+    { id:'effects', name:'Эффекты', label:'Эффекты победы', icon:'✨', families:['Starburst','Nova Flash','Solar Ring','Hyperlight','Dream Spark','Thunder','Comet','Eternal Glow'], colors:['#e2b85a','#7d9ee5','#b28ce8','#4ac99b','#ed788b','#5bc4d0','#ec9f5d'] },
+    { id:'slots', name:'Стили слотов', label:'Оформление автоматов', icon:'🎰', families:['Royal Reel','Cyber Spin','Velvet','Crystal','Golden Drums','Nebula Reel','Turbo','Mythic'], colors:['#d5a348','#58a2d8','#a47de0','#4cbf91','#db7181','#50bdc8','#bf8b57'] }
+  ];
+  const MARKET_PALETTES = ['Amber','Arctic','Violet','Emerald','Crimson','Sapphire','Pearl','Onyx','Solar','Cosmic'];
+  const MARKET_EDITIONS = ['Prime','Ultra','Infinite','Legacy','Eternal','Signature','Overdrive','Ascended','Prestige','Infinity'];
+  const MARKET_RARITIES = [
+    { id:'mythic', name:'МИФИЧЕСКИЙ', base:35000000000, color:'#f0a8ff' },
+    { id:'legendary', name:'ЛЕГЕНДАРНЫЙ', base:5000000000, color:'#edbd66' },
+    { id:'epic', name:'ЭПИЧЕСКИЙ', base:750000000, color:'#b99aff' },
+    { id:'rare', name:'РЕДКИЙ', base:125000000, color:'#77b9ef' },
+    { id:'common', name:'ОБЫЧНЫЙ', base:25000000, color:'#9db0bd' }
+  ];
+  const MARKET_BUILTIN_THEMES = ['gold','blue','purple','green','red','pink','cyan'];
+  function marketHslToHex(hue, saturation, lightness) {
+    const s=saturation/100, l=lightness/100;
+    const c=(1-Math.abs(2*l-1))*s;
+    const x=c*(1-Math.abs((hue/60)%2-1));
+    const m=l-c/2;
+    let rgb=[0,0,0];
+    if(hue<60) rgb=[c,x,0]; else if(hue<120) rgb=[x,c,0]; else if(hue<180) rgb=[0,c,x];
+    else if(hue<240) rgb=[0,x,c]; else if(hue<300) rgb=[x,0,c]; else rgb=[c,0,x];
+    return '#'+rgb.map(value=>Math.round((value+m)*255).toString(16).padStart(2,'0')).join('');
+  }
+
+  function getMarketItem(id) {
+    const itemId = Math.floor(Number(id));
+    if (!Number.isFinite(itemId) || itemId < 1 || itemId > MARKET_TOTAL_ITEMS) return null;
+    const categoryIndex = (itemId - 1) % MARKET_CATEGORIES.length;
+    const category = MARKET_CATEGORIES[categoryIndex];
+    const serial = Math.floor((itemId - 1) / MARKET_CATEGORIES.length);
+    const family = category.families[serial % category.families.length];
+    const paletteIndex = Math.floor(serial / category.families.length) % MARKET_PALETTES.length;
+    const palette = MARKET_PALETTES[paletteIndex];
+    const edition = MARKET_EDITIONS[Math.floor(serial / (category.families.length * MARKET_PALETTES.length)) % MARKET_EDITIONS.length];
+    const rarityPhase = Math.floor((MARKET_TOTAL_ITEMS - itemId) / MARKET_CATEGORIES.length) % 1000;
+    let rarity = MARKET_RARITIES[4];
+    if (rarityPhase < 2) rarity = MARKET_RARITIES[0];
+    else if (rarityPhase < 20) rarity = MARKET_RARITIES[1];
+    else if (rarityPhase < 140) rarity = MARKET_RARITIES[2];
+    else if (rarityPhase < 450) rarity = MARKET_RARITIES[3];
+    const multiplier = 1 + (serial % 5) * .12;
+    const hue = (itemId * 137.508) % 360;
+    const saturation = 66 + (serial % 25);
+    const lightness = 42 + (Math.floor(serial / 25) % 22);
+    const color = marketHslToHex(hue, saturation, lightness);
+    const secondaryColor = marketHslToHex((hue + 42) % 360, Math.max(55,saturation-7), Math.min(72,lightness+9));
+    const code = `KS-${String(itemId).padStart(6,'0')}`;
+    return {
+      id:itemId, code, category, categoryIndex, serial, family, palette, edition,
+      name:`${family} ${palette} ${edition}`,
+      rarity, color, secondaryColor, price:Math.floor(rarity.base * multiplier),
+      theme:MARKET_BUILTIN_THEMES[serial % MARKET_BUILTIN_THEMES.length],
+      background:['aurora','gradient','minimal'][serial % 3],
+      banner:['aurora','sunset','forest','gold','ice'][serial % 5],
+      mask:['neon','ice','mono','sunset','shadow'][serial % 5],
+      title:`${family} ${palette}`
+    };
+  }
+
+  function getMarketOwned() {
+    const values = readJSON(MARKET_OWNED_KEY, []);
+    return new Set(Array.isArray(values) ? values.filter(id => Number.isInteger(id) && id >= 1 && id <= MARKET_TOTAL_ITEMS) : []);
+  }
+  function getMarketEquipped() {
+    const value = readJSON(MARKET_EQUIPPED_KEY, {});
+    return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+  }
+  function applyMarketVisuals() {
+    const equipped = getMarketEquipped();
+    const root = document.documentElement;
+    root.classList.remove('ks-market-frame-active','ks-market-banner-active','ks-market-effect-active','ks-market-slot-active');
+    Object.keys(equipped).forEach(categoryId => {
+      const item = getMarketItem(equipped[categoryId]);
+      if (!item || item.category.id !== categoryId) return;
+      if (categoryId === 'themes') {
+        state.settings.customAccent = item.color;
+      } else if (categoryId === 'backgrounds') {
+        state.settings.customAccent = item.color;
+        state.settings.backgroundStyle = item.background;
+      } else if (categoryId === 'frames') {
+        root.style.setProperty('--ks-market-frame-color', item.color);
+        root.classList.add('ks-market-frame-active');
+      } else if (categoryId === 'banners') {
+        root.style.setProperty('--ks-market-banner-a', item.color);
+        root.style.setProperty('--ks-market-banner-b', item.secondaryColor);
+        root.classList.add('ks-market-banner-active');
+      } else if (categoryId === 'titles') {
+        localStorage.setItem('ks_profile_title', item.title);
+      } else if (categoryId === 'masks') {
+        localStorage.setItem('ks_avatar_mask', item.mask);
+      } else if (categoryId === 'effects') {
+        root.style.setProperty('--ks-market-effect-color', item.color);
+        root.classList.add('ks-market-effect-active');
+      } else if (categoryId === 'slots') {
+        root.style.setProperty('--ks-market-slot-color', item.color);
+        root.classList.add('ks-market-slot-active');
+      }
+    });
+    saveToLocal();
+    applySettings();
+    updateProfileUI();
+  }
+
+  function marketPageIds() {
+    if (marketSearchId !== null) return [marketSearchId];
+    const ids = [];
+    const categoryIndex = marketCategory === 'all' ? -1 : MARKET_CATEGORIES.findIndex(item => item.id === marketCategory);
+    const direction = marketSort === 'cheap' ? 1 : -1;
+    for (let i = 0; i < MARKET_PAGE_SIZE; i++) {
+      const itemOffset = marketPage * MARKET_PAGE_SIZE + i;
+      let id;
+      if (categoryIndex < 0) id = direction < 0 ? MARKET_TOTAL_ITEMS - itemOffset : itemOffset + 1;
+      else if (direction < 0) {
+        const offset = (MARKET_CATEGORIES.length - 1 - categoryIndex + MARKET_CATEGORIES.length) % MARKET_CATEGORIES.length;
+        id = MARKET_TOTAL_ITEMS - marketPage * MARKET_PAGE_SIZE * MARKET_CATEGORIES.length - offset - i * MARKET_CATEGORIES.length;
+      } else id = 1 + categoryIndex + itemOffset * MARKET_CATEGORIES.length;
+      if (id >= 1 && id <= MARKET_TOTAL_ITEMS) ids.push(id);
+    }
+    if (categoryIndex >= 0 && marketSort === 'premium') {
+      // Every category owns exactly one eighth of the generated catalogue.
+      return ids.filter(id => (id - 1) % MARKET_CATEGORIES.length === categoryIndex);
+    }
+    return ids;
+  }
+
+  function renderKesugMarket() {
+    const owned = getMarketOwned();
+    const equipped = getMarketEquipped();
+    const ids = marketPageIds();
+    const categoryOptions = [{id:'all',name:'Все товары'}, ...MARKET_CATEGORIES.map(item=>({id:item.id,name:item.name}))]
+      .map(item=>`<option value="${item.id}" ${marketCategory===item.id?'selected':''}>${item.name}</option>`).join('');
+    const cards = ids.map(id => {
+      const item = getMarketItem(id);
+      if (!item) return '';
+      const isOwned = owned.has(id);
+      const isEquipped = Number(equipped[item.category.id]) === id;
+      const action = isEquipped ? `<button class="ks-market-card-action is-equipped" disabled>НАДЕТО</button>`
+        : isOwned ? `<button class="ks-market-card-action" onclick="equipMarketItem(${id})">Надеть</button>`
+        : `<button class="ks-market-card-action" onclick="buyMarketItem(${id})">Купить</button>`;
+      return `<article class="ks-market-product" style="--market-product-color:${item.color};--market-product-rarity:${item.rarity.color}">
+        <div class="ks-market-product-art"><span class="ks-market-product-icon">${item.category.icon}</span><small>${item.category.label}</small><b>${item.rarity.name}</b><em class="ks-market-orbit"></em></div>
+        <div class="ks-market-product-info"><span class="ks-market-product-code">${item.code}</span><strong>${item.name}</strong><small>${item.category.label} · ${item.edition}</small>
+        <div class="ks-market-product-buy"><span>${fmt(item.price)} <small>очков</small></span>${action}</div>
+        ${isOwned?'<div class="ks-market-owned-mark">✓ В коллекции</div>':''}</div>
+      </article>`;
+    }).join('');
+    const categoryCount = marketCategory === 'all' ? MARKET_TOTAL_ITEMS : MARKET_TOTAL_ITEMS / MARKET_CATEGORIES.length;
+    const pageCount = Math.ceil(categoryCount / MARKET_PAGE_SIZE);
+    const pageLabel = marketSearchId !== null ? 'Результат поиска' : `Страница ${marketPage + 1} из ${pageCount.toLocaleString('ru-RU')}`;
+    const searchNote = marketSearchId !== null ? `<button class="ks-market-clear-search" type="button" onclick="clearKesugMarketSearch()">Сбросить поиск и вернуться в каталог</button>` : '';
+    const html = `
+      <section class="ks-market-intro">
+        <div><span class="ks-market-kicker">KESUG COSMETIC EXCHANGE</span><h3>Большой магазин</h3><p>Миллион уникальных предметов. Собирай редкие стили, оформляй профиль и меняй внешний вид автоматов.</p></div>
+        <div class="ks-market-counter"><strong>1 000 000</strong><small>ТОВАРОВ В КАТАЛОГЕ</small></div>
+      </section>
+      <section class="ks-market-wallet"><span>ТВОЙ БАЛАНС</span><strong>${fmt(state.balance)} <small>виртуальных очков</small></strong><span>Цены начинаются от 25 млн и доходят до 51,8 млрд очков.</span><span class="ks-market-owned-total">В коллекции: ${owned.size.toLocaleString('ru-RU')} предметов</span></section>
+      <section class="ks-market-controls">
+        <label><span>Категория</span><select id="ks-market-category" onchange="setKesugMarketCategory(this.value)">${categoryOptions}</select></label>
+        <label><span>Порядок</span><select id="ks-market-sort" onchange="setKesugMarketSort(this.value)"><option value="premium" ${marketSort==='premium'?'selected':''}>Дорогие сначала</option><option value="cheap" ${marketSort==='cheap'?'selected':''}>Дешёвые сначала</option></select></label>
+        <div class="ks-market-search"><input id="ks-market-search-input" type="search" inputmode="numeric" placeholder="Код товара KS-000123" value="${marketSearchId!==null?`KS-${String(marketSearchId).padStart(6,'0')}`:''}" onkeydown="if(event.key==='Enter')searchKesugMarket()"><button type="button" onclick="searchKesugMarket()" aria-label="Найти товар">⌕</button></div>
+      </section>
+      <div class="ks-market-results-head"><strong>${marketCategory==='all'?'Все товары':MARKET_CATEGORIES.find(item=>item.id===marketCategory)?.label}</strong><span>${pageLabel} · ${ids.length} карточек на странице</span></div>
+      ${searchNote}
+      <section class="ks-market-grid">${cards || '<div class="ks-market-empty">Товары не найдены.</div>'}</section>
+      ${marketSearchId===null?`<nav class="ks-market-pagination" aria-label="Страницы магазина"><button type="button" onclick="setKesugMarketPage(${Math.max(0,marketPage-1)})" ${marketPage===0?'disabled':''}>← Назад</button><span>${(marketPage+1).toLocaleString('ru-RU')} / ${pageCount.toLocaleString('ru-RU')}</span><button type="button" onclick="setKesugMarketPage(${Math.min(pageCount-1,marketPage+1)})" ${marketPage>=pageCount-1?'disabled':''}>Вперёд →</button></nav>`:''}
+      <p class="ks-market-disclaimer">Все предметы косметические и приобретаются только за виртуальные очки Kesug. Реальные деньги и платежи не используются. Каталог генерируется локально по коду товара; одновременно отображается только 18 карточек, поэтому магазин не перегружает устройство.</p>`;
+    showDetail('Магазин', 'Коллекция тем, фонов, рамок, баннеров, титулов и эффектов.', html);
+  }
+
+  function openKesugMarket() {
+    marketPage = 0;
+    marketCategory = 'all';
+    marketSort = 'premium';
+    marketSearchId = null;
+    applyMarketVisuals();
+    renderKesugMarket();
+  }
+  window.setKesugMarketCategory = value => {
+    if (value !== 'all' && !MARKET_CATEGORIES.some(item=>item.id===value)) return;
+    marketCategory = value; marketPage = 0; marketSearchId = null; renderKesugMarket();
+  };
+  window.setKesugMarketSort = value => {
+    if (!['premium','cheap'].includes(value)) return;
+    marketSort = value; marketPage = 0; marketSearchId = null; renderKesugMarket();
+  };
+  window.setKesugMarketPage = page => {
+    const perPage = marketCategory==='all' ? MARKET_TOTAL_ITEMS : MARKET_TOTAL_ITEMS / MARKET_CATEGORIES.length;
+    marketPage = Math.max(0, Math.min(Math.ceil(perPage / MARKET_PAGE_SIZE)-1, Math.floor(Number(page)||0)));
+    marketSearchId = null; renderKesugMarket();
+  };
+  window.searchKesugMarket = () => {
+    const raw = document.getElementById('ks-market-search-input')?.value.trim() || '';
+    const digits = raw.replace(/^KS[-\s#]?/i,'').replace(/\s/g,'');
+    const id = /^\d{1,7}$/.test(digits) ? Number(digits) : NaN;
+    if (!Number.isInteger(id) || id<1 || id>MARKET_TOTAL_ITEMS) { showToast('Введи код товара от KS-000001 до KS-1000000'); return; }
+    marketSearchId=id; renderKesugMarket();
+  };
+  window.clearKesugMarketSearch = () => { marketSearchId=null; marketPage=0; renderKesugMarket(); };
+  window.buyMarketItem = id => {
+    const item=getMarketItem(id); if(!item) return;
+    const owned=getMarketOwned();
+    if(owned.has(item.id)){ showToast('Этот предмет уже есть в коллекции'); renderKesugMarket(); return; }
+    if(state.balance<item.price){ showToast(`Недостаточно очков. Нужно ещё ${fmt(item.price-state.balance)}.`); return; }
+    owned.add(item.id);
+    if(!writeJSON(MARKET_OWNED_KEY,[...owned])) return;
+    state.balance-=item.price;
+    saveToLocal(); updateUI();
+    if(window.ksLogActivity) window.ksLogActivity('Магазин',`Куплен ${item.name} (${item.code}) за ${fmt(item.price)} виртуальных очков`);
+    showToast(`Куплено: ${item.name}`);
+    renderKesugMarket();
+  };
+  window.equipMarketItem = id => {
+    const item=getMarketItem(id); if(!item) return;
+    const owned=getMarketOwned();
+    if(!owned.has(item.id)){ showToast('Сначала купи этот предмет'); return; }
+    const equipped=getMarketEquipped();
+    equipped[item.category.id]=item.id;
+    if(!writeJSON(MARKET_EQUIPPED_KEY,equipped)) return;
+    applyMarketVisuals();
+    showToast(`Надето: ${item.name}`);
+    renderKesugMarket();
+  };
+  // Restore previously equipped store cosmetics on each app launch.
+  applyMarketVisuals();
+
   function bonusStatusText() {
     const claimed = localStorage.getItem('ks_daily_bonus_day') === dayKey();
     return claimed ? `Забран: ${fmt(localStorage.getItem('ks_daily_bonus_amount')||0)} ₽ · завтра снова` : 'Доступна сегодня · до 10 000 000';
@@ -4808,6 +5127,7 @@ showPage('lobby');
       case 'converter': return openConverter();
       case 'constructor': return openSymbolConstructor();
       case 'music': return openMyMusic();
+      case 'market': return openKesugMarket();
       default: return;
     }
   };

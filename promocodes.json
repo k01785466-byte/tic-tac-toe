@@ -1,6 +1,29 @@
 {
-  "code": "HUW2YT5",
-  "reward": 100000,
-  "enabled": true,
-  "description": ",ОБНОВА"
+  "version": 1,
+  "codes": [
+    {
+      "code": "KESUGSTART",
+      "reward": 50000,
+      "enabled": true,
+      "description": "Стартовый бонус"
+    },
+    {
+      "code": "KESUG2026",
+      "reward": 250000,
+      "enabled": true,
+      "description": "Бонус Kesug 2026"
+    },
+    {
+      "code": "LITEBONUS",
+      "reward": 100000,
+      "enabled": true,
+      "description": "Бонус для Lite"
+    },
+    {
+      "code": "HUW2YT5",
+      "reward": 100000,
+      "enabled": true,
+      "description": "ОБНОВА"
+    }
+  ]
 }

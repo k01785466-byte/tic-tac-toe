@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Kesug Slots</title>
+<meta name="theme-color" content="#121214">
+<meta name="application-name" content="Kesug Slots">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kesug Slots">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22%23171511%22%2F%3E%3Cpath%20d%3D%22M32%207%2056%2032%2032%2057%208%2032Z%22%20fill%3D%22%23d6ad5b%22%2F%3E%3Cpath%20d%3D%22M32%2015%2048%2032%2032%2049%2016%2032Z%22%20fill%3D%22%23f0cf83%22%2F%3E%3Cpath%20d%3D%22M32%2022%2042%2032%2032%2042%2022%2032Z%22%20fill%3D%22%237a5724%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%223.5%22%20fill%3D%22%23fff1c7%22%2F%3E%3C%2Fsvg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -5685,6 +5692,162 @@ showPage('lobby');
   }
 }
 </style>
+
+
+<script id="kesug-pwa-runtime">
+(() => {
+  const secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  let installPrompt = null;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    #kesug-pwa-install {
+      position:fixed; z-index:18000; left:50%; bottom:max(18px,env(safe-area-inset-bottom));
+      transform:translateX(-50%); width:min(420px,calc(100vw - 28px));
+      display:none; align-items:center; gap:12px; padding:12px 14px;
+      border:1px solid var(--glass-border,rgba(255,255,255,.15)); border-radius:18px;
+      background:var(--glass-bg,rgba(18,20,28,.96)); color:var(--text-main,#fff);
+      box-shadow:0 18px 55px rgba(0,0,0,.42); backdrop-filter:blur(18px);
+    }
+    #kesug-pwa-install.is-visible { display:flex; }
+    #kesug-pwa-install .ks-pwa-copy { min-width:0; flex:1; }
+    #kesug-pwa-install strong { display:block; font-size:12px; }
+    #kesug-pwa-install small { display:block; color:var(--text-muted,#aaa); font-size:10px; margin-top:2px; }
+    #kesug-pwa-install button { border:0; border-radius:11px; padding:9px 12px; color:#101217; background:var(--accent-gold,#e5c16e); font-weight:900; font-size:11px; cursor:pointer; }
+    #kesug-pwa-install .ks-pwa-dismiss { padding:7px 9px; color:var(--text-muted,#aaa); background:transparent; }
+    #kesug-offline-pill {
+      position:fixed; z-index:17999; top:max(8px,env(safe-area-inset-top)); left:50%; transform:translateX(-50%);
+      display:none; align-items:center; gap:7px; padding:7px 11px; border-radius:999px;
+      color:#f7e6bd; background:rgba(31,26,17,.94); border:1px solid rgba(214,173,91,.32);
+      font:800 10px Manrope, sans-serif; box-shadow:0 8px 28px rgba(0,0,0,.28); pointer-events:none;
+    }
+    #kesug-offline-pill.is-visible { display:flex; }
+    #kesug-offline-pill i { color:#e2b85b; }
+    #kesug-pwa-prep {
+      position:fixed; z-index:18001; right:14px; bottom:max(16px,env(safe-area-inset-bottom));
+      display:none; align-items:center; gap:9px; max-width:calc(100vw - 28px); padding:10px 12px;
+      border:1px solid var(--glass-border,rgba(255,255,255,.15)); border-radius:15px;
+      background:var(--glass-bg,rgba(18,20,28,.96)); color:var(--text-main,#fff);
+      box-shadow:0 12px 36px rgba(0,0,0,.34); backdrop-filter:blur(16px);
+    }
+    #kesug-pwa-prep.is-visible { display:flex; }
+    #kesug-pwa-prep-copy { min-width:0; font:800 10px Manrope,sans-serif; }
+    #kesug-pwa-prep-copy small { display:block; margin-top:2px; color:var(--text-muted,#aaa); font-size:9px; font-weight:600; }
+    #kesug-pwa-prep button { border:0; border-radius:10px; padding:8px 10px; color:#101217; background:var(--accent-gold,#e5c16e); font:900 10px Manrope,sans-serif; white-space:nowrap; }
+    #kesug-pwa-prep button:disabled { opacity:.65; }
+    @media(max-width:480px){ #kesug-pwa-prep { left:10px; right:10px; bottom:max(10px,env(safe-area-inset-bottom)); justify-content:space-between; } }
+    @media (max-width:420px) { #kesug-pwa-install { gap:8px; padding:10px; } #kesug-pwa-install strong{font-size:11px;} #kesug-pwa-install small{font-size:9px;} }
+  `;
+  document.head.appendChild(style);
+
+  const installBar = document.createElement('div');
+  installBar.id = 'kesug-pwa-install';
+  installBar.innerHTML = `<div class="ks-pwa-copy"><strong>Установить Kesug Slots</strong><small>Игра будет открываться с главного экрана и работать офлайн</small></div><button type="button" id="kesug-pwa-install-action">Установить</button><button type="button" class="ks-pwa-dismiss" id="kesug-pwa-install-dismiss" aria-label="Закрыть">✕</button>`;
+  document.body.appendChild(installBar);
+
+  const offlinePill = document.createElement('div');
+  offlinePill.id = 'kesug-offline-pill';
+  offlinePill.innerHTML = `<i class="ph-fill ph-wifi-slash"></i><span>ОФЛАЙН · БОТЫ ДОСТУПНЫ</span>`;
+  document.body.appendChild(offlinePill);
+
+  const prepBar = document.createElement('div');
+  prepBar.id = 'kesug-pwa-prep';
+  prepBar.innerHTML = `<div id="kesug-pwa-prep-copy">Подготовить к полёту<small>Сохранить игровые изображения для офлайна</small></div><button type="button" id="kesug-pwa-prep-action">Подготовить</button>`;
+  document.body.appendChild(prepBar);
+
+  const updateNetworkState = () => {
+    offlinePill.classList.toggle('is-visible', !navigator.onLine);
+    if (!navigator.onLine) prepBar.classList.remove('is-visible');
+  };
+  window.addEventListener('online', updateNetworkState);
+  window.addEventListener('offline', updateNetworkState);
+  updateNetworkState();
+
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault();
+    installPrompt = event;
+    if (!standalone && !sessionStorage.getItem('ks_pwa_install_dismissed')) installBar.classList.add('is-visible');
+  });
+
+  document.getElementById('kesug-pwa-install-action').addEventListener('click', async () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    try { await installPrompt.userChoice; } catch (_) {}
+    installPrompt = null;
+    installBar.classList.remove('is-visible');
+  });
+  document.getElementById('kesug-pwa-install-dismiss').addEventListener('click', () => {
+    installBar.classList.remove('is-visible');
+    try { sessionStorage.setItem('ks_pwa_install_dismissed', '1'); } catch (_) {}
+  });
+  window.addEventListener('appinstalled', () => installBar.classList.remove('is-visible'));
+
+  const prepAction = document.getElementById('kesug-pwa-prep-action');
+  const prepCopy = document.getElementById('kesug-pwa-prep-copy');
+  let prepRunning = false;
+  async function showOfflinePreparation() {
+    if (!secure || !navigator.onLine || !('serviceWorker' in navigator)) return;
+    try {
+      const registration = await navigator.serviceWorker.ready;
+      if (registration.active && !prepRunning && !localStorage.getItem('ks_pwa_assets_ready')) prepBar.classList.add('is-visible');
+    } catch (_) {}
+  }
+  async function prepareOfflineAssets() {
+    if (prepRunning || !navigator.onLine || !('serviceWorker' in navigator)) return;
+    prepRunning = true;
+    prepAction.disabled = true;
+    prepAction.textContent = 'Загрузка…';
+    prepCopy.firstChild.textContent = 'Готовим Kesug к полёту';
+    const registration = await navigator.serviceWorker.ready;
+    const worker = navigator.serviceWorker.controller || registration.active;
+    if (!worker) {
+      prepRunning = false;
+      prepAction.disabled = false;
+      prepAction.textContent = 'Повторить';
+      return;
+    }
+    const channel = new MessageChannel();
+    channel.port1.onmessage = event => {
+      const data = event.data || {};
+      if (data.type === 'progress') {
+        prepCopy.firstChild.textContent = `Загружено ${data.completed} из ${data.total}`;
+        prepCopy.querySelector('small').textContent = data.failed ? `Не удалось загрузить: ${data.failed}` : 'Сохраняем изображения и оформление';
+      }
+      if (data.type === 'complete') {
+        prepRunning = false;
+        prepAction.disabled = false;
+        prepAction.textContent = 'Готово';
+        prepCopy.firstChild.textContent = 'Kesug готов к полёту';
+        prepCopy.querySelector('small').textContent = `Сохранено ресурсов: ${data.completed}. Пропущено: ${data.failed}.`;
+        try { localStorage.setItem('ks_pwa_assets_ready', '1'); } catch (_) {}
+        window.setTimeout(() => prepBar.classList.remove('is-visible'), 7000);
+      }
+    };
+    worker.postMessage({ type: 'KESUG_PREPARE_OFFLINE' }, [channel.port2]);
+  }
+  prepAction.addEventListener('click', prepareOfflineAssets);
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(showOfflinePreparation).catch(() => {});
+    navigator.serviceWorker.addEventListener('controllerchange', showOfflinePreparation);
+    window.addEventListener('online', showOfflinePreparation);
+  }
+
+  if ('serviceWorker' in navigator && secure) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js', { scope: './' })
+        .then(registration => {
+          // Check for newer app files whenever the installed game is opened online.
+          if (navigator.onLine) registration.update().catch(() => {});
+        })
+        .catch(error => console.warn('Kesug PWA: service worker registration failed', error));
+    }, { once: true });
+  } else if (!secure) {
+    console.info('Kesug PWA requires HTTPS or localhost to enable offline installation.');
+  }
+})();
+</script>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* Kesug Slots PWA service worker. Bump CACHE_VERSION when shipping a new release. */
-const CACHE_VERSION = 'kesug-pwa-v3';
+const CACHE_VERSION = 'kesug-pwa-v6';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const SHELL_FILES = [

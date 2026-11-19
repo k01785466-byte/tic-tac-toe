@@ -2679,7 +2679,7 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
 .ks-more-tile-bannered .ks-more-banner::before { width:112px;height:112px;right:-23px;top:-55px;background:rgba(255,255,255,.14); }
 .ks-more-tile-bannered .ks-more-banner::after { width:72px;height:72px;right:38px;bottom:-54px;border:1px solid rgba(255,255,255,.24);box-shadow:0 0 0 10px rgba(255,255,255,.045),0 0 0 21px rgba(255,255,255,.035); }
 .ks-more-banner-symbol { position:relative;z-index:1;width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.26);border-radius:16px;background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.15);backdrop-filter:blur(8px);font-size:28px; }
-.ks-more-banner-symbol i { font-size:29px; }
+.ks-more-banner-symbol img { width:42px;height:42px;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(0,0,0,.22)); }
 .ks-more-banner-kicker { position:relative;z-index:1;margin-left:auto;color:rgba(255,255,255,.88);font-size:9px;font-weight:900;letter-spacing:.16em;text-align:right; }
 .ks-more-tile-bannered > strong { display:block;margin:11px 13px 0;padding:0;color:var(--text-white);font-size:12px;line-height:1.25; }
 .ks-more-tile-bannered > small { display:block;margin:5px 13px 13px;padding:0;color:var(--text-muted);font-size:10px;line-height:1.45; }
@@ -2725,7 +2725,7 @@ body.lite-mode .ks-more-page,body.lite-mode .ks-more-tile { box-shadow:none !imp
   .ks-more-tile.ks-more-tile-bannered {min-height:148px;border-radius:14px;}
   .ks-more-tile-bannered .ks-more-banner {height:76px;min-height:76px;flex-basis:76px;padding:10px;}
   .ks-more-banner-symbol {width:44px;height:44px;flex-basis:44px;border-radius:13px;font-size:24px;}
-  .ks-more-banner-symbol i {font-size:25px;}
+  .ks-more-banner-symbol img {width:38px;height:38px;}
   .ks-more-banner-kicker {font-size:7px;letter-spacing:.11em;}
   .ks-more-tile-bannered > strong {margin:9px 10px 0;font-size:11px;}
   .ks-more-tile-bannered > small {margin:4px 10px 10px;font-size:9px;}
@@ -2898,6 +2898,56 @@ body.lite-mode .profile-card,body.lite-mode .settings-hero,body.lite-mode .setti
 @media(max-width:760px) { .ks-market-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .ks-market-controls { grid-template-columns:repeat(2,minmax(0,1fr)); } .ks-market-search { grid-column:1/-1; } }
 @media(max-width:420px) { .ks-market-intro { align-items:flex-start; flex-direction:column; padding:15px; } .ks-market-counter { justify-items:start; } .ks-market-grid { gap:8px; } .ks-market-product-art { min-height:88px; padding:9px; } .ks-market-product-info { padding:8px; } .ks-market-product-buy > span { font-size:10px; } .ks-market-card-action { padding:8px 4px; } }
 body.lite-mode .ks-market-product,body.lite-mode .ks-market-intro { box-shadow:none !important; }
+</style>
+
+
+<style id="ks-showcase-analytics-styles">
+.ks-showcase-card { padding:16px; border:1px solid var(--border); border-radius:18px; background:linear-gradient(125deg,rgba(var(--accent-rgb),.15),var(--bg-card)); }
+.ks-showcase-head { display:flex; align-items:center; gap:13px; }
+.ks-showcase-avatar { width:64px; height:64px; flex:0 0 auto; border-radius:20px; object-fit:cover; border:2px solid var(--accent-gold); }
+.ks-showcase-name { color:var(--text-white); font:800 18px 'Space Grotesk',Manrope,sans-serif; }
+.ks-showcase-meta { margin-top:4px; color:var(--text-muted); font-size:10px; }
+.ks-showcase-items { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; margin-top:12px; }
+.ks-showcase-item { min-width:0; padding:11px 8px; text-align:center; border:1px solid var(--border); border-radius:12px; background:rgba(0,0,0,.12); }
+.ks-showcase-item-art { display:grid; place-items:center; min-height:45px; color:var(--accent-gold); font-size:25px; }
+.ks-showcase-item strong { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--text-white); font-size:9px; }
+.ks-showcase-item small { display:block; margin-top:3px; color:var(--text-muted); font-size:8px; }
+.ks-analytics-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:12px 0; }
+.ks-analytics-stat { min-width:0; padding:12px 9px; border:1px solid var(--border); border-radius:12px; background:var(--bg-card); }
+.ks-analytics-stat span { display:block; color:var(--text-muted); font-size:8px; font-weight:800; text-transform:uppercase; }
+.ks-analytics-stat strong { display:block; margin-top:6px; overflow-wrap:anywhere; color:var(--text-white); font:800 16px 'Space Grotesk',Manrope,sans-serif; }
+.ks-analytics-chart { display:flex; align-items:end; gap:7px; height:112px; padding:12px 10px 8px; border:1px solid var(--border); border-radius:13px; background:var(--bg-card); }
+.ks-analytics-bar { display:flex; flex:1; min-width:0; flex-direction:column; align-items:center; justify-content:end; height:100%; gap:5px; }
+.ks-analytics-bar i { display:block; width:100%; min-height:3px; max-width:24px; border-radius:6px 6px 2px 2px; background:linear-gradient(180deg,var(--accent-gold),var(--accent-green)); }
+.ks-analytics-bar small { color:var(--text-muted); font-size:8px; }
+.ks-analytics-note { margin-top:8px; color:var(--text-muted); font-size:9px; line-height:1.5; }
+.ks-more-banner-symbol img { width:42px; height:42px; display:block; object-fit:contain; filter:drop-shadow(0 4px 7px rgba(0,0,0,.22)); }
+@media(max-width:700px){.ks-showcase-items{grid-template-columns:repeat(2,minmax(0,1fr));}.ks-analytics-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.ks-more-banner-symbol img{width:42px;height:42px;display:block;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(0,0,0,.22));}
+.ks-feature-hero-symbol img{width:56px;height:56px;display:block;object-fit:contain;filter:drop-shadow(0 5px 10px rgba(0,0,0,.25));}
+</style>
+
+
+<style id="kesug-ui-scale-game-viewport-fix">
+/* UI scale must not shrink or shift the fixed slot overlay itself. Its box is
+   compensated in syncGameViewportForUIScale(); only the game UI is zoomed. */
+#game-screen {
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: none !important;
+}
+#game-screen > .slot-container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 </style>
 
 </head>
@@ -3100,6 +3150,7 @@ body.lite-mode .ks-market-product,body.lite-mode .ks-market-intro { box-shadow:n
       <div class="profile-actions">
         <button class="btn btn-green" onclick="showPage('edit-profile')"><i class="ph-bold ph-pencil"></i> Редактировать профиль</button>
         <button class="btn btn-gray" onclick="showPage('settings')"><i class="ph-bold ph-sliders-horizontal"></i> Настройки</button>
+        <button class="btn btn-gray" type="button" onclick="window.useMoreFeature('showcase')"><i class="ph-fill ph-user-square"></i> Витрина профиля</button>
       </div>
 
       <div class="stat-grid">
@@ -3268,6 +3319,8 @@ body.lite-mode .ks-market-product,body.lite-mode .ks-market-intro { box-shadow:n
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('converter')"><span class="ks-more-icon">🪙</span><strong>Конвертер</strong><small>Форматы игровых единиц</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('constructor')"><span class="ks-more-icon">🧱</span><strong>Конструктор</strong><small>Собственный набор символов</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('music')"><span class="ks-more-icon"><i class="ph-fill ph-music-notes"></i></span><strong>Моя музыка</strong><small>Твоя библиотека треков и плейлист</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('showcase')"><span class="ks-more-icon"><i class="ph-fill ph-user-square"></i></span><strong>Витрина профиля</strong><small>Покажи любимые предметы и оформление</small></button>
+      <button class="ks-more-tile" type="button" onclick="useMoreFeature('analytics')"><span class="ks-more-icon"><i class="ph-fill ph-chart-line-up"></i></span><strong>Аналитика игрока</strong><small>Графики, динамика и любимые автоматы</small></button>
     </div>
   </section>
 </div>
@@ -3379,7 +3432,10 @@ const ICON_MAP = {
 };
 
 function getIconUrl(emoji) {
-  return ICON_MAP[emoji] || 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Gem%20stone/3D/gem_stone_3d.png';
+  if (ICON_MAP[emoji]) return ICON_MAP[emoji];
+  const safeEmoji = String(emoji || '✨').replace(/[<>"']/g, '');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><defs><radialGradient id="g"><stop stop-color="#ffffff" stop-opacity=".24"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="128" cy="128" r="116" fill="url(#g)"/><text x="128" y="174" text-anchor="middle" font-size="142" font-family="Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif">${safeEmoji}</text></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
 function readLocalJSON(key, fallback) {
@@ -3661,6 +3717,23 @@ function mixColor(rgb, amount = 0.34) {
   return '#' + mix(rgb.r) + mix(rgb.g) + mix(rgb.b);
 }
 
+
+function syncGameViewportForUIScale(scale) {
+  const gameScreen = document.getElementById('game-screen');
+  if (!gameScreen) return;
+  const safeScale = Math.min(120, Math.max(80, Number(scale) || 100));
+  const inverse = 100 / safeScale;
+  // body.zoom scales fixed descendants too. Compensate the overlay's box so
+  // it still covers the whole physical viewport at 80–120% UI scale.
+  gameScreen.style.left = '0';
+  gameScreen.style.top = '0';
+  gameScreen.style.right = 'auto';
+  gameScreen.style.bottom = 'auto';
+  gameScreen.style.width = `${(100 * inverse).toFixed(4)}vw`;
+  gameScreen.style.height = `${(100 * inverse).toFixed(4)}dvh`;
+  gameScreen.style.maxHeight = 'none';
+}
+
 function applySettings() {
   const body = document.body;
   const root = document.documentElement;
@@ -3710,6 +3783,7 @@ function applySettings() {
   const scale = Math.min(120, Math.max(80, Number(state.settings.uiScale) || 100));
   state.settings.uiScale = scale;
   body.style.zoom = `${scale}%`;
+  syncGameViewportForUIScale(scale);
   const scaleOutput = document.getElementById('setting-scale-value');
   if (scaleOutput) scaleOutput.textContent = `${scale}%`;
 }
@@ -3784,6 +3858,7 @@ window.changeInterfaceScale = (value) => {
   const scale = Math.min(120, Math.max(80, Math.round(numeric / 5) * 5));
   state.settings.uiScale = scale;
   document.body.style.zoom = `${scale}%`;
+  syncGameViewportForUIScale(scale);
   const range = document.getElementById('setting-ui-scale');
   const output = document.getElementById('setting-scale-value');
   if (range && range.value !== String(scale)) range.value = String(scale);
@@ -3963,8 +4038,8 @@ function generateResult(syms) {
   if (hasAnyTriple) return result;
   if (Math.random() < 0.15) {
     const line = WIN_LINES[Math.floor(Math.random() * WIN_LINES.length)];
-    const s = syms[Math.floor(Math.random() * syms.length)];
-    line.forEach(idx => result[idx] = s);
+    const symbol = syms[Math.floor(Math.random() * syms.length)];
+    line.forEach(idx => result[idx] = symbol);
   }
   return result;
 }
@@ -3985,7 +4060,7 @@ window.spin = () => {
   document.querySelectorAll('.reel-item').forEach(el => el.classList.remove('winning'));
 
   const syms = currentMachine.symbols;
-  const result = generateResult(syms);
+  const result = generateResult(syms, currentMachine);
   const reelHeight = document.querySelector('.reel-window').offsetHeight / 3;
   const ITEMS = 20;
   const LITE_MODE = document.body.classList.contains('lite-mode');
@@ -4557,6 +4632,7 @@ showPage('lobby');
     return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
   };
   const fmt = value => Math.floor(Number(value)||0).toLocaleString('ru-RU');
+  try { localStorage.removeItem('ks_custom_machines_v1'); } catch (_) {}
   let history = readJSON('ks_round_history', []);
   if (!Array.isArray(history)) history = [];
   let autoPlayActive = false;
@@ -4650,48 +4726,50 @@ showPage('lobby');
   let activeMoreFeature = '';
   const moreFeatureNames = {
     'daily-bonus':'Забрать бонус','random-slot':'Случайный слот','history':'История','autoplay':'Автоигра','appearance':'Оформление','achievements':'Достижения','promo':'Промокод','stats':'Статистика','challenges':'Испытания','sounds':'Звуки','effects':'Эффекты','favorites':'Избранное','search':'Поиск','reaction':'Игры на реакцию',duels:'Дуэли',
-    combinations:'Комбинации',archive:'Архив',cinema:'Кинозал',gallery:'Галерея',lab:'Лаборатория',masks:'Маски',titles:'Титулы',bookmarks:'Закладки',navigator:'Навигатор',schedule:'Расписание',openings:'Открытия',quiz:'Викторина',minigames:'Мини-игры',editor:'Редактор',journal:'Журнал',goals:'Мои цели','random-effect':'Случайный эффект',night:'Ночной режим',cleanup:'Очистка',downloads:'Загрузки',converter:'Конвертер',constructor:'Конструктор',music:'Моя музыка',market:'Магазин'
+    combinations:'Комбинации',archive:'Архив',cinema:'Кинозал',gallery:'Галерея',lab:'Лаборатория',masks:'Маски',titles:'Титулы',bookmarks:'Закладки',navigator:'Навигатор',schedule:'Расписание',openings:'Открытия',quiz:'Викторина',minigames:'Мини-игры',editor:'Редактор',journal:'Журнал',goals:'Мои цели','random-effect':'Случайный эффект',night:'Ночной режим',cleanup:'Очистка',downloads:'Загрузки',converter:'Конвертер',constructor:'Конструктор',music:'Моя музыка',market:'Магазин',showcase:'Витрина профиля',analytics:'Аналитика игрока'
   };
   const MORE_FEATURE_VISUALS = {
-    'daily-bonus': { a: '#45317e', b: '#bd83f2', kicker: 'DAILY REWARD', icon: 'ph-fill ph-gift' },
-    'random-slot': { a: '#713515', b: '#eaa04c', kicker: 'RANDOM PICK', icon: 'ph-fill ph-dice-five' },
-    history: { a: '#174b67', b: '#63b7d2', kicker: 'TIMELINE', icon: 'ph-bold ph-scroll' },
-    autoplay: { a: '#185642', b: '#65c99b', kicker: 'AUTO PLAY', icon: 'ph-fill ph-repeat' },
-    appearance: { a: '#60336f', b: '#d58be2', kicker: 'YOUR STYLE', icon: 'ph-fill ph-palette' },
-    achievements: { a: '#654817', b: '#e7b95d', kicker: 'ACHIEVEMENTS', icon: 'ph-fill ph-trophy' },
-    promo: { a: '#6d2d49', b: '#e8789e', kicker: 'BONUS CODE', icon: 'ph-fill ph-ticket' },
-    stats: { a: '#1a426f', b: '#61a6e7', kicker: 'ANALYTICS', icon: 'ph-fill ph-chart-line-up' },
-    challenges: { a: '#73501c', b: '#e6a94c', kicker: 'CHALLENGES', icon: 'ph-fill ph-target' },
-    sounds: { a: '#234c69', b: '#68b3d6', kicker: 'SOUND', icon: 'ph-fill ph-speaker-high' },
-    effects: { a: '#482c79', b: '#ae8bf0', kicker: 'VISUAL FX', icon: 'ph-fill ph-sparkle' },
-    favorites: { a: '#76521b', b: '#f0c35f', kicker: 'FAVORITES', icon: 'ph-fill ph-star' },
-    search: { a: '#214b78', b: '#79ace6', kicker: 'FIND A GAME', icon: 'ph-bold ph-magnifying-glass' },
-    reaction: { a: '#713619', b: '#ee914a', kicker: 'REFLEX TEST', icon: 'ph-fill ph-lightning' },
-    duels: { a: '#702b3d', b: '#ec7182', kicker: 'BOT ARENA', icon: 'ph-fill ph-sword' },
-    combinations: { a: '#2c5869', b: '#74c8d2', kicker: 'SYMBOL GUIDE', icon: 'ph-fill ph-puzzle-piece' },
-    archive: { a: '#414d68', b: '#9caecb', kicker: 'COLLECTION', icon: 'ph-fill ph-archive' },
-    cinema: { a: '#5d3159', b: '#d47bc1', kicker: 'CINEMA', icon: 'ph-fill ph-film-strip' },
-    gallery: { a: '#20516b', b: '#76c0dc', kicker: 'GALLERY', icon: 'ph-fill ph-images' },
-    lab: { a: '#285b51', b: '#83cbb0', kicker: 'EXPERIMENTS', icon: 'ph-fill ph-flask' },
-    masks: { a: '#693e68', b: '#d18bbd', kicker: 'AVATAR STYLE', icon: 'ph-fill ph-masks-theater' },
-    titles: { a: '#735323', b: '#dfbe70', kicker: 'PLAYER TITLES', icon: 'ph-fill ph-medal' },
-    bookmarks: { a: '#31516e', b: '#86b8e4', kicker: 'SAVED PAGES', icon: 'ph-fill ph-bookmark-simple' },
-    navigator: { a: '#245d59', b: '#73c9ba', kicker: 'QUICK ACCESS', icon: 'ph-fill ph-compass' },
-    schedule: { a: '#3e5778', b: '#9dbce6', kicker: 'EVENT CALENDAR', icon: 'ph-fill ph-calendar-dots' },
-    openings: { a: '#6e502b', b: '#d6a66b', kicker: 'OPENING LOG', icon: 'ph-fill ph-package' },
-    quiz: { a: '#345579', b: '#85b8f0', kicker: 'KESUG QUIZ', icon: 'ph-fill ph-brain' },
-    minigames: { a: '#633966', b: '#d18bd7', kicker: 'ARCADE', icon: 'ph-fill ph-game-controller' },
-    editor: { a: '#704a35', b: '#dca57e', kicker: 'CUSTOM DESIGN', icon: 'ph-fill ph-paint-brush' },
-    journal: { a: '#3b5364', b: '#8bb4c7', kicker: 'ACTIVITY LOG', icon: 'ph-fill ph-notebook' },
-    goals: { a: '#4e632c', b: '#b1cc77', kicker: 'PERSONAL GOALS', icon: 'ph-fill ph-flag-checkered' },
-    'random-effect': { a: '#654187', b: '#c09aeb', kicker: 'SURPRISE STYLE', icon: 'ph-fill ph-magic-wand' },
-    night: { a: '#293d70', b: '#8295df', kicker: 'DARK ATMOSPHERE', icon: 'ph-fill ph-moon-stars' },
-    cleanup: { a: '#4b6260', b: '#a6c8bf', kicker: 'MAINTENANCE', icon: 'ph-fill ph-broom' },
-    downloads: { a: '#315a78', b: '#83c2e5', kicker: 'FILES', icon: 'ph-fill ph-download-simple' },
-    converter: { a: '#66512e', b: '#d7b873', kicker: 'UNIT TOOLS', icon: 'ph-fill ph-arrows-left-right' },
-    constructor: { a: '#3e5960', b: '#91c9c9', kicker: 'BUILD YOUR SET', icon: 'ph-fill ph-cubes' },
-    music: { a: '#243d73', b: '#8e8bf2', kicker: 'YOUR SOUND LIBRARY', icon: 'ph-fill ph-music-notes' },
-    market: { a: '#67401e', b: '#e3b45f', kicker: 'KESUG MARKET · 1M ITEMS', icon: 'ph-fill ph-storefront' }
+    'daily-bonus': { a: '#45317e', b: '#bd83f2', kicker: 'DAILY REWARD', emoji: '🎁' },
+    'random-slot': { a: '#713515', b: '#eaa04c', kicker: 'RANDOM PICK', emoji: '🎲' },
+    history: { a: '#174b67', b: '#63b7d2', kicker: 'TIMELINE', emoji: '📜' },
+    autoplay: { a: '#185642', b: '#65c99b', kicker: 'AUTO PLAY', emoji: '🚀' },
+    appearance: { a: '#60336f', b: '#d58be2', kicker: 'YOUR STYLE', emoji: '🔮' },
+    achievements: { a: '#654817', b: '#e7b95d', kicker: 'ACHIEVEMENTS', emoji: '🏆' },
+    promo: { a: '#6d2d49', b: '#e8789e', kicker: 'BONUS CODE', emoji: '💰' },
+    stats: { a: '#1a426f', b: '#61a6e7', kicker: 'ANALYTICS', emoji: '💎' },
+    challenges: { a: '#73501c', b: '#e6a94c', kicker: 'CHALLENGES', emoji: '🏔️' },
+    sounds: { a: '#234c69', b: '#68b3d6', kicker: 'SOUND', emoji: '🔔' },
+    effects: { a: '#482c79', b: '#ae8bf0', kicker: 'VISUAL FX', emoji: '💥' },
+    favorites: { a: '#76521b', b: '#f0c35f', kicker: 'FAVORITES', emoji: '⭐' },
+    search: { a: '#214b78', b: '#79ace6', kicker: 'FIND A GAME', emoji: '🌐' },
+    reaction: { a: '#713619', b: '#ee914a', kicker: 'REFLEX TEST', emoji: '⚡' },
+    duels: { a: '#702b3d', b: '#ec7182', kicker: 'BOT ARENA', emoji: '⚔️' },
+    combinations: { a: '#2c5869', b: '#74c8d2', kicker: 'SYMBOL GUIDE', emoji: '⚙️' },
+    archive: { a: '#414d68', b: '#9caecb', kicker: 'COLLECTION', emoji: '📖' },
+    cinema: { a: '#5d3159', b: '#d47bc1', kicker: 'CINEMA', emoji: '📱' },
+    gallery: { a: '#20516b', b: '#76c0dc', kicker: 'GALLERY', emoji: '🌌' },
+    lab: { a: '#285b51', b: '#83cbb0', kicker: 'EXPERIMENTS', emoji: '🏺' },
+    masks: { a: '#693e68', b: '#d18bbd', kicker: 'AVATAR STYLE', emoji: '🕶️' },
+    titles: { a: '#735323', b: '#dfbe70', kicker: 'PLAYER TITLES', emoji: '👑' },
+    bookmarks: { a: '#31516e', b: '#86b8e4', kicker: 'SAVED PAGES', emoji: '📖' },
+    navigator: { a: '#245d59', b: '#73c9ba', kicker: 'QUICK ACCESS', emoji: '⚓' },
+    schedule: { a: '#3e5778', b: '#9dbce6', kicker: 'EVENT CALENDAR', emoji: '🏛️' },
+    openings: { a: '#6e502b', b: '#d6a66b', kicker: 'OPENING LOG', emoji: '🎁' },
+    quiz: { a: '#345579', b: '#85b8f0', kicker: 'KESUG QUIZ', emoji: '🤖' },
+    minigames: { a: '#633966', b: '#d18bd7', kicker: 'ARCADE', emoji: '🎲' },
+    editor: { a: '#704a35', b: '#dca57e', kicker: 'CUSTOM DESIGN', emoji: '🪓' },
+    journal: { a: '#3b5364', b: '#8bb4c7', kicker: 'ACTIVITY LOG', emoji: '📜' },
+    goals: { a: '#4e632c', b: '#b1cc77', kicker: 'PERSONAL GOALS', emoji: '🏆' },
+    'random-effect': { a: '#654187', b: '#c09aeb', kicker: 'SURPRISE STYLE', emoji: '🌟' },
+    night: { a: '#293d70', b: '#8295df', kicker: 'DARK ATMOSPHERE', emoji: '🌙' },
+    cleanup: { a: '#4b6260', b: '#a6c8bf', kicker: 'MAINTENANCE', emoji: '🦴' },
+    downloads: { a: '#315a78', b: '#83c2e5', kicker: 'FILES', emoji: '💻' },
+    converter: { a: '#66512e', b: '#d7b873', kicker: 'UNIT TOOLS', emoji: '⚙️' },
+    constructor: { a: '#3e5960', b: '#91c9c9', kicker: 'BUILD YOUR SET', emoji: '🗿' },
+    music: { a: '#243d73', b: '#8e8bf2', kicker: 'YOUR SOUND LIBRARY', emoji: '🔔' },
+    market: { a: '#67401e', b: '#e3b45f', kicker: 'KESUG MARKET · 1M ITEMS', emoji: '💰' },
+    showcase: { a: '#254a72', b: '#83b8ee', kicker: 'PROFILE SHOWCASE', emoji: '👑' },
+    analytics: { a: '#1c5a55', b: '#72c9b4', kicker: 'PLAYER ANALYTICS', emoji: '🌍' },
   };
 
   function decorateMoreTiles() {
@@ -4707,10 +4785,10 @@ showPage('lobby');
       tile.style.setProperty('--feature-banner-b', visual.b);
       const icon = tile.querySelector('.ks-more-icon');
       if (icon) {
-        const oldIcon = icon.innerHTML;
         icon.className = 'ks-more-banner';
         icon.setAttribute('aria-hidden', 'true');
-        icon.innerHTML = `<span class="ks-more-banner-symbol">${oldIcon}</span><span class="ks-more-banner-kicker">${visual.kicker}</span><span class="ks-more-banner-orbit"></span>`;
+        // Use one consistent Phosphor icon set; older tiles mixed vector icons and emoji glyphs.
+        icon.innerHTML = `<span class="ks-more-banner-symbol"><img src="${getIconUrl(visual.emoji)}" alt="" loading="eager" decoding="async" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='✦';"></span><span class="ks-more-banner-kicker">${visual.kicker}</span><span class="ks-more-banner-orbit"></span>`;
       }
     });
   }
@@ -4722,7 +4800,7 @@ showPage('lobby');
       ? `<div class="ks-more-detail-tools"><button class="ks-more-secondary" type="button" onclick="saveCurrentMoreBookmark()">📌 В закладки</button></div>`
       : '';
     const visual = MORE_FEATURE_VISUALS[activeMoreFeature] || { a: '#344b6c', b: '#7ca9d7', kicker: 'KESUG FEATURE', icon: 'ph-fill ph-sparkles' };
-    const safeIcon = visual.icon.startsWith('ph-') ? `<i class="${visual.icon}"></i>` : visual.icon;
+    const safeIcon = `<img src="${getIconUrl(visual.emoji || '🌟')}" alt="" decoding="async">`;
     const featureHero = `<section class="ks-feature-hero" style="--feature-banner-a:${visual.a};--feature-banner-b:${visual.b}" aria-label="${title}">
       <div class="ks-feature-hero-art"><span class="ks-feature-hero-orbit"></span><span class="ks-feature-hero-symbol">${safeIcon}</span><span class="ks-feature-hero-kicker">${visual.kicker}</span></div>
       <div class="ks-feature-hero-copy"><span class="ks-feature-hero-brand">KESUG SLOTS · EXTRA SPACE</span><h3>${title}</h3><p>${subtitle || ''}</p></div>
@@ -5062,6 +5140,86 @@ showPage('lobby');
   // Restore previously equipped store cosmetics on each app launch.
   applyMarketVisuals();
 
+  // ═══════ PROFILE SHOWCASE ═══════
+  const SHOWCASE_KEY = 'ks_profile_showcase_items_v1';
+  function openPlayerShowcase() {
+    const owned = getMarketOwned();
+    const selected = readJSON(SHOWCASE_KEY, []);
+    const showcaseIds = Array.isArray(selected) ? selected.filter(id => owned.has(Number(id))).slice(0, 6) : [];
+    const items = showcaseIds.map(id => getMarketItem(id)).filter(Boolean);
+    const eloData = readJSON('ks_duel_profile', {});
+    const avatar = state.avatar || KESUG_DEFAULT_AVATAR;
+    const ownedOptions = [...owned].map(id => getMarketItem(id)).filter(Boolean)
+      .map(item => `<option value="${item.id}">${escapeHtml(item.name)} · ${escapeHtml(item.category.label)}</option>`).join('');
+    const itemCards = items.length ? items.map(item => `<div class="ks-showcase-item"><div class="ks-showcase-item-art" style="color:${item.color}">${item.category.icon}</div><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.rarity.name)}</small><button class="ks-slot-small-button" style="margin-top:7px" onclick="removeKesugShowcaseItem(${item.id})">Убрать</button></div>`).join('') : '<div class="ks-more-info-card" style="grid-column:1/-1">Витрина пока пустая. Выбери предметы, которые хочешь показать в профиле.</div>';
+    const html = `
+      <div class="ks-showcase-card">
+        <div class="ks-showcase-head"><img class="ks-showcase-avatar" src="${escapeHtml(avatar)}" alt="Аватар"><div><div class="ks-showcase-name">${escapeHtml(state.nickname)}</div><div class="ks-showcase-meta">${escapeHtml(localStorage.getItem('ks_profile_title') || 'Игрок Kesug')} · ${fmt(Number(eloData.elo) || 1000)} ELO</div><div class="ks-showcase-meta">${owned.size.toLocaleString('ru-RU')} предметов в коллекции</div></div></div>
+        <div class="ks-showcase-items">${itemCards}</div>
+      </div>
+      <div class="ks-more-info-card" style="margin-top:12px"><strong>Предметы на витрине</strong><p style="margin:6px 0 10px;color:var(--text-muted);font-size:10px">Выбери до 6 предметов из своего магазина. Они будут отображаться в твоей локальной витрине профиля.</p>
+        ${ownedOptions ? `<div class="ks-more-form"><select id="ks-showcase-select" class="ks-more-select">${ownedOptions}</select><button class="ks-more-action" type="button" onclick="addKesugShowcaseItem()" ${showcaseIds.length>=6?'disabled':''}>Добавить</button></div>` : '<p style="color:var(--text-muted);font-size:10px">Сначала приобрети любой косметический предмет в магазине.</p>'}
+        <small style="display:block;margin-top:9px;color:var(--text-muted)">${showcaseIds.length}/6 мест занято</small>
+      </div>`;
+    showDetail('Витрина профиля', 'Твоя личная коллекция: покажи любимые предметы, титул и стиль оформления.', html);
+  }
+  window.addKesugShowcaseItem = () => {
+    const select = document.getElementById('ks-showcase-select');
+    const id = Number(select?.value);
+    const owned = getMarketOwned();
+    if (!Number.isInteger(id) || !owned.has(id)) { showToast('Выбери предмет из своей коллекции'); return; }
+    const list = readJSON(SHOWCASE_KEY, []);
+    const next = Array.isArray(list) ? list.slice() : [];
+    if (next.includes(id)) { showToast('Этот предмет уже на витрине'); return; }
+    if (next.length >= 6) { showToast('На витрине максимум 6 предметов'); return; }
+    next.push(id); writeJSON(SHOWCASE_KEY, next); openPlayerShowcase();
+  };
+  window.removeKesugShowcaseItem = id => {
+    const list = readJSON(SHOWCASE_KEY, []);
+    writeJSON(SHOWCASE_KEY, (Array.isArray(list) ? list : []).filter(value => Number(value) !== Number(id)));
+    openPlayerShowcase();
+  };
+
+  // ═══════ PLAYER ANALYTICS ═══════
+  function openPlayerAnalytics() {
+    const rounds = (Array.isArray(history) ? history : []).slice(0, 100);
+    const wins = rounds.filter(row => Number(row.win) > 0).length;
+    const recentBet = rounds.reduce((sum, row) => sum + (Number(row.bet) || 0), 0);
+    const recentWon = rounds.reduce((sum, row) => sum + (Number(row.win) || 0), 0);
+    const winRate = rounds.length ? Math.round(wins / rounds.length * 100) : 0;
+    const byMachine = {};
+    rounds.forEach(row => { const key = row.machine || 'Автомат'; byMachine[key] = (byMachine[key] || 0) + 1; });
+    const topMachine = Object.entries(byMachine).sort((a,b) => b[1]-a[1])[0];
+    const duel = readJSON('ks_duel_profile', {});
+    const days = [];
+    for (let offset = 6; offset >= 0; offset--) {
+      const date = new Date(); date.setHours(0,0,0,0); date.setDate(date.getDate()-offset);
+      const key = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+      const count = rounds.filter(row => { const d = new Date(row.at); return !Number.isNaN(d.getTime()) && `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}` === key; }).length;
+      days.push({ label: date.toLocaleDateString('ru-RU',{weekday:'short'}).replace('.',''), count });
+    }
+    const maxDay = Math.max(1, ...days.map(day=>day.count));
+    const chart = days.map(day => `<div class="ks-analytics-bar" title="${day.label}: ${day.count} раундов"><i style="height:${Math.max(4, day.count/maxDay*76)}px"></i><small>${day.label}</small></div>`).join('');
+    const net = Number(state.stats.won||0) - Number(state.stats.totalBet||0);
+    const html = `
+      <div class="ks-analytics-grid">
+        <div class="ks-analytics-stat"><span>Всего раундов</span><strong>${fmt(state.stats.spins||0)}</strong></div>
+        <div class="ks-analytics-stat"><span>Доля раундов с выигрышем · последние 100</span><strong>${winRate}%</strong></div>
+        <div class="ks-analytics-stat"><span>Общий результат</span><strong style="color:${net>=0?'var(--accent-green)':'var(--accent-red)'}">${net>=0?'+':''}${fmt(net)}</strong></div>
+        <div class="ks-analytics-stat"><span>Макс. выигрыш</span><strong>${fmt(state.stats.maxWin||0)}</strong></div>
+      </div>
+      <div class="ks-more-info-card"><strong>Активность за последние 7 дней</strong><div class="ks-analytics-chart">${chart}</div><p class="ks-analytics-note">Показывает количество раундов по дням из сохранённой истории (до 100 последних раундов).</p></div>
+      <div class="ks-more-list">
+        <div class="ks-more-row"><span class="ks-more-row-icon"><i class="ph-fill ph-game-controller"></i></span><div class="ks-more-row-copy"><strong>Любимый автомат</strong><small>Чаще всего запускался в сохранённой истории</small></div><strong>${escapeHtml(topMachine ? topMachine[0] : 'Пока нет данных')}</strong></div>
+        <div class="ks-more-row"><span class="ks-more-row-icon"><i class="ph-fill ph-coins"></i></span><div class="ks-more-row-copy"><strong>Ставки за последние 100 раундов</strong><small>По журналу сохранённых результатов</small></div><strong>${fmt(recentBet)}</strong></div>
+        <div class="ks-more-row"><span class="ks-more-row-icon"><i class="ph-fill ph-trophy"></i></span><div class="ks-more-row-copy"><strong>Получено за последние 100 раундов</strong></div><strong>${fmt(recentWon)}</strong></div>
+        <div class="ks-more-row"><span class="ks-more-row-icon"><i class="ph-fill ph-sword"></i></span><div class="ks-more-row-copy"><strong>Дуэли · рейтинг ELO</strong><small>${Number(duel.wins)||0} побед · ${Number(duel.losses)||0} поражений · ${Number(duel.draws)||0} ничьих</small></div><strong>${fmt(duel.elo||1000)}</strong></div>
+        <div class="ks-more-row"><span class="ks-more-row-icon"><i class="ph-fill ph-star"></i></span><div class="ks-more-row-copy"><strong>Избранные автоматы</strong></div><strong>${state.favorites.length}</strong></div>
+      </div>
+      <p class="ks-analytics-note">Все показатели хранятся локально. Суммарная статистика берётся из профиля, график и любимый автомат — из истории последних 100 раундов.</p>`;
+    showDetail('Аналитика игрока', 'Подробный обзор активности, результатов и игровых предпочтений.', html);
+  }
+
   function bonusStatusText() {
     const claimed = localStorage.getItem('ks_daily_bonus_day') === dayKey();
     return claimed ? `Забран: ${fmt(localStorage.getItem('ks_daily_bonus_amount')||0)} ₽ · завтра снова` : 'Доступна сегодня · до 10 000 000';
@@ -5128,6 +5286,8 @@ showPage('lobby');
       case 'constructor': return openSymbolConstructor();
       case 'music': return openMyMusic();
       case 'market': return openKesugMarket();
+      case 'showcase': return openPlayerShowcase();
+      case 'analytics': return openPlayerAnalytics();
       default: return;
     }
   };
@@ -5301,8 +5461,8 @@ showPage('lobby');
     renderDuelMatch(true);
     window.setTimeout(() => {
       if (!activeDuel) { duelRolling = false; return; }
-      const playerResult = generateResult(machine.symbols);
-      const botResult = generateResult(machine.symbols);
+      const playerResult = generateResult(machine.symbols, machine);
+      const botResult = generateResult(machine.symbols, machine);
       const playerPayout = calculateDuelPayout(machine, playerResult, activeDuel.stake);
       const botPayout = calculateDuelPayout(machine, botResult, activeDuel.stake);
       const result = playerPayout > botPayout ? 'player' : botPayout > playerPayout ? 'bot' : 'draw';

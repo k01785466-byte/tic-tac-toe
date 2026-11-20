@@ -3290,7 +3290,46 @@ body.lite-mode .ks-anniversary-hero,body.lite-mode .ks-anniversary-section{backd
               <div class="ks-os-widget-toolbar"><span><i class="ph-fill ph-squares-four"></i> ТВОИ ВИДЖЕТЫ</span><button type="button" onclick="ksOSOpenSettings()" aria-label="Управление виджетами" title="Добавить или убрать виджеты"><i class="ph-bold ph-plus"></i></button></div>
               <div class="ks-os-widgets" id="ks-os-widgets"></div>
             </aside>
-          </main>
+          
+      <section class="page-view ks-premium-page" id="page-premium" aria-labelledby="ks-premium-title">
+        <div class="ks-premium-shell">
+          <header class="ks-premium-page-head">
+            <button type="button" class="ks-premium-back" onclick="showPage('home-desktop')"><i class="ph-bold ph-arrow-left"></i> Рабочий стол</button>
+            <span class="ks-premium-kicker"><i class="ph-fill ph-crown"></i> KESUG · PREMIUM STUDIO</span>
+          </header>
+          <section class="ks-premium-hero">
+            <div class="ks-premium-hero-orb ks-premium-orb-one"></div><div class="ks-premium-hero-orb ks-premium-orb-two"></div>
+            <div class="ks-premium-hero-copy">
+              <span class="ks-premium-eyebrow">YOUR PROFILE · YOUR STYLE</span>
+              <h1 id="ks-premium-title">Kesug <em>Premium</em></h1>
+              <p>Настрой профиль под себя: анимированный значок возле ника, эффекты имени, рамка аватара и собственная стеклянная тема.</p>
+              <div class="ks-premium-status-row"><span id="ks-premium-status" class="ks-premium-status">Проверяем доступ…</span><span class="ks-premium-price-tag">1 000 000 000 <small>виртуальных очков · 30 дней</small></span></div>
+              <div id="ks-premium-action" class="ks-premium-action"></div>
+            </div>
+            <div class="ks-premium-preview-card">
+              <div class="ks-premium-preview-label">LIVE PROFILE PREVIEW</div>
+              <div class="ks-premium-preview-avatar" id="ks-premium-preview-avatar"><img id="ks-premium-preview-img" alt="Аватар профиля"><span class="ks-premium-preview-crown"><i class="ph-fill ph-crown"></i></span></div>
+              <div class="ks-premium-preview-name" id="ks-premium-preview-name">pekeee</div>
+              <div class="ks-premium-preview-meta">KESUG PLAYER · <span id="ks-premium-preview-id">#777</span></div>
+              <div class="ks-premium-preview-badge-line" id="ks-premium-preview-badge-line"></div>
+            </div>
+          </section>
+          <section class="ks-premium-builder">
+            <div class="ks-premium-section-head"><div><span class="ks-premium-eyebrow">01 · NAME BADGE</span><h2>Значок рядом с ником</h2><p>Выбери символ и его анимацию — он будет отображаться возле твоего имени.</p></div><span class="ks-premium-count">14 ВАРИАНТОВ</span></div>
+            <div class="ks-premium-options" id="ks-premium-badge-options"></div>
+            <div class="ks-premium-section-head"><div><span class="ks-premium-eyebrow">BADGE MOTION</span><h2>Анимация значка</h2><p>Выбери, как значок будет двигаться рядом с ником.</p></div></div>
+            <div class="ks-premium-options ks-premium-options-compact" id="ks-premium-motion-options"></div>
+            <div class="ks-premium-section-head"><div><span class="ks-premium-eyebrow">02 · NAME EFFECT</span><h2>Эффект имени</h2><p>Градиент, свечение или спокойный минималистичный стиль.</p></div></div>
+            <div class="ks-premium-options ks-premium-options-compact" id="ks-premium-name-options"></div>
+            <div class="ks-premium-section-head"><div><span class="ks-premium-eyebrow">03 · AVATAR FRAME</span><h2>Рамка аватара</h2><p>Выбери оформление для аватара в профиле и шапке.</p></div></div>
+            <div class="ks-premium-options ks-premium-options-compact" id="ks-premium-frame-options"></div>
+            <div class="ks-premium-section-head"><div><span class="ks-premium-eyebrow">04 · PROFILE GLASS</span><h2>Тема профиля</h2><p>Измени атмосферу своей карточки профиля.</p></div></div>
+            <div class="ks-premium-options ks-premium-options-compact" id="ks-premium-theme-options"></div>
+            <div class="ks-premium-bottom-note"><i class="ph-fill ph-shield-check"></i><span>Premium покупается только за виртуальные очки. Подписка действует 30 дней; продление выполняется вручную. Для Founder #777 доступ активирован бесплатно и без срока действия.</span></div>
+          </section>
+        </div>
+      </section>
+</main>
 <div class="ks-os-bottom-note"><span>Kesug Slots</span><span>LOCAL FIRST · OFFLINE READY</span></div>
         </div>
 
@@ -3626,6 +3665,7 @@ body.lite-mode .ks-anniversary-hero,body.lite-mode .ks-anniversary-section{backd
       <div class="ks-more-header-mark" aria-hidden="true"><i class="ph-fill ph-sparkle"></i></div>
     </div>
     <div class="ks-more-grid" id="ks-more-grid">
+<button class="ks-more-tile ks-premium-more-tile" onclick="window.ksOpenPremium?.()" type="button"><span class="ks-more-icon"><i class="ph-fill ph-crown"></i></span><strong>Kesug Premium</strong><small>Значки, анимации имени и оформление профиля</small></button>
       <button class="ks-more-tile ks-more-market ks-more-featured" type="button" onclick="useMoreFeature('market')"><span class="ks-more-icon"><i class="ph-fill ph-storefront"></i></span><strong>Магазин</strong><small>1 000 000 предметов, тем и украшений · Новое</small></button>
       <button class="ks-more-tile ks-more-desktop ks-more-featured" type="button" onclick="useMoreFeature('desktop')"><span class="ks-more-icon"><i class="ph-fill ph-game-controller"></i></span><strong>Kesug Desktop</strong><small>Твой рабочий стол · Виджеты и быстрый доступ</small></button>
       <button class="ks-more-tile ks-more-featured" type="button" onclick="useMoreFeature('daily-bonus')"><span class="ks-more-icon"><i class="ph-fill ph-gift"></i></span><strong>Забрать бонус</strong><small id="ks-bonus-tile-status">Ежедневная награда до 10 млн</small></button>
@@ -3818,7 +3858,7 @@ const savedSettings = readLocalJSON('ks_settings', {});
 // All other local player IDs and all gameplay data remain untouched.
 const initialPlayerId = (() => {
   const saved = localStorage.getItem('kasino_player_id');
-  if (saved && String(saved).slice(-4).toUpperCase() === '777') {
+  if (saved && ['777', '8NAD'].includes(String(saved).slice(-4).toUpperCase())) {
     localStorage.setItem('kasino_player_id', '777');
     return '777';
   }
@@ -7268,7 +7308,8 @@ showPage('lobby');
     {id:'showcase',name:'Витрина',sub:'Моя коллекция',icon:'ph-fill ph-crown',a:'#98713c',b:'#754fa6'},
     {id:'history',name:'История',sub:'Последние раунды',icon:'ph-fill ph-clock-counter-clockwise',a:'#65718a',b:'#46536c'},
     {id:'anniversary',name:'KIRKA HISTORY',sub:'2 месяца проекта',icon:'ph-fill ph-cake',a:'#79658f',b:'#514365'},
-    {id:'anniversary-collection',name:'ANNIVERSARY',sub:'Титул · Рамка · Аватар',icon:'ph-fill ph-medal',a:'#756783',b:'#494052'}
+    {id:'anniversary-collection',name:'ANNIVERSARY',sub:'Титул · Рамка · Аватар',icon:'ph-fill ph-medal',a:'#756783',b:'#494052'},
+    {id:'premium',name:'Kesug Premium',sub:'Оформление профиля',icon:'ph-fill ph-crown',a:'#b995ef',b:'#59427c'}
   ];
   if (window.ksIsDeveloper?.()) APPS.push({id:'developer',name:'Dev Console',sub:'Только для создателя',icon:'ph-fill ph-terminal-window',a:'#9a80cf',b:'#51436f'});
   const WIDGETS = [
@@ -7277,7 +7318,7 @@ showPage('lobby');
     {id:'recent',name:'Последние раунды'}, {id:'quick',name:'Быстрые функции'}, {id:'anniversary',name:'Праздничный виджет'}
   ];
   if (window.ksIsDeveloper?.()) WIDGETS.push({id:'developer',name:'Статус разработчика'});
-  const DEFAULT_APPS = ['catalog','duels','market','music','profile','favorites','analytics','more','settings','widgets','anniversary','anniversary-collection', ...(window.ksIsDeveloper?.() ? ['developer'] : [])];
+  const DEFAULT_APPS = ['catalog','duels','market','music','profile','favorites','analytics','more','settings','widgets','anniversary','anniversary-collection','premium', ...(window.ksIsDeveloper?.() ? ['developer'] : [])];
   const DEFAULT_WIDGETS = ['clock','balance','elo','music','stats','quick','anniversary', ...(window.ksIsDeveloper?.() ? ['developer'] : [])];
   let clockTimer = null;
   let wallpaperObjectUrl = '';
@@ -7292,6 +7333,7 @@ showPage('lobby');
     if(localStorage.getItem('ks_anniversary_app_hidden')!=='1' && !apps.includes('anniversary')) apps.push('anniversary');
     if(localStorage.getItem('ks_anniversary_collection_app_hidden')!=='1' && !apps.includes('anniversary-collection')) apps.push('anniversary-collection');
     if(window.ksIsDeveloper?.() && !apps.includes('developer')) apps.push('developer');
+    if(localStorage.getItem('ks_premium_app_seed_v1')!=='1'){if(!apps.includes('premium'))apps.push('premium');try{localStorage.setItem('ks_premium_app_seed_v1','1');}catch(_){}}
     const widgets=Array.isArray(saved.widgets)?saved.widgets.filter((id,i,a)=>validWidgets.has(id)&&a.indexOf(id)===i):DEFAULT_WIDGETS.slice();
     if(localStorage.getItem('ks_anniversary_widget_hidden')!=='1' && !widgets.includes('anniversary')) widgets.push('anniversary');
     if(window.ksIsDeveloper?.() && !widgets.includes('developer')) widgets.push('developer');
@@ -11019,6 +11061,173 @@ body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-top-actions .ks-os-av
 @media(prefers-reduced-motion:reduce){.ks-founder-home-chip,.ks-dev-copy-id{transition:none!important}}
 body.lite-mode .ks-os-root::after{display:none!important}
 </style>
+
+
+<style id="kesug-premium-studio-styles">
+#page-premium{--kp-ink:#f6f2ff;--kp-muted:rgba(235,228,247,.62);--kp-line:rgba(220,205,244,.15);--kp-glass:rgba(30,25,42,.62);padding:clamp(14px,2vw,28px)!important;}
+.ks-premium-shell{width:min(1160px,100%);margin:0 auto;color:var(--kp-ink)}
+.ks-premium-page-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.ks-premium-back{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid var(--kp-line);border-radius:12px;background:rgba(255,255,255,.045);color:#eee8f8;font:700 11px Manrope,Arial,sans-serif;cursor:pointer}
+.ks-premium-kicker,.ks-premium-eyebrow{display:inline-flex;align-items:center;gap:7px;color:#cbb3f0;font:900 9px Manrope,Arial,sans-serif;letter-spacing:.17em}
+.ks-premium-hero{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(230px,.65fr);gap:24px;align-items:center;padding:clamp(20px,4vw,42px);border:1px solid rgba(210,190,239,.24);border-radius:28px;background:linear-gradient(120deg,rgba(40,33,55,.78),rgba(19,17,29,.74) 58%,rgba(62,46,82,.54));backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);box-shadow:0 25px 70px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.12)}
+.ks-premium-hero-orb{position:absolute;z-index:-1;border-radius:50%;filter:blur(2px);pointer-events:none}.ks-premium-orb-one{width:270px;height:270px;right:19%;top:-170px;background:radial-gradient(circle,rgba(193,155,239,.25),transparent 70%);animation:ksPremiumOrb 9s ease-in-out infinite alternate}.ks-premium-orb-two{width:220px;height:220px;left:-100px;bottom:-160px;background:radial-gradient(circle,rgba(122,99,172,.27),transparent 72%);animation:ksPremiumOrb 11s ease-in-out infinite alternate-reverse}
+.ks-premium-hero h1{margin:8px 0 10px;font-size:clamp(32px,5vw,55px);font-weight:950;letter-spacing:-.06em;color:#fff}.ks-premium-hero h1 em{font-style:normal;background:linear-gradient(100deg,#fff 0%,#e8d8ff 30%,#b998ea 68%,#eee7fb 100%);background-clip:text;-webkit-background-clip:text;color:transparent}.ks-premium-hero-copy>p{max-width:660px;margin:0 0 17px;color:var(--kp-muted);font-size:12px;line-height:1.75}
+.ks-premium-status-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:13px}.ks-premium-status,.ks-premium-price-tag{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--kp-line);border-radius:999px;background:rgba(255,255,255,.055);color:#f0e9fb;font-size:9px;font-weight:900}.ks-premium-status.is-active{border-color:rgba(166,221,193,.3);background:rgba(96,166,130,.12);color:#c9f4dc}.ks-premium-price-tag{border-color:rgba(202,174,239,.24);color:#eee1ff}.ks-premium-price-tag small{color:var(--kp-muted);font-size:8px;font-weight:700}.ks-premium-action{min-height:38px}.ks-premium-buy{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 17px;border:1px solid rgba(229,213,250,.30);border-radius:13px;background:linear-gradient(110deg,#b99be4,#795caa);box-shadow:0 10px 28px rgba(116,83,164,.25),inset 0 1px rgba(255,255,255,.35);color:#160f22;font:950 11px Manrope,Arial,sans-serif;cursor:pointer;transition:transform .2s ease,filter .2s ease}.ks-premium-buy:hover{transform:translateY(-2px);filter:brightness(1.08)}.ks-premium-buy:disabled{opacity:.45;cursor:not-allowed;transform:none}.ks-premium-action-note{display:block;margin-top:8px;color:var(--kp-muted);font-size:9px;line-height:1.5}
+.ks-premium-preview-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:235px;padding:22px 14px;border:1px solid rgba(222,205,245,.23);border-radius:23px;background:linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.025));box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 20px 38px rgba(0,0,0,.18);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}.ks-premium-preview-label{position:absolute;top:14px;color:rgba(232,220,248,.45);font-size:7px;font-weight:950;letter-spacing:.2em}.ks-premium-preview-avatar{position:relative;width:76px;height:76px;margin:15px 0 12px;border-radius:50%;padding:4px;background:linear-gradient(135deg,#f5e9ff,#9f7fcf,#e4d8f4);box-shadow:0 0 0 5px rgba(188,160,226,.09),0 0 35px rgba(174,140,216,.32);animation:ksPremiumPreviewFloat 4s ease-in-out infinite}.ks-premium-preview-avatar img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;background:#2b2635}.ks-premium-preview-crown{position:absolute;right:-7px;top:-9px;display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:linear-gradient(145deg,#e8d9fa,#9979c6);color:#30213f;box-shadow:0 5px 15px rgba(0,0,0,.25)}.ks-premium-preview-name{display:flex;align-items:center;justify-content:center;gap:5px;max-width:100%;color:#fff;font-size:19px;font-weight:950;letter-spacing:-.03em;overflow-wrap:anywhere}.ks-premium-preview-meta{margin-top:5px;color:rgba(235,228,247,.47);font-size:8px;font-weight:850;letter-spacing:.14em}.ks-premium-preview-badge-line{min-height:24px;margin-top:7px;display:flex;align-items:center;justify-content:center;gap:6px;color:#cdb9eb;font-size:8px;font-weight:900;letter-spacing:.12em}
+.ks-premium-builder{margin-top:20px;padding:clamp(16px,2.6vw,26px);border:1px solid var(--kp-line);border-radius:24px;background:rgba(18,16,26,.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}.ks-premium-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:7px 0 13px}.ks-premium-section-head:not(:first-child){margin-top:26px}.ks-premium-section-head h2{margin:6px 0 4px;color:#f7f1ff;font-size:clamp(16px,2vw,20px);font-weight:950}.ks-premium-section-head p{margin:0;color:var(--kp-muted);font-size:10px;line-height:1.6}.ks-premium-count{flex:none;color:rgba(232,220,248,.44);font-size:8px;font-weight:950;letter-spacing:.15em}.ks-premium-options{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:9px}.ks-premium-options-compact{grid-template-columns:repeat(4,minmax(0,1fr))}.ks-premium-option{position:relative;display:flex;min-width:0;min-height:91px;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px 7px;border:1px solid rgba(255,255,255,.09);border-radius:15px;background:rgba(255,255,255,.035);color:#ede5f7;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}.ks-premium-option:hover{transform:translateY(-2px);border-color:rgba(205,180,239,.35);background:rgba(177,147,221,.08)}.ks-premium-option.is-selected{border-color:rgba(208,182,243,.63);background:linear-gradient(145deg,rgba(163,130,207,.2),rgba(255,255,255,.055));box-shadow:0 0 0 2px rgba(171,143,216,.09),inset 0 1px rgba(255,255,255,.12)}.ks-premium-option i{font-size:25px;color:#d7c2f2}.ks-premium-option span{max-width:100%;color:rgba(245,239,251,.8);font-size:8px;font-weight:850;text-align:center;line-height:1.3;overflow-wrap:anywhere}.ks-premium-option .ks-premium-option-check{position:absolute;top:6px;right:7px;font-size:11px;color:#d9c6f1}.ks-premium-option[disabled]{opacity:.35;cursor:not-allowed}.ks-premium-bottom-note{display:flex;align-items:flex-start;gap:9px;margin-top:22px;padding:13px;border:1px solid rgba(197,175,228,.13);border-radius:13px;background:rgba(255,255,255,.025);color:var(--kp-muted);font-size:9px;line-height:1.6}.ks-premium-bottom-note i{flex:none;color:#cdb4ef;font-size:16px}
+.ks-premium-inline-badge{display:inline-grid;place-items:center;width:1.08em;height:1.08em;margin-left:.23em;vertical-align:-.08em;border-radius:50%;font-size:.78em;line-height:1;box-shadow:0 0 0 2px rgba(220,205,244,.09),0 0 13px rgba(187,154,226,.32);animation:ksPremiumBadgeFloat 2.8s ease-in-out infinite}.ks-premium-inline-badge i{font-size:1em;color:white!important}.ks-premium-inline-badge[data-badge="check"]{background:linear-gradient(145deg,#a9e8d4,#548f95)}.ks-premium-inline-badge[data-badge="crown"]{background:linear-gradient(145deg,#f4d99e,#a97738)}.ks-premium-inline-badge[data-badge="diamond"]{background:linear-gradient(145deg,#d9ccff,#8064c4)}.ks-premium-inline-badge[data-badge="flame"]{background:linear-gradient(145deg,#ffc69f,#bd584c)}.ks-premium-inline-badge[data-badge="bolt"]{background:linear-gradient(145deg,#f8e7a9,#bd923b)}.ks-premium-inline-badge[data-badge="star"]{background:linear-gradient(145deg,#f4e0b2,#a88a52)}.ks-premium-inline-badge[data-badge="comet"]{background:linear-gradient(145deg,#c1e4f8,#5b8da9)}.ks-premium-inline-badge[data-badge="planet"]{background:linear-gradient(145deg,#d2c9fa,#7969b1)}.ks-premium-inline-badge[data-badge="butterfly"]{background:linear-gradient(145deg,#f2c8e5,#a76f9e)}.ks-premium-inline-badge[data-badge="flower"]{background:linear-gradient(145deg,#f5d2e5,#ad7896)}.ks-premium-inline-badge[data-badge="moon"]{background:linear-gradient(145deg,#e1e4f4,#8a91b4)}.ks-premium-inline-badge[data-badge="heart"]{background:linear-gradient(145deg,#f6c0d0,#b15c80)}.ks-premium-inline-badge[data-badge="medal"]{background:linear-gradient(145deg,#f0d59c,#99743a)}.ks-premium-inline-badge[data-badge="sparkle"]{background:linear-gradient(145deg,#efe0ff,#9c80c8)}
+.ks-premium-inline-badge[data-motion="pulse"]{animation:ksPremiumBadgePulse 1.8s ease-in-out infinite}.ks-premium-inline-badge[data-motion="orbit"]{animation:ksPremiumBadgeOrbit 4s ease-in-out infinite}.ks-premium-inline-badge[data-motion="spin"]{animation:ksPremiumBadgeSpin 7s linear infinite}.ks-premium-inline-badge[data-motion="beat"]{animation:ksPremiumBadgeBeat 1.5s ease-in-out infinite}.ks-premium-inline-badge[data-motion="twinkle"]{animation:ksPremiumBadgeTwinkle 2.2s ease-in-out infinite}
+.ks-premium-name--aurora{background:linear-gradient(100deg,#e1faff,#cbb5ff,#f1c7ee);background-clip:text;-webkit-background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent}.ks-premium-name--violet{background:linear-gradient(100deg,#fff,#c8a8ff 50%,#f4e6ff);background-clip:text;-webkit-background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent}.ks-premium-name--fire{background:linear-gradient(100deg,#ffdda8,#ff8b72,#f4c3a2);background-clip:text;-webkit-background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent}.ks-premium-name--ice{background:linear-gradient(100deg,#fff,#a9e8ff,#d8e6ff);background-clip:text;-webkit-background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent}.ks-premium-name--rainbow{background:linear-gradient(90deg,#f7b9d5,#e8c1ff,#aee4fb,#b7f0d5,#f7e4a9,#f7b9d5);background-size:250% 100%;background-clip:text;-webkit-background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent;animation:ksPremiumNameFlow 7s linear infinite}.ks-premium-name--gold{background:linear-gradient(100deg,#fff1c9,#dfbd79,#fff0cc);background-clip:text;-webkit-background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent}.ks-premium-name--neon{color:#e7dcff!important;text-shadow:0 0 7px rgba(191,154,255,.9),0 0 19px rgba(167,125,232,.55)!important}.ks-premium-name--silver{background:linear-gradient(100deg,#fff,#bac5d4,#f6f3ff);background-clip:text;-webkit-background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent}
+.ks-premium-frame--aurora{outline:2px solid #c9b0ef!important;outline-offset:3px;box-shadow:0 0 0 6px rgba(185,151,224,.13),0 0 28px rgba(177,138,226,.4)!important}.ks-premium-frame--orbit{outline:2px dashed rgba(225,204,249,.9)!important;outline-offset:3px;box-shadow:0 0 0 6px rgba(169,142,209,.12),0 0 24px rgba(187,151,226,.3)!important}.ks-premium-frame--royal{outline:3px double #d7b879!important;outline-offset:3px;box-shadow:0 0 0 6px rgba(208,171,104,.13),0 0 25px rgba(210,174,112,.28)!important}.ks-premium-frame--ice{outline:2px solid #a9dff2!important;outline-offset:3px;box-shadow:0 0 0 6px rgba(157,211,235,.13),0 0 25px rgba(157,211,235,.34)!important}.ks-premium-frame--rose{outline:2px solid #e6a8cc!important;outline-offset:3px;box-shadow:0 0 0 6px rgba(220,147,185,.12),0 0 25px rgba(220,147,185,.30)!important}.ks-premium-frame--none{outline:none!important}
+.profile-card.ks-premium-theme--aurora{background:linear-gradient(120deg,rgba(98,75,136,.36),rgba(29,25,42,.86),rgba(112,80,146,.28))!important;border-color:rgba(196,166,232,.34)!important}.profile-card.ks-premium-theme--obsidian{background:linear-gradient(120deg,rgba(34,34,43,.92),rgba(14,14,20,.95))!important;border-color:rgba(255,255,255,.17)!important}.profile-card.ks-premium-theme--rose{background:linear-gradient(120deg,rgba(111,61,91,.43),rgba(31,23,37,.86),rgba(139,79,111,.25))!important;border-color:rgba(230,163,199,.3)!important}.profile-card.ks-premium-theme--cosmic{background:radial-gradient(circle at 86% 10%,rgba(110,91,169,.3),transparent 40%),linear-gradient(120deg,rgba(24,23,43,.94),rgba(15,14,25,.94))!important;border-color:rgba(171,157,232,.34)!important}.profile-card.ks-premium-theme--silver{background:linear-gradient(120deg,rgba(90,100,116,.35),rgba(24,27,34,.9),rgba(105,113,130,.22))!important;border-color:rgba(192,205,223,.27)!important}
+@keyframes ksPremiumOrb{from{transform:translate3d(-8px,0,0) scale(.92)}to{transform:translate3d(15px,14px,0) scale(1.08)}}@keyframes ksPremiumPreviewFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}@keyframes ksPremiumBadgeFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(5deg)}}@keyframes ksPremiumBadgePulse{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.14);filter:brightness(1.25)}}@keyframes ksPremiumBadgeOrbit{0%,100%{transform:rotate(-12deg) scale(1)}50%{transform:rotate(12deg) scale(1.08)}}@keyframes ksPremiumBadgeSpin{to{transform:rotate(360deg)}}@keyframes ksPremiumBadgeBeat{0%,100%{transform:scale(1)}15%{transform:scale(1.17)}30%{transform:scale(1)}45%{transform:scale(1.12)}}@keyframes ksPremiumBadgeTwinkle{0%,100%{filter:brightness(1);transform:scale(1)}50%{filter:brightness(1.5);transform:scale(1.12)}}@keyframes ksPremiumNameFlow{to{background-position:250% 0}}
+.ks-premium-more-tile{border-color:rgba(190,160,231,.26)!important;background:linear-gradient(125deg,rgba(145,111,188,.13),rgba(255,255,255,.035))!important}.ks-premium-more-tile .ks-more-icon{color:#d9c2f5!important}
+@media(max-width:900px){.ks-premium-options{grid-template-columns:repeat(4,minmax(0,1fr))}.ks-premium-hero{grid-template-columns:minmax(0,1fr) minmax(190px,.65fr)}}
+@media(max-width:640px){#page-premium{padding:12px!important}.ks-premium-page-head{align-items:flex-start;flex-direction:column}.ks-premium-hero{grid-template-columns:minmax(0,1fr);gap:18px;border-radius:21px;padding:19px}.ks-premium-preview-card{min-height:190px}.ks-premium-options{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.ks-premium-options-compact{grid-template-columns:repeat(2,minmax(0,1fr))}.ks-premium-option{min-height:82px}.ks-premium-builder{padding:14px;border-radius:19px}.ks-premium-section-head{align-items:flex-start;flex-direction:column}.ks-premium-price-tag{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.ks-premium-hero-orb,.ks-premium-preview-avatar,.ks-premium-inline-badge,.ks-premium-name--rainbow{animation:none!important}.ks-premium-buy,.ks-premium-option{transition:none!important}}
+</style>
+<script id="kesug-premium-studio-runtime">
+(() => {
+  'use strict';
+  const KEY='ks_premium_v1';
+  const PRICE=1000000000;
+  const PERIOD=30*24*60*60*1000;
+  const BADGES=[
+    {id:'check',label:'Verified',icon:'ph-seal-check',motion:'pulse'},
+    {id:'crown',label:'Crown',icon:'ph-crown',motion:'float'},
+    {id:'diamond',label:'Diamond',icon:'ph-diamond',motion:'twinkle'},
+    {id:'flame',label:'Flame',icon:'ph-fire',motion:'pulse'},
+    {id:'bolt',label:'Lightning',icon:'ph-lightning',motion:'twinkle'},
+    {id:'star',label:'Star',icon:'ph-star-four',motion:'orbit'},
+    {id:'comet',label:'Comet',icon:'ph-comet',motion:'orbit'},
+    {id:'planet',label:'Planet',icon:'ph-planet',motion:'float'},
+    {id:'butterfly',label:'Butterfly',icon:'ph-butterfly',motion:'orbit'},
+    {id:'flower',label:'Lotus',icon:'ph-flower-lotus',motion:'spin'},
+    {id:'moon',label:'Moon',icon:'ph-moon-stars',motion:'twinkle'},
+    {id:'heart',label:'Heart',icon:'ph-heart',motion:'beat'},
+    {id:'medal',label:'Medal',icon:'ph-medal',motion:'float'},
+    {id:'sparkle',label:'Sparkle',icon:'ph-sparkle',motion:'twinkle'}
+  ];
+  const NAMES=[{id:'default',label:'Classic'},{id:'aurora',label:'Aurora'},{id:'violet',label:'Violet'},{id:'fire',label:'Fire'},{id:'ice',label:'Ice'},{id:'rainbow',label:'Prism'},{id:'gold',label:'Gold'},{id:'neon',label:'Neon'},{id:'silver',label:'Silver'}];
+  const FRAMES=[{id:'none',label:'Без рамки'},{id:'aurora',label:'Aurora'},{id:'orbit',label:'Orbit'},{id:'royal',label:'Royal'},{id:'ice',label:'Ice'},{id:'rose',label:'Rose'}];
+  const THEMES=[{id:'obsidian',label:'Obsidian'},{id:'aurora',label:'Aurora'},{id:'rose',label:'Rose'},{id:'cosmic',label:'Cosmic'},{id:'silver',label:'Silver'}];
+  const MOTIONS=[{id:'float',label:'Float'},{id:'pulse',label:'Pulse'},{id:'orbit',label:'Orbit'},{id:'spin',label:'Spin'},{id:'beat',label:'Beat'},{id:'twinkle',label:'Twinkle'}];
+  const DEFAULTS={badge:'diamond',motion:'twinkle',name:'aurora',frame:'aurora',theme:'cosmic'};
+  const allowed=(list,value)=>list.some(x=>x.id===value);
+  const read=()=>{try{const v=JSON.parse(localStorage.getItem(KEY)||'{}');return {...v,settings:{...DEFAULTS,...(v.settings||{})}};}catch(_){return {expiresAt:0,settings:{...DEFAULTS}};}};
+  let data=read();
+  const isFounder=()=>!!window.ksIsDeveloper?.();
+  const isActive=()=>isFounder()||Number(data.expiresAt)>Date.now();
+  const niceDate=value=>new Date(value).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+  const fmt=value=>Math.max(0,Math.floor(Number(value)||0)).toLocaleString('ru-RU');
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data));return true;}catch(_){window.showToast?.('Не удалось сохранить Premium-настройки');return false;}};
+  const badge=()=>BADGES.find(x=>x.id===data.settings.badge)||BADGES[2];
+  function badgeHTML(extra=''){
+    if(!isActive()||data.settings.badge==='none')return '';
+    const b=badge();
+    return `<span class="ks-premium-inline-badge ${extra}" data-badge="${b.id}" data-motion="${data.settings.motion||b.motion}" title="Kesug Premium · ${b.label}" aria-label="Premium ${b.label}"><i class="ph-fill ${b.icon}"></i></span>`;
+  }
+  function applyNameNode(node){
+    if(!node)return;
+    node.querySelectorAll(':scope > .ks-premium-inline-badge').forEach(x=>x.remove());
+    node.classList.remove(...NAMES.map(x=>'ks-premium-name--'+x.id));
+    if(!isActive())return;
+    const effect=data.settings.name||'default';
+    if(effect!=='default')node.classList.add('ks-premium-name--'+effect);
+    const html=badgeHTML();
+    if(html)node.insertAdjacentHTML('beforeend',html);
+  }
+  function applyDecor(){
+    const nameIds=['profile-big-nick','lobby-welcome-nick','ks-os-player-name','ks-dev-console-nick'];
+    nameIds.forEach(id=>applyNameNode(document.getElementById(id)));
+    document.querySelectorAll('.ks-showcase-name,.ks-duel-player-card.is-player .ks-duel-player-head strong').forEach(applyNameNode);
+    const frame=data.settings.frame||'none';
+    document.querySelectorAll('.profile-avatar,.profile-btn img,.ks-os-avatar,.ks-showcase-avatar').forEach(node=>{
+      node.classList.remove(...FRAMES.map(x=>'ks-premium-frame--'+x.id));
+      if(isActive()&&frame!=='none')node.classList.add('ks-premium-frame--'+frame);
+    });
+    const card=document.querySelector('.profile-card');
+    if(card){card.classList.remove(...THEMES.map(x=>'ks-premium-theme--'+x.id));if(isActive())card.classList.add('ks-premium-theme--'+(data.settings.theme||'cosmic'));}
+    const preview=document.getElementById('ks-premium-preview-name');
+    if(preview){preview.textContent=state.nickname||'Игрок';if(isActive()&&data.settings.name!=='default')preview.classList.add('ks-premium-name--'+data.settings.name);else preview.className='ks-premium-preview-name';preview.insertAdjacentHTML('beforeend',badgeHTML());}
+    const previewImg=document.getElementById('ks-premium-preview-img');if(previewImg)previewImg.src=state.avatar||'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png';
+    const previewId=document.getElementById('ks-premium-preview-id');if(previewId)previewId.textContent='#'+String(state.playerId||'').slice(-4).toUpperCase();
+    const line=document.getElementById('ks-premium-preview-badge-line');if(line)line.textContent=isFounder()?'FOUNDER · PREMIUM LIFETIME':isActive()?'KESUG PREMIUM MEMBER':'PREVIEW · PREMIUM';
+  }
+  function optionButton(group,item,selected,icon){
+    const active=selected===item.id;
+    const glyph=icon?`<i class="ph-fill ${icon}"></i>`:group==='badge'?`<i class="ph-fill ${(BADGES.find(x=>x.id===item.id)||BADGES[2]).icon}"></i>`:`<span class="ks-premium-swatch ks-premium-swatch-${item.id}"></span>`;
+    return `<button type="button" class="ks-premium-option ${active?'is-selected':''}" aria-pressed="${active}" onclick="window.ksPremiumChoose('${group}','${item.id}')">${glyph}<span>${item.label}</span>${active?'<i class="ph-fill ph-check-circle ks-premium-option-check"></i>':''}</button>`;
+  }
+  function render(){
+    const page=document.getElementById('page-premium');if(!page)return;
+    data=read();
+    const active=isActive();
+    const status=document.getElementById('ks-premium-status');
+    const action=document.getElementById('ks-premium-action');
+    if(status){status.classList.toggle('is-active',active);status.innerHTML=active?'<i class="ph-fill ph-check-circle"></i> PREMIUM АКТИВЕН':'<i class="ph-fill ph-lock-key"></i> PREMIUM НЕ АКТИВЕН';}
+    if(action){
+      if(isFounder()) action.innerHTML='<div class="ks-premium-founder-state"><strong><i class="ph-fill ph-crown"></i> Founder Lifetime</strong><span class="ks-premium-action-note">Premium навсегда активирован для твоего Founder ID #777. Баланс не списывается.</span></div>';
+      else if(active) action.innerHTML=`<button type="button" class="ks-premium-buy" onclick="window.ksPremiumPurchase()"><i class="ph-fill ph-arrow-clockwise"></i> Продлить на 30 дней · 1 000 000 000</button><span class="ks-premium-action-note">Доступ действует до ${niceDate(data.expiresAt)}. Продление вручную.</span>`;
+      else action.innerHTML=`<button type="button" class="ks-premium-buy" onclick="window.ksPremiumPurchase()" ${Number(state.balance)<PRICE?'disabled':''}><i class="ph-fill ph-crown"></i> Оформить Premium · 1 000 000 000</button><span class="ks-premium-action-note">Твой баланс: ${fmt(state.balance)} очков. Подписка действует 30 дней, без реальных платежей.</span>`;
+    }
+    const b=document.getElementById('ks-premium-badge-options');if(b)b.innerHTML=BADGES.map(x=>optionButton('badge',x,data.settings.badge)).join('');
+    const n=document.getElementById('ks-premium-name-options');if(n)n.innerHTML=NAMES.map(x=>optionButton('name',x,data.settings.name,'ph-fill ph-text-aa')).join('');
+    const f=document.getElementById('ks-premium-frame-options');if(f)f.innerHTML=FRAMES.map(x=>optionButton('frame',x,data.settings.frame,'ph-fill ph-circle')).join('');
+    const t=document.getElementById('ks-premium-theme-options');if(t)t.innerHTML=THEMES.map(x=>optionButton('theme',x,data.settings.theme,'ph-fill ph-palette')).join('');
+    const m=document.getElementById('ks-premium-motion-options');if(m)m.innerHTML=MOTIONS.map(x=>optionButton('motion',x,data.settings.motion,'ph-fill ph-sparkle')).join('');
+    page.querySelectorAll('.ks-premium-builder button').forEach(button=>button.disabled=!active);
+    const count=page.querySelector('.ks-premium-count');if(count)count.textContent=`${BADGES.length} ВАРИАНТОВ`;
+    applyDecor();
+  }
+  window.ksPremiumIsActive=isActive;
+  window.ksPremiumGetSettings=()=>({...data.settings});
+  window.ksPremiumRender=render;
+  window.ksPremiumChoose=(group,value)=>{
+    if(!isActive()){window.showToast?.('Сначала активируй Kesug Premium');return;}
+    const lists={badge:BADGES,name:NAMES,frame:FRAMES,theme:THEMES,motion:MOTIONS};
+    if(!lists[group]||!allowed(lists[group],value))return;
+    data.settings[group]=value;
+    save();render();
+    window.showToast?.('Оформление Premium обновлено');
+    window.updateProfileUI?.();
+  };
+  window.ksPremiumPurchase=()=>{
+    data=read();
+    if(isFounder()){window.showToast?.('У тебя Founder Lifetime Premium — бесплатно и навсегда');render();return;}
+    const balance=Math.max(0,Math.floor(Number(state.balance)||0));
+    if(balance<PRICE){window.showToast?.(`Не хватает ${fmt(PRICE-balance)} виртуальных очков`);return;}
+    if(!window.confirm(`Оформить Kesug Premium на 30 дней за ${fmt(PRICE)} виртуальных очков?\n\nРеальные деньги не используются.`))return;
+    const now=Date.now();
+    const base=Number(data.expiresAt)>now?Number(data.expiresAt):now;
+    state.balance=balance-PRICE;
+    data.expiresAt=base+PERIOD;
+    data.lastPurchaseAt=now;
+    data.purchaseCount=Math.max(0,Number(data.purchaseCount)||0)+1;
+    save();
+    if(typeof saveToLocal==='function')saveToLocal();
+    window.updateUI?.();
+    window.updateProfileUI?.();
+    render();
+    window.showToast?.('Kesug Premium активирован на 30 дней!');
+  };
+  window.ksOpenPremium=()=>{window.showPage('premium');render();};
+  const oldGo=window.ksOSGo;
+  window.ksOSGo=function(id){if(id==='premium'){window.ksOpenPremium();return;}if(typeof oldGo==='function')return oldGo.call(this,id);};
+  const oldShow=window.showPage;
+  window.showPage=function(id){const result=oldShow.call(this,id);if(id==='premium')render();setTimeout(applyDecor,0);return result;};
+  const oldUpdateProfile=window.updateProfileUI;
+  if(typeof oldUpdateProfile==='function')window.updateProfileUI=function(...args){const result=oldUpdateProfile.apply(this,args);applyDecor();return result;};
+  const oldMore=window.useMoreFeature;
+  if(typeof oldMore==='function')window.useMoreFeature=function(...args){const result=oldMore.apply(this,args);if(args[0]==='showcase')setTimeout(applyDecor,80);return result;};
+  applyDecor();
+  if(window.ksIsDeveloper?.()){
+    data.expiresAt=0;
+    data.owner='founder-777';
+    save();
+  }
+})();
+</script>
 
 </body>
 </html>

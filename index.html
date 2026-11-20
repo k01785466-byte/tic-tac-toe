@@ -3271,6 +3271,7 @@ body.lite-mode .ks-anniversary-hero,body.lite-mode .ks-anniversary-section{backd
               <div class="ks-os-greeting">
                 <div class="ks-os-eyebrow">ТВОЁ ИГРОВОЕ ПРОСТРАНСТВО</div>
                 <h1>С возвращением, <span id="ks-os-player-name">Игрок</span><span id="ks-dev-greeting-badge" class="ks-developer-verified ks-developer-greeting-badge" hidden title="Kesug Developer"><i class="ph-fill ph-seal-check"></i></span></h1>
+                <div id="ks-founder-home-chip" class="ks-founder-home-chip" hidden><i class="ph-fill ph-crown"></i><span>FOUNDER EDITION</span><b>PLAYER 777</b></div>
                 <p>Запускай автоматы, открывай коллекции и управляй своим Kesug из одного места.</p>
               </div>
 
@@ -3440,7 +3441,7 @@ body.lite-mode .ks-anniversary-hero,body.lite-mode .ks-anniversary-section{backd
         <img id="profile-big-avatar" class="profile-avatar" src="">
         <div class="profile-info">
           <h2 id="profile-big-nick">Игрок</h2><span id="ks-developer-verified" class="ks-developer-verified" hidden title="Подтверждённый разработчик" aria-label="Подтверждённый разработчик"><i class="ph-fill ph-seal-check"></i></span>
-          <div id="ks-developer-role-chip" class="ks-developer-role-chip" hidden><i class="ph-fill ph-code"></i> FOUNDER · DEVELOPER</div>
+          <div id="ks-developer-role-chip" class="ks-developer-role-chip" hidden><i class="ph-fill ph-code"></i> FOUNDER · DEVELOPER · #777</div>
           <span id="profile-title-chip" class="ks-profile-title-chip" hidden></span>
           <span id="ks-anniversary-profile-badge" class="ks-anniversary-profile-badge" hidden><i class="ph-fill ph-sparkle"></i> 2 MONTHS</span>
           <p id="profile-big-id">ID: #0000</p>
@@ -3478,19 +3479,20 @@ body.lite-mode .ks-anniversary-hero,body.lite-mode .ks-anniversary-section{backd
       </section>
     </div>
 
-    <!-- DEVELOPER CONSOLE · PRIVATE LOCAL PROFILE #8NAD -->
+    <!-- DEVELOPER CONSOLE · PRIVATE LOCAL PROFILE #777 -->
     <div class="page-view ks-developer-page" id="page-developer">
       <div class="page-header">
         <button class="back-btn" type="button" onclick="showPage('home-desktop')"><i class="ph-bold ph-arrow-left"></i> Рабочий стол</button>
-        <span class="ks-developer-page-label"><i class="ph-fill ph-seal-check"></i> PRIVATE DEVELOPER SPACE</span>
+        <span class="ks-developer-page-label"><i class="ph-fill ph-seal-check"></i> PRIVATE FOUNDER SPACE</span>
       </div>
       <section class="ks-developer-hero">
         <div class="ks-developer-hero-mark"><i class="ph-fill ph-code"></i></div>
         <div class="ks-developer-hero-copy">
-          <span class="ks-developer-eyebrow">KESUG SLOTS · CREATOR ACCESS</span>
+          <span class="ks-developer-eyebrow">KESUG SLOTS · FOUNDER ACCESS</span>
           <h2>Привет, <span id="ks-dev-console-nick">pekeee</span> <span class="ks-developer-verified"><i class="ph-fill ph-seal-check"></i></span></h2>
           <p>Твоя личная панель разработчика. Здесь собраны диагностика, быстрые инструменты и информация о локальной сборке.</p>
-          <span class="ks-developer-id-pill"><i class="ph-fill ph-fingerprint"></i> PLAYER ID #8NAD · VERIFIED DEVELOPER</span>
+          <span class="ks-developer-id-pill"><i class="ph-fill ph-fingerprint"></i> PLAYER ID #777 · VERIFIED DEVELOPER</span>
+          <button class="ks-dev-copy-id" type="button" onclick="window.ksDevCopyId?.()"><i class="ph-bold ph-copy"></i> Скопировать ID</button>
         </div>
       </section>
       <section class="ks-developer-stat-grid">
@@ -3502,7 +3504,7 @@ body.lite-mode .ks-anniversary-hero,body.lite-mode .ks-anniversary-section{backd
       <section class="ks-developer-panel">
         <div class="ks-developer-panel-heading"><div><span class="ks-developer-eyebrow">LOCAL DIAGNOSTICS</span><h3>Состояние системы</h3></div><button type="button" class="ks-developer-refresh" onclick="window.ksDevRender?.()" aria-label="Обновить диагностику"><i class="ph-bold ph-arrows-clockwise"></i></button></div>
         <div class="ks-developer-diagnostics">
-          <div><span>Player ID</span><strong id="ks-dev-id">#8NAD</strong></div>
+          <div><span>Player ID</span><strong id="ks-dev-id">#777</strong></div>
           <div><span>Размер экрана</span><strong id="ks-dev-viewport">—</strong></div>
           <div><span>Service Worker</span><strong id="ks-dev-sw-status">Проверка…</strong></div>
           <div><span>Режим приложения</span><strong id="ks-dev-pwa-status">—</strong></div>
@@ -3520,6 +3522,7 @@ body.lite-mode .ks-anniversary-hero,body.lite-mode .ks-anniversary-section{backd
           <button type="button" onclick="exportProfileBackup()"><i class="ph-fill ph-download-simple"></i><strong>Экспорт профиля</strong><small>Резервная копия локального прогресса</small></button>
           <button type="button" onclick="window.ksDevDownloadReport?.()"><i class="ph-fill ph-file-arrow-down"></i><strong>Отчёт диагностики</strong><small>Скачать сведения о версии и состоянии клиента</small></button>
           <button type="button" onclick="window.ksOSOpenSettings?.()"><i class="ph-fill ph-sliders-horizontal"></i><strong>Настроить Kesug OS</strong><small>Открыть настройки рабочего стола</small></button>
+          <button type="button" onclick="window.ksDevToggleAura?.()"><i class="ph-fill ph-sparkle"></i><strong>Founder Aura</strong><small>Включить или выключить личное оформление</small></button>
           <button type="button" onclick="window.ksDevUpdatePWA?.()"><i class="ph-fill ph-cloud-arrow-down"></i><strong>Проверить обновление PWA</strong><small>Запросить новую версию Service Worker</small></button>
         </div>
         <p class="ks-developer-footnote"><i class="ph-fill ph-shield-check"></i> Инструменты работают локально. Они не меняют баланс, шансы, чужие профили или игровые результаты.</p>
@@ -3811,9 +3814,19 @@ const DEFAULT_SETTINGS = {
 
 const shouldShowNewPlayerSetup = !localStorage.getItem('kasino_player_id') && localStorage.getItem('ks_onboarding_done') !== '1';
 const savedSettings = readLocalJSON('ks_settings', {});
+// One-time founder ID migration: the original creator profile #777 becomes #777.
+// All other local player IDs and all gameplay data remain untouched.
+const initialPlayerId = (() => {
+  const saved = localStorage.getItem('kasino_player_id');
+  if (saved && String(saved).slice(-4).toUpperCase() === '777') {
+    localStorage.setItem('kasino_player_id', '777');
+    return '777';
+  }
+  return saved || ('player_' + Math.random().toString(36).substr(2, 9));
+})();
 
 const state = {
-  playerId: localStorage.getItem('kasino_player_id') || 'player_' + Math.random().toString(36).substr(2, 9),
+  playerId: initialPlayerId,
   balance: localStorage.getItem('ks_balance') === null ? 1000 : Math.max(0, Number(localStorage.getItem('ks_balance')) || 0),
   bet: 100,
   avatar: localStorage.getItem('ks_avatar') || '',
@@ -3829,9 +3842,9 @@ if (!Array.isArray(state.favorites)) state.favorites = [];
 state.favorites = [...new Set(state.favorites.filter(id => typeof id === 'string' && MACHINES.some(machine => machine.id === id)))];
 localStorage.setItem('kasino_player_id', state.playerId);
 
-// Local developer identity: the displayed player ID is the last four characters.
-// This unlock is intentionally tied to #8NAD, not to a nickname that can be copied.
-const KESUG_DEVELOPER_ID = '8NAD';
+// Founder identity is tied to the assigned local Player ID #777, not to a nickname.
+// This is a local-first convenience gate, not server-side authentication.
+const KESUG_DEVELOPER_ID = '777';
 window.ksIsDeveloper = () => String(state.playerId || '').slice(-4).toUpperCase() === KESUG_DEVELOPER_ID;
 window.ksGetDeveloperSnapshot = () => ({
   id: '#' + String(state.playerId || '').slice(-4).toUpperCase(),
@@ -3916,6 +3929,8 @@ function updateProfileUI() {
   document.querySelectorAll('.profile-avatar,.profile-btn,.ks-os-avatar').forEach(node => node.classList.toggle('ks-dev-avatar-verified', isKesugDeveloper));
   const greetingBadge = document.getElementById('ks-dev-greeting-badge');
   if (greetingBadge) greetingBadge.hidden = !isKesugDeveloper;
+  const founderHomeChip = document.getElementById('ks-founder-home-chip');
+  if (founderHomeChip) founderHomeChip.hidden = !isKesugDeveloper;
   const lobbyNick = document.getElementById('lobby-welcome-nick');
   if (lobbyNick) lobbyNick.textContent = state.nickname;
   const title = localStorage.getItem('ks_profile_title') || '';
@@ -4357,7 +4372,12 @@ async function importProfileBackup(file) {
     };
     state.nickname = String(profile.nickname || 'Игрок').trim().slice(0, 15) || 'Игрок';
     state.balance = validNumber(profile.balance, state.balance);
-    state.playerId = typeof profile.playerId === 'string' && /^player_[a-z0-9]+$/i.test(profile.playerId) ? profile.playerId : state.playerId;
+    if (!window.ksIsDeveloper?.() && typeof profile.playerId === 'string') {
+      const importedId = profile.playerId.trim();
+      if (importedId.slice(-4).toUpperCase() === '8NAD') state.playerId = '777';
+      else if (/^player_[a-z0-9]+$/i.test(importedId)) state.playerId = importedId;
+    }
+    // The founder keeps the assigned ID #777 when restoring their own profile backup.
     state.avatar = typeof profile.avatar === 'string' && profile.avatar.length <= 6 * 1024 * 1024 && (profile.avatar === '' || profile.avatar.startsWith('data:image/') || /^https:\/\//i.test(profile.avatar)) ? profile.avatar : '';
     const stats = profile.stats && typeof profile.stats === 'object' ? profile.stats : {};
     state.stats = {
@@ -7328,7 +7348,7 @@ showPage('lobby');
       recent:`${Array.isArray(hist)&&hist.length?`<div class="ks-os-widget-list">${hist.slice(0,3).map(r=>`<div><span>${esc(r.machineName||'Автомат')}</span><strong>${fmt(r.win)} очков</strong></div>`).join('')}</div>`:'<div class="ks-os-widget-empty">Недавние результаты появятся здесь.</div>'}<div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="ksOSGo('history')">Открыть историю</button></div>`,
       quick:`<div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="ksOSGo('catalog')">🎰 Каталог</button><button class="ks-os-widget-action" onclick="ksOSGo('duels')">⚔️ Дуэли</button><button class="ks-os-widget-action" onclick="ksOSGo('market')">🛒 Магазин</button><button class="ks-os-widget-action" onclick="ksOSGo('more')">▦ Все функции</button></div>`,
       anniversary:`<div class="ks-os-anniversary-widget-top"><div class="ks-os-anniversary-number">2<span>M</span></div><div><strong>2 MONTHS OF HISTORY</strong><small>21.09.2026 — 21.11.2026</small></div></div><p class="ks-os-anniversary-widget-copy">Два месяца идей, переделок и релизов — от KIRKA CASINO до Kesug Slots Remastered.</p><div class="ks-os-widget-actions ks-os-anniversary-widget-actions"><button class="ks-os-widget-action" onclick="window.ksOpenAnniversaryReport?.()">История серии</button><button class="ks-os-widget-action" onclick="ksOSGo('anniversary-collection')">Коллекция</button><button class="ks-os-widget-action" onclick="ksToggleAnniversaryDesktop()">Праздничные обои</button></div>`,
-      developer:`<div class="ks-os-widget-elo"><strong style="font-size:18px">PEKEEE</strong><span class="ks-os-tier" style="background:rgba(151,124,205,.15);border-color:rgba(190,165,242,.34);color:#e2d5ff">VERIFIED</span></div><div class="ks-os-widget-caption">Создатель Kesug Slots · Player ID #8NAD</div><div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="window.ksOpenDeveloperPanel?.()">Открыть Dev Console</button></div>`
+      developer:`<div class="ks-os-widget-elo"><strong style="font-size:18px">PEKEEE</strong><span class="ks-os-tier" style="background:rgba(151,124,205,.15);border-color:rgba(190,165,242,.34);color:#e2d5ff">VERIFIED</span></div><div class="ks-os-widget-caption">Создатель Kesug Slots · Player ID #777</div><div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="window.ksOpenDeveloperPanel?.()">Открыть Dev Console</button></div>`
     };
     const names={clock:'Часы и дата',balance:'Баланс',elo:'Рейтинг ELO',music:'Музыка',stats:'Статистика',favorites:'Избранное',recent:'Последние раунды',quick:'Быстрые действия',anniversary:'2 MONTHS · ANNIVERSARY',developer:'KESUG DEVELOPER'};
     const icons={clock:'ph-clock',balance:'ph-wallet',elo:'ph-trophy',music:'ph-music-notes',stats:'ph-chart-line-up',favorites:'ph-star',recent:'ph-clock-counter-clockwise',quick:'ph-lightning',anniversary:'ph-cake',developer:'ph-seal-check'};
@@ -10773,7 +10793,7 @@ body.lite-mode .ks-os-anniversary-widget,body.lite-mode .ks-anniv-reward-card{an
 
 
 <style id="kesug-developer-private-style">
-/* Private creator identity and Dev Console, unlocked for local Player ID #8NAD only. */
+/* Private creator identity and Dev Console, unlocked for local Player ID #777 only. */
 .ks-developer-verified{display:inline-grid;place-items:center;width:22px;height:22px;margin-left:5px;vertical-align:middle;border-radius:50%;color:#fff;background:linear-gradient(145deg,#c5a9ff,#8063c5 58%,#4d3c85);box-shadow:0 0 0 2px rgba(198,171,255,.13),0 0 18px rgba(165,128,244,.46);font-size:15px;line-height:1;animation:ksDevBadgeGlow 3.2s ease-in-out infinite}
 .ks-developer-verified[hidden],.ks-developer-role-chip[hidden],#ks-dev-greeting-badge[hidden]{display:none!important}
 @keyframes ksDevBadgeGlow{0%,100%{filter:brightness(1);box-shadow:0 0 0 2px rgba(198,171,255,.13),0 0 12px rgba(165,128,244,.25)}50%{filter:brightness(1.18);box-shadow:0 0 0 3px rgba(198,171,255,.17),0 0 23px rgba(165,128,244,.55)}}
@@ -10814,7 +10834,7 @@ body.lite-mode .ks-os-anniversary-widget,body.lite-mode .ks-anniv-reward-card{an
     setText('ks-dev-spins', fmt(data.spins));
     setText('ks-dev-maxwin', fmt(data.maxWin));
     setText('ks-dev-favorites', fmt(data.favorites));
-    setText('ks-dev-id', data.id || '#8NAD');
+    setText('ks-dev-id', data.id || '#777');
     setText('ks-dev-viewport', `${window.innerWidth} × ${window.innerHeight} · DPR ${window.devicePixelRatio || 1}`);
     setText('ks-dev-storage-count', `${data.storageKeys || 0} ключей`);
     const isStandalone = window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
@@ -10831,6 +10851,26 @@ body.lite-mode .ks-os-anniversary-widget,body.lite-mode .ks-anniv-reward-card{an
     if (!allowed()) { window.showToast?.('Доступ закрыт'); return; }
     window.showPage('developer');
     window.ksDevRender();
+  };
+  window.ksDevCopyId = async () => {
+    if (!allowed()) return;
+    const value = '#777';
+    try {
+      if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(value);
+      else {
+        const field = document.createElement('textarea'); field.value = value;
+        field.style.position = 'fixed'; field.style.opacity = '0'; document.body.appendChild(field);
+        field.select(); document.execCommand('copy'); field.remove();
+      }
+      window.showToast?.('Player ID #777 скопирован');
+    } catch (_) { window.showToast?.('Не удалось скопировать ID'); }
+  };
+  window.ksDevToggleAura = () => {
+    if (!allowed()) return;
+    const enabled = document.body.classList.toggle('ks-founder-aura-off') === false;
+    try { localStorage.setItem('ks_founder_aura', enabled ? '1' : '0'); } catch (_) {}
+    window.showToast?.(enabled ? 'Founder Aura включена' : 'Founder Aura выключена');
+    return enabled;
   };
   window.ksDevStorageCheck = () => {
     if (!allowed()) return;
@@ -10855,7 +10895,7 @@ body.lite-mode .ks-os-anniversary-widget,body.lite-mode .ks-anniv-reward-card{an
   window.ksDevToggleHud = () => {
     if (!allowed()) return;
     let hud=el('ks-dev-hud');
-    if(!hud){hud=document.createElement('div');hud.id='ks-dev-hud';hud.hidden=true;hud.innerHTML=`<span class="ks-dev-hud-dot"></span><span>PEKEEE · DEVELOPER #8NAD</span><button type="button" aria-label="Скрыть Developer HUD" style="border:0;background:transparent;color:inherit;font-size:15px;cursor:pointer" onclick="document.getElementById('ks-dev-hud').hidden=true">×</button>`;document.body.appendChild(hud);}
+    if(!hud){hud=document.createElement('div');hud.id='ks-dev-hud';hud.hidden=true;hud.innerHTML=`<span class="ks-dev-hud-dot"></span><span>PEKEEE · DEVELOPER #777</span><button type="button" aria-label="Скрыть Developer HUD" style="border:0;background:transparent;color:inherit;font-size:15px;cursor:pointer" onclick="document.getElementById('ks-dev-hud').hidden=true">×</button>`;document.body.appendChild(hud);}
     hud.hidden=!hud.hidden;
     window.showToast?.(hud.hidden?'Developer HUD скрыт':'Developer HUD включён');
   };
@@ -10874,8 +10914,9 @@ body.lite-mode .ks-os-anniversary-widget,body.lite-mode .ks-anniv-reward-card{an
   const refreshChrome = () => {
     const dev=allowed();
     document.body.classList.toggle('ks-developer-profile',dev);
-    const badge=el('ks-developer-verified'), role=el('ks-developer-role-chip'), greeting=el('ks-dev-greeting-badge');
-    if(badge)badge.hidden=!dev;if(role)role.hidden=!dev;if(greeting)greeting.hidden=!dev;
+    document.body.classList.toggle('ks-founder-aura-off', localStorage.getItem('ks_founder_aura') === '0');
+    const badge=el('ks-developer-verified'), role=el('ks-developer-role-chip'), greeting=el('ks-dev-greeting-badge'), founderChip=el('ks-founder-home-chip');
+    if(badge)badge.hidden=!dev;if(role)role.hidden=!dev;if(greeting)greeting.hidden=!dev;if(founderChip)founderChip.hidden=!dev;
     document.querySelectorAll('.profile-avatar,.profile-btn,.ks-os-avatar').forEach(node=>node.classList.toggle('ks-dev-avatar-verified',dev));
     const more=el('ks-dev-more-tile');if(more)more.hidden=!dev;
     const app=el('ks-os-app-grid');if(app && dev && !app.querySelector('[data-os-app="developer"]')) window.ksDesktopRefresh?.();
@@ -10886,6 +10927,98 @@ body.lite-mode .ks-os-anniversary-widget,body.lite-mode .ks-anniv-reward-card{an
   refreshChrome();
 })();
 </script>
+
+
+<style id="kesug-founder-777-exclusive-theme">
+/* FOUNDER 777 — personal visual identity. This layer decorates the existing UI without altering gameplay. */
+body.ks-developer-profile:not(.ks-founder-aura-off){
+  --ks-founder-ice: #e9e2f7;
+  --ks-founder-lilac: #c9b5ef;
+  --ks-founder-violet: #9878ca;
+  --ks-founder-line: rgba(210,190,239,.26);
+  --ks-founder-glass: rgba(29,24,42,.58);
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-root{background:#0d0b14!important;color:#f8f4ff!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-wallpaper:not(.is-custom){
+  background:
+    radial-gradient(ellipse at 12% 14%,rgba(153,119,202,.34),transparent 34%),
+    radial-gradient(ellipse at 87% 25%,rgba(205,188,230,.22),transparent 30%),
+    radial-gradient(ellipse at 50% 100%,rgba(95,73,134,.24),transparent 42%),
+    linear-gradient(135deg,#100d18 0%,#191525 52%,#090910 100%)!important;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-shade{
+  background:linear-gradient(90deg,rgba(5,4,10,.58),rgba(10,8,17,.24) 58%,rgba(5,4,10,.5)),linear-gradient(0deg,rgba(4,3,8,.62),transparent 42%,rgba(7,5,12,.18))!important;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-root::after{
+  content:"";position:absolute;z-index:0;pointer-events:none;inset:0;opacity:.52;
+  background:radial-gradient(circle at 8% 38%,rgba(224,211,246,.16) 0 1px,transparent 2px),radial-gradient(circle at 78% 18%,rgba(224,211,246,.19) 0 1px,transparent 2px),radial-gradient(circle at 92% 73%,rgba(224,211,246,.15) 0 1px,transparent 2px),radial-gradient(circle at 38% 84%,rgba(224,211,246,.12) 0 1px,transparent 2px);
+  background-size:260px 220px,330px 260px,280px 240px,360px 280px;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-content{z-index:1;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-topbar{
+  position:relative;overflow:hidden;border-color:rgba(211,193,239,.34)!important;
+  background:linear-gradient(115deg,rgba(47,38,62,.70),rgba(19,17,28,.64) 55%,rgba(63,48,82,.46))!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.26),0 0 34px rgba(171,143,211,.12),inset 0 1px rgba(255,255,255,.16)!important;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-topbar::after{
+  content:"FOUNDER EDITION · 777";position:absolute;right:118px;bottom:5px;color:rgba(224,211,244,.48);font:900 7px/1 Manrope,Arial,sans-serif;letter-spacing:.2em;pointer-events:none;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-brand-mark{
+  border-color:rgba(230,218,248,.55)!important;
+  background:linear-gradient(145deg,#c4b0e7,#8569b3 58%,#594574)!important;
+  box-shadow:0 8px 26px rgba(157,125,200,.28),inset 0 1px rgba(255,255,255,.44)!important;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-brand small{color:rgba(222,210,242,.66)!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-top-center{color:rgba(231,221,245,.72)!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-status-dot{background:#d6c5f1!important;box-shadow:0 0 12px rgba(210,190,239,.78)!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-greeting h1 span#ks-os-player-name{
+  color:#eee5fb!important;background:linear-gradient(100deg,#fff,#d9c9f1 52%,#b8a1dc);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 28px rgba(193,169,226,.24)!important;
+}
+.ks-founder-home-chip{width:max-content;max-width:100%;display:inline-flex;align-items:center;gap:8px;margin:0 0 10px;padding:7px 11px;border:1px solid rgba(214,197,239,.32);border-radius:999px;background:linear-gradient(100deg,rgba(153,126,190,.21),rgba(255,255,255,.055),rgba(113,87,150,.18));color:#ece3f8;font:900 8px/1.2 Manrope,Arial,sans-serif;letter-spacing:.16em;box-shadow:0 7px 22px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.12);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+.ks-founder-home-chip i{font-size:13px;color:#ddcef2}.ks-founder-home-chip b{padding-left:8px;border-left:1px solid rgba(220,204,241,.22);color:#c9b5e8}
+.ks-founder-home-chip[hidden]{display:none!important}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-app-panel,
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-machine-panel,
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-widget-card{
+  border-color:rgba(211,193,239,.22)!important;
+  background:linear-gradient(145deg,rgba(49,39,65,.48),rgba(15,13,23,.59))!important;
+  box-shadow:0 16px 42px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.09)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(130%)!important;backdrop-filter:blur(22px) saturate(130%)!important;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-app-icon{
+  background:linear-gradient(145deg,rgba(189,166,225,.86),rgba(101,80,137,.92))!important;
+  border-color:rgba(237,226,250,.42)!important;
+  box-shadow:0 10px 24px rgba(86,63,119,.28),inset 0 1px rgba(255,255,255,.38)!important;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-app[data-os-app="developer"] .ks-os-app-icon{background:linear-gradient(145deg,#e5d8f5,#9072bf 58%,#584477)!important;box-shadow:0 0 0 4px rgba(205,184,235,.10),0 12px 30px rgba(138,107,184,.36)!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-machine{border-color:rgba(209,191,235,.20)!important;background:rgba(35,29,47,.52)!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-machine-icon{background:linear-gradient(145deg,rgba(178,154,216,.36),rgba(90,73,120,.46))!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-widget-label,
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-section-kicker,
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-eyebrow{color:#d4c2ed!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .profile-card{
+  position:relative;border:1px solid rgba(214,195,240,.38)!important;
+  background:radial-gradient(ellipse at 88% 4%,rgba(179,151,218,.25),transparent 40%),linear-gradient(125deg,rgba(56,43,73,.86),rgba(19,17,27,.84))!important;
+  box-shadow:0 22px 58px rgba(0,0,0,.28),0 0 36px rgba(160,129,201,.12),inset 0 1px rgba(255,255,255,.11)!important;
+}
+body.ks-developer-profile:not(.ks-founder-aura-off) .profile-card::after{content:"FOUNDER IDENTITY · 777"!important;color:rgba(225,210,246,.68)!important;letter-spacing:.22em!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .profile-avatar,
+body.ks-developer-profile:not(.ks-founder-aura-off) .profile-btn,
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-avatar{outline:2px solid rgba(216,198,242,.9)!important;outline-offset:3px!important;box-shadow:0 0 0 6px rgba(180,151,218,.13),0 0 30px rgba(174,143,214,.36)!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-developer-role-chip{border-color:rgba(220,201,244,.44)!important;background:linear-gradient(100deg,rgba(157,128,194,.28),rgba(255,255,255,.08))!important;color:#f0e7fb!important;box-shadow:0 7px 20px rgba(0,0,0,.13),inset 0 1px rgba(255,255,255,.14)!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-developer-hero{border-color:rgba(218,199,242,.42)!important;background:radial-gradient(circle at 90% 2%,rgba(193,170,226,.27),transparent 40%),linear-gradient(125deg,rgba(65,50,83,.82),rgba(19,17,28,.76))!important;box-shadow:0 24px 65px rgba(0,0,0,.28),0 0 38px rgba(169,140,208,.12),inset 0 1px rgba(255,255,255,.14)!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-developer-panel,
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-developer-stat{border-color:rgba(211,193,239,.20)!important;background:linear-gradient(145deg,rgba(49,39,65,.57),rgba(17,15,25,.64))!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-developer-tools-grid button{border-color:rgba(212,194,239,.2)!important;background:linear-gradient(145deg,rgba(145,119,180,.13),rgba(255,255,255,.035))!important;}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-developer-tools-grid button:hover{border-color:rgba(226,210,247,.44)!important;background:rgba(173,148,210,.16)!important;}
+.ks-dev-copy-id{display:inline-flex;align-items:center;gap:7px;min-height:32px;margin:9px 0 0 5px;padding:7px 11px;border:1px solid rgba(213,195,239,.25);border-radius:999px;background:rgba(255,255,255,.07);color:#eee5fb;font:850 9px Manrope,Arial,sans-serif;cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease}
+.ks-dev-copy-id:hover{transform:translateY(-1px);background:rgba(186,162,222,.16);border-color:rgba(225,210,245,.42)}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-developer-page-label{color:#e1d4f2!important}
+body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-top-actions .ks-os-avatar{border-color:rgba(223,207,244,.62)!important;}
+@media(max-width:650px){body.ks-developer-profile:not(.ks-founder-aura-off) .ks-os-topbar::after{display:none}.ks-founder-home-chip{font-size:7px;gap:6px;padding:6px 8px}.ks-dev-copy-id{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.ks-founder-home-chip,.ks-dev-copy-id{transition:none!important}}
+body.lite-mode .ks-os-root::after{display:none!important}
+</style>
 
 </body>
 </html>

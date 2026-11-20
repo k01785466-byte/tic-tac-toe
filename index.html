@@ -3049,6 +3049,102 @@ body:not(.ks-os-home-active) .ks-os-settings-panel{z-index:1200}
   #game-screen .ks-bet-rule-note { font-size:9px; padding:7px 8px; }
 }
 </style>
+
+<style id="kesug-catalog-performance-paytable-duels">
+/* KESUG PERFORMANCE PASS — reduce repeated paint and expensive card effects. */
+#machine-grid { contain: layout style; }
+#machine-grid .game-card {
+  content-visibility:auto;
+  contain-intrinsic-size:auto 320px;
+  contain:layout paint style;
+  animation:none !important;
+  opacity:1 !important;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease !important;
+  -webkit-backdrop-filter:none !important;
+  backdrop-filter:none !important;
+  box-shadow:0 8px 20px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+#machine-grid .game-card::after { display:none !important; }
+#machine-grid .game-card::before { transition:opacity .16s ease !important; }
+#machine-grid .game-card-art { -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+#machine-grid .game-icon { width:70px;height:70px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.28)) !important; }
+#machine-grid .game-card:hover { transform:translate3d(0,-2px,0) !important; }
+#machine-grid .game-card .play-btn { transition:background-color .16s ease,color .16s ease,transform .16s ease !important; }
+
+/* Reels use a reusable, short strip and promote only the strip being animated. */
+#game-screen .reel-strip { will-change:transform; transform:translate3d(0,0,0); backface-visibility:hidden; }
+#game-screen .reel-item img { width:76%;height:76%;object-fit:contain; }
+#game-screen .reel-item.winning { animation-duration:.72s !important; animation-iteration-count:2 !important; }
+#game-screen .reel-window { contain:layout paint style; }
+#game-screen .slot-container { -webkit-backdrop-filter:blur(10px) saturate(112%) !important; backdrop-filter:blur(10px) saturate(112%) !important; }
+
+/* Paytable — uses the exact symbol image URL used by the machine reels. */
+.ks-machine-paytable { width:min(100%,760px);margin:14px auto 0; }
+.ks-machine-paytable-toggle {
+  width:100%;min-height:44px;display:flex;align-items:center;justify-content:center;gap:9px;
+  border:1px solid rgba(225,219,236,.16);border-radius:13px;padding:10px 14px;
+  color:#f0edf5;background:rgba(255,255,255,.075);font:800 12px Manrope,system-ui,sans-serif;
+  cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+.ks-machine-paytable-toggle:hover { background:rgba(255,255,255,.12);border-color:rgba(225,219,236,.3); }
+.ks-machine-paytable-toggle[aria-expanded="true"] { background:rgba(220,214,232,.13);border-color:rgba(225,219,236,.32); }
+.ks-machine-paytable-panel {
+  margin-top:9px;padding:14px;border:1px solid rgba(225,219,236,.13);border-radius:17px;
+  background:rgba(22,21,29,.78);box-shadow:0 12px 32px rgba(0,0,0,.16);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.ks-machine-paytable-panel[hidden] { display:none !important; }
+.ks-machine-paytable-heading { display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px; }
+.ks-machine-paytable-heading strong { display:block;color:#f1edf6;font-size:13px; }
+.ks-machine-paytable-heading span { display:block;margin-top:4px;color:rgba(232,227,240,.57);font-size:10px;line-height:1.45; }
+.ks-machine-paytable-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px; }
+.ks-machine-paytable-item {
+  min-width:0;display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;gap:9px;
+  padding:9px;border:1px solid rgba(225,219,236,.1);border-radius:13px;background:rgba(255,255,255,.045);
+}
+.ks-machine-paytable-art { width:42px;height:42px;display:grid;place-items:center;border-radius:11px;background:rgba(255,255,255,.055); }
+.ks-machine-paytable-art img { display:block;width:36px;height:36px;object-fit:contain; }
+.ks-machine-paytable-copy { min-width:0; }
+.ks-machine-paytable-copy small { display:block;color:rgba(232,227,240,.58);font-size:9px;line-height:1.3; }
+.ks-machine-paytable-copy strong { display:block;margin-top:3px;color:#eae5f2;font-size:16px;font-weight:900;letter-spacing:-.03em; }
+.ks-machine-paytable-note { margin:12px 0 0;color:rgba(232,227,240,.52);font-size:10px;line-height:1.5; }
+
+/* Duel machine picker — dark glass select and visual confirmation of the selected game. */
+#ks-duel-machine.ks-more-select {
+  display:block;width:100%;min-height:48px;box-sizing:border-box;appearance:none;-webkit-appearance:none;
+  padding:12px 42px 12px 14px;border:1px solid rgba(230,224,240,.18) !important;border-radius:13px !important;
+  color:#f1edf6 !important;background-color:rgba(28,27,35,.9) !important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23d8d2e2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  outline:none;font:700 12px Manrope,system-ui,sans-serif;
+}
+#ks-duel-machine.ks-more-select:focus { border-color:rgba(222,215,236,.42) !important;box-shadow:0 0 0 3px rgba(220,214,232,.08) !important; }
+#ks-duel-machine option { color:#f2eff7 !important;background:#24232c !important; }
+.ks-duel-machine-preview {
+  display:flex;align-items:center;gap:11px;margin:9px 0 15px;padding:10px 12px;
+  border:1px solid rgba(230,224,240,.12);border-radius:14px;background:rgba(255,255,255,.045);
+}
+.ks-duel-machine-preview-art { flex:0 0 46px;width:46px;height:46px;display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.06); }
+.ks-duel-machine-preview-art img { width:40px;height:40px;object-fit:contain; }
+.ks-duel-machine-preview-copy { min-width:0; }
+.ks-duel-machine-preview-copy strong { display:block;color:#f2eff7;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.ks-duel-machine-preview-copy small { display:block;margin-top:3px;color:rgba(232,227,240,.56);font-size:10px; }
+
+@media(max-width:620px) {
+  .ks-machine-paytable { margin-top:10px; }
+  .ks-machine-paytable-panel { padding:10px; }
+  .ks-machine-paytable-grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:7px; }
+  .ks-machine-paytable-item { grid-template-columns:36px minmax(0,1fr);gap:7px;padding:7px; }
+  .ks-machine-paytable-art { width:36px;height:36px; }
+  .ks-machine-paytable-art img { width:31px;height:31px; }
+  .ks-machine-paytable-copy strong { font-size:14px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #machine-grid .game-card,#machine-grid .game-card::before,#game-screen .reel-item.winning { animation:none !important;transition:none !important; }
+}
+body.lite-mode #machine-grid .game-card,body.lite-mode .ks-machine-paytable-panel { -webkit-backdrop-filter:none !important;backdrop-filter:none !important; }
+</style>
+
 </head>
 <body class="is-loading ks-os-home-active">
 
@@ -3588,6 +3684,7 @@ const ICON_MAP = {
 };
 
 function getIconUrl(emoji) {
+  if (emoji === '🐒' && ICON_MAP['🐵']) return ICON_MAP['🐵'];
   if (ICON_MAP[emoji]) return ICON_MAP[emoji];
   const safeEmoji = String(emoji || '✨').replace(/[<>"']/g, '');
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><defs><radialGradient id="g"><stop stop-color="#ffffff" stop-opacity=".24"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="128" cy="128" r="116" fill="url(#g)"/><text x="128" y="174" text-anchor="middle" font-size="142" font-family="Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif">${safeEmoji}</text></svg>`;
@@ -4284,18 +4381,16 @@ window.spin = () => {
   const syms = currentMachine.symbols;
   const result = generateResult(syms, currentMachine);
   const reelHeight = document.querySelector('.reel-window').offsetHeight / 3;
-  const ITEMS = 20;
+  const ITEMS = 8; // shorter reel strip: fewer live image nodes per spin
   const LITE_MODE = document.body.classList.contains('lite-mode');
   const DURATION = LITE_MODE ? 0 : 1500;
 
   for (let col = 0; col < 3; col++) {
     const strip = document.getElementById('reel-' + col);
-    let html = '';
-    for (let k = 0; k < ITEMS; k++) html += `<div class="reel-item"><img src="${getIconUrl(syms[Math.floor(Math.random() * syms.length)])}"></div>`;
-    html += `<div class="reel-item"><img src="${getIconUrl(result[col])}"></div>`;
-    html += `<div class="reel-item"><img src="${getIconUrl(result[col + 3])}"></div>`;
-    html += `<div class="reel-item"><img src="${getIconUrl(result[col + 6])}"></div>`;
-    strip.innerHTML = html;
+    const reelSymbols = [];
+    for (let k = 0; k < ITEMS; k++) reelSymbols.push(syms[Math.floor(Math.random() * syms.length)]);
+    reelSymbols.push(result[col], result[col + 3], result[col + 6]);
+    window.ksSetReelSymbols(strip, reelSymbols);
     strip.style.transition = 'none';
     strip.style.transform = 'translateY(0)';
   }
@@ -6622,9 +6717,10 @@ showPage('lobby');
   function cacheKnownAssets(registration) {
     if (!navigator.onLine || !registration) return;
     const discovered = (performance.getEntriesByType('resource') || []).map(entry => entry.name);
-    // Include every known machine illustration, not only the images which happened to be visible before going offline.
-    try { if (typeof ICON_MAP !== 'undefined') discovered.push(...Object.values(ICON_MAP)); } catch (_) {}
-    try { document.querySelectorAll('img[src]').forEach(img => discovered.push(img.currentSrc || img.src)); } catch (_) {}
+    // Cache only resources the player has actually loaded. Machine artwork is cached
+    // naturally by the Service Worker as catalogue cards and individual machines are opened;
+    // avoid a burst of 100+ remote image downloads at startup on slower connections.
+    try { document.querySelectorAll('img[src]').forEach(img => { if (img.complete && img.naturalWidth > 0) discovered.push(img.currentSrc || img.src); }); } catch (_) {}
     const urls = [...new Set(discovered.filter(url => /^https?:/i.test(url) && /\.(?:css|woff2?|ttf|otf|png|jpe?g|webp|svg)(?:[?#]|$)/i.test(url)))].slice(0, 160);
     const worker = navigator.serviceWorker.controller || registration.active || registration.waiting;
     if (worker && urls.length) {
@@ -9271,5 +9367,657 @@ input,select,textarea{min-width:0;max-width:100%}
 @media(max-width:360px){.games-grid{grid-template-columns:minmax(0,1fr)!important}.game-card-art{min-height:150px!important}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
+<style id="kesug-motion-optimization-v2">
+/* KESUG MOTION + PERFORMANCE LAYER
+   Animations are interaction-driven, mostly transform/opacity based, and reveal only in-view. */
+:root {
+  --ks-motion-v2-ease: cubic-bezier(.2,.78,.2,1);
+  --ks-motion-v2-fast: 180ms;
+  --ks-motion-v2-normal: 360ms;
+  --ks-motion-v2-slow: 560ms;
+}
+
+@keyframes ksV2PageEnter {
+  0% { opacity:0; transform:translate3d(0,16px,0) scale(.988); }
+  72% { opacity:1; transform:translate3d(0,-1px,0) scale(1.002); }
+  100% { opacity:1; transform:translate3d(0,0,0) scale(1); }
+}
+@keyframes ksV2CardEnter {
+  0% { opacity:0; transform:translate3d(0,18px,0) scale(.975); }
+  100% { opacity:1; transform:translate3d(0,0,0) scale(1); }
+}
+@keyframes ksV2AppEnter {
+  0% { opacity:0; transform:translate3d(0,20px,0) scale(.9); }
+  72% { opacity:1; transform:translate3d(0,-2px,0) scale(1.015); }
+  100% { opacity:1; transform:translate3d(0,0,0) scale(1); }
+}
+@keyframes ksV2WidgetEnter {
+  0% { opacity:0; transform:translate3d(0,17px,0) scale(.98); }
+  100% { opacity:1; transform:translate3d(0,0,0) scale(1); }
+}
+@keyframes ksV2WinImpact {
+  0% { opacity:0; transform:translate3d(0,18px,0) scale(.84) rotate(-1deg); }
+  68% { opacity:1; transform:translate3d(0,-3px,0) scale(1.035) rotate(.35deg); }
+  100% { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0); }
+}
+@keyframes ksV2WinCell {
+  0%,100% { transform:scale(1); }
+  42% { transform:scale(1.13); }
+  72% { transform:scale(1.045); }
+}
+@keyframes ksV2SpinSheen {
+  0% { transform:translate3d(-130%,0,0) skewX(-18deg); opacity:0; }
+  18% { opacity:.65; }
+  55% { opacity:.2; }
+  100% { transform:translate3d(230%,0,0) skewX(-18deg); opacity:0; }
+}
+@keyframes ksV2ToastIn {
+  0% { opacity:0; transform:translate3d(-50%,12px,0) scale(.97); }
+  100% { opacity:1; transform:translate3d(-50%,0,0) scale(1); }
+}
+@keyframes ksV2IconTap {
+  0%,100% { transform:translateY(0) scale(1); }
+  45% { transform:translateY(-4px) scale(1.1) rotate(-5deg); }
+}
+@keyframes ksV2PanelPulse {
+  0%,100% { box-shadow:0 16px 44px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.055); }
+  50% { box-shadow:0 20px 52px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.085); }
+}
+
+/* In-view reveals: one-shot, no infinite animation on dozens of cards. */
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .ks-motion-in:not(.ks-motion-done) {
+  will-change:transform,opacity;
+  animation:ksV2CardEnter 560ms var(--ks-motion-v2-ease) var(--ks-motion-delay,0ms) both !important;
+}
+html[data-ks-motion="balanced"] body:not(.lite-mode):not(.reduce-effects) .ks-motion-in:not(.ks-motion-done) {
+  will-change:transform,opacity;
+  animation:ksV2CardEnter 340ms var(--ks-motion-v2-ease) var(--ks-motion-delay,0ms) both !important;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .ks-os-app.ks-motion-in:not(.ks-motion-done) {
+  animation:ksV2AppEnter 620ms var(--ks-motion-v2-ease) var(--ks-motion-delay,0ms) both !important;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .ks-os-widget-card.ks-motion-in:not(.ks-motion-done),
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .ks-desktop-widget.ks-motion-in:not(.ks-motion-done) {
+  animation:ksV2WidgetEnter 600ms var(--ks-motion-v2-ease) var(--ks-motion-delay,0ms) both !important;
+}
+html[data-ks-motion="balanced"] body:not(.lite-mode):not(.reduce-effects) .ks-os-app.ks-motion-in:not(.ks-motion-done) {
+  animation:ksV2AppEnter 390ms var(--ks-motion-v2-ease) var(--ks-motion-delay,0ms) both !important;
+}
+
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .page-view.active.ks-motion-route {
+  animation:ksV2PageEnter 520ms var(--ks-motion-v2-ease) both !important;
+  transform-origin:center top;
+}
+html[data-ks-motion="balanced"] body:not(.lite-mode):not(.reduce-effects) .page-view.active.ks-motion-route {
+  animation:ksV2PageEnter 320ms var(--ks-motion-v2-ease) both !important;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) #ks-more-detail-content.ks-motion-route,
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .ks-more-detail-content.ks-motion-route {
+  animation:ksV2PageEnter 480ms var(--ks-motion-v2-ease) both !important;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) #game-screen.active.ks-motion-machine .slot-container {
+  animation:ksV2WidgetEnter 620ms var(--ks-motion-v2-ease) both !important;
+}
+html[data-ks-motion="balanced"] body:not(.lite-mode):not(.reduce-effects) #game-screen.active.ks-motion-machine .slot-container {
+  animation:ksV2WidgetEnter 380ms var(--ks-motion-v2-ease) both !important;
+}
+
+/* Interactive micro-motion: only while the user points, focuses, or taps. */
+@media (hover:hover) and (pointer:fine) {
+  .ks-os-app,.ks-os-widget-card,.ks-more-tile,.game-card,.ks-market-card,.ks-market-product,
+  .ks-duel-card,.ks-duel-panel,.stat-card,.profile-card,.ks-desktop-widget {
+    transition:transform 240ms var(--ks-motion-v2-ease),border-color 240ms ease,box-shadow 240ms ease,background-color 240ms ease !important;
+  }
+  .ks-os-app:hover,.ks-os-widget-card:hover,.ks-more-tile:hover,.game-card:hover,
+  .ks-market-card:hover,.ks-market-product:hover,.ks-duel-card:hover,.ks-duel-panel:hover,
+  .stat-card:hover,.profile-card:hover,.ks-desktop-widget:hover {
+    transform:translate3d(0,-4px,0);
+  }
+  .ks-os-app:hover .ks-os-app-icon,.ks-os-app:focus-visible .ks-os-app-icon {
+    transform:translate3d(0,-3px,0) scale(1.09) rotate(-4deg);
+  }
+  .ks-os-app-icon { transition:transform 260ms var(--ks-motion-v2-ease); }
+  .game-card:hover .game-icon { transform:translate3d(0,-3px,0) scale(1.075) rotate(2deg); }
+  .ks-more-tile:hover .ks-more-icon { transform:translateY(-3px) rotate(-5deg) scale(1.08); }
+}
+button:not(:disabled),.btn:not(:disabled),[role="button"] { -webkit-tap-highlight-color:transparent; }
+button:not(:disabled):active,.btn:not(:disabled):active,.ks-os-app:active,.game-card:active,.ks-more-tile:active {
+  transform:scale(.975);
+  transition-duration:90ms !important;
+}
+button:focus-visible,.btn:focus-visible,.ks-os-app:focus-visible,.game-card:focus-visible {
+  outline:2px solid rgba(220,214,232,.78) !important;
+  outline-offset:3px;
+}
+
+/* A sheen is composed of a moving transform, not a continuously repainted gradient. */
+.spin-btn-big::after {
+  content:"";position:absolute;inset:-2px auto -2px -35%;width:24%;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);
+  transform:translate3d(-130%,0,0) skewX(-18deg);opacity:0;
+}
+@media (hover:hover) and (pointer:fine) {
+  html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .spin-btn-big:hover::after {
+    animation:ksV2SpinSheen 900ms ease both;
+  }
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .reel-item.winning {
+  animation:ksV2WinCell 780ms cubic-bezier(.2,.8,.2,1) 2 both !important;
+}
+html[data-ks-motion="balanced"] body:not(.lite-mode):not(.reduce-effects) .reel-item.winning {
+  animation:ksV2WinCell 620ms ease 1 both !important;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) #win-popup.active .win-box {
+  animation:ksV2WinImpact 520ms var(--ks-motion-v2-ease) both !important;
+}
+html[data-ks-motion="balanced"] body:not(.lite-mode):not(.reduce-effects) #win-popup.active .win-box {
+  animation:ksV2WinImpact 360ms var(--ks-motion-v2-ease) both !important;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .ks-os-settings-panel:not([hidden]) {
+  animation:ksV2PageEnter 360ms var(--ks-motion-v2-ease) both;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .ks-toast.is-visible {
+  animation:ksV2ToastIn 260ms var(--ks-motion-v2-ease) both;
+}
+
+/* Reduce expensive blur on phones/low-power automatic profile, while keeping glass translucent. */
+html[data-ks-motion="balanced"] :is(.ks-os-app-panel,.ks-os-machine-panel,.ks-os-widget-card,.ks-os-settings-panel,
+.page-view,.page-header,.catalog-section,.game-card,.slot-container,.game-header,.reels,.ks-more-panel,
+.ks-more-detail,.ks-market-card,.ks-duel-panel,.ks-analytics-card,.win-popup) {
+  -webkit-backdrop-filter:blur(12px) saturate(112%) !important;
+  backdrop-filter:blur(12px) saturate(112%) !important;
+}
+html[data-ks-motion="balanced"] .ks-os-app-panel,
+html[data-ks-motion="balanced"] .ks-os-machine-panel,
+html[data-ks-motion="balanced"] .ks-os-widget-card,
+html[data-ks-motion="balanced"] .game-card { contain:layout style; }
+html[data-ks-motion="cinematic"] .game-card,
+html[data-ks-motion="cinematic"] .ks-os-app,
+html[data-ks-motion="cinematic"] .ks-os-widget-card,
+html[data-ks-motion="cinematic"] .ks-more-tile,
+html[data-ks-motion="cinematic"] .ks-market-card,
+html[data-ks-motion="cinematic"] .ks-duel-card { contain:layout style; }
+
+/* Offscreen/hidden tab animations stop consuming cycles. */
+html.ks-tab-hidden *,html.ks-tab-hidden *::before,html.ks-tab-hidden *::after {
+  animation-play-state:paused !important;
+}
+html[data-ks-motion="minimal"] *,
+html[data-ks-motion="minimal"] *::before,
+html[data-ks-motion="minimal"] *::after {
+  animation:none !important;transition-duration:.01ms !important;scroll-behavior:auto !important;
+}
+body.reduce-effects *,body.reduce-effects *::before,body.reduce-effects *::after,
+body.lite-mode *,body.lite-mode *::before,body.lite-mode *::after {
+  animation:none !important;transition-duration:.01ms !important;
+}
+@media (max-width:700px) {
+  html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .ks-motion-in:not(.ks-motion-done) {
+    animation-duration:420ms !important;
+  }
+  .ks-os-app,.ks-os-widget-card,.game-card,.ks-more-tile,.ks-market-card,.ks-duel-panel {
+    transition-duration:180ms !important;
+  }
+  .spin-btn-big::after { display:none !important; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation:none !important;transition-duration:.01ms !important;scroll-behavior:auto !important; }
+}
+
+/* Animation profile control added to the existing Settings / Motion section. */
+.ks-motion-profile-row { align-items:center; }
+.ks-motion-profile-select {
+  flex:0 0 auto;min-width:142px;max-width:48%;padding:9px 10px;border-radius:11px;
+  border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:inherit;
+  font:700 11px Manrope,system-ui,sans-serif;outline:none;
+}
+.ks-motion-profile-select option { color:#17161e;background:#f2f0f5; }
+.ks-motion-profile-note { display:block;margin-top:5px;color:rgba(235,232,241,.55);font-size:9px;line-height:1.45; }
+@media(max-width:540px) {
+  .ks-motion-profile-row { flex-wrap:wrap; }
+  .ks-motion-profile-select { margin-left:40px;max-width:calc(100% - 40px);width:calc(100% - 40px); }
+}
+</style>
+<script id="kesug-motion-optimization-runtime">
+(() => {
+  'use strict';
+  const html = document.documentElement;
+  const body = document.body;
+  const STORAGE_KEY = 'kesug_motion_profile_v2';
+  const validProfiles = ['auto','cinematic','balanced','minimal'];
+  let chosen = 'auto';
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (validProfiles.includes(saved)) chosen = saved;
+  } catch (_) {}
+
+  const reducePreference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+  const coarsePointer = window.matchMedia?.('(pointer: coarse)');
+  function autoProfile() {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const cores = Number(navigator.hardwareConcurrency || 0);
+    const memory = Number(navigator.deviceMemory || 0);
+    const dataSaver = !!(connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || '')));
+    const lowPower = dataSaver || (cores && cores <= 4) || (memory && memory <= 4) || !!coarsePointer?.matches;
+    return lowPower ? 'balanced' : 'cinematic';
+  }
+  function effectiveProfile() {
+    if (reducePreference?.matches || body.classList.contains('reduce-effects') || body.classList.contains('lite-mode')) return 'minimal';
+    return chosen === 'auto' ? autoProfile() : chosen;
+  }
+  function syncMotionProfile() {
+    const effective = effectiveProfile();
+    html.dataset.ksMotion = effective;
+    html.dataset.ksMotionChoice = chosen;
+    const select = document.getElementById('ks-motion-profile');
+    if (select && select.value !== chosen) select.value = chosen;
+    const note = document.getElementById('ks-motion-profile-note');
+    if (note) {
+      const labels = {
+        cinematic:'Кинематографичный режим: больше плавных появлений, выразительные переходы и эффекты наведения.',
+        balanced:'Сбалансированный режим: короткие анимации и более лёгкое размытие — подходит для телефонов.',
+        minimal:'Минимальный режим: декоративные движения отключены.',
+        auto:'Авто: режим подбирается по настройкам доступности и возможностям устройства.'
+      };
+      note.textContent = effective === 'minimal' && chosen !== 'minimal'
+        ? 'Сейчас включён минимальный режим: активен Lite, уменьшение анимаций или системная настройка доступности.'
+        : labels[chosen] || labels.auto;
+    }
+  }
+  function buildMotionSetting() {
+    const reduced = document.getElementById('setting-reduced-motion');
+    const section = reduced?.closest('.settings-group');
+    if (!section || document.getElementById('ks-motion-profile')) return;
+    const row = document.createElement('div');
+    row.className = 'setting-row ks-motion-profile-row';
+    row.innerHTML = `
+      <span class="setting-row-icon"><i class="ph-bold ph-sparkle" aria-hidden="true"></i></span>
+      <span class="setting-row-copy"><strong>Интенсивность анимаций</strong><small>Выбери, насколько выразительными будут переходы и эффекты.</small><small class="ks-motion-profile-note" id="ks-motion-profile-note"></small></span>
+      <select class="ks-motion-profile-select" id="ks-motion-profile" aria-label="Интенсивность анимаций">
+        <option value="auto">Авто</option>
+        <option value="cinematic">Кинематографично</option>
+        <option value="balanced">Сбалансированно</option>
+        <option value="minimal">Минимум</option>
+      </select>`;
+    section.appendChild(row);
+    const select = row.querySelector('select');
+    select.value = chosen;
+    select.addEventListener('change', () => {
+      chosen = validProfiles.includes(select.value) ? select.value : 'auto';
+      try { localStorage.setItem(STORAGE_KEY, chosen); } catch (_) {}
+      syncMotionProfile();
+      resetRevealTargets(document);
+      window.showToast?.('Профиль анимаций сохранён');
+    });
+    syncMotionProfile();
+  }
+
+  const revealSelector = [
+    '.game-card','#ks-os-app-grid .ks-os-app','#ks-os-widgets .ks-os-widget-card',
+    '.ks-more-tile','.ks-market-card','.ks-market-product','.ks-duel-card',
+    '.ks-desktop-widget','.stat-card','.ks-gallery-card'
+  ].join(',');
+  let revealObserver = null;
+  if ('IntersectionObserver' in window) {
+    revealObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const element = entry.target;
+        if (html.dataset.ksMotion !== 'minimal') element.classList.add('ks-motion-in');
+        else element.classList.add('ks-motion-done');
+        revealObserver.unobserve(element);
+      }
+    }, { root:null, rootMargin:'0px 0px -3% 0px', threshold:0.06 });
+  }
+  function observeElement(element, index=0) {
+    if (!(element instanceof Element) || element.dataset.ksMotionObserved === '1') return;
+    element.dataset.ksMotionObserved = '1';
+    element.style.setProperty('--ks-motion-delay', `${Math.min(index % 8, 7) * 42}ms`);
+    if (revealObserver) revealObserver.observe(element);
+    else requestAnimationFrame(() => {
+      if (html.dataset.ksMotion !== 'minimal') element.classList.add('ks-motion-in');
+    });
+  }
+  function optimizeImage(image) {
+    if (!(image instanceof HTMLImageElement)) return;
+    if (!image.hasAttribute('decoding')) image.decoding = 'async';
+    const critical = image.closest('#game-screen,.ks-loader,.top-header') || image.loading === 'eager';
+    if (!critical && !image.hasAttribute('loading')) image.loading = 'lazy';
+    if (!critical && image.loading === 'lazy' && 'fetchPriority' in image) image.fetchPriority = 'low';
+  }
+  function scan(root) {
+    if (!root) return;
+    if (root instanceof Element) {
+      if (root.matches(revealSelector)) observeElement(root, 0);
+      if (root.tagName === 'IMG') optimizeImage(root);
+      root.querySelectorAll?.(revealSelector).forEach((element,index) => observeElement(element,index));
+      root.querySelectorAll?.('img').forEach(optimizeImage);
+    } else if (root === document) {
+      document.querySelectorAll(revealSelector).forEach((element,index) => observeElement(element,index));
+      document.querySelectorAll('img').forEach(optimizeImage);
+    }
+  }
+  function resetRevealTargets(root=document) {
+    const nodes = root === document ? document.querySelectorAll(revealSelector) : root.querySelectorAll(revealSelector);
+    nodes.forEach(element => {
+      revealObserver?.unobserve(element);
+      element.classList.remove('ks-motion-in','ks-motion-done');
+      delete element.dataset.ksMotionObserved;
+    });
+    scan(root);
+  }
+  // Release temporary compositor hints as soon as one-shot reveal animations finish.
+  document.addEventListener('animationend', event => {
+    const element = event.target;
+    if (element instanceof Element && element.dataset.ksMotionObserved === '1') {
+      element.classList.add('ks-motion-done');
+      element.style.removeProperty('will-change');
+    }
+  }, true);
+
+  // Route transitions are attached to the existing navigation API, preserving all feature logic.
+  function animateRoute(element, className='ks-motion-route') {
+    if (!element) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    requestAnimationFrame(() => {
+      element.classList.add(className);
+      const cleanup = () => element.classList.remove(className);
+      element.addEventListener('animationend', cleanup, { once:true });
+      window.setTimeout(cleanup, 900);
+    });
+  }
+  const originalShowPage = window.showPage;
+  if (typeof originalShowPage === 'function') {
+    window.showPage = function(id,...args) {
+      const result = originalShowPage.apply(this,[id,...args]);
+      const page = document.getElementById(`page-${id}`);
+      if (page?.classList.contains('active')) animateRoute(page);
+      return result;
+    };
+  }
+  const originalUseMoreFeature = window.useMoreFeature;
+  if (typeof originalUseMoreFeature === 'function') {
+    window.useMoreFeature = function(...args) {
+      const result = originalUseMoreFeature.apply(this,args);
+      const detail = document.querySelector('#ks-more-detail-content,.ks-more-detail-content');
+      if (detail) animateRoute(detail);
+      scan(document.getElementById('page-more-detail') || document);
+      return result;
+    };
+  }
+  const originalOpenMachine = window.openMachine;
+  if (typeof originalOpenMachine === 'function') {
+    window.openMachine = function(...args) {
+      const result = originalOpenMachine.apply(this,args);
+      const screen = document.getElementById('game-screen');
+      if (screen?.classList.contains('active')) animateRoute(screen,'ks-motion-machine');
+      scan(screen || document);
+      return result;
+    };
+  }
+
+  // Avoid continuous animation work while the app is in a background tab.
+  document.addEventListener('visibilitychange', () => {
+    html.classList.toggle('ks-tab-hidden', document.hidden);
+  }, { passive:true });
+  if (reducePreference?.addEventListener) reducePreference.addEventListener('change', syncMotionProfile);
+  const classObserver = new MutationObserver(() => syncMotionProfile());
+  classObserver.observe(body,{attributes:true,attributeFilter:['class']});
+
+  // Batch dynamic DOM work into a single animation frame instead of scanning on every mutation.
+  let scanFrame = 0;
+  const domObserver = new MutationObserver(records => {
+    const added = [];
+    for (const record of records) for (const node of record.addedNodes) if (node.nodeType === 1) added.push(node);
+    if (!added.length || scanFrame) return;
+    scanFrame = requestAnimationFrame(() => {
+      scanFrame = 0;
+      for (const node of added) scan(node);
+    });
+  });
+
+  buildMotionSetting();
+  syncMotionProfile();
+  scan(document);
+  domObserver.observe(body,{childList:true,subtree:true});
+})();
+</script>
+
+<script id="kesug-catalog-performance-paytable-duels-runtime">
+(() => {
+  'use strict';
+  const $ = (selector, root=document) => root.querySelector(selector);
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+
+  /* Keep card elements and their already-loaded images instead of rebuilding 39 cards on every filter. */
+  const cardNodes = new Map();
+  function getCard(machine, originalIndex) {
+    let card = cardNodes.get(machine.id);
+    if (card) return card;
+    const category = getMachineCategory(machine);
+    const meta = MACHINE_CATEGORY_META[category] || MACHINE_CATEGORY_META.adventure;
+    card = document.createElement('article');
+    card.className = 'game-card';
+    card.setAttribute('role','button');
+    card.tabIndex = 0;
+    card.setAttribute('aria-label',`Открыть виртуальный автомат ${machine.name}`);
+    card.dataset.machineId = machine.id;
+    card.style.setProperty('--card-accent', meta.accent);
+    card.innerHTML = `
+      <div class="game-card-art">
+        <button class="favorite-toggle" type="button" aria-label="Добавить в избранное" aria-pressed="false"><i class="ph-bold ph-star"></i></button>
+        <span class="game-card-number">KS / ${String(originalIndex).padStart(2,'0')}</span>
+        <span class="game-card-category">${esc(meta.label)}</span>
+        <img class="game-icon" alt="" loading="lazy" decoding="async" width="70" height="70">
+      </div>
+      <div class="game-card-body">
+        <div class="game-title">${esc(machine.name)}</div>
+        <div class="game-desc">${esc(machine.desc)}</div>
+        <div class="play-btn">Открыть автомат <i class="ph-bold ph-arrow-up-right"></i></div>
+      </div>`;
+    const icon = $('.game-icon',card);
+    icon.src = getIconUrl(machine.symbols[0]);
+    const favorite = $('.favorite-toggle',card);
+    favorite.addEventListener('click', event => window.toggleFavorite?.(event,machine.id));
+    card.addEventListener('click', event => {
+      if (event.target.closest('button')) return;
+      window.openMachine?.(machine.id);
+    });
+    card.addEventListener('keydown', event => {
+      if ((event.key === 'Enter' || event.key === ' ') && event.target === card) {
+        event.preventDefault(); window.openMachine?.(machine.id);
+      }
+    });
+    cardNodes.set(machine.id,card);
+    return card;
+  }
+
+  function renderLobbyOptimized() {
+    const grid = $('#machine-grid');
+    if (!grid || !Array.isArray(MACHINES)) return;
+    const favorites = Array.isArray(state.favorites) ? state.favorites : [];
+    let items = MACHINES.filter(machine => {
+      const categoryMatch = lobbyFilters.category === 'all'
+        || (lobbyFilters.category === 'favorites' ? favorites.includes(machine.id) : getMachineCategory(machine) === lobbyFilters.category);
+      const searchText = `${machine.name} ${machine.desc}`.toLocaleLowerCase('ru-RU');
+      return categoryMatch && (!lobbyFilters.query || searchText.includes(lobbyFilters.query));
+    });
+    if (lobbyFilters.sort === 'az') items.sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+    if (lobbyFilters.sort === 'za') items.sort((a,b)=>b.name.localeCompare(a.name,'ru'));
+
+    const count = $('#catalog-visible-count'); if (count) count.textContent = String(items.length);
+    const heroCount = $('#hero-machine-count'); if (heroCount) heroCount.textContent = String(MACHINES.length);
+    const favoritesCount = $('#favorites-tab-count'); if (favoritesCount) favoritesCount.textContent = String(favorites.length);
+    const empty = $('#catalog-empty');
+    if (empty) {
+      empty.hidden = items.length !== 0;
+      const title = $('strong',empty), message = $('span',empty);
+      if (title) title.textContent = lobbyFilters.category === 'favorites' && favorites.length === 0 ? 'Избранное пока пусто' : 'Ничего не найдено';
+      if (message) message.textContent = lobbyFilters.category === 'favorites' && favorites.length === 0 ? 'Нажимай на звёздочку на карточке, чтобы сохранить автомат здесь.' : 'Попробуй изменить запрос или выбрать другую категорию.';
+    }
+
+    const fragment = document.createDocumentFragment();
+    items.forEach(machine => {
+      const originalIndex = MACHINES.indexOf(machine) + 1;
+      const card = getCard(machine,originalIndex);
+      const favorite = $('.favorite-toggle',card);
+      const isFavorite = favorites.includes(machine.id);
+      if (favorite) {
+        favorite.classList.toggle('is-favorite',isFavorite);
+        favorite.setAttribute('aria-pressed',String(isFavorite));
+        favorite.setAttribute('aria-label',isFavorite?'Убрать из избранного':'Добавить в избранное');
+        const icon = $('i',favorite);
+        if (icon) icon.className = `${isFavorite?'ph-fill':'ph-bold'} ph-star`;
+      }
+      fragment.appendChild(card);
+    });
+    grid.replaceChildren(fragment);
+  }
+  window.renderLobby = renderLobbyOptimized;
+  renderLobbyOptimized();
+
+  let searchTimer = 0;
+  window.filterMachines = query => {
+    lobbyFilters.query = String(query || '').trim().toLocaleLowerCase('ru-RU');
+    window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(renderLobbyOptimized,110);
+  };
+
+  /* Reuse the same small reel DOM on every spin; only swap already-known image URLs. */
+  window.ksSetReelSymbols = (strip,symbols) => {
+    if (!strip || !Array.isArray(symbols)) return;
+    if (strip.children.length !== symbols.length) {
+      const fragment = document.createDocumentFragment();
+      symbols.forEach(symbol => {
+        const cell = document.createElement('div'); cell.className='reel-item';
+        const image = document.createElement('img'); image.alt=''; image.decoding='async'; image.loading='eager'; image.width=80; image.height=80;
+        image.src = getIconUrl(symbol); cell.appendChild(image); fragment.appendChild(cell);
+      });
+      strip.replaceChildren(fragment);
+    } else {
+      Array.from(strip.children).forEach((cell,index) => {
+        const image = cell.querySelector('img');
+        const url = getIconUrl(symbols[index]);
+        if (image && image.getAttribute('src') !== url) image.src = url;
+        cell.classList.remove('winning');
+      });
+    }
+  };
+
+  /* Prewarm only the selected machine's six symbols, not the entire 100+ icon library at startup. */
+  const warmedSymbols = new Set();
+  function warmMachineSymbols(machine) {
+    if (!machine || !Array.isArray(machine.symbols)) return;
+    const symbols = [...new Set(machine.symbols)];
+    let cursor = 0;
+    const warmNext = () => {
+      if (cursor >= symbols.length) return;
+      const symbol = symbols[cursor++];
+      const url = getIconUrl(symbol);
+      if (!warmedSymbols.has(url)) {
+        warmedSymbols.add(url);
+        const image = new Image(); image.decoding='async'; image.src=url;
+        if (image.decode) image.decode().catch(()=>{});
+      }
+      if (window.requestIdleCallback) requestIdleCallback(warmNext,{timeout:500});
+      else window.setTimeout(warmNext,80);
+    };
+    warmNext();
+  }
+
+  /* Paytable uses the very same 3D symbol images as the actual reels. */
+  function ensurePaytable() {
+    const screen = $('#game-screen');
+    const reels = $('#main-reels');
+    if (!screen || !reels) return null;
+    let wrap = $('#ks-machine-paytable');
+    if (wrap) return wrap;
+    wrap = document.createElement('section');
+    wrap.id='ks-machine-paytable';
+    wrap.className='ks-machine-paytable';
+    wrap.innerHTML = `
+      <button type="button" class="ks-machine-paytable-toggle" aria-expanded="false" aria-controls="ks-machine-paytable-panel">
+        <i class="ph-bold ph-list-check" aria-hidden="true"></i><span>Таблица выплат</span><i class="ph-bold ph-caret-down" aria-hidden="true"></i>
+      </button>
+      <div id="ks-machine-paytable-panel" class="ks-machine-paytable-panel" hidden>
+        <div class="ks-machine-paytable-heading"><div><strong>Символы и выплаты</strong><span>Три одинаковых символа на одной из 8 линий</span></div></div>
+        <div class="ks-machine-paytable-grid"></div>
+        <p class="ks-machine-paytable-note">Выплата рассчитывается как ставка × множитель. Для ставок выше 50 000 очков расчётная база выплаты ограничена 50 000.</p>
+      </div>`;
+    reels.insertAdjacentElement('afterend',wrap);
+    const toggle = $('.ks-machine-paytable-toggle',wrap);
+    const panel = $('#ks-machine-paytable-panel',wrap);
+    toggle.addEventListener('click',()=>{
+      const open = panel.hidden;
+      panel.hidden = !open;
+      toggle.setAttribute('aria-expanded',String(open));
+      const caret = $('i:last-child',toggle);
+      if (caret) caret.className = `ph-bold ${open?'ph-caret-up':'ph-caret-down'}`;
+    });
+    return wrap;
+  }
+  function renderPaytable(machine) {
+    if (!machine) return;
+    const wrap = ensurePaytable();
+    const grid = wrap && $('.ks-machine-paytable-grid',wrap);
+    if (!grid) return;
+    const unique = [...new Set(machine.symbols)];
+    grid.replaceChildren();
+    unique.forEach(symbol => {
+      const symbolIndex = machine.symbols.indexOf(symbol);
+      const multiplier = Number(machine.triple[symbolIndex]) || 0;
+      const card = document.createElement('div'); card.className='ks-machine-paytable-item';
+      const art = document.createElement('div'); art.className='ks-machine-paytable-art';
+      const image = document.createElement('img'); image.src=getIconUrl(symbol); image.alt=symbol; image.decoding='async'; image.loading='lazy';
+      art.appendChild(image);
+      const copy = document.createElement('div'); copy.className='ks-machine-paytable-copy';
+      const label = document.createElement('small'); label.textContent='3 на линии';
+      const value = document.createElement('strong'); value.textContent=`×${multiplier}`;
+      copy.append(label,value); card.append(art,copy); grid.appendChild(card);
+    });
+  }
+  const originalOpenMachine = window.openMachine;
+  if (typeof originalOpenMachine === 'function') {
+    window.openMachine = function(id,...args) {
+      const result = originalOpenMachine.call(this,id,...args);
+      const machine = MACHINES.find(item=>item.id===id);
+      if (machine) {
+        renderPaytable(machine);
+        warmMachineSymbols(machine);
+      }
+      return result;
+    };
+  }
+
+  /* Keep the duel picker dark-glass and show the selected machine's actual artwork. */
+  function upgradeDuelPicker() {
+    const select = $('#ks-duel-machine');
+    if (!select || select.dataset.ksVisualReady === '1') return;
+    select.dataset.ksVisualReady='1';
+    const preview = document.createElement('div'); preview.className='ks-duel-machine-preview';
+    preview.setAttribute('aria-live','polite');
+    select.insertAdjacentElement('afterend',preview);
+    const update = () => {
+      const machine = MACHINES.find(item=>item.id===select.value) || MACHINES[0];
+      preview.replaceChildren();
+      const art=document.createElement('div');art.className='ks-duel-machine-preview-art';
+      const img=document.createElement('img');img.src=getIconUrl(machine.symbols[0]);img.alt='';img.decoding='async';
+      art.appendChild(img);
+      const copy=document.createElement('div');copy.className='ks-duel-machine-preview-copy';
+      const name=document.createElement('strong');name.textContent=machine.name;
+      const desc=document.createElement('small');desc.textContent=`${getMachineCategory(machine)} · ${machine.symbols.length} символов`;
+      copy.append(name,desc);preview.append(art,copy);
+    };
+    select.addEventListener('change',update);
+    update();
+  }
+  upgradeDuelPicker();
+  const detailRoot = $('#ks-more-detail-content') || document.body;
+  const duelObserver = new MutationObserver(() => upgradeDuelPicker());
+  duelObserver.observe(detailRoot,{childList:true,subtree:true});
+})();
+</script>
+
 </body>
 </html>

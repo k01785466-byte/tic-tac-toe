@@ -1,5 +1,5 @@
 /* Kesug Slots Remastered — offline-first service worker. */
-const VERSION = 'kesug-remastered-release-2';
+const VERSION = 'kesug-remastered-performance-paytable-1';
 const SHELL_CACHE = `${VERSION}-shell`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 const SCOPE_URL = self.registration.scope;
@@ -47,25 +47,29 @@ self.addEventListener('fetch', event => {
   if (!['http:', 'https:'].includes(url.protocol)) return;
 
   if (request.mode === 'navigate' && url.origin === self.location.origin) {
-    event.respondWith((async () => {
+    // Start revalidation immediately, but return the saved shell without waiting when available.
+    const refreshPromise = (async () => {
       const shell = await caches.open(SHELL_CACHE);
-      const cached = await caches.match(request, { ignoreSearch: true }) || await shell.match(APP_URL) || await shell.match(new URL('./', SCOPE_URL).href);
-      // Network-first with a short timeout keeps deployed updates fresh without leaving offline launch waiting forever.
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 1800);
+      const timeout = setTimeout(() => controller.abort(), 5000);
       try {
-        const response = await fetch(request, { signal: controller.signal });
-        clearTimeout(timeout);
+        const response = await fetch(request, { signal: controller.signal, cache: 'no-cache' });
         if (response && response.ok) {
-          const cache = await caches.open(SHELL_CACHE);
-          await cache.put(APP_URL, response.clone());
+          await shell.put(APP_URL, response.clone());
           return response;
         }
-        if (cached) return cached;
-        return response;
-      } catch (_) {
-        clearTimeout(timeout);
-        if (cached) return cached;
+        throw new Error('Navigation response was not successful');
+      } finally { clearTimeout(timeout); }
+    })();
+    event.waitUntil(refreshPromise.catch(() => {}));
+    event.respondWith((async () => {
+      const shell = await caches.open(SHELL_CACHE);
+      const cached = await caches.match(request, { ignoreSearch: true })
+        || await shell.match(APP_URL)
+        || await shell.match(new URL('./', SCOPE_URL).href);
+      if (cached) return cached;
+      try { return await refreshPromise; }
+      catch (_) {
         return new Response('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kesug Slots</title><main style="font:16px system-ui;padding:10vh 8vw;color:#eee;background:#111116;min-height:80vh"><h1>Kesug Slots</h1><p>Открой игру один раз с подключением к интернету, чтобы сохранить её для офлайн-запуска.</p></main>', { headers: { 'Content-Type': 'text/html; charset=utf-8' }, status: 200 });
       }
     })());
@@ -111,7 +115,7 @@ self.addEventListener('message', event => {
         if (port) port.postMessage({ type: 'progress', completed, total: urls.length, failed });
       }
     };
-    await Promise.all(Array.from({ length: Math.min(6, urls.length) }, () => worker()));
+    await Promise.all(Array.from({ length: Math.min(2, urls.length) }, () => worker()));
     if (port) port.postMessage({ type: 'complete', completed, total: urls.length, failed });
   })());
 });

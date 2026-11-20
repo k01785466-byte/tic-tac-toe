@@ -10019,5 +10019,176 @@ body.lite-mode *,body.lite-mode *::before,body.lite-mode *::after {
 })();
 </script>
 
+
+<!-- KESUG_ROUTE_FLASH_FIX_V1 -->
+<style id="kesug-route-flash-fix">
+/* A single page-level animation was competing with several legacy route/reveal animations.
+   Keep screen changes stable; retain button, icon, reel and win micro-animations. */
+html body:not(.ks-os-home-active) .page-view.active,
+html body.ks-os-shell-active .page-view.active,
+html body .page-view.active {
+  animation: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  will-change: auto !important;
+}
+html body:not(.ks-os-home-active) .page-view.active.ks-route-enter,
+html body .page-view.active.ks-route-enter,
+html body .page-view.active.ks-motion-route {
+  animation: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .page-view.active.ks-motion-route,
+html[data-ks-motion="balanced"] body:not(.lite-mode):not(.reduce-effects) .page-view.active.ks-motion-route {
+  animation: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+/* Do not replay first-visit card reveals on top of the screen transition. */
+html body .page-view.active .ks-motion-in:not(.ks-motion-done) {
+  animation: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+/* Scroll position changes instantly between app screens; inner lists can still smooth-scroll. */
+html.ks-route-switching { scroll-behavior: auto !important; }
+</style>
+<script id="kesug-route-flash-fix-runtime">
+(() => {
+  'use strict';
+  const html = document.documentElement;
+  const body = document.body;
+  let cleanupFrame = 0;
+  function settleActiveScreen() {
+    if (cleanupFrame) cancelAnimationFrame(cleanupFrame);
+    cleanupFrame = requestAnimationFrame(() => {
+      cleanupFrame = 0;
+      document.querySelectorAll('.page-view').forEach(page => {
+        page.classList.remove('ks-route-enter', 'ks-motion-route');
+      });
+      document.querySelectorAll('.page-view.active .ks-motion-in:not(.ks-motion-done)').forEach(node => {
+        node.classList.add('ks-motion-done');
+        node.style.removeProperty('will-change');
+      });
+      body.classList.remove('ks-route-switching');
+    });
+  }
+  const originalShowPage = window.showPage;
+  if (typeof originalShowPage === 'function') {
+    window.showPage = function(id, ...args) {
+      const result = originalShowPage.apply(this, [id, ...args]);
+      body.classList.add('ks-route-switching');
+      settleActiveScreen();
+      return result;
+    };
+  }
+  const originalMoreFeature = window.useMoreFeature;
+  if (typeof originalMoreFeature === 'function') {
+    window.useMoreFeature = function(...args) {
+      const result = originalMoreFeature.apply(this, args);
+      settleActiveScreen();
+      return result;
+    };
+  }
+  // Settle the initial route too, so first paint does not inherit an old reveal state.
+  settleActiveScreen();
+})();
+</script>
+
+
+<!-- KESUG_ROUTE_FLASH_FIX_V2 -->
+<style id="kesug-route-flash-fix-v2">
+/* Stop stacked page, feature and machine entrance keyframes. Keep slot-spin/win and hover micro-motion. */
+html body .page-view.active,
+html body:not(.ks-os-home-active) .page-view.active,
+html body.ks-os-shell-active .page-view.active,
+html body .page-view.active.ks-route-enter,
+html body .page-view.active.ks-motion-route {
+  animation:none !important; opacity:1 !important; transform:none !important; filter:none !important;
+  transition:none !important; will-change:auto !important;
+}
+html[data-ks-motion="cinematic"] body:not(.lite-mode):not(.reduce-effects) .page-view.active.ks-motion-route,
+html[data-ks-motion="balanced"] body:not(.lite-mode):not(.reduce-effects) .page-view.active.ks-motion-route {
+  animation:none !important; opacity:1 !important; transform:none !important; filter:none !important;
+}
+html body .page-view.active .ks-motion-in:not(.ks-motion-done) {
+  animation:none !important; opacity:1 !important; transform:none !important; filter:none !important; will-change:auto !important;
+}
+html body .ks-more-detail-content.ks-feature-enter,
+html body #ks-more-detail-content.ks-motion-route,
+html body .ks-more-detail-content.ks-motion-route,
+html body #game-screen.active.ks-machine-enter .slot-container,
+html body #game-screen.active.ks-motion-machine .slot-container,
+html body #game-screen.active.ks-machine-enter .reel-window {
+  animation:none !important; opacity:1 !important; transform:none !important; filter:none !important;
+}
+html.ks-route-switching { scroll-behavior:auto !important; }
+</style>
+<script id="kesug-route-flash-fix-v2-runtime">
+(() => {
+  'use strict';
+  const html = document.documentElement;
+  const body = document.body;
+  let routeDepth = 0;
+  let cleanupFrame = 0;
+  const nativeScrollTo = window.scrollTo.bind(window);
+  // Page changes should not also animate the document scroll; inner panels retain their own scrolling.
+  window.scrollTo = function(...args) {
+    if (routeDepth > 0 && args.length === 1 && args[0] && typeof args[0] === 'object') {
+      const options = { ...args[0], behavior:'instant' };
+      try { return nativeScrollTo(options); }
+      catch (_) { return nativeScrollTo({ top: options.top || 0, left: options.left || 0, behavior:'auto' }); }
+    }
+    return nativeScrollTo(...args);
+  };
+  function settle() {
+    if (cleanupFrame) cancelAnimationFrame(cleanupFrame);
+    cleanupFrame = requestAnimationFrame(() => {
+      cleanupFrame = 0;
+      document.querySelectorAll('.page-view').forEach(page => {
+        page.classList.remove('ks-route-enter','ks-motion-route');
+      });
+      document.querySelectorAll('.ks-more-detail-content.ks-feature-enter,#ks-more-detail-content.ks-motion-route,#game-screen.ks-machine-enter,#game-screen.ks-motion-machine')
+        .forEach(node => node.classList.remove('ks-feature-enter','ks-motion-route','ks-machine-enter','ks-motion-machine'));
+      document.querySelectorAll('.page-view.active .ks-motion-in:not(.ks-motion-done)').forEach(node => {
+        node.classList.add('ks-motion-done');
+        node.style.removeProperty('will-change');
+      });
+      html.classList.remove('ks-route-switching');
+    });
+  }
+  function withRouteLock(callback, context, args) {
+    routeDepth++;
+    html.classList.add('ks-route-switching');
+    try { return callback.apply(context,args); }
+    finally { routeDepth = Math.max(0,routeDepth-1); settle(); }
+  }
+  const originalShowPage = window.showPage;
+  if (typeof originalShowPage === 'function') {
+    window.showPage = function(...args) { return withRouteLock(originalShowPage,this,args); };
+  }
+  const originalMoreFeature = window.useMoreFeature;
+  if (typeof originalMoreFeature === 'function') {
+    window.useMoreFeature = function(...args) { return withRouteLock(originalMoreFeature,this,args); };
+  }
+  const originalOpenMachine = window.openMachine;
+  if (typeof originalOpenMachine === 'function') {
+    window.openMachine = function(...args) { return withRouteLock(originalOpenMachine,this,args); };
+  }
+  const originalCloseMachine = window.closeMachine;
+  if (typeof originalCloseMachine === 'function') {
+    window.closeMachine = function(...args) { return withRouteLock(originalCloseMachine,this,args); };
+  }
+  settle();
+})();
+</script>
+
 </body>
 </html>

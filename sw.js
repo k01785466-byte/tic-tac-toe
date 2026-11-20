@@ -1,5 +1,5 @@
 /* Kesug Slots Remastered — offline-first service worker. */
-const VERSION = 'kesug-remastered-dev-console-v1-2026-11-20';
+const VERSION = 'kesug-remastered-founder-777-v1-2026-11-20';
 const SHELL_CACHE = `${VERSION}-shell`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 const SCOPE_URL = self.registration.scope;

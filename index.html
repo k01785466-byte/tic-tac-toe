@@ -3145,6 +3145,48 @@ body:not(.ks-os-home-active) .ks-os-settings-panel{z-index:1200}
 body.lite-mode #machine-grid .game-card,body.lite-mode .ks-machine-paytable-panel { -webkit-backdrop-filter:none !important;backdrop-filter:none !important; }
 </style>
 
+<style id="kesug-anniversary-center-styles">
+.ks-anniversary-hero{position:relative;overflow:hidden;padding:clamp(20px,4vw,34px);border:1px solid rgba(210,200,232,.19);border-radius:24px;background:radial-gradient(circle at 85% 18%,rgba(164,139,208,.2),transparent 34%),linear-gradient(135deg,rgba(38,38,49,.82),rgba(22,22,30,.72));backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 18px 48px rgba(0,0,0,.18);}
+.ks-anniversary-hero:after{content:"";position:absolute;width:220px;height:220px;right:-74px;top:-112px;border-radius:50%;border:1px solid rgba(205,190,235,.16);box-shadow:0 0 0 24px rgba(205,190,235,.025),0 0 0 48px rgba(205,190,235,.02);pointer-events:none}
+.ks-anniversary-kicker{font-size:10px;font-weight:800;letter-spacing:.2em;color:#c5b4e4;text-transform:uppercase}
+.ks-anniversary-title{margin:9px 0 5px;font-size:clamp(27px,5vw,46px);line-height:1.02;letter-spacing:-.045em;color:#f1edf8;font-weight:850}
+.ks-anniversary-sub{max-width:680px;margin:0;color:rgba(235,231,244,.72);font-size:13px;line-height:1.65}
+.ks-anniversary-date{display:inline-flex;align-items:center;gap:8px;margin-top:17px;padding:8px 12px;border-radius:999px;background:rgba(187,165,221,.11);border:1px solid rgba(203,185,230,.18);font-size:11px;color:#ded2f2}
+.ks-anniversary-section{margin-top:18px;padding:18px;border:1px solid rgba(210,200,232,.13);border-radius:19px;background:rgba(26,26,35,.56);backdrop-filter:blur(17px);-webkit-backdrop-filter:blur(17px)}
+.ks-anniversary-section h4{margin:0 0 13px;color:#f0edf6;font-size:14px;font-weight:800;letter-spacing:-.01em}
+.ks-anniversary-section-note{margin:-5px 0 13px;color:rgba(225,220,235,.57);font-size:10px;line-height:1.55}
+.ks-anniversary-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ks-anniversary-stat{min-width:0;padding:14px 13px;border:1px solid rgba(207,196,227,.13);border-radius:15px;background:rgba(245,241,255,.045)}
+.ks-anniversary-stat span{display:block;color:rgba(222,216,235,.6);font-size:10px;line-height:1.4}
+.ks-anniversary-stat strong{display:block;margin-top:7px;color:#f1edf7;font-size:clamp(16px,2.5vw,23px);font-weight:850;letter-spacing:-.035em;overflow-wrap:anywhere}
+.ks-anniversary-stat small{display:block;margin-top:4px;color:rgba(222,216,235,.43);font-size:9px;line-height:1.4}
+.ks-anniversary-highlight{color:#cbb8eb!important}
+.ks-anniversary-timeline{display:grid;gap:0;position:relative}
+.ks-anniversary-milestone{display:grid;grid-template-columns:94px 18px minmax(0,1fr);gap:10px;position:relative;padding:0 0 16px;min-width:0}
+.ks-anniversary-milestone:last-child{padding-bottom:0}
+.ks-anniversary-milestone:not(:last-child):before{content:"";position:absolute;left:102px;top:17px;bottom:-1px;width:1px;background:linear-gradient(rgba(188,165,222,.52),rgba(188,165,222,.08))}
+.ks-anniversary-time{padding-top:3px;color:#b9a6d8;font-size:10px;font-weight:800;text-align:right;white-space:nowrap}
+.ks-anniversary-dot{position:relative;z-index:1;width:9px;height:9px;margin:5px auto 0;border-radius:50%;background:#b9a2df;box-shadow:0 0 0 4px rgba(185,162,223,.12),0 0 16px rgba(185,162,223,.32)}
+.ks-anniversary-milestone-copy{min-width:0;padding:0 0 0 3px}
+.ks-anniversary-milestone-copy strong{display:block;color:#f0edf6;font-size:12px}
+.ks-anniversary-milestone-copy p{margin:4px 0 0;color:rgba(224,219,235,.61);font-size:10px;line-height:1.55}
+.ks-anniversary-process{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.ks-anniversary-process-step{padding:12px 9px;text-align:center;border:1px solid rgba(207,196,227,.13);border-radius:13px;background:rgba(245,241,255,.04)}
+.ks-anniversary-process-step b{display:block;color:#cbb8eb;font-size:10px;letter-spacing:.08em}
+.ks-anniversary-process-step span{display:block;margin-top:5px;color:rgba(235,231,244,.76);font-size:10px;line-height:1.35}
+.ks-anniversary-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.ks-anniversary-actions button{flex:1 1 180px;min-height:42px;border-radius:12px}
+.ks-anniversary-data-note{margin:12px 2px 0;color:rgba(222,216,235,.48);font-size:9px;line-height:1.6}
+.ks-anniversary-breakdown{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.ks-anniversary-breakdown-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;border:1px solid rgba(207,196,227,.1);background:rgba(245,241,255,.035)}
+.ks-anniversary-breakdown-row span{color:rgba(229,224,238,.67);font-size:10px;min-width:0}
+.ks-anniversary-breakdown-row b{color:#f0edf6;font-size:11px;text-align:right;overflow-wrap:anywhere}
+.ks-anniversary-tile{border-color:rgba(186,163,222,.3)!important;background:linear-gradient(135deg,rgba(116,91,150,.15),rgba(245,241,255,.035))!important}
+.ks-anniversary-tile .ks-more-icon{background:rgba(177,150,217,.16)!important;color:#cfb9ed!important}
+@media(max-width:700px){.ks-anniversary-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ks-anniversary-stat{padding:12px}.ks-anniversary-section{padding:14px;border-radius:16px}.ks-anniversary-process{grid-template-columns:repeat(2,minmax(0,1fr))}.ks-anniversary-process-step:last-child{grid-column:1/-1}.ks-anniversary-milestone{grid-template-columns:78px 16px minmax(0,1fr);gap:8px}.ks-anniversary-milestone:not(:last-child):before{left:86px}.ks-anniversary-time{font-size:9px}.ks-anniversary-breakdown{grid-template-columns:1fr}.ks-anniversary-title{font-size:31px}}
+@media(prefers-reduced-motion:reduce){.ks-anniversary-hero,.ks-anniversary-section{backdrop-filter:none;-webkit-backdrop-filter:none}}
+body.lite-mode .ks-anniversary-hero,body.lite-mode .ks-anniversary-section{backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none}
+</style>
 </head>
 <body class="is-loading ks-os-home-active">
 
@@ -3209,6 +3251,7 @@ body.lite-mode #machine-grid .game-card,body.lite-mode .ks-machine-paytable-pane
       <section class="ks-os-root" id="ks-os-root" data-wallpaper="aurora" aria-label="Рабочий стол Kesug">
         <div class="ks-os-wallpaper" id="ks-os-wallpaper"></div>
         <div class="ks-os-shade"></div>
+        <div class="ks-anniversary-atmosphere" aria-hidden="true"></div>
         <div class="ks-os-content">
           <header class="ks-os-topbar">
             <button class="ks-os-brand" type="button" onclick="ksOSGo('home')" aria-label="Рабочий стол Kesug">
@@ -3227,7 +3270,7 @@ body.lite-mode #machine-grid .game-card,body.lite-mode .ks-machine-paytable-pane
             <section class="ks-os-left-column">
               <div class="ks-os-greeting">
                 <div class="ks-os-eyebrow">ТВОЁ ИГРОВОЕ ПРОСТРАНСТВО</div>
-                <h1>С возвращением, <span id="ks-os-player-name">Игрок</span></h1>
+                <h1>С возвращением, <span id="ks-os-player-name">Игрок</span><span id="ks-dev-greeting-badge" class="ks-developer-verified ks-developer-greeting-badge" hidden title="Kesug Developer"><i class="ph-fill ph-seal-check"></i></span></h1>
                 <p>Запускай автоматы, открывай коллекции и управляй своим Kesug из одного места.</p>
               </div>
 
@@ -3396,8 +3439,10 @@ body.lite-mode #machine-grid .game-card,body.lite-mode .ks-machine-paytable-pane
       <div class="profile-card">
         <img id="profile-big-avatar" class="profile-avatar" src="">
         <div class="profile-info">
-          <h2 id="profile-big-nick">Игрок</h2>
+          <h2 id="profile-big-nick">Игрок</h2><span id="ks-developer-verified" class="ks-developer-verified" hidden title="Подтверждённый разработчик" aria-label="Подтверждённый разработчик"><i class="ph-fill ph-seal-check"></i></span>
+          <div id="ks-developer-role-chip" class="ks-developer-role-chip" hidden><i class="ph-fill ph-code"></i> FOUNDER · DEVELOPER</div>
           <span id="profile-title-chip" class="ks-profile-title-chip" hidden></span>
+          <span id="ks-anniversary-profile-badge" class="ks-anniversary-profile-badge" hidden><i class="ph-fill ph-sparkle"></i> 2 MONTHS</span>
           <p id="profile-big-id">ID: #0000</p>
           <span class="profile-fav-summary"><i class="ph-fill ph-star"></i> <strong id="profile-favorites-count">0</strong> в избранном</span>
         </div>
@@ -3430,6 +3475,54 @@ body.lite-mode #machine-grid .game-card,body.lite-mode .ks-machine-paytable-pane
           <input id="import-backup-file" type="file" accept=".json,application/json" hidden>
         </div>
         <small><i class="ph-fill ph-shield-check"></i> Файл хранится у тебя. Онлайн-синхронизации нет.</small>
+      </section>
+    </div>
+
+    <!-- DEVELOPER CONSOLE · PRIVATE LOCAL PROFILE #8NAD -->
+    <div class="page-view ks-developer-page" id="page-developer">
+      <div class="page-header">
+        <button class="back-btn" type="button" onclick="showPage('home-desktop')"><i class="ph-bold ph-arrow-left"></i> Рабочий стол</button>
+        <span class="ks-developer-page-label"><i class="ph-fill ph-seal-check"></i> PRIVATE DEVELOPER SPACE</span>
+      </div>
+      <section class="ks-developer-hero">
+        <div class="ks-developer-hero-mark"><i class="ph-fill ph-code"></i></div>
+        <div class="ks-developer-hero-copy">
+          <span class="ks-developer-eyebrow">KESUG SLOTS · CREATOR ACCESS</span>
+          <h2>Привет, <span id="ks-dev-console-nick">pekeee</span> <span class="ks-developer-verified"><i class="ph-fill ph-seal-check"></i></span></h2>
+          <p>Твоя личная панель разработчика. Здесь собраны диагностика, быстрые инструменты и информация о локальной сборке.</p>
+          <span class="ks-developer-id-pill"><i class="ph-fill ph-fingerprint"></i> PLAYER ID #8NAD · VERIFIED DEVELOPER</span>
+        </div>
+      </section>
+      <section class="ks-developer-stat-grid">
+        <article class="ks-developer-stat"><small>БАЛАНС ПРОФИЛЯ</small><strong id="ks-dev-balance">—</strong><span>Локальные виртуальные очки</span></article>
+        <article class="ks-developer-stat"><small>СПИНЫ</small><strong id="ks-dev-spins">—</strong><span>Сохранённая статистика</span></article>
+        <article class="ks-developer-stat"><small>МАКС. ВЫИГРЫШ</small><strong id="ks-dev-maxwin">—</strong><span>Рекорд профиля</span></article>
+        <article class="ks-developer-stat"><small>ИЗБРАННОЕ</small><strong id="ks-dev-favorites">—</strong><span>Автоматы в коллекции</span></article>
+      </section>
+      <section class="ks-developer-panel">
+        <div class="ks-developer-panel-heading"><div><span class="ks-developer-eyebrow">LOCAL DIAGNOSTICS</span><h3>Состояние системы</h3></div><button type="button" class="ks-developer-refresh" onclick="window.ksDevRender?.()" aria-label="Обновить диагностику"><i class="ph-bold ph-arrows-clockwise"></i></button></div>
+        <div class="ks-developer-diagnostics">
+          <div><span>Player ID</span><strong id="ks-dev-id">#8NAD</strong></div>
+          <div><span>Размер экрана</span><strong id="ks-dev-viewport">—</strong></div>
+          <div><span>Service Worker</span><strong id="ks-dev-sw-status">Проверка…</strong></div>
+          <div><span>Режим приложения</span><strong id="ks-dev-pwa-status">—</strong></div>
+          <div><span>Локальные ключи</span><strong id="ks-dev-storage-count">—</strong></div>
+          <div><span>Версия интерфейса</span><strong>ANNIVERSARY · DEV</strong></div>
+        </div>
+        <div class="ks-developer-check-result" id="ks-dev-check-result" role="status">Система готова к локальной диагностике.</div>
+      </section>
+      <section class="ks-developer-panel">
+        <div class="ks-developer-panel-heading"><div><span class="ks-developer-eyebrow">CREATOR TOOLS</span><h3>Инструменты разработчика</h3></div><i class="ph-fill ph-wrench"></i></div>
+        <div class="ks-developer-tools-grid">
+          <button type="button" onclick="window.ksDevStorageCheck?.()"><i class="ph-fill ph-database"></i><strong>Проверить сохранения</strong><small>Проверка JSON-данных без изменения профиля</small></button>
+          <button type="button" onclick="window.ksDevMeasureFPS?.()"><i class="ph-fill ph-gauge"></i><strong>Измерить FPS</strong><small>Короткий замер плавности текущего экрана</small></button>
+          <button type="button" onclick="window.ksDevToggleHud?.()"><i class="ph-fill ph-crosshair"></i><strong>Developer HUD</strong><small>Показать или скрыть мини-панель поверх игры</small></button>
+          <button type="button" onclick="exportProfileBackup()"><i class="ph-fill ph-download-simple"></i><strong>Экспорт профиля</strong><small>Резервная копия локального прогресса</small></button>
+          <button type="button" onclick="window.ksDevDownloadReport?.()"><i class="ph-fill ph-file-arrow-down"></i><strong>Отчёт диагностики</strong><small>Скачать сведения о версии и состоянии клиента</small></button>
+          <button type="button" onclick="window.ksOSOpenSettings?.()"><i class="ph-fill ph-sliders-horizontal"></i><strong>Настроить Kesug OS</strong><small>Открыть настройки рабочего стола</small></button>
+          <button type="button" onclick="window.ksDevUpdatePWA?.()"><i class="ph-fill ph-cloud-arrow-down"></i><strong>Проверить обновление PWA</strong><small>Запросить новую версию Service Worker</small></button>
+        </div>
+        <p class="ks-developer-footnote"><i class="ph-fill ph-shield-check"></i> Инструменты работают локально. Они не меняют баланс, шансы, чужие профили или игровые результаты.</p>
       </section>
     </div>
 
@@ -3535,6 +3628,9 @@ body.lite-mode #machine-grid .game-card,body.lite-mode .ks-machine-paytable-pane
       <button class="ks-more-tile ks-more-featured" type="button" onclick="useMoreFeature('daily-bonus')"><span class="ks-more-icon"><i class="ph-fill ph-gift"></i></span><strong>Забрать бонус</strong><small id="ks-bonus-tile-status">Ежедневная награда до 10 млн</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('random-slot')"><span class="ks-more-icon"><i class="ph-fill ph-dice-five"></i></span><strong>Случайный слот</strong><small>Открыть случайный автомат</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('history')"><span class="ks-more-icon"><i class="ph-bold ph-scroll"></i></span><strong>История</strong><small>Последние игровые результаты</small></button>
+      <button class="ks-more-tile ks-anniversary-tile" type="button" onclick="window.ksOpenAnniversaryReport?.()"><span class="ks-more-icon"><i class="ph-fill ph-cake"></i></span><strong>KIRKA HISTORY</strong><small>2 месяца · история проекта и твоя статистика</small></button>
+      <button class="ks-more-tile ks-anniversary-collection-tile" type="button" onclick="window.ksOpenAnniversaryCollection?.()"><span class="ks-more-icon"><i class="ph-fill ph-medal"></i></span><strong>ANNIVERSARY COLLECTION</strong><small>Титул, рамка, аватар и значок двухмесячия</small></button>
+      <button class="ks-more-tile ks-dev-more-tile" id="ks-dev-more-tile" type="button" hidden onclick="window.ksOpenDeveloperPanel?.()"><span class="ks-more-icon"><i class="ph-fill ph-terminal-window"></i></span><strong>DEVELOPER CONSOLE</strong><small>Инструменты создателя Kesug Slots</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('autoplay')"><span class="ks-more-icon"><i class="ph-fill ph-repeat"></i></span><strong>Автоигра</strong><small>Автоматические виртуальные раунды</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('appearance')"><span class="ks-more-icon"><i class="ph-fill ph-palette"></i></span><strong>Оформление</strong><small>Темы и внешний вид</small></button>
       <button class="ks-more-tile" type="button" onclick="useMoreFeature('achievements')"><span class="ks-more-icon"><i class="ph-fill ph-trophy"></i></span><strong>Достижения</strong><small>Твои игровые отметки</small></button>
@@ -3733,16 +3829,37 @@ if (!Array.isArray(state.favorites)) state.favorites = [];
 state.favorites = [...new Set(state.favorites.filter(id => typeof id === 'string' && MACHINES.some(machine => machine.id === id)))];
 localStorage.setItem('kasino_player_id', state.playerId);
 
+// Local developer identity: the displayed player ID is the last four characters.
+// This unlock is intentionally tied to #8NAD, not to a nickname that can be copied.
+const KESUG_DEVELOPER_ID = '8NAD';
+window.ksIsDeveloper = () => String(state.playerId || '').slice(-4).toUpperCase() === KESUG_DEVELOPER_ID;
+window.ksGetDeveloperSnapshot = () => ({
+  id: '#' + String(state.playerId || '').slice(-4).toUpperCase(),
+  nickname: String(state.nickname || 'Игрок'),
+  balance: Math.max(0, Number(state.balance) || 0),
+  spins: Math.max(0, Number(state.stats?.spins) || 0),
+  wins: Math.max(0, Number(state.stats?.won) || 0),
+  maxWin: Math.max(0, Number(state.stats?.maxWin) || 0),
+  totalBet: Math.max(0, Number(state.stats?.totalBet) || 0),
+  favorites: Array.isArray(state.favorites) ? state.favorites.length : 0,
+  storageKeys: localStorage.length
+});
+
 const SLOT_MAX_STAKE = 50_000_000;
 const SLOT_PAYOUT_CAP = 50_000;
 let currentMachine = null, isSpinning = false;
 let currentRoundStake = 0, currentPayoutStake = 0, confirmedHighStake = null;
 
 window.showPage = (id) => {
+  if (id === 'developer' && !window.ksIsDeveloper?.()) {
+    window.showToast?.('Этот раздел доступен только разработчику');
+    id = 'home-desktop';
+  }
   document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
   const el = document.getElementById('page-' + id);
   if (el) el.classList.add('active');
 
+  if (id === 'developer') window.ksDevRender?.();
   if (id === 'profile') renderProfileStats();
   if (id === 'settings') syncSettingsControls();
   if (id === 'edit-profile') document.getElementById('input-nick').value = state.nickname;
@@ -3785,9 +3902,20 @@ function updateProfileUI() {
   
   document.getElementById('profile-big-avatar').src = currentAvatar;
   document.getElementById('nav-avatar').src = currentAvatar;
+  const osAvatar = document.getElementById('ks-os-avatar');
+  if (osAvatar) osAvatar.src = currentAvatar;
   
   document.getElementById('profile-big-nick').textContent = state.nickname;
   document.getElementById('profile-big-id').textContent = `ID: #${state.playerId.slice(-4).toUpperCase()}`;
+  const isKesugDeveloper = !!window.ksIsDeveloper?.();
+  document.body.classList.toggle('ks-developer-profile', isKesugDeveloper);
+  const developerBadge = document.getElementById('ks-developer-verified');
+  const developerRole = document.getElementById('ks-developer-role-chip');
+  if (developerBadge) developerBadge.hidden = !isKesugDeveloper;
+  if (developerRole) developerRole.hidden = !isKesugDeveloper;
+  document.querySelectorAll('.profile-avatar,.profile-btn,.ks-os-avatar').forEach(node => node.classList.toggle('ks-dev-avatar-verified', isKesugDeveloper));
+  const greetingBadge = document.getElementById('ks-dev-greeting-badge');
+  if (greetingBadge) greetingBadge.hidden = !isKesugDeveloper;
   const lobbyNick = document.getElementById('lobby-welcome-nick');
   if (lobbyNick) lobbyNick.textContent = state.nickname;
   const title = localStorage.getItem('ks_profile_title') || '';
@@ -3810,7 +3938,14 @@ function updateProfileUI() {
     ice: 'linear-gradient(120deg,rgba(109,204,255,.25),rgba(76,121,201,.2),var(--bg-card))'
   };
   const profileCard = document.querySelector('.profile-card');
-  if (profileCard) profileCard.style.background = bannerStyles[banner] || bannerStyles.default;
+  if (profileCard) {
+    profileCard.style.background = bannerStyles[banner] || bannerStyles.default;
+    profileCard.classList.toggle('ks-anniversary-frame', localStorage.getItem('ks_profile_frame') === 'anniversary');
+  }
+  const anniversaryBadge = document.getElementById('ks-anniversary-profile-badge');
+  if (anniversaryBadge) anniversaryBadge.hidden = localStorage.getItem('ks_anniversary_badge_equipped') !== '1';
+  document.querySelector('.profile-btn')?.classList.toggle('ks-anniversary-avatar-frame', localStorage.getItem('ks_profile_frame') === 'anniversary');
+  document.querySelector('.ks-os-avatar')?.classList.toggle('ks-anniversary-avatar-frame', localStorage.getItem('ks_profile_frame') === 'anniversary');
 }
 
 function renderProfileStats() {
@@ -4423,6 +4558,7 @@ function checkWin(res) {
 
   if (win > 0) {
     if (window.ksPlayUiSound) window.ksPlayUiSound('win');
+    window.ksPlayAnniversaryWinEffect?.();
     winningCells.forEach(idx => {
       const col = idx % 3, row = Math.floor(idx / 3);
       const strip = document.getElementById('reel-' + col);
@@ -5044,10 +5180,12 @@ showPage('lobby');
   };
   let activeMoreFeature = '';
   const moreFeatureNames = {
-    'daily-bonus':'Забрать бонус','random-slot':'Случайный слот','history':'История','autoplay':'Автоигра','appearance':'Оформление','achievements':'Достижения','promo':'Промокод','stats':'Статистика','challenges':'Испытания','sounds':'Звуки','effects':'Эффекты','favorites':'Избранное','search':'Поиск','reaction':'Игры на реакцию',duels:'Дуэли',
+    'anniversary':'KIRKA HISTORY','anniversary-collection':'ANNIVERSARY COLLECTION','daily-bonus':'Забрать бонус','random-slot':'Случайный слот','history':'История','autoplay':'Автоигра','appearance':'Оформление','achievements':'Достижения','promo':'Промокод','stats':'Статистика','challenges':'Испытания','sounds':'Звуки','effects':'Эффекты','favorites':'Избранное','search':'Поиск','reaction':'Игры на реакцию',duels:'Дуэли',
     combinations:'Комбинации',archive:'Архив',cinema:'Кинозал',gallery:'Галерея',lab:'Лаборатория',masks:'Маски',titles:'Титулы',bookmarks:'Закладки',navigator:'Навигатор',schedule:'Расписание',openings:'Открытия',quiz:'Викторина',minigames:'Мини-игры',editor:'Редактор',journal:'Журнал',goals:'Мои цели','random-effect':'Случайный эффект',night:'Ночной режим',cleanup:'Очистка',downloads:'Загрузки',converter:'Конвертер',constructor:'Конструктор',music:'Моя музыка',market:'Магазин',showcase:'Витрина профиля',analytics:'Аналитика игрока',desktop:'Kesug Desktop'
   };
   const MORE_FEATURE_VISUALS = {
+    anniversary: { a: '#514364', b: '#a48cc7', kicker: 'TWO MONTHS · PROJECT STORY', emoji: '🎂' },
+    'anniversary-collection': { a: '#5b4a68', b: '#b7a4cb', kicker: 'LIMITED · TWO MONTHS', emoji: '🏅' },
     desktop: { a: '#153f68', b: '#55b8de', kicker: 'PERSONAL WORKSPACE', emoji: '💻' },
   'daily-bonus': { a: '#45317e', b: '#bd83f2', kicker: 'DAILY REWARD', emoji: '🎁' },
     'random-slot': { a: '#713515', b: '#eaa04c', kicker: 'RANDOM PICK', emoji: '🎲' },
@@ -5474,7 +5612,7 @@ showPage('lobby');
     const itemCards = items.length ? items.map(item => `<div class="ks-showcase-item"><div class="ks-showcase-item-art" style="color:${item.color}">${item.category.icon}</div><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.rarity.name)}</small><button class="ks-slot-small-button" style="margin-top:7px" onclick="removeKesugShowcaseItem(${item.id})">Убрать</button></div>`).join('') : '<div class="ks-more-info-card" style="grid-column:1/-1">Витрина пока пустая. Выбери предметы, которые хочешь показать в профиле.</div>';
     const html = `
       <div class="ks-showcase-card">
-        <div class="ks-showcase-head"><img class="ks-showcase-avatar" src="${escapeHtml(avatar)}" alt="Аватар"><div><div class="ks-showcase-name">${escapeHtml(state.nickname)}</div><div class="ks-showcase-meta">${escapeHtml(localStorage.getItem('ks_profile_title') || 'Игрок Kesug')} · ${fmt(Number(eloData.elo) || 1000)} ELO</div><div class="ks-showcase-meta">${owned.size.toLocaleString('ru-RU')} предметов в коллекции</div></div></div>
+        <div class="ks-showcase-head"><img class="ks-showcase-avatar" src="${escapeHtml(avatar)}" alt="Аватар"><div><div class="ks-showcase-name">${escapeHtml(state.nickname)}${window.ksIsDeveloper?.() ? '<span class="ks-developer-verified" title="Подтверждённый разработчик"><i class="ph-fill ph-seal-check"></i></span>' : ''}</div><div class="ks-showcase-meta">${escapeHtml(localStorage.getItem('ks_profile_title') || 'Игрок Kesug')} · ${fmt(Number(eloData.elo) || 1000)} ELO</div><div class="ks-showcase-meta">${owned.size.toLocaleString('ru-RU')} предметов в коллекции</div></div></div>
         <div class="ks-showcase-items">${itemCards}</div>
       </div>
       <div class="ks-more-info-card" style="margin-top:12px"><strong>Предметы на витрине</strong><p style="margin:6px 0 10px;color:var(--text-muted);font-size:10px">Выбери до 6 предметов из своего магазина. Они будут отображаться в твоей локальной витрине профиля.</p>
@@ -5554,9 +5692,288 @@ showPage('lobby');
     decorateMoreTiles();
   }
 
+
+  // ═══════ KIRKA HISTORY · 2 MONTHS ANNIVERSARY REPORT ═══════
+  function getAnniversarySnapshot() {
+    const stats = state.stats || {};
+    const rounds = readArray('ks_round_history');
+    const duel = readJSON('ks_duel_profile', {});
+    const duelHistory = readArray('ks_duel_history');
+    const visited = readJSON('ks_visited_machine_ids', []);
+    const journal = readArray('ks_account_journal');
+    const promos = readArray('ks_used_promos');
+    const owned = readJSON('ks_market_owned_v1', []);
+    const bonusCount = Number(localStorage.getItem('ks_daily_bonus_count')) || 0;
+    const spins = Math.max(0, Number(stats.spins) || 0);
+    const totalBet = Math.max(0, Number(stats.totalBet) || 0);
+    const won = Math.max(0, Number(stats.won) || 0);
+    const winsInRecentLog = rounds.filter(row => Number(row && row.win) > 0).length;
+    const machineCounts = {};
+    rounds.forEach(row => { const name = String(row && row.machine || 'Автомат'); machineCounts[name] = (machineCounts[name] || 0) + 1; });
+    const mostPlayed = Object.entries(machineCounts).sort((a,b) => b[1]-a[1])[0];
+    const achievementFlags = [
+      spins >= 1, spins >= 10, spins >= 100, spins >= 500,
+      Array.isArray(visited) && visited.length >= 5,
+      Array.isArray(visited) && visited.length >= 20,
+      state.favorites.length >= 3, state.favorites.length >= 10,
+      state.balance >= 100000, state.balance >= 1000000, bonusCount >= 3
+    ];
+    const start = new Date(2026, 8, 21, 0, 0, 0, 0);
+    const today = new Date(); today.setHours(0,0,0,0);
+    const days = Math.max(0, Math.floor((today - start) / 86400000));
+    const duelMatches = Math.max(Number(duel.matches)||0, Number(duel.wins||0)+Number(duel.losses||0)+Number(duel.draws||0));
+    return {
+      nickname: state.nickname || 'Игрок', balance: Number(state.balance)||0,
+      spins, totalBet, won, averageBet: spins ? totalBet/spins : 0, averagePayout: spins ? won/spins : 0, maxWin: Math.max(0, Number(stats.maxWin)||0), net: won-totalBet,
+      duels: duelMatches, duelWins: Number(duel.wins)||0, duelLosses: Number(duel.losses)||0, duelDraws: Number(duel.draws)||0, elo: Number(duel.elo)||1000,
+      visitedCount: Array.isArray(visited)?visited.length:0, favorites: state.favorites.length,
+      marketItems: Array.isArray(owned)?owned.length:0, promos: Array.isArray(promos)?promos.length:0,
+      bonusCount, achievements: achievementFlags.filter(Boolean).length, achievementTotal: achievementFlags.length,
+      journalCount: journal.length, recentRounds: rounds.length, recentWinRate: rounds.length?Math.round(winsInRecentLog/rounds.length*100):0,
+      duelHistoryCount: duelHistory.length, mostPlayed: mostPlayed ? mostPlayed[0] : 'Пока нет данных', mostPlayedCount: mostPlayed ? mostPlayed[1] : 0,
+      projectDays: days
+    };
+  }
+  function anniversaryFormat(value) { return Math.floor(Number(value)||0).toLocaleString('ru-RU'); }
+  function openAnniversaryReport() {
+    const s = getAnniversarySnapshot();
+    const resultClass = s.net >= 0 ? 'ks-anniversary-highlight' : '';
+    const duelRate = s.duels ? Math.round(s.duelWins / s.duels * 100) : 0;
+    const timeline = [
+      { date:'21.09.2026', title:'KIRKA CASINO · начало серии', text:'Первая идея браузерного казино с виртуальными очками и игровыми барабанами. Отсюда началась вся цепочка проектов.' },
+      { date:'ОСЕНЬ 2026', title:'CASINO DROP', text:'Проект получил новое имя. Развивались интерфейс, профиль, прогресс, бонусы, магазин и дополнительные игровые идеи; удачные решения переходили в следующие версии.' },
+      { date:'ОСЕНЬ 2026', title:'CASINO DROP 2', text:'Отдельная браузерная 3D-часть: трёхмерный зал, пять автоматов, скины и эмоции персонажа, уровни, опыт, промокоды и работа над производительностью.' },
+      { date:'НОЯБРЬ 2026', title:'KESUG SLOTS', text:'Переход к Local-First: 39 автоматов, пять категорий, локальные сохранения, профиль, дуэли с ELO, Kesug Market, статистика и дополнительные приложения.' },
+      { date:'НОЯБРЬ 2026', title:'KESUG OS', text:'Собственная оболочка игры: рабочий стол и сетка приложений, виджеты, настройка обоев, профиль и единая навигация без нижнего Dock.' },
+      { date:'20.11.2026', title:'KESUG SLOTS REMASTERED', text:'Релиз новой оболочки: стеклянный интерфейс, мобильная адаптация, PWA и офлайн-кэш. Затем — Motion Engine, оптимизация каталога, таблицы выплат и дальнейшая полировка.' }
+    ];
+    const timelineHtml = timeline.map((item,index)=>`<div class="ks-anniversary-milestone"><div class="ks-anniversary-time">${item.date}</div><div class="ks-anniversary-dot" aria-hidden="true"></div><div class="ks-anniversary-milestone-copy"><strong>${item.title}</strong><p>${item.text}</p></div></div>`).join('');
+    const html = `
+      <section class="ks-anniversary-hero">
+        <div class="ks-anniversary-kicker">KIRKA CASINO → KESUG SLOTS</div>
+        <h2 class="ks-anniversary-title">2 MONTHS OF HISTORY</h2><div class="ks-anniversary-confetti-label"><i class="ph-fill ph-sparkle"></i> ANNIVERSARY EDITION</div>
+        <p class="ks-anniversary-sub">Два месяца идей, экспериментов, переделок, тестирования и релизов. От первого KIRKA CASINO до Kesug Slots Remastered.</p>
+        <div class="ks-anniversary-date"><i class="ph-fill ph-calendar-blank"></i> 21.09.2026 — 21.11.2026 · 2 месяца истории</div>
+      </section>
+      <section class="ks-anniversary-section">
+        <h4>МАСШТАБ СЕРИИ</h4>
+        <div class="ks-anniversary-stats">
+          <div class="ks-anniversary-stat"><span>Этапов серии</span><strong>6</strong><small>KIRKA CASINO → Remastered</small></div>
+          <div class="ks-anniversary-stat"><span>Автоматов в Kesug Slots</span><strong>39</strong><small>Пять тематических категорий</small></div>
+          <div class="ks-anniversary-stat"><span>Отдельная оболочка</span><strong>KESUG OS</strong><small>Собственный рабочий стол</small></div>
+          <div class="ks-anniversary-stat"><span>Архитектура игры</span><strong>LOCAL-FIRST</strong><small>Прогресс хранится на устройстве</small></div>
+        </div>
+      </section>
+      <section class="ks-anniversary-section">
+        <h4>ТВОИ РЕЗУЛЬТАТЫ В KESUG SLOTS</h4>
+        <p class="ks-anniversary-section-note">Показатели считываются прямо из локального профиля на этом устройстве.</p>
+        <div class="ks-anniversary-stats">
+          <div class="ks-anniversary-stat"><span>Всего раундов</span><strong>${anniversaryFormat(s.spins)}</strong><small>Накопительная статистика</small></div>
+          <div class="ks-anniversary-stat"><span>Сумма ставок</span><strong>${anniversaryFormat(s.totalBet)}</strong><small>Виртуальных очков</small></div>
+          <div class="ks-anniversary-stat"><span>Всего получено</span><strong>${anniversaryFormat(s.won)}</strong><small>Виртуальных очков</small></div>
+          <div class="ks-anniversary-stat"><span>Максимальный выигрыш</span><strong>${anniversaryFormat(s.maxWin)}</strong><small>Лучший результат профиля</small></div>
+          <div class="ks-anniversary-stat"><span>Текущий баланс</span><strong>${anniversaryFormat(s.balance)}</strong><small>Виртуальные очки</small></div>
+          <div class="ks-anniversary-stat"><span>Общий результат</span><strong class="${resultClass}">${s.net>=0?'+':''}${anniversaryFormat(s.net)}</strong><small>Получено минус поставлено</small></div>
+          <div class="ks-anniversary-stat"><span>Открыто автоматов</span><strong>${anniversaryFormat(s.visitedCount)} / ${MACHINES.length}</strong><small>Разные автоматы</small></div>
+          <div class="ks-anniversary-stat"><span>Избранное</span><strong>${anniversaryFormat(s.favorites)}</strong><small>Сохранённые автоматы</small></div>
+        </div>
+      </section>
+      <section class="ks-anniversary-section">
+        <h4>ДУЭЛИ И ДОСТИЖЕНИЯ</h4>
+        <div class="ks-anniversary-breakdown">
+          <div class="ks-anniversary-breakdown-row"><span>Дуэли сыграно</span><b>${anniversaryFormat(s.duels)}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Рейтинг ELO</span><b>${anniversaryFormat(s.elo)}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Победы / поражения / ничьи</span><b>${s.duelWins} / ${s.duelLosses} / ${s.duelDraws}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Доля побед в дуэлях</span><b>${duelRate}%</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Записей дуэлей в журнале</span><b>${s.duelHistoryCount} / 30</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Средняя ставка за раунд</span><b>${anniversaryFormat(s.averageBet)}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Средняя выплата за раунд</span><b>${anniversaryFormat(s.averagePayout)}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Достижения открыты</span><b>${s.achievements} / ${s.achievementTotal}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Ежедневных бонусов получено</span><b>${anniversaryFormat(s.bonusCount)}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Предметов в коллекции</span><b>${anniversaryFormat(s.marketItems)}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Промокодов использовано</span><b>${anniversaryFormat(s.promos)}</b></div>
+        </div>
+      </section>
+      <section class="ks-anniversary-section">
+        <h4>ТВОЯ ИГРОВАЯ АКТИВНОСТЬ</h4>
+        <div class="ks-anniversary-breakdown">
+          <div class="ks-anniversary-breakdown-row"><span>Самый частый автомат · сохранённая история</span><b>${escapeHtml(s.mostPlayed)}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Раундов в этом автомате · журнал</span><b>${anniversaryFormat(s.mostPlayedCount)}</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Раунды с выплатой · последние ${s.recentRounds}</span><b>${s.recentWinRate}%</b></div>
+          <div class="ks-anniversary-breakdown-row"><span>Записей в журнале действий</span><b>${anniversaryFormat(s.journalCount)} / 150</b></div>
+        </div>
+        <p class="ks-anniversary-data-note">Важное уточнение: общие раунды, ставки, выплаты и рекорд берутся из накопительной статистики профиля. Журнал раундов хранит максимум 100 последних записей, дуэлей — до 30, действий — до 150. Поэтому любимый автомат и доля раундов с выплатой рассчитаны по сохранённой выборке, а не за всю историю. Ранее проведённое время в игре не записывалось, поэтому мы не показываем выдуманный таймер.</p>
+      </section>
+      <section class="ks-anniversary-section">
+        <h4>ИСТОРИЯ ВСЕЙ СЕРИИ</h4>
+        <p class="ks-anniversary-section-note">Как менялся проект и к чему мы пришли за два месяца.</p>
+        <div class="ks-anniversary-timeline">${timelineHtml}</div>
+      </section>
+      <section class="ks-anniversary-section">
+        <h4>КАК МЫ СОЗДАЁМ KESUG</h4>
+        <div class="ks-anniversary-process">
+          <div class="ks-anniversary-process-step"><b>01</b><span>Идея и концепция</span></div>
+          <div class="ks-anniversary-process-step"><b>02</b><span>Прототип и разработка</span></div>
+          <div class="ks-anniversary-process-step"><b>03</b><span>Проверка функций</span></div>
+          <div class="ks-anniversary-process-step"><b>04</b><span>Отзывы и исправления</span></div>
+          <div class="ks-anniversary-process-step"><b>05</b><span>Полировка и релиз</span></div>
+        </div>
+        <p class="ks-anniversary-data-note">Этот отчёт объединяет этапы развития серии и статистику текущего локального профиля. Данные разных устройств автоматически не объединяются.</p>
+        <div class="ks-anniversary-actions">
+          <button class="ks-more-action" type="button" onclick="ksCopyAnniversaryReport()"><i class="ph-bold ph-copy"></i> Скопировать мой отчёт</button>
+          <button class="ks-more-secondary" type="button" onclick="ksDownloadAnniversaryReport()"><i class="ph-bold ph-download-simple"></i> Сохранить TXT</button>
+        </div>
+      </section>`;
+    showDetail('KIRKA HISTORY · 2 месяца', 'История серии и персональный отчёт по твоему локальному профилю.', html);
+  }
+  window.ksOpenAnniversaryReport = () => {
+    try { activeMoreFeature = 'anniversary'; openAnniversaryReport(); return true; }
+    catch (error) { console.error('KIRKA HISTORY open failed:', error); showToast('Не удалось открыть KIRKA HISTORY. Попробуй ещё раз.'); return false; }
+  };
+
+  const ANNIVERSARY_REWARD_IDS = ['title','frame','avatar','badge'];
+  const ANNIVERSARY_AVATAR = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#30283b"/><stop offset="1" stop-color="#111218"/></linearGradient><linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#efe6f8"/><stop offset=".5" stop-color="#bda9d4"/><stop offset="1" stop-color="#746582"/></linearGradient></defs><circle cx="128" cy="128" r="121" fill="url(#bg)"/><circle cx="128" cy="128" r="111" fill="none" stroke="url(#ring)" stroke-width="7"/><circle cx="128" cy="128" r="91" fill="#ffffff" fill-opacity=".045" stroke="#ffffff" stroke-opacity=".17"/><path d="M128 42l8 18 19 2-14 13 4 19-17-10-17 10 4-19-14-13 19-2z" fill="#e8def3"/><text x="128" y="145" font-family="Arial,sans-serif" font-size="76" font-weight="800" text-anchor="middle" fill="#f5effb">2M</text><text x="128" y="178" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle" fill="#cfc1df">ANNIV.</text><circle cx="53" cy="178" r="4" fill="#d6c7e7"/><circle cx="205" cy="82" r="4" fill="#d6c7e7"/></svg>');
+  function getAnniversaryOwned() { const owned=readJSON('ks_anniversary_collection_v1',[]); return Array.isArray(owned)?owned:[]; }
+  function openAnniversaryCollection() {
+    activeMoreFeature = 'anniversary-collection';
+    const owned = getAnniversaryOwned();
+    const claimed = ANNIVERSARY_REWARD_IDS.every(id => owned.includes(id));
+    const equipped = { title: anniversaryEquipped('title'), frame: anniversaryEquipped('frame'), avatar: anniversaryEquipped('avatar'), badge: anniversaryEquipped('badge') };
+    const rewards = [
+      {id:'title',icon:'ph-crown',name:'Титул ANNIVERSARY',desc:'Особый титул двухмесячия рядом с ником.'},
+      {id:'frame',icon:'ph-aperture',name:'Рамка ANNIVERSARY',desc:'Светлая стеклянная окантовка аватара в профиле.'},
+      {id:'avatar',icon:'ph-user-circle',name:'Праздничный аватар',desc:'Эксклюзивная эмблема 2M в стиле Kesug.'},
+      {id:'badge',icon:'ph-seal-check',name:'Значок 2 MONTHS',desc:'Праздничная отметка в карточке профиля.'}
+    ];
+    const cards = rewards.map(item => { const has=owned.includes(item.id); const on=equipped[item.id]; return `<article class="ks-anniv-reward-card ${has?'is-owned':''} ${on?'is-equipped':''}"><div class="ks-anniv-reward-art ks-anniv-reward-${item.id}"><i class="ph-fill ${item.icon}"></i></div><div class="ks-anniv-reward-copy"><strong>${item.name}</strong><p>${item.desc}</p><small>${!has?'Ещё не получено':on?'СЕЙЧАС НАДЕТО':'В КОЛЛЕКЦИИ'}</small></div><button type="button" ${!has?'disabled':''} onclick="ksEquipAnniversaryReward('${item.id}')">${!has?'Заблокировано':on?'Снять':'Надеть'}</button></article>`; }).join('');
+    const fullyEquipped = ANNIVERSARY_REWARD_IDS.every(id => equipped[id]);
+    const setAction = !claimed ? '<button class="ks-more-action ks-anniv-claim" type="button" onclick="ksClaimAnniversaryCollection()"><i class="ph-fill ph-gift"></i> Забрать и надеть комплект</button>' : fullyEquipped ? '<button class="ks-more-action" type="button" disabled>✓ Весь комплект надет</button>' : '<button class="ks-more-action ks-anniv-claim" type="button" onclick="ksEquipAnniversarySet()"><i class="ph-fill ph-sparkle"></i> Надеть весь комплект</button>';
+    const html = `<section class="ks-anniv-collection-hero"><div class="ks-anniv-collection-seal"><span>2</span><small>MONTHS</small></div><div><div class="ks-anniversary-kicker">21 SEPTEMBER — 21 NOVEMBER 2026</div><h3>ANNIVERSARY COLLECTION</h3><p>Четыре памятных предмета в честь двух месяцев истории серии. Коллекция бесплатная и не использует виртуальный баланс.</p></div></section><section class="ks-anniversary-section"><h4>ПРАЗДНИЧНЫЕ ПРЕДМЕТЫ</h4><div class="ks-anniv-reward-grid">${cards}</div><div class="ks-anniversary-actions">${setAction}<button class="ks-more-secondary" type="button" onclick="ksRestoreAnniversaryLook()">Снять праздничные украшения</button></div><p class="ks-anniversary-data-note">Предметы сохраняются локально в этом браузере. Их можно надевать и снимать без изменения баланса. Старые аватар и титул сохраняются для восстановления.</p></section>`;
+    showDetail('Anniversary Collection','Памятные украшения профиля к двухмесячному юбилею KIRKA CASINO → Kesug Slots.',html);
+  }
+  window.ksOpenAnniversaryCollection = () => { try { openAnniversaryCollection(); return true; } catch(error) { console.error('Anniversary Collection open failed:',error); showToast('Не удалось открыть коллекцию.'); return false; } };
+  function anniversaryEquipped(id) {
+    if (id === 'title') return localStorage.getItem('ks_profile_title') === 'ANNIVERSARY';
+    if (id === 'frame') return localStorage.getItem('ks_profile_frame') === 'anniversary';
+    if (id === 'avatar') return localStorage.getItem('ks_anniversary_avatar_equipped') === '1';
+    if (id === 'badge') return localStorage.getItem('ks_anniversary_badge_equipped') === '1';
+    return false;
+  }
+  function rememberAnniversaryValue(key, previousKey, flag) {
+    if (localStorage.getItem(flag) === '1') return;
+    const old = localStorage.getItem(key);
+    localStorage.setItem(previousKey, old === null ? '__NULL__' : old);
+    localStorage.setItem(flag, '1');
+  }
+  function restoreAnniversaryValue(key, previousKey, flag) {
+    if (localStorage.getItem(flag) !== '1') return;
+    const old = localStorage.getItem(previousKey);
+    if (old === '__NULL__' || old === null) localStorage.removeItem(key);
+    else localStorage.setItem(key, old);
+    localStorage.removeItem(previousKey);
+    localStorage.removeItem(flag);
+  }
+  function playAnniversaryChime() {
+    try {
+      if (state.settings?.soundEnabled === false) return;
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      [587.33, 739.99, 880].forEach((frequency,index) => {
+        const oscillator = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = ctx.currentTime + index * 0.095;
+        oscillator.type = 'sine'; oscillator.frequency.value = frequency;
+        gain.gain.setValueAtTime(0.0001,start);
+        gain.gain.exponentialRampToValueAtTime(0.035,start + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0001,start + 0.24);
+        oscillator.connect(gain); gain.connect(ctx.destination);
+        oscillator.start(start); oscillator.stop(start + 0.26);
+      });
+      setTimeout(() => ctx.close().catch(() => {}), 850);
+    } catch (_) {}
+  }
+  function setAnniversaryReward(id, enabled) {
+    if (id === 'title') {
+      if (enabled) { rememberAnniversaryValue('ks_profile_title','ks_anniv_prev_profile_title','ks_anniv_prev_title_saved'); localStorage.setItem('ks_profile_title','ANNIVERSARY'); }
+      else restoreAnniversaryValue('ks_profile_title','ks_anniv_prev_profile_title','ks_anniv_prev_title_saved');
+    }
+    if (id === 'frame') {
+      if (enabled) { rememberAnniversaryValue('ks_profile_frame','ks_anniv_prev_profile_frame','ks_anniv_prev_frame_saved'); localStorage.setItem('ks_profile_frame','anniversary'); }
+      else restoreAnniversaryValue('ks_profile_frame','ks_anniv_prev_profile_frame','ks_anniv_prev_frame_saved');
+    }
+    if (id === 'avatar') {
+      if (enabled) {
+        rememberAnniversaryValue('ks_avatar','ks_anniv_prev_avatar','ks_anniv_prev_avatar_saved');
+        state.avatar = ANNIVERSARY_AVATAR; saveToLocal(); localStorage.setItem('ks_anniversary_avatar_equipped','1');
+      } else {
+        restoreAnniversaryValue('ks_avatar','ks_anniv_prev_avatar','ks_anniv_prev_avatar_saved');
+        state.avatar = localStorage.getItem('ks_avatar') || ''; saveToLocal(); localStorage.removeItem('ks_anniversary_avatar_equipped');
+      }
+    }
+    if (id === 'badge') {
+      if (enabled) localStorage.setItem('ks_anniversary_badge_equipped','1');
+      else localStorage.removeItem('ks_anniversary_badge_equipped');
+    }
+  }
+  window.ksClaimAnniversaryCollection = () => {
+    const owned = [...new Set([...getAnniversaryOwned(),...ANNIVERSARY_REWARD_IDS])];
+    if (!writeJSON('ks_anniversary_collection_v1',owned)) return false;
+    localStorage.setItem('ks_anniversary_collection_claimed_v1','1');
+    ANNIVERSARY_REWARD_IDS.forEach(id => setAnniversaryReward(id,true));
+    updateProfileUI(); window.ksDesktopRefresh?.(); playAnniversaryChime();
+    showToast('Праздничный комплект получен и надет!');
+    openAnniversaryCollection();
+    return true;
+  };
+  window.ksEquipAnniversaryReward = id => {
+    if (!ANNIVERSARY_REWARD_IDS.includes(id) || !getAnniversaryOwned().includes(id)) { showToast('Сначала забери праздничную коллекцию'); return false; }
+    setAnniversaryReward(id,!anniversaryEquipped(id));
+    updateProfileUI(); window.ksDesktopRefresh?.();
+    showToast(anniversaryEquipped(id)?'Украшение надето':'Украшение снято');
+    openAnniversaryCollection();
+    return true;
+  };
+  window.ksEquipAnniversarySet = () => {
+    if (!ANNIVERSARY_REWARD_IDS.every(id => getAnniversaryOwned().includes(id))) { showToast('Сначала забери праздничную коллекцию'); return false; }
+    ANNIVERSARY_REWARD_IDS.forEach(id => setAnniversaryReward(id,true));
+    updateProfileUI(); window.ksDesktopRefresh?.(); playAnniversaryChime();
+    showToast('Весь праздничный комплект надет!'); openAnniversaryCollection();
+    return true;
+  };
+  window.ksRestoreAnniversaryLook = () => {
+    ANNIVERSARY_REWARD_IDS.forEach(id => setAnniversaryReward(id,false));
+    updateProfileUI(); window.ksDesktopRefresh?.(); showToast('Праздничные украшения сняты'); openAnniversaryCollection();
+    return true;
+  };
+
+  function makeAnniversaryText() {
+    const s = getAnniversarySnapshot();
+    return [
+      'KIRKA HISTORY · 2 MONTHS', 'KIRKA CASINO → CASINO DROP → CASINO DROP 2 → KESUG SLOTS → REMASTERED',
+      `Игрок: ${s.nickname}`, `Раундов: ${s.spins}`, `Сумма ставок: ${anniversaryFormat(s.totalBet)}`, `Средняя ставка за раунд: ${anniversaryFormat(s.averageBet)}`,
+      `Получено: ${anniversaryFormat(s.won)}`, `Средняя выплата за раунд: ${anniversaryFormat(s.averagePayout)}`, `Максимальный выигрыш: ${anniversaryFormat(s.maxWin)}`,
+      `Баланс: ${anniversaryFormat(s.balance)}`, `Общий результат: ${s.net>=0?'+':''}${anniversaryFormat(s.net)}`,
+      `Открыто автоматов: ${s.visitedCount}/${MACHINES.length}`, `Избранное: ${s.favorites}`, `Дуэли: ${s.duels} · победы ${s.duelWins} · поражения ${s.duelLosses} · ничьи ${s.duelDraws}`,
+      `ELO: ${s.elo}`, `Записей дуэлей: ${s.duelHistoryCount}/30`, `Достижения: ${s.achievements}/${s.achievementTotal}`, `Ежедневные бонусы: ${s.bonusCount}`, `Предметы: ${s.marketItems}`, `Промокоды: ${s.promos}`, `Записей журнала: ${s.journalCount}/150`,
+      '', 'Показатели взяты из локального профиля. История раундов хранит до 100 последних записей.'
+    ].join('\n');
+  }
+  window.ksCopyAnniversaryReport = async () => {
+    const text = makeAnniversaryText();
+    try { await navigator.clipboard.writeText(text); showToast('Отчёт скопирован'); }
+    catch (_) { const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();try{document.execCommand('copy');showToast('Отчёт скопирован');}catch(__){showToast('Не удалось скопировать отчёт');}area.remove(); }
+  };
+  window.ksDownloadAnniversaryReport = () => {
+    const blob = new Blob([makeAnniversaryText()], {type:'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob); const a=document.createElement('a');a.href=url;a.download='KIRKA-HISTORY-2-MONTHS.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+
   window.useMoreFeature = key => {
     activeMoreFeature = key;
     switch (key) {
+      case 'anniversary': return window.ksOpenAnniversaryReport();
+      case 'anniversary-collection': return window.ksOpenAnniversaryCollection();
       case 'daily-bonus': return openDailyBonus();
       case 'random-slot': {
         closeMenu();
@@ -5749,7 +6166,7 @@ showPage('lobby');
     const cells = Array.isArray(result) && result.length === 9
       ? result.map(symbol => `<div class="ks-duel-cell"><img src="${getIconUrl(symbol)}" alt="${escapeHtml(symbol)}"></div>`).join('')
       : '<div class="ks-duel-empty">Ожидает раунда</div>';
-    return `<div class="ks-duel-player-card ${isPlayer ? 'is-player' : 'is-bot'}"><div class="ks-duel-player-head"><strong>${escapeHtml(name)}</strong><span>${fmt(rating)} ELO</span></div><div class="ks-duel-reels">${cells}</div><div class="ks-duel-payout">Выигрыш за раунд: <b>${fmt(payout || 0)}</b></div></div>`;
+    return `<div class="ks-duel-player-card ${isPlayer ? 'is-player' : 'is-bot'}"><div class="ks-duel-player-head"><strong>${escapeHtml(name)}${isPlayer && window.ksIsDeveloper?.() ? '<span class="ks-developer-verified" title="Подтверждённый разработчик"><i class="ph-fill ph-seal-check"></i></span>' : ''}</strong><span>${fmt(rating)} ELO</span></div><div class="ks-duel-reels">${cells}</div><div class="ks-duel-payout">Выигрыш за раунд: <b>${fmt(payout || 0)}</b></div></div>`;
   }
 
   function renderDuelMatch(rolling = false) {
@@ -6829,15 +7246,19 @@ showPage('lobby');
     {id:'settings',name:'Настройки',sub:'Внешний вид',icon:'ph-fill ph-gear-six',a:'#627c99',b:'#3b5c8d'},
     {id:'widgets',name:'Виджеты',sub:'Kesug Desktop',icon:'ph-fill ph-app-window',a:'#217f9b',b:'#485bc3'},
     {id:'showcase',name:'Витрина',sub:'Моя коллекция',icon:'ph-fill ph-crown',a:'#98713c',b:'#754fa6'},
-    {id:'history',name:'История',sub:'Последние раунды',icon:'ph-fill ph-clock-counter-clockwise',a:'#397da7',b:'#3756a0'}
+    {id:'history',name:'История',sub:'Последние раунды',icon:'ph-fill ph-clock-counter-clockwise',a:'#65718a',b:'#46536c'},
+    {id:'anniversary',name:'KIRKA HISTORY',sub:'2 месяца проекта',icon:'ph-fill ph-cake',a:'#79658f',b:'#514365'},
+    {id:'anniversary-collection',name:'ANNIVERSARY',sub:'Титул · Рамка · Аватар',icon:'ph-fill ph-medal',a:'#756783',b:'#494052'}
   ];
+  if (window.ksIsDeveloper?.()) APPS.push({id:'developer',name:'Dev Console',sub:'Только для создателя',icon:'ph-fill ph-terminal-window',a:'#9a80cf',b:'#51436f'});
   const WIDGETS = [
     {id:'clock',name:'Часы и дата'}, {id:'balance',name:'Баланс'}, {id:'elo',name:'Рейтинг ELO'},
     {id:'music',name:'Музыкальный плеер'}, {id:'stats',name:'Статистика'}, {id:'favorites',name:'Избранные автоматы'},
-    {id:'recent',name:'Последние раунды'}, {id:'quick',name:'Быстрые функции'}
+    {id:'recent',name:'Последние раунды'}, {id:'quick',name:'Быстрые функции'}, {id:'anniversary',name:'Праздничный виджет'}
   ];
-  const DEFAULT_APPS = ['catalog','duels','market','music','profile','favorites','analytics','more','settings','widgets'];
-  const DEFAULT_WIDGETS = ['clock','balance','elo','music','stats','quick'];
+  if (window.ksIsDeveloper?.()) WIDGETS.push({id:'developer',name:'Статус разработчика'});
+  const DEFAULT_APPS = ['catalog','duels','market','music','profile','favorites','analytics','more','settings','widgets','anniversary','anniversary-collection', ...(window.ksIsDeveloper?.() ? ['developer'] : [])];
+  const DEFAULT_WIDGETS = ['clock','balance','elo','music','stats','quick','anniversary', ...(window.ksIsDeveloper?.() ? ['developer'] : [])];
   let clockTimer = null;
   let wallpaperObjectUrl = '';
   const safeRead = (key, fallback) => { try { const raw=localStorage.getItem(key); return raw?JSON.parse(raw):fallback; } catch(_){ return fallback; } };
@@ -6846,7 +7267,21 @@ showPage('lobby');
   function getConfig(){
     const saved=safeRead(OS_CONFIG_KEY,{}); const validApps=new Set(APPS.map(x=>x.id)); const validWidgets=new Set(WIDGETS.map(x=>x.id));
     const apps=Array.isArray(saved.apps)?saved.apps.filter((id,i,a)=>validApps.has(id)&&a.indexOf(id)===i):DEFAULT_APPS.slice();
+    // Anniversary shortcuts/widgets are seeded robustly for existing installs.
+    // They remain removable from Desktop settings; removals are explicitly remembered.
+    if(localStorage.getItem('ks_anniversary_app_hidden')!=='1' && !apps.includes('anniversary')) apps.push('anniversary');
+    if(localStorage.getItem('ks_anniversary_collection_app_hidden')!=='1' && !apps.includes('anniversary-collection')) apps.push('anniversary-collection');
+    if(window.ksIsDeveloper?.() && !apps.includes('developer')) apps.push('developer');
     const widgets=Array.isArray(saved.widgets)?saved.widgets.filter((id,i,a)=>validWidgets.has(id)&&a.indexOf(id)===i):DEFAULT_WIDGETS.slice();
+    if(localStorage.getItem('ks_anniversary_widget_hidden')!=='1' && !widgets.includes('anniversary')) widgets.push('anniversary');
+    if(window.ksIsDeveloper?.() && !widgets.includes('developer')) widgets.push('developer');
+    try{
+      localStorage.setItem('ks_anniversary_layout_seed_v3','1');
+      if(localStorage.getItem('ks_anniversary_decor_refresh_v3')!=='1'){
+        localStorage.setItem('ks_anniversary_desktop_mode','1');
+        localStorage.setItem('ks_anniversary_decor_refresh_v3','1');
+      }
+    }catch(_){}
     return {apps:apps.length?apps:DEFAULT_APPS.slice(),widgets:widgets.length?widgets:DEFAULT_WIDGETS.slice(),wallpaper:['custom','none'].includes(saved.wallpaper)?saved.wallpaper:'none'};
   }
   let config=getConfig();
@@ -6891,11 +7326,13 @@ showPage('lobby');
       stats:`<div class="ks-os-widget-stats"><div class="ks-os-widget-stat"><strong>${fmt(stat.spins)}</strong><small>СПИНОВ</small></div><div class="ks-os-widget-stat"><strong>${fmt(stat.won)}</strong><small>ВЫИГРЫШИ</small></div><div class="ks-os-widget-stat"><strong>${fmt(stat.maxWin)}</strong><small>РЕКОРД</small></div></div><div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="ksOSGo('analytics')">Вся аналитика</button></div>`,
       favorites:`${fav.length?`<div class="ks-os-widget-list">${fav.map(m=>`<button onclick="ksOSOpenMachine('${esc(m.id)}')"><span>${esc(m.name)}</span><i class="ph-bold ph-arrow-up-right"></i></button>`).join('')}</div>`:'<div class="ks-os-widget-empty">Добавь автоматы в избранное — они появятся здесь.</div>'}<div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="ksOSGo('favorites')">Все избранные</button></div>`,
       recent:`${Array.isArray(hist)&&hist.length?`<div class="ks-os-widget-list">${hist.slice(0,3).map(r=>`<div><span>${esc(r.machineName||'Автомат')}</span><strong>${fmt(r.win)} очков</strong></div>`).join('')}</div>`:'<div class="ks-os-widget-empty">Недавние результаты появятся здесь.</div>'}<div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="ksOSGo('history')">Открыть историю</button></div>`,
-      quick:`<div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="ksOSGo('catalog')">🎰 Каталог</button><button class="ks-os-widget-action" onclick="ksOSGo('duels')">⚔️ Дуэли</button><button class="ks-os-widget-action" onclick="ksOSGo('market')">🛒 Магазин</button><button class="ks-os-widget-action" onclick="ksOSGo('more')">▦ Все функции</button></div>`
+      quick:`<div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="ksOSGo('catalog')">🎰 Каталог</button><button class="ks-os-widget-action" onclick="ksOSGo('duels')">⚔️ Дуэли</button><button class="ks-os-widget-action" onclick="ksOSGo('market')">🛒 Магазин</button><button class="ks-os-widget-action" onclick="ksOSGo('more')">▦ Все функции</button></div>`,
+      anniversary:`<div class="ks-os-anniversary-widget-top"><div class="ks-os-anniversary-number">2<span>M</span></div><div><strong>2 MONTHS OF HISTORY</strong><small>21.09.2026 — 21.11.2026</small></div></div><p class="ks-os-anniversary-widget-copy">Два месяца идей, переделок и релизов — от KIRKA CASINO до Kesug Slots Remastered.</p><div class="ks-os-widget-actions ks-os-anniversary-widget-actions"><button class="ks-os-widget-action" onclick="window.ksOpenAnniversaryReport?.()">История серии</button><button class="ks-os-widget-action" onclick="ksOSGo('anniversary-collection')">Коллекция</button><button class="ks-os-widget-action" onclick="ksToggleAnniversaryDesktop()">Праздничные обои</button></div>`,
+      developer:`<div class="ks-os-widget-elo"><strong style="font-size:18px">PEKEEE</strong><span class="ks-os-tier" style="background:rgba(151,124,205,.15);border-color:rgba(190,165,242,.34);color:#e2d5ff">VERIFIED</span></div><div class="ks-os-widget-caption">Создатель Kesug Slots · Player ID #8NAD</div><div class="ks-os-widget-actions"><button class="ks-os-widget-action" onclick="window.ksOpenDeveloperPanel?.()">Открыть Dev Console</button></div>`
     };
-    const names={clock:'Часы и дата',balance:'Баланс',elo:'Рейтинг ELO',music:'Музыка',stats:'Статистика',favorites:'Избранное',recent:'Последние раунды',quick:'Быстрые действия'};
-    const icons={clock:'ph-clock',balance:'ph-wallet',elo:'ph-trophy',music:'ph-music-notes',stats:'ph-chart-line-up',favorites:'ph-star',recent:'ph-clock-counter-clockwise',quick:'ph-lightning'};
-    return `<article class="ks-os-widget-card ${id==='quick'||id==='recent'?'wide':''}"><div class="ks-os-widget-label"><i class="ph-fill ${icons[id]||'ph-squares-four'}"></i> ${names[id]||id}</div>${cards[id]||''}</article>`;
+    const names={clock:'Часы и дата',balance:'Баланс',elo:'Рейтинг ELO',music:'Музыка',stats:'Статистика',favorites:'Избранное',recent:'Последние раунды',quick:'Быстрые действия',anniversary:'2 MONTHS · ANNIVERSARY',developer:'KESUG DEVELOPER'};
+    const icons={clock:'ph-clock',balance:'ph-wallet',elo:'ph-trophy',music:'ph-music-notes',stats:'ph-chart-line-up',favorites:'ph-star',recent:'ph-clock-counter-clockwise',quick:'ph-lightning',anniversary:'ph-cake',developer:'ph-seal-check'};
+    return `<article class="ks-os-widget-card ${id==='quick'||id==='recent'||id==='anniversary'||id==='developer'?'wide':''} ${id==='anniversary'?'ks-os-anniversary-widget':''} ${id==='developer'?'ks-os-developer-widget':''}"><div class="ks-os-widget-label"><i class="ph-fill ${icons[id]||'ph-squares-four'}"></i> ${names[id]||id}</div>${cards[id]||''}</article>`;
   }
   function renderSettings(){
     const apps=document.getElementById('ks-os-app-toggles'); const widgets=document.getElementById('ks-os-widget-toggles');
@@ -6906,6 +7343,7 @@ showPage('lobby');
   function render(){
     const root=document.getElementById('ks-os-root'); if(!root)return;
     config=getConfig(); root.dataset.wallpaper=config.wallpaper; document.body.dataset.ksWallpaper=config.wallpaper||'aurora';
+    root.classList.toggle('ks-anniversary-mode',localStorage.getItem('ks_anniversary_desktop_mode')!=='0');
     const name=document.getElementById('ks-os-player-name'); if(name)name.textContent=state.nickname||'Игрок';
     const avatar=document.getElementById('ks-os-avatar'); if(avatar)avatar.src=state.avatar||'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20sunglasses/3D/smiling_face_with_sunglasses_3d.png';
     const apps=document.getElementById('ks-os-app-grid'); if(apps)apps.innerHTML=config.apps.map(appHtml).join('');
@@ -6949,6 +7387,9 @@ showPage('lobby');
     if(id==='profile'||id==='settings'){window.showPage(id);return;}
     if(id==='more'){window.openMoreMenu();return;}
     if(id==='favorites'){window.showPage('lobby');window.setMachineCategory?.('favorites');setTimeout(()=>document.getElementById('catalog-section')?.scrollIntoView({behavior:'smooth',block:'start'}),80);return;}
+    if(id==='anniversary'){window.ksOpenAnniversaryReport?.();return;}
+    if(id==='anniversary-collection'){window.ksOpenAnniversaryCollection?.();return;}
+    if(id==='developer'){window.ksOpenDeveloperPanel?.();return;}
     const featureMap={duels:'duels',market:'market',music:'music',analytics:'analytics',showcase:'showcase',history:'history',widgets:'desktop'};
     const feature=featureMap[id];if(feature){window.useMoreFeature(feature);return;}
   }
@@ -6962,11 +7403,12 @@ showPage('lobby');
   function setWallpaper(preset){if(!['custom','none'].includes(preset))return;config.wallpaper=preset;saveConfig();applyWallpaper();renderSettings();}
   function openSettings(){const panel=document.getElementById('ks-os-settings-panel');if(!panel)return;panel.hidden=false;renderSettings();}
   function closeSettings(){const panel=document.getElementById('ks-os-settings-panel');if(panel)panel.hidden=true;}
-  function toggleList(type,id){const list=type==='app'?config.apps:config.widgets;const valid=type==='app'?APPS:WIDGETS;if(!valid.some(x=>x.id===id))return;const index=list.indexOf(id);if(index>=0){if(list.length<=1){window.showToast?.('Оставь хотя бы один элемент');return;}list.splice(index,1);}else list.push(id);saveConfig();render();}
+  function toggleList(type,id){const list=type==='app'?config.apps:config.widgets;const valid=type==='app'?APPS:WIDGETS;if(!valid.some(x=>x.id===id))return;const index=list.indexOf(id);if(index>=0){if(list.length<=1){window.showToast?.('Оставь хотя бы один элемент');return;}list.splice(index,1);if(type==='widget'&&id==='anniversary')localStorage.setItem('ks_anniversary_widget_hidden','1');if(type==='app'&&id==='anniversary')localStorage.setItem('ks_anniversary_app_hidden','1');if(type==='app'&&id==='anniversary-collection')localStorage.setItem('ks_anniversary_collection_app_hidden','1');}else{list.push(id);if(type==='widget'&&id==='anniversary')localStorage.removeItem('ks_anniversary_widget_hidden');if(type==='app'&&id==='anniversary')localStorage.removeItem('ks_anniversary_app_hidden');if(type==='app'&&id==='anniversary-collection')localStorage.removeItem('ks_anniversary_collection_app_hidden');}saveConfig();render();}
   function reset(){if(!window.confirm('Вернуть стандартные приложения, виджеты и обои Kesug Desktop?'))return;config={apps:DEFAULT_APPS.slice(),widgets:DEFAULT_WIDGETS.slice(),wallpaper:'none'};saveConfig();render();closeSettings();window.showToast?.('Рабочий стол восстановлен');}
   function toggleMusic(){const audio=window.kesugMusic?.audio;if(!audio){window.showToast?.('Плеер пока недоступен');return;}if(audio.paused){audio.play().catch(()=>window.showToast?.('Сначала добавь трек в «Моя музыка»'));}else audio.pause();setTimeout(render,80);}
   window.ksOSGo=go;
   window.ksOSOpenMachine=openMachine;
+  window.ksToggleAnniversaryDesktop=()=>{const root=document.getElementById('ks-os-root');const enabled=!(root?.classList.contains('ks-anniversary-mode'));try{localStorage.setItem('ks_anniversary_desktop_mode',enabled?'1':'0');}catch(_){}if(root)root.classList.toggle('ks-anniversary-mode',enabled);window.showToast?.(enabled?'Праздничное оформление включено':'Праздничное оформление выключено');return enabled;};
   window.ksOSToggleApp=id=>toggleList('app',id);
   window.ksOSToggleWidget=id=>toggleList('widget',id);
   window.ksOSSetWallpaper=setWallpaper;
@@ -7901,7 +8343,7 @@ body.ks-os-home-active .content-wrapper {width:100% !important;max-width:none !i
   const body = document.body;
   const routeMap = {
     'home-desktop':'home','lobby':'catalog','profile':'profile','settings':'settings',
-    'edit-profile':'profile','more':'more','more-detail':'more'
+    'edit-profile':'profile','more':'more','more-detail':'more','developer':'developer'
   };
   function currentPageId(){
     return document.querySelector('.page-view.active')?.id?.replace(/^page-/,'') || 'home-desktop';
@@ -7948,6 +8390,9 @@ body.ks-os-home-active .content-wrapper {width:100% !important;max-width:none !i
     if(id==='profile'||id==='settings'){window.showPage(id);return;}
     if(id==='more'){window.openMoreMenu();return;}
     if(id==='favorites'){window.showPage('lobby');window.setMachineCategory?.('favorites');return;}
+    if(id==='anniversary'){window.ksOpenAnniversaryReport?.();return;}
+    if(id==='anniversary-collection'){window.ksOpenAnniversaryCollection?.();return;}
+    if(id==='developer'){window.ksOpenDeveloperPanel?.();return;}
     const featureMap={duels:'duels',market:'market',music:'music',analytics:'analytics',showcase:'showcase',history:'history',widgets:'desktop'};
     if(featureMap[id]){window.useMoreFeature(featureMap[id]);return;}
   };
@@ -10187,6 +10632,258 @@ html.ks-route-switching { scroll-behavior:auto !important; }
     window.closeMachine = function(...args) { return withRouteLock(originalCloseMachine,this,args); };
   }
   settle();
+})();
+</script>
+
+
+<style id="ks-anniversary-celebration-system">
+/* Two-month anniversary: ornamental layer respects the player's chosen wallpaper. */
+.ks-anniversary-atmosphere{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .55s ease}
+.ks-os-root.ks-anniversary-mode .ks-anniversary-atmosphere{opacity:1}
+.ks-anniversary-atmosphere::before,.ks-anniversary-atmosphere::after{content:"";position:absolute;inset:-12%;pointer-events:none}
+.ks-anniversary-atmosphere::before{background-image:radial-gradient(circle,rgba(239,229,250,.75) 0 1px,transparent 1.8px),radial-gradient(circle,rgba(203,183,225,.65) 0 1.4px,transparent 2px),radial-gradient(circle,rgba(255,255,255,.36) 0 1px,transparent 1.6px);background-size:137px 151px,211px 197px,89px 103px;background-position:0 0,45px 77px,20px 31px;opacity:.42;animation:ksAnnivStarDrift 32s linear infinite}
+.ks-anniversary-atmosphere::after{background:radial-gradient(ellipse at 8% 12%,rgba(179,149,207,.20),transparent 33%),radial-gradient(ellipse at 92% 8%,rgba(235,223,248,.14),transparent 30%),radial-gradient(ellipse at 76% 88%,rgba(140,121,173,.16),transparent 32%);mix-blend-mode:screen;animation:ksAnnivAmbient 12s ease-in-out infinite alternate}
+@keyframes ksAnnivStarDrift{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-35px,28px,0)}}
+@keyframes ksAnnivAmbient{0%{opacity:.52;transform:scale(1)}100%{opacity:1;transform:scale(1.035)}}
+.ks-os-root.ks-anniversary-mode .ks-os-greeting::after{content:"✦ TWO MONTHS · 21 NOVEMBER 2026";display:inline-flex;margin-top:12px;padding:7px 11px;border:1px solid rgba(211,193,230,.22);border-radius:999px;background:rgba(41,35,50,.38);color:#e3d7f0;font-size:8px;font-weight:900;letter-spacing:.14em;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.ks-os-root.ks-anniversary-mode .ks-os-app[data-os-app="anniversary"] .ks-os-app-icon,.ks-os-root.ks-anniversary-mode .ks-os-app[data-os-app="anniversary-collection"] .ks-os-app-icon{border-color:rgba(218,199,238,.52);box-shadow:0 0 0 4px rgba(180,153,211,.08),0 10px 28px rgba(104,76,133,.26),inset 0 1px 0 rgba(255,255,255,.3)}
+.ks-os-anniversary-widget{position:relative;overflow:hidden;border-color:rgba(195,174,220,.28)!important;background:linear-gradient(135deg,rgba(99,80,118,.22),rgba(34,31,42,.52))!important}
+.ks-os-anniversary-widget::after{content:"";position:absolute;width:160px;height:160px;right:-80px;top:-88px;border:1px solid rgba(222,208,239,.2);border-radius:50%;box-shadow:0 0 0 17px rgba(222,208,239,.03),0 0 0 35px rgba(222,208,239,.025);pointer-events:none}
+.ks-os-anniversary-widget-top{display:flex;align-items:center;gap:12px;margin:5px 0 10px}
+.ks-os-anniversary-number{width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;border:1px solid rgba(220,203,238,.38);border-radius:17px;background:linear-gradient(145deg,rgba(183,157,212,.23),rgba(255,255,255,.045));color:#f0e8f8;font-size:28px;font-weight:900;letter-spacing:-.08em;box-shadow:0 10px 25px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.2)}
+.ks-os-anniversary-number span{font-size:12px;letter-spacing:0;margin-left:1px}
+.ks-os-anniversary-widget-top strong{display:block;color:#f0e9f7;font-size:11px;letter-spacing:.13em}
+.ks-os-anniversary-widget-top small{display:block;margin-top:5px;color:rgba(229,218,240,.62);font-size:9px}
+.ks-os-anniversary-widget-copy{margin:0 0 12px;color:rgba(232,224,241,.68);font-size:10px;line-height:1.55}
+.ks-os-anniversary-widget-actions{position:relative;z-index:1;flex-wrap:wrap}
+.ks-os-anniversary-widget-actions .ks-os-widget-action{flex:1 1 105px;border-color:rgba(204,184,226,.18)!important;background:rgba(236,224,248,.075)!important;color:#eee6f6!important}
+.ks-anniversary-confetti-label{display:inline-flex;align-items:center;gap:7px;margin-top:11px;padding:6px 10px;border:1px solid rgba(211,193,230,.2);border-radius:999px;background:rgba(192,170,219,.08);color:#d6c5e7;font-size:8px;font-weight:900;letter-spacing:.14em}
+.ks-anniv-collection-hero{display:flex;align-items:center;gap:18px;padding:18px;border:1px solid rgba(211,194,231,.19);border-radius:20px;background:radial-gradient(circle at 88% 18%,rgba(188,159,221,.16),transparent 34%),linear-gradient(130deg,rgba(70,57,82,.42),rgba(24,24,32,.58));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.ks-anniv-collection-seal{width:86px;height:86px;flex:0 0 86px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid rgba(218,201,238,.65);border-radius:50%;background:radial-gradient(circle,rgba(205,184,227,.2),rgba(36,31,45,.8));box-shadow:0 0 0 7px rgba(184,157,211,.07),0 0 36px rgba(184,157,211,.16),inset 0 1px rgba(255,255,255,.2);color:#f4edf9}
+.ks-anniv-collection-seal span{font-size:34px;font-weight:900;line-height:1;letter-spacing:-.08em}.ks-anniv-collection-seal small{margin-top:4px;font-size:8px;font-weight:900;letter-spacing:.22em;color:#d8c9e7}
+.ks-anniv-collection-hero h3{margin:5px 0 7px;color:#f3edf8;font-size:clamp(17px,3vw,23px);font-weight:900;letter-spacing:-.035em}.ks-anniv-collection-hero p{margin:0;color:rgba(230,222,238,.66);font-size:10px;line-height:1.6}
+.ks-anniv-reward-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ks-anniv-reward-card{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;min-width:0;padding:12px;border:1px solid rgba(217,207,230,.13);border-radius:15px;background:rgba(245,240,252,.035)}
+.ks-anniv-reward-card.is-equipped{border-color:rgba(202,180,226,.46);background:rgba(166,139,198,.09)}
+.ks-anniv-reward-art{width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(219,203,237,.2);border-radius:14px;background:linear-gradient(145deg,rgba(184,156,212,.18),rgba(255,255,255,.035));color:#e4d8f0;font-size:23px}
+.ks-anniv-reward-copy{min-width:0}.ks-anniv-reward-copy strong{display:block;color:#f1edf6;font-size:11px}.ks-anniv-reward-copy p{margin:4px 0;color:rgba(226,218,235,.6);font-size:9px;line-height:1.45}.ks-anniv-reward-copy small{color:#cbb8df;font-size:8px;font-weight:900;letter-spacing:.1em}
+.ks-anniv-reward-card button{grid-column:1/-1;min-height:34px;border:1px solid rgba(206,190,225,.2);border-radius:10px;background:rgba(207,190,226,.11);color:#eee6f6;font-size:9px;font-weight:900;cursor:pointer}
+.ks-anniv-reward-card button:disabled{opacity:.45;cursor:not-allowed}
+.ks-anniv-claim{background:linear-gradient(130deg,rgba(136,110,164,.4),rgba(75,62,92,.55))!important;border-color:rgba(211,193,231,.35)!important;color:#f5eef9!important}
+.profile-card.ks-anniversary-frame .profile-avatar{outline:3px solid rgba(210,190,231,.9);outline-offset:5px;box-shadow:0 0 0 10px rgba(187,160,213,.1),0 0 28px rgba(179,146,213,.35),0 12px 28px rgba(0,0,0,.24)!important}
+.profile-btn.ks-anniversary-avatar-frame,.ks-os-avatar.ks-anniversary-avatar-frame{outline:2px solid rgba(210,190,231,.88);outline-offset:3px;box-shadow:0 0 0 5px rgba(187,160,213,.10),0 0 20px rgba(179,146,213,.25)!important}
+.ks-anniversary-profile-badge{display:inline-flex;align-items:center;gap:5px;width:max-content;margin-top:6px;padding:5px 8px;border:1px solid rgba(207,188,229,.28);border-radius:999px;background:rgba(143,116,172,.13);color:#e6d9f1;font-size:8px;font-weight:900;letter-spacing:.13em}
+.ks-anniversary-profile-badge[hidden]{display:none!important}
+.ks-once-anniversary-welcome{position:fixed;inset:0;z-index:50000;display:grid;place-items:center;padding:20px;background:rgba(8,8,12,.74);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);opacity:0;animation:ksAnnivWelcomeIn .65s ease forwards}
+.ks-once-anniversary-welcome-card{position:relative;isolation:isolate;overflow:hidden;width:min(520px,100%);padding:clamp(24px,5vw,42px);border:1px solid rgba(220,205,238,.25);border-radius:28px;background:radial-gradient(circle at 85% 8%,rgba(188,160,219,.2),transparent 36%),linear-gradient(145deg,rgba(43,37,52,.96),rgba(17,17,23,.96));box-shadow:0 28px 100px rgba(0,0,0,.5),inset 0 1px rgba(255,255,255,.12);text-align:center;transform:translateY(18px) scale(.97);animation:ksAnnivWelcomeCard .7s cubic-bezier(.18,.8,.22,1) forwards}
+.ks-once-anniversary-welcome-card::before{content:"";position:absolute;inset:-45%;z-index:-1;background:conic-gradient(from 40deg,transparent,rgba(215,195,236,.12),transparent 34%,rgba(215,195,236,.08),transparent 65%);animation:ksAnnivWelcomeSpin 24s linear infinite}
+.ks-anniv-welcome-mark{width:82px;height:82px;display:grid;place-items:center;margin:0 auto 18px;border:1px solid rgba(221,204,239,.48);border-radius:25px;background:linear-gradient(145deg,rgba(180,152,212,.25),rgba(255,255,255,.045));color:#f0e8f8;font-size:34px;box-shadow:0 0 0 8px rgba(190,166,216,.055),0 12px 38px rgba(0,0,0,.24)}
+.ks-anniv-welcome-kicker{color:#ccb9df;font-size:9px;font-weight:900;letter-spacing:.22em}.ks-anniv-welcome-title{margin:10px 0 8px;color:#f5effa;font-size:clamp(27px,6vw,40px);font-weight:900;letter-spacing:-.055em;line-height:1.06}.ks-anniv-welcome-copy{margin:0 auto;max-width:380px;color:rgba(235,227,243,.68);font-size:12px;line-height:1.7}.ks-anniv-welcome-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:23px}.ks-anniv-welcome-actions button{min-height:43px;padding:0 17px;border:1px solid rgba(219,202,238,.24);border-radius:12px;background:rgba(199,178,220,.14);color:#f2eaf8;font-size:10px;font-weight:900;cursor:pointer}.ks-anniv-welcome-actions button.primary{background:linear-gradient(135deg,rgba(158,132,190,.54),rgba(91,73,111,.68));border-color:rgba(222,207,238,.42)}
+@keyframes ksAnnivWelcomeIn{to{opacity:1}}@keyframes ksAnnivWelcomeCard{to{transform:translateY(0) scale(1)}}@keyframes ksAnnivWelcomeSpin{to{transform:rotate(360deg)}}
+@media(max-width:650px){.ks-anniv-reward-grid{grid-template-columns:minmax(0,1fr)}.ks-anniv-collection-hero{align-items:flex-start;padding:14px;gap:12px}.ks-anniv-collection-seal{width:66px;height:66px;flex-basis:66px}.ks-anniv-collection-seal span{font-size:27px}.ks-anniv-reward-card{grid-template-columns:44px minmax(0,1fr)}.ks-anniv-reward-art{width:42px;height:42px}.ks-os-anniversary-widget-actions .ks-os-widget-action{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){.ks-anniversary-atmosphere::before,.ks-anniversary-atmosphere::after,.ks-once-anniversary-welcome,.ks-once-anniversary-welcome-card::before{animation:none!important}.ks-once-anniversary-welcome{opacity:1}.ks-once-anniversary-welcome-card{transform:none;animation:none}}
+body.lite-mode .ks-anniversary-atmosphere::before,body.lite-mode .ks-anniversary-atmosphere::after{animation:none!important}
+
+/* ANNIVERSARY DECORATIONS — visible desktop atmosphere + collectible profile cosmetics. */
+.ks-os-root.ks-anniversary-mode .ks-os-topbar{border-color:rgba(218,199,238,.28)!important;box-shadow:0 12px 38px rgba(120,91,151,.12),inset 0 1px rgba(255,255,255,.09)}
+.ks-os-root.ks-anniversary-mode .ks-os-app-panel,.ks-os-root.ks-anniversary-mode .ks-os-machine-panel{border-color:rgba(208,189,229,.22)!important;box-shadow:0 18px 50px rgba(83,63,108,.12),inset 0 1px rgba(255,255,255,.06)}
+.ks-os-root.ks-anniversary-mode .ks-os-greeting h1{text-shadow:0 0 32px rgba(197,172,225,.16)}
+.ks-os-root.ks-anniversary-mode .ks-os-greeting::before{content:"✦ 2 MONTHS ANNIVERSARY ✦";display:inline-flex;align-items:center;margin:0 0 9px;padding:5px 9px;border:1px solid rgba(216,198,236,.2);border-radius:999px;background:rgba(203,184,224,.075);color:#e5d8f0;font-size:8px;font-weight:900;letter-spacing:.17em}
+.ks-os-root.ks-anniversary-mode .ks-os-app[data-os-app="anniversary"] .ks-os-app-icon::after,.ks-os-root.ks-anniversary-mode .ks-os-app[data-os-app="anniversary-collection"] .ks-os-app-icon::after{content:"✦";position:absolute;right:-4px;top:-5px;display:grid;place-items:center;width:15px;height:15px;border:1px solid rgba(232,220,245,.65);border-radius:50%;background:rgba(113,91,137,.95);color:#fff;font-size:9px;box-shadow:0 3px 12px rgba(0,0,0,.26)}
+.ks-os-root.ks-anniversary-mode .ks-os-app-icon{position:relative}
+.ks-os-anniversary-widget{animation:ksAnnivWidgetGlow 7s ease-in-out infinite alternate}
+.ks-os-anniversary-widget .ks-os-widget-label{color:#e1d2ef}
+.ks-os-anniversary-widget .ks-os-anniversary-number{animation:ksAnnivNumberFloat 5s ease-in-out infinite}
+.ks-os-anniversary-widget-actions .ks-os-widget-action{position:relative;z-index:2;transition:transform .2s ease,background .2s ease,border-color .2s ease}
+.ks-os-anniversary-widget-actions .ks-os-widget-action:hover{transform:translateY(-2px);background:rgba(236,224,248,.15)!important;border-color:rgba(220,202,239,.36)!important}
+.ks-anniversary-profile-badge{background:linear-gradient(105deg,rgba(143,116,172,.12),rgba(221,205,239,.22),rgba(143,116,172,.12));background-size:220% 100%;animation:ksAnnivBadgeShine 5s ease-in-out infinite}
+.profile-card.ks-anniversary-frame{border-color:rgba(210,190,231,.52)!important;box-shadow:0 0 0 1px rgba(210,190,231,.12),0 16px 46px rgba(137,104,168,.18),inset 0 1px rgba(255,255,255,.08)!important}
+.profile-card.ks-anniversary-frame .profile-avatar{animation:ksAnnivFrameGlow 4s ease-in-out infinite alternate}
+.ks-anniv-collection-seal{animation:ksAnnivSealFloat 5s ease-in-out infinite}
+.ks-anniv-reward-card{animation:ksAnnivRewardIn .55s both;transition:transform .22s ease,border-color .22s ease,background .22s ease}
+.ks-anniv-reward-card:nth-child(2){animation-delay:.06s}.ks-anniv-reward-card:nth-child(3){animation-delay:.12s}.ks-anniv-reward-card:nth-child(4){animation-delay:.18s}
+.ks-anniv-reward-card:hover{transform:translateY(-3px);border-color:rgba(218,199,238,.34);background:rgba(245,240,252,.065)}
+.ks-anniv-claim{position:relative;overflow:hidden}
+.ks-anniv-claim::after{content:"";position:absolute;inset:-40% auto -40% -35%;width:30%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);animation:ksAnnivClaimShine 3.8s ease-in-out infinite;pointer-events:none}
+@keyframes ksAnnivWidgetGlow{0%{box-shadow:0 10px 28px rgba(0,0,0,.14),0 0 0 rgba(172,145,202,0)}100%{box-shadow:0 12px 34px rgba(0,0,0,.18),0 0 32px rgba(172,145,202,.12)}}
+@keyframes ksAnnivNumberFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}
+@keyframes ksAnnivBadgeShine{0%,65%,100%{background-position:100% 0}82%{background-position:0 0}}
+@keyframes ksAnnivFrameGlow{from{box-shadow:0 0 0 8px rgba(187,160,213,.08),0 0 16px rgba(179,146,213,.18),0 12px 28px rgba(0,0,0,.22)}to{box-shadow:0 0 0 10px rgba(187,160,213,.13),0 0 32px rgba(179,146,213,.42),0 12px 28px rgba(0,0,0,.22)}}
+@keyframes ksAnnivSealFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes ksAnnivRewardIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ksAnnivClaimShine{0%,55%{left:-35%}100%{left:130%}}
+@media(max-width:650px){.ks-os-root.ks-anniversary-mode .ks-os-greeting::before{font-size:7px;letter-spacing:.12em}.ks-os-anniversary-widget{animation:none}.ks-anniv-reward-card:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.ks-os-anniversary-widget,.ks-os-anniversary-number,.ks-anniversary-profile-badge,.profile-card.ks-anniversary-frame .profile-avatar,.ks-anniv-collection-seal,.ks-anniv-reward-card,.ks-anniv-claim::after{animation:none!important;transition:none!important}}
+body.lite-mode .ks-os-anniversary-widget,body.lite-mode .ks-anniv-reward-card{animation:none!important}
+
+
+.ks-anniversary-win-burst{position:fixed;inset:0;z-index:8000;overflow:hidden;pointer-events:none;contain:strict}
+.ks-anniversary-win-burst span{position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--size);border-radius:3px;background:linear-gradient(145deg,#f1e6fb,#b9a0d3);box-shadow:0 0 12px rgba(205,180,231,.55);opacity:0;animation:ksAnnivWinSparkle 1.15s cubic-bezier(.14,.72,.25,1) var(--delay) both}
+.ks-anniversary-win-burst span:nth-child(3n){border-radius:50%;background:#f6e9ca;box-shadow:0 0 13px rgba(237,215,174,.55)}
+@keyframes ksAnnivWinSparkle{0%{opacity:0;transform:translate3d(0,12px,0) rotate(0) scale(.35)}18%{opacity:.95}100%{opacity:0;transform:translate3d(var(--dx),var(--dy),0) rotate(var(--rot)) scale(.1)}}
+
+</style>
+<script id="ks-anniversary-welcome-runtime">
+(() => {
+  'use strict';
+  const KEY='ks_anniversary_welcome_seen_2026_v1';
+  window.ksPlayAnniversaryWinEffect = () => {
+    try {
+      if (localStorage.getItem('ks_anniversary_desktop_mode') === '0' || document.body.classList.contains('lite-mode')) return;
+      const settings = JSON.parse(localStorage.getItem('ks_settings') || '{}');
+      if (settings.reduceEffects || settings.liteMode || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+      document.querySelector('.ks-anniversary-win-burst')?.remove();
+      const burst = document.createElement('div'); burst.className = 'ks-anniversary-win-burst'; burst.setAttribute('aria-hidden','true');
+      for (let i=0;i<18;i++) {
+        const particle=document.createElement('span');
+        const angle=(Math.PI*2*i)/18; const radius=70+(i%4)*20;
+        particle.style.setProperty('--x',`calc(50% + ${Math.cos(angle)*radius}px)`);
+        particle.style.setProperty('--y',`calc(46% + ${Math.sin(angle)*radius*.55}px)`);
+        particle.style.setProperty('--dx',`${Math.cos(angle)*(90+(i%3)*24)}px`);
+        particle.style.setProperty('--dy',`${Math.sin(angle)*(75+(i%4)*18)-24}px`);
+        particle.style.setProperty('--rot',`${i*41}deg`);
+        particle.style.setProperty('--delay',`${(i%6)*.018}s`);
+        particle.style.setProperty('--size',`${4+(i%3)*2}px`);
+        burst.appendChild(particle);
+      }
+      document.body.appendChild(burst);
+      setTimeout(()=>burst.remove(),1450);
+    } catch(error) { console.debug('Anniversary win effect skipped:',error); }
+  };
+  const greeting=()=>{const h=new Date().getHours();return h<5?'Доброй ночи':h<12?'Доброе утро':h<18?'Добрый день':'Добрый вечер';};
+  const chime=()=>{try{const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;const ctx=new Ctx();[523.25,659.25,783.99].forEach((freq,i)=>{const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='sine';osc.frequency.value=freq;gain.gain.setValueAtTime(.0001,ctx.currentTime+i*.11);gain.gain.exponentialRampToValueAtTime(.045,ctx.currentTime+i*.11+.025);gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+i*.11+.22);osc.connect(gain);gain.connect(ctx.destination);osc.start(ctx.currentTime+i*.11);osc.stop(ctx.currentTime+i*.11+.24);});setTimeout(()=>ctx.close().catch(()=>{}),900);}catch(_){}};
+  function show(){
+    try{if(localStorage.getItem(KEY)==='1'||!localStorage.getItem('ks_nickname'))return;}catch(_){return;}
+    const setup=document.getElementById('ks-onboarding');if(setup?.classList.contains('is-visible'))return;
+    if(document.querySelector('.ks-once-anniversary-welcome'))return;
+    const overlay=document.createElement('div');overlay.className='ks-once-anniversary-welcome';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Два месяца истории Kesug');
+    overlay.innerHTML='<section class="ks-once-anniversary-welcome-card"><div class="ks-anniv-welcome-mark"><i class="ph-fill ph-cake"></i></div><div class="ks-anniv-welcome-kicker">KESUG SLOTS · TWO MONTHS</div><h1 class="ks-anniv-welcome-title"><span class="ks-anniv-greeting"></span>, <span class="ks-anniv-nickname"></span>!</h1><p class="ks-anniv-welcome-copy">Два месяца идей, игр, экспериментов и больших обновлений. От KIRKA CASINO до Kesug Slots Remastered — спасибо, что ты часть этой истории.</p><div class="ks-anniv-welcome-actions"><button type="button" class="primary" data-open>Открыть историю</button><button type="button" data-collection>Забрать украшения</button><button type="button" data-close>Позже</button></div></section>';
+    const nick=String(localStorage.getItem('ks_nickname')||'Игрок').slice(0,40);overlay.querySelector('.ks-anniv-greeting').textContent=greeting();overlay.querySelector('.ks-anniv-nickname').textContent=nick;
+    const close=()=>{try{localStorage.setItem(KEY,'1');}catch(_){}overlay.classList.add('is-leaving');overlay.style.transition='opacity .25s ease';overlay.style.opacity='0';setTimeout(()=>overlay.remove(),260);};
+    overlay.querySelector('[data-close]').addEventListener('click',close);
+    overlay.querySelector('[data-open]').addEventListener('click',()=>{chime();close();setTimeout(()=>window.ksOpenAnniversaryReport?.(),280);});
+    overlay.querySelector('[data-collection]').addEventListener('click',()=>{chime();close();setTimeout(()=>window.ksOpenAnniversaryCollection?.(),280);});
+    overlay.addEventListener('click',event=>{if(event.target===overlay)close();});
+    document.body.appendChild(overlay);
+  }
+  const run=()=>setTimeout(show,1100);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+})();
+</script>
+
+
+<style id="kesug-developer-private-style">
+/* Private creator identity and Dev Console, unlocked for local Player ID #8NAD only. */
+.ks-developer-verified{display:inline-grid;place-items:center;width:22px;height:22px;margin-left:5px;vertical-align:middle;border-radius:50%;color:#fff;background:linear-gradient(145deg,#c5a9ff,#8063c5 58%,#4d3c85);box-shadow:0 0 0 2px rgba(198,171,255,.13),0 0 18px rgba(165,128,244,.46);font-size:15px;line-height:1;animation:ksDevBadgeGlow 3.2s ease-in-out infinite}
+.ks-developer-verified[hidden],.ks-developer-role-chip[hidden],#ks-dev-greeting-badge[hidden]{display:none!important}
+@keyframes ksDevBadgeGlow{0%,100%{filter:brightness(1);box-shadow:0 0 0 2px rgba(198,171,255,.13),0 0 12px rgba(165,128,244,.25)}50%{filter:brightness(1.18);box-shadow:0 0 0 3px rgba(198,171,255,.17),0 0 23px rgba(165,128,244,.55)}}
+#profile-big-nick{display:inline-block;vertical-align:middle;margin-bottom:4px}
+.ks-developer-role-chip{width:max-content;max-width:100%;display:inline-flex;align-items:center;gap:6px;margin:0 0 7px;padding:5px 9px;border:1px solid rgba(184,158,240,.34);border-radius:999px;background:linear-gradient(100deg,rgba(122,91,174,.22),rgba(255,255,255,.06));color:#ded0ff;font-size:9px;font-weight:950;letter-spacing:.13em}
+.ks-dev-avatar-verified{outline:2px solid rgba(174,143,235,.85)!important;outline-offset:3px!important;box-shadow:0 0 0 6px rgba(160,128,221,.12),0 0 26px rgba(154,119,221,.42)!important}
+.ks-developer-greeting-badge{width:25px;height:25px;font-size:17px;margin-left:8px;transform:translateY(-2px)}
+.ks-os-greeting h1 .ks-developer-verified{color:#fff!important;text-shadow:none!important}
+.ks-os-app[data-os-app="developer"] .ks-os-app-icon{background:linear-gradient(145deg,#a891df,#554477)!important;box-shadow:0 10px 25px rgba(128,94,194,.30),inset 0 1px 0 rgba(255,255,255,.35)}
+.ks-os-app[data-os-app="developer"] .ks-os-app-name{color:#e4d8ff}
+.ks-os-developer-widget{border-color:rgba(190,165,242,.25)!important;background:linear-gradient(135deg,rgba(80,64,108,.30),rgba(25,24,33,.58))!important}
+.ks-dev-more-tile[hidden]{display:none!important}
+.ks-dev-more-tile .ks-more-icon{background:linear-gradient(145deg,#a891df,#554477)!important;color:#fff!important}
+.ks-developer-page{max-width:1120px;margin-left:auto;margin-right:auto}
+.ks-developer-page-label{display:inline-flex;align-items:center;gap:7px;color:#d8c8ff;font-size:10px;font-weight:950;letter-spacing:.14em}
+.ks-developer-hero{position:relative;overflow:hidden;display:flex;align-items:center;gap:22px;margin:10px 0 16px;padding:clamp(18px,3vw,30px);border:1px solid rgba(190,165,242,.24);border-radius:24px;background:radial-gradient(circle at 90% 0,rgba(155,121,219,.2),transparent 38%),linear-gradient(125deg,rgba(50,42,69,.72),rgba(24,23,34,.68));backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 22px 60px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.12)}
+.ks-developer-hero-mark{flex:0 0 76px;width:76px;height:76px;display:grid;place-items:center;border:1px solid rgba(220,207,255,.4);border-radius:24px;background:linear-gradient(145deg,rgba(187,160,246,.3),rgba(96,76,141,.2));color:#eadfff;font-size:38px;box-shadow:0 0 32px rgba(143,112,205,.25)}
+.ks-developer-hero-copy{min-width:0}.ks-developer-eyebrow{display:block;color:#bca8e7;font-size:9px;font-weight:950;letter-spacing:.18em}.ks-developer-hero h2{margin:7px 0;color:#fff;font-size:clamp(21px,3vw,30px);font-weight:950;letter-spacing:-.04em}.ks-developer-hero p{max-width:690px;margin:0 0 12px;color:rgba(238,232,250,.72);font-size:12px;line-height:1.7}.ks-developer-id-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid rgba(190,165,242,.25);border-radius:999px;background:rgba(255,255,255,.06);color:#e1d5fa;font-size:9px;font-weight:900;letter-spacing:.08em}
+.ks-developer-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:0 0 14px}.ks-developer-stat,.ks-developer-panel{min-width:0;border:1px solid rgba(255,255,255,.12);border-radius:17px;background:rgba(25,24,33,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.07)}.ks-developer-stat{padding:15px}.ks-developer-stat small{display:block;color:#b7a8d2;font-size:8px;font-weight:950;letter-spacing:.14em}.ks-developer-stat strong{display:block;margin:8px 0 4px;color:#fff;font-size:clamp(18px,2.2vw,25px);font-weight:950;overflow-wrap:anywhere}.ks-developer-stat span{color:rgba(235,229,245,.52);font-size:9px}.ks-developer-panel{padding:17px;margin:0 0 14px}.ks-developer-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.ks-developer-panel-heading h3{margin:4px 0 0;color:#fff;font-size:16px;font-weight:900}.ks-developer-panel-heading>i{color:#c8b5ee;font-size:23px}.ks-developer-refresh{width:34px;height:34px;border:1px solid rgba(190,165,242,.22);border-radius:11px;background:rgba(255,255,255,.07);color:#e6dbfa;cursor:pointer}.ks-developer-diagnostics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.ks-developer-diagnostics>div{min-width:0;padding:11px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.035)}.ks-developer-diagnostics span{display:block;margin-bottom:5px;color:rgba(236,231,246,.54);font-size:9px}.ks-developer-diagnostics strong{display:block;color:#f5f0ff;font-size:11px;overflow-wrap:anywhere}.ks-developer-check-result{margin-top:11px;padding:10px 12px;border:1px solid rgba(180,155,228,.18);border-radius:11px;background:rgba(142,111,194,.09);color:#d9cbed;font-size:10px;line-height:1.5}
+.ks-developer-tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.ks-developer-tools-grid button{min-width:0;min-height:112px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:13px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.045);color:#f4efff;text-align:left;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease}.ks-developer-tools-grid button:hover{transform:translateY(-2px);border-color:rgba(190,165,242,.38);background:rgba(150,119,205,.10)}.ks-developer-tools-grid button>i{color:#c4a9f3;font-size:20px}.ks-developer-tools-grid button strong{font-size:11px}.ks-developer-tools-grid button small{color:rgba(235,229,245,.54);font-size:9px;line-height:1.45}.ks-developer-footnote{display:flex;align-items:flex-start;gap:7px;margin:13px 0 0;color:rgba(234,229,245,.56);font-size:9px;line-height:1.55}.ks-developer-footnote i{color:#b7a0e7;font-size:14px;flex:none}
+#ks-dev-hud{position:fixed;z-index:99999;right:12px;bottom:12px;display:flex;align-items:center;gap:9px;max-width:calc(100vw - 24px);padding:9px 12px;border:1px solid rgba(194,169,244,.36);border-radius:12px;background:rgba(28,23,41,.88);color:#f0e9ff;font:800 10px/1.2 system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.25);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}#ks-dev-hud[hidden]{display:none!important}#ks-dev-hud .ks-dev-hud-dot{width:7px;height:7px;border-radius:50%;background:#b79ae9;box-shadow:0 0 10px #b79ae9}
+@media(max-width:760px){.ks-developer-hero{align-items:flex-start;gap:13px;padding:16px}.ks-developer-hero-mark{width:54px;height:54px;flex-basis:54px;border-radius:17px;font-size:27px}.ks-developer-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ks-developer-diagnostics{grid-template-columns:repeat(2,minmax(0,1fr))}.ks-developer-tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ks-developer-panel{padding:13px}}
+@media(max-width:380px){.ks-developer-hero{display:block}.ks-developer-hero-mark{margin-bottom:12px}.ks-developer-tools-grid{grid-template-columns:minmax(0,1fr)}.ks-developer-stat{padding:12px}}
+@media(prefers-reduced-motion:reduce){.ks-developer-verified{animation:none!important}.ks-developer-tools-grid button{transition:none!important}}
+</style>
+<script id="kesug-private-developer-tools">
+(() => {
+  'use strict';
+  const allowed = () => !!window.ksIsDeveloper?.();
+  const el = id => document.getElementById(id);
+  const fmt = value => Math.floor(Number(value)||0).toLocaleString('ru-RU');
+  const setText = (id,value) => { const node=el(id); if(node) node.textContent=String(value); };
+  window.ksDevRender = async () => {
+    if (!allowed()) { if (document.body.dataset.ksDeveloperDenied !== '1') { document.body.dataset.ksDeveloperDenied='1'; window.showToast?.('Раздел доступен только профилю разработчика'); } return; }
+    const data = window.ksGetDeveloperSnapshot?.() || {};
+    setText('ks-dev-console-nick', data.nickname || 'pekeee');
+    setText('ks-dev-balance', fmt(data.balance));
+    setText('ks-dev-spins', fmt(data.spins));
+    setText('ks-dev-maxwin', fmt(data.maxWin));
+    setText('ks-dev-favorites', fmt(data.favorites));
+    setText('ks-dev-id', data.id || '#8NAD');
+    setText('ks-dev-viewport', `${window.innerWidth} × ${window.innerHeight} · DPR ${window.devicePixelRatio || 1}`);
+    setText('ks-dev-storage-count', `${data.storageKeys || 0} ключей`);
+    const isStandalone = window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    setText('ks-dev-pwa-status', isStandalone ? 'Установлено' : 'Обычная вкладка');
+    let swStatus = 'Недоступен';
+    if ('serviceWorker' in navigator) {
+      try { const reg = await navigator.serviceWorker.getRegistration(); swStatus = reg?.active ? 'Активен' : reg?.waiting ? 'Есть обновление' : 'Зарегистрирован'; }
+      catch (_) { swStatus = 'Не удалось проверить'; }
+    }
+    setText('ks-dev-sw-status', swStatus);
+    const moreTile = el('ks-dev-more-tile'); if (moreTile) moreTile.hidden = false;
+  };
+  window.ksOpenDeveloperPanel = () => {
+    if (!allowed()) { window.showToast?.('Доступ закрыт'); return; }
+    window.showPage('developer');
+    window.ksDevRender();
+  };
+  window.ksDevStorageCheck = () => {
+    if (!allowed()) return;
+    const keys = ['ks_stats','ks_settings','ks_favorites','ks_round_history','ks_duel_profile','ks_duel_history','ks_market_owned_v1','ks_os_home_config_v1','ks_used_promos','ks_account_journal'];
+    const missing=[], invalid=[];
+    keys.forEach(key => {
+      const raw=localStorage.getItem(key);
+      if(raw===null) { missing.push(key); return; }
+      try { JSON.parse(raw); } catch (_) { invalid.push(key); }
+    });
+    const message = invalid.length ? `Найдены данные с некорректным JSON: ${invalid.join(', ')}.` : `Проверено ${keys.length} типов сохранений. Ошибок формата не найдено.${missing.length?` Не создано пока: ${missing.length}.`:''}`;
+    setText('ks-dev-check-result', message);
+    window.showToast?.(invalid.length ? 'Проверка нашла проблему в сохранениях' : 'Проверка сохранений завершена');
+  };
+  window.ksDevMeasureFPS = () => {
+    if (!allowed()) return;
+    const result=el('ks-dev-check-result'); if(result)result.textContent='Измеряем частоту кадров…';
+    let frames=0, start=0;
+    const tick=now=>{if(!start)start=now;frames++;if(now-start<1400){requestAnimationFrame(tick);return;}const fps=Math.round(frames/((now-start)/1000));setText('ks-dev-check-result',`Текущий экран: около ${fps} FPS за короткий замер. Результат зависит от устройства и фоновой нагрузки.`);};
+    requestAnimationFrame(tick);
+  };
+  window.ksDevToggleHud = () => {
+    if (!allowed()) return;
+    let hud=el('ks-dev-hud');
+    if(!hud){hud=document.createElement('div');hud.id='ks-dev-hud';hud.hidden=true;hud.innerHTML=`<span class="ks-dev-hud-dot"></span><span>PEKEEE · DEVELOPER #8NAD</span><button type="button" aria-label="Скрыть Developer HUD" style="border:0;background:transparent;color:inherit;font-size:15px;cursor:pointer" onclick="document.getElementById('ks-dev-hud').hidden=true">×</button>`;document.body.appendChild(hud);}
+    hud.hidden=!hud.hidden;
+    window.showToast?.(hud.hidden?'Developer HUD скрыт':'Developer HUD включён');
+  };
+  window.ksDevUpdatePWA = async () => {
+    if (!allowed()) return;
+    if (!('serviceWorker' in navigator)) { window.showToast?.('Service Worker недоступен в этом режиме'); return; }
+    try { const registration = await navigator.serviceWorker.getRegistration(); if (!registration) { window.showToast?.('Service Worker ещё не зарегистрирован'); return; } await registration.update(); window.showToast?.('Проверка обновления PWA завершена'); window.ksDevRender?.(); }
+    catch (_) { window.showToast?.('Не удалось проверить обновление PWA'); }
+  };
+  window.ksDevDownloadReport = () => {
+    if (!allowed()) return;
+    const data=window.ksGetDeveloperSnapshot?.()||{};
+    const report={app:'Kesug Slots Remastered',build:'Anniversary Developer Edition',createdAt:new Date().toISOString(),profile:{id:data.id,nickname:data.nickname},statistics:{balance:data.balance,spins:data.spins,totalBet:data.totalBet,wins:data.wins,maxWin:data.maxWin,favorites:data.favorites},environment:{viewport:`${innerWidth}x${innerHeight}`,dpr:devicePixelRatio||1,standalone:!!(matchMedia?.('(display-mode: standalone)').matches||navigator.standalone===true),serviceWorker:('serviceWorker' in navigator)},storage:{keyCount:localStorage.length}};
+    const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='kesug-developer-report.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1200);
+  };
+  const refreshChrome = () => {
+    const dev=allowed();
+    document.body.classList.toggle('ks-developer-profile',dev);
+    const badge=el('ks-developer-verified'), role=el('ks-developer-role-chip'), greeting=el('ks-dev-greeting-badge');
+    if(badge)badge.hidden=!dev;if(role)role.hidden=!dev;if(greeting)greeting.hidden=!dev;
+    document.querySelectorAll('.profile-avatar,.profile-btn,.ks-os-avatar').forEach(node=>node.classList.toggle('ks-dev-avatar-verified',dev));
+    const more=el('ks-dev-more-tile');if(more)more.hidden=!dev;
+    const app=el('ks-os-app-grid');if(app && dev && !app.querySelector('[data-os-app="developer"]')) window.ksDesktopRefresh?.();
+  };
+  const baseUpdate=window.updateProfileUI;
+  if(typeof baseUpdate==='function') window.updateProfileUI=function(...args){const result=baseUpdate.apply(this,args);refreshChrome();return result;};
+  if(typeof window.addEventListener==='function') window.addEventListener('resize',()=>{if(document.getElementById('page-developer')?.classList.contains('active'))window.ksDevRender();},{passive:true});
+  refreshChrome();
 })();
 </script>
 

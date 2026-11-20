@@ -11282,5 +11282,354 @@ body.lite-mode .ks-os-root::after{display:none!important}
   };
 })();
 </script>
+
+
+<!-- KESUG PREMIUM DISPLAY FIX: render nickname and badge without relying on remote icon fonts -->
+<style id="kesug-premium-display-fix-style">
+.ks-premium-name-text{display:inline-block!important;position:relative;max-width:100%;color:#f7f4fc!important;-webkit-text-fill-color:#f7f4fc!important;background:none!important;background-clip:border-box!important;-webkit-background-clip:border-box!important;overflow-wrap:anywhere;vertical-align:middle;line-height:1.2}
+.ks-premium-name-text.ks-premium-name--aurora{background:linear-gradient(100deg,#f3fbff 0%,#d7c9ff 48%,#f5d6ef 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.ks-premium-name-text.ks-premium-name--violet{background:linear-gradient(100deg,#fff 0%,#d7b8ff 50%,#f5eaff 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.ks-premium-name-text.ks-premium-name--fire{background:linear-gradient(100deg,#fff3dc 0%,#ffc28e 48%,#ff8b9d 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.ks-premium-name-text.ks-premium-name--ice{background:linear-gradient(100deg,#fff 0%,#c7efff 48%,#aabaff 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.ks-premium-name-text.ks-premium-name--rainbow{background:linear-gradient(90deg,#ffb5d5,#ffd6a5,#fff2a8,#b9f2d0,#b6d8ff,#ddc3ff)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.ks-premium-name-text.ks-premium-name--gold{background:linear-gradient(100deg,#fff5d4,#f2d48d 50%,#fff0c1)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.ks-premium-name-text.ks-premium-name--neon{background:linear-gradient(100deg,#e1fff8,#a8f2e0 50%,#c9c0ff)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.ks-premium-name-text.ks-premium-name--silver{background:linear-gradient(100deg,#fff,#c9cfda 50%,#f7f3ff)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+.ks-premium-inline-badge.ks-premium-inline-badge-visible{display:inline-grid!important;flex:0 0 1.18em!important;place-items:center!important;width:1.18em!important;height:1.18em!important;min-width:1.18em!important;margin-left:.28em!important;vertical-align:middle!important;border-radius:50%!important;overflow:hidden!important;line-height:1!important;font-family:system-ui,Arial,sans-serif!important;font-size:.82em!important;color:#fff!important;text-indent:0!important;opacity:1!important;visibility:visible!important;box-shadow:0 0 0 2px rgba(231,222,249,.15),0 0 16px rgba(194,166,239,.45)!important}
+.ks-premium-inline-badge-visible .ph-fill{display:none!important}
+.ks-premium-badge-glyph{display:grid!important;place-items:center!important;width:100%!important;height:100%!important;color:#fff!important;font:900 .92em/1 system-ui,Arial,sans-serif!important;text-shadow:0 1px 3px rgba(0,0,0,.35)!important}
+.ks-premium-preview-name{display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;gap:5px!important;min-height:25px!important;max-width:100%!important}
+.ks-premium-preview-crown{font-size:0!important}.ks-premium-preview-crown .ph-fill{display:none!important}.ks-premium-preview-crown:after{content:'♛';font:900 15px/1 Georgia,serif!important;color:#382747!important}
+.ks-premium-option-symbol{display:grid;place-items:center;width:27px;height:27px;border-radius:9px;background:rgba(255,255,255,.075);color:#f2eaff;font:900 17px/1 system-ui,Arial,sans-serif;box-shadow:inset 0 1px rgba(255,255,255,.12)}
+#ks-premium-preview-name:empty:before{content:'Игрок';color:#f7f4fc}
+</style>
+<script id="kesug-premium-display-fix-runtime">
+(() => {
+  'use strict';
+  if (window.__ksPremiumDisplayFixV1) return;
+  window.__ksPremiumDisplayFixV1 = true;
+
+  const GLYPHS = {
+    check:'✓', crown:'♛', diamond:'◆', flame:'✦', bolt:'ϟ', star:'★',
+    comet:'☄', planet:'◉', butterfly:'❦', flower:'❀', moon:'☾', heart:'♥', medal:'✪', sparkle:'✧'
+  };
+  const NAME_EFFECTS = ['aurora','violet','fire','ice','rainbow','gold','neon','silver'];
+  const SELECTOR = '#profile-big-nick,#lobby-welcome-nick,#ks-os-player-name,#ks-dev-console-nick,#ks-premium-preview-name,.ks-showcase-name,.ks-duel-player-card.is-player .ks-duel-player-head strong';
+  let applying = false;
+  let scheduled = false;
+
+  function currentNickname() {
+    let value = '';
+    try { if (typeof state !== 'undefined' && state && state.nickname) value = String(state.nickname); } catch (_) {}
+    if (!value) { try { value = String(localStorage.getItem('ks_nickname') || ''); } catch (_) {} }
+    if (!value) {
+      const node = document.getElementById('profile-big-nick') || document.getElementById('lobby-welcome-nick');
+      value = node?.textContent || '';
+    }
+    value = value.replace(/[\u200B-\u200D\uFEFF]/g,'').trim().slice(0,24);
+    return value || 'Игрок';
+  }
+
+  function premiumActive() {
+    try { return !!window.ksPremiumIsActive?.() || ['founder','tester'].includes(window.ksGetPlayerRole?.()); }
+    catch (_) { return false; }
+  }
+
+  function premiumSettings() {
+    try { return window.ksPremiumGetSettings?.() || {}; }
+    catch (_) { return {}; }
+  }
+
+  function ensureNameNode(node, nickname, active, settings) {
+    if (!node || !node.isConnected) return;
+    const directChildren = Array.from(node.children || []);
+    let label = directChildren.find(child => child.classList?.contains('ks-premium-name-text'));
+    let badge = directChildren.find(child => child.classList?.contains('ks-premium-inline-badge'));
+    if (!label) {
+      // Keep only the nickname text in a dedicated span: gradients now affect the text, not the flex container.
+      const oldText = (node.textContent || '').replace(/[\u200B-\u200D\uFEFF]/g,'').trim();
+      node.textContent = '';
+      label = document.createElement('span');
+      label.className = 'ks-premium-name-text';
+      label.textContent = nickname || oldText || 'Игрок';
+      node.appendChild(label);
+      // textContent removed any previously attached badge, so it must be recreated below.
+      badge = null;
+    } else if (label.textContent !== nickname) {
+      label.textContent = nickname;
+    }
+
+    label.classList.remove(...NAME_EFFECTS.map(name => 'ks-premium-name--' + name));
+    if (active && settings.name && settings.name !== 'default' && NAME_EFFECTS.includes(settings.name)) {
+      label.classList.add('ks-premium-name--' + settings.name);
+    }
+
+    const badgeId = String(settings.badge || 'diamond');
+    if (!active || badgeId === 'none') {
+      badge?.remove();
+      return;
+    }
+    if (!badge || badge.parentElement !== node) {
+      badge = document.createElement('span');
+      node.appendChild(badge);
+    }
+    const symbol = GLYPHS[badgeId] || '✦';
+    const motion = String(settings.motion || 'twinkle');
+    const badgeTitle = 'Kesug Premium · ' + badgeId;
+    badge.className = 'ks-premium-inline-badge ks-premium-inline-badge-visible';
+    badge.dataset.badge = badgeId;
+    badge.dataset.motion = motion;
+    badge.title = badgeTitle;
+    badge.setAttribute('aria-label', badgeTitle);
+    let glyph = badge.querySelector(':scope > .ks-premium-badge-glyph');
+    if (!glyph) {
+      badge.textContent = '';
+      glyph = document.createElement('span');
+      glyph.className = 'ks-premium-badge-glyph';
+      badge.appendChild(glyph);
+    }
+    if (glyph.textContent !== symbol) glyph.textContent = symbol;
+  }
+
+  function applyAll() {
+    if (applying) return;
+    applying = true;
+    try {
+      const nickname = currentNickname();
+      const active = premiumActive();
+      const settings = premiumSettings();
+      document.querySelectorAll(SELECTOR).forEach(node => ensureNameNode(node, nickname, active, settings));
+      document.body.classList.toggle('ks-premium-active-profile', active);
+      const previewId = document.getElementById('ks-premium-preview-id');
+      if (previewId) {
+        let id = '';
+        try { if (typeof state !== 'undefined' && state?.playerId) id = String(state.playerId); } catch (_) {}
+        if (!id) { try { id = String(localStorage.getItem('kasino_player_id') || ''); } catch (_) {} }
+        previewId.textContent = '#' + id.replace(/^#+/,'').slice(-4).toUpperCase();
+      }
+      const previewImage = document.getElementById('ks-premium-preview-img');
+      if (previewImage) {
+        let avatar = '';
+        try { if (typeof state !== 'undefined' && state?.avatar) avatar = String(state.avatar); } catch (_) {}
+        if (!avatar) { try { avatar = String(localStorage.getItem('ks_avatar') || ''); } catch (_) {} }
+        if (avatar && previewImage.getAttribute('src') !== avatar) previewImage.src = avatar;
+      }
+    } finally { applying = false; }
+  }
+
+  function scheduleApply() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => { scheduled = false; applyAll(); });
+  }
+
+  window.ksPremiumRefreshIdentity = applyAll;
+  const oldRender = window.ksPremiumRender;
+  if (typeof oldRender === 'function') {
+    window.ksPremiumRender = function(...args) {
+      let result;
+      try { result = oldRender.apply(this,args); }
+      finally { applyAll(); }
+      return result;
+    };
+  }
+  const oldUpdate = window.updateProfileUI;
+  if (typeof oldUpdate === 'function') {
+    window.updateProfileUI = function(...args) {
+      let result;
+      try { result = oldUpdate.apply(this,args); }
+      finally { applyAll(); }
+      return result;
+    };
+  }
+  const oldShow = window.showPage;
+  if (typeof oldShow === 'function') {
+    window.showPage = function(id,...args) {
+      const result = oldShow.apply(this,[id,...args]);
+      if (id === 'premium' || id === 'profile' || id === 'home-desktop' || id === 'lobby') scheduleApply();
+      return result;
+    };
+  }
+  const oldChoose = window.ksPremiumChoose;
+  if (typeof oldChoose === 'function') {
+    window.ksPremiumChoose = function(...args) {
+      const result = oldChoose.apply(this,args);
+      scheduleApply();
+      return result;
+    };
+  }
+
+  const observer = new MutationObserver(records => {
+    if (applying) return;
+    const relevant = records.some(record => {
+      const target = record.target.nodeType === 1 ? record.target : record.target.parentElement;
+      if (target?.matches?.(SELECTOR) || target?.closest?.(SELECTOR)) return true;
+      return Array.from(record.addedNodes || []).some(node => {
+        if (node.nodeType !== 1) return false;
+        return node.matches?.(SELECTOR) || node.querySelector?.(SELECTOR);
+      });
+    });
+    if (relevant) scheduleApply();
+  });
+  if (document.body) observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',scheduleApply,{once:true});
+  else scheduleApply();
+  setTimeout(scheduleApply,180);
+  setTimeout(scheduleApply,900);
+})();
+</script>
+<!-- /KESUG PREMIUM DISPLAY FIX -->
+
+
+<!-- KESUG PREMIUM FINAL DISPLAY FALLBACK V2 -->
+<style id="kesug-premium-final-display-v2">
+/* Keep the premium name visible even when text-clipping or icon fonts are unavailable. */
+.ks-premium-preview-name,
+#profile-big-nick,
+#lobby-welcome-nick,
+#ks-os-player-name,
+#ks-dev-console-nick,
+.ks-showcase-name,
+.ks-duel-player-card.is-player .ks-duel-player-head strong {
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+}
+.ks-premium-name-text {
+  display: inline-block !important;
+  position: relative !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: #f7f3ff !important;
+  -webkit-text-fill-color: #f7f3ff !important;
+  background: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  text-shadow: 0 0 12px rgba(197,169,255,.25) !important;
+}
+.ks-premium-name-text.ks-premium-name--aurora { color:#e7d8ff!important; -webkit-text-fill-color:#e7d8ff!important; text-shadow:0 0 13px rgba(194,166,255,.45)!important; }
+.ks-premium-name-text.ks-premium-name--violet { color:#d9baff!important; -webkit-text-fill-color:#d9baff!important; text-shadow:0 0 13px rgba(183,133,255,.5)!important; }
+.ks-premium-name-text.ks-premium-name--fire { color:#ffc1aa!important; -webkit-text-fill-color:#ffc1aa!important; text-shadow:0 0 13px rgba(255,146,119,.4)!important; }
+.ks-premium-name-text.ks-premium-name--ice { color:#c9efff!important; -webkit-text-fill-color:#c9efff!important; text-shadow:0 0 13px rgba(135,210,255,.4)!important; }
+.ks-premium-name-text.ks-premium-name--rainbow { color:#e8d8ff!important; -webkit-text-fill-color:#e8d8ff!important; text-shadow:0 0 13px rgba(193,164,255,.55)!important; }
+.ks-premium-name-text.ks-premium-name--gold { color:#f3dfa9!important; -webkit-text-fill-color:#f3dfa9!important; text-shadow:0 0 13px rgba(222,188,112,.45)!important; }
+.ks-premium-name-text.ks-premium-name--neon { color:#aff2e3!important; -webkit-text-fill-color:#aff2e3!important; text-shadow:0 0 13px rgba(126,235,213,.45)!important; }
+.ks-premium-name-text.ks-premium-name--silver { color:#e2e7f0!important; -webkit-text-fill-color:#e2e7f0!important; text-shadow:0 0 13px rgba(215,224,240,.4)!important; }
+.ks-premium-inline-badge-visible { display:inline-grid!important; flex:0 0 1.2em!important; width:1.2em!important; min-width:1.2em!important; height:1.2em!important; place-items:center!important; margin-left:.3em!important; vertical-align:middle!important; border-radius:50%!important; opacity:1!important; visibility:visible!important; color:#fff!important; -webkit-text-fill-color:#fff!important; overflow:visible!important; }
+.ks-premium-inline-badge-visible .ks-premium-badge-glyph { display:grid!important; place-items:center!important; width:100%!important; height:100%!important; color:#fff!important; -webkit-text-fill-color:#fff!important; font:900 .9em/1 system-ui,Arial,sans-serif!important; opacity:1!important; visibility:visible!important; }
+.ks-premium-option-symbol { display:grid!important; place-items:center!important; flex:0 0 28px!important; width:28px!important; height:28px!important; font:900 17px/1 system-ui,Arial,sans-serif!important; color:#f5edff!important; -webkit-text-fill-color:#f5edff!important; }
+.ks-premium-option-check-fallback { display:inline-grid!important; place-items:center!important; width:16px!important; height:16px!important; margin-left:auto!important; color:#d9c4ff!important; font:900 14px/1 system-ui,Arial,sans-serif!important; }
+.ks-premium-status-glyph { display:inline-grid!important; place-items:center!important; font:900 12px/1 system-ui,Arial,sans-serif!important; }
+.ks-premium-preview-name { color:#f7f3ff!important; -webkit-text-fill-color:#f7f3ff!important; min-height:27px!important; line-height:1.35!important; }
+#ks-premium-title em { color:#d8c0ff!important; -webkit-text-fill-color:#d8c0ff!important; background:none!important; background-clip:border-box!important; -webkit-background-clip:border-box!important; text-shadow:0 0 20px rgba(187,154,232,.28)!important; }
+.ks-developer-verified { font-family:system-ui,Arial,sans-serif!important; }
+.ks-developer-verified i { display:none!important; }
+.ks-developer-verified::before { content:'✓'; display:block; color:#fff!important; font:900 14px/1 system-ui,Arial,sans-serif!important; }
+.ks-premium-preview-avatar.is-fallback::after { content:'K'; position:absolute; inset:4px; display:grid; place-items:center; border-radius:50%; color:#f4eaff; font:900 30px/1 system-ui,Arial,sans-serif; background:radial-gradient(circle at 35% 25%,rgba(211,190,255,.45),rgba(83,65,111,.9) 70%); }
+</style>
+<script id="kesug-premium-final-display-v2-runtime">
+(() => {
+  'use strict';
+  if (window.__ksPremiumFinalDisplayV2) return;
+  window.__ksPremiumFinalDisplayV2 = true;
+  const EFFECTS=['aurora','violet','fire','ice','rainbow','gold','neon','silver'];
+  const GLYPHS={check:'✓',crown:'♛',diamond:'◆',flame:'✦',bolt:'ϟ',star:'★',comet:'☄',planet:'◉',butterfly:'❦',flower:'❀',moon:'☾',heart:'♥',medal:'✪',sparkle:'✧'};
+  const GROUP_GLYPHS={
+    'ks-premium-badge-options':GLYPHS,
+    'ks-premium-motion-options':{float:'↕',pulse:'◉',orbit:'◎',spin:'⟳',beat:'♥',twinkle:'✧'},
+    'ks-premium-name-options':{default:'Aa',aurora:'Aa',violet:'Aa',fire:'Aa',ice:'Aa',rainbow:'Aa',gold:'Aa',neon:'Aa',silver:'Aa'},
+    'ks-premium-frame-options':{none:'○',aurora:'◎',orbit:'◉',royal:'♛',ice:'❖',rose:'❀'},
+    'ks-premium-theme-options':{obsidian:'◈',aurora:'✧',rose:'❀',cosmic:'☾',silver:'◇'}
+  };
+  const idFromButton=(button)=>{
+    const m=(button.getAttribute('onclick')||'').match(/ksPremiumChoose\('([^']+)'\s*,\s*'([^']+)'\)/);
+    return m?m[2]:'';
+  };
+  function paintOptions(){
+    for(const [containerId,map] of Object.entries(GROUP_GLYPHS)){
+      const container=document.getElementById(containerId); if(!container) continue;
+      container.querySelectorAll('button.ks-premium-option').forEach(button=>{
+        const id=idFromButton(button); const icon=button.querySelector('i:not(.ks-premium-option-check-fallback)');
+        if(icon){const sym=document.createElement('span');sym.className='ks-premium-option-symbol';sym.textContent=map[id]||'✦';icon.replaceWith(sym);}
+        else if(!button.querySelector('.ks-premium-option-symbol')){
+          const label=button.querySelector('span:not(.ks-premium-option-check-fallback)');
+          const sym=document.createElement('span');sym.className='ks-premium-option-symbol';sym.textContent=map[id]||'✦';
+          if(label)button.insertBefore(sym,label);else button.prepend(sym);
+        }
+        const check=button.querySelector('.ks-premium-option-check');
+        if(check){const sym=document.createElement('span');sym.className='ks-premium-option-check-fallback';sym.textContent='✓';check.replaceWith(sym);}
+      });
+    }
+    const status=document.getElementById('ks-premium-status');
+    if(status){const old=status.querySelector('i');if(old){const glyph=document.createElement('span');glyph.className='ks-premium-status-glyph';glyph.textContent='✓';old.replaceWith(glyph);}}
+  }
+  function fixNames(){
+    let nickname='Игрок';
+    try{if(typeof state!=='undefined'&&state?.nickname)nickname=String(state.nickname);}catch(_){}
+    if(nickname==='Игрок'){try{nickname=String(localStorage.getItem('ks_nickname')||'Игрок');}catch(_){}}
+    nickname=nickname.trim().slice(0,24)||'Игрок';
+    const settings=window.ksPremiumGetSettings?.()||{};
+    const active=!!window.ksPremiumIsActive?.()||['founder','tester'].includes(window.ksGetPlayerRole?.());
+    const selectors=['#profile-big-nick','#lobby-welcome-nick','#ks-os-player-name','#ks-dev-console-nick','#ks-premium-preview-name','.ks-showcase-name','.ks-duel-player-card.is-player .ks-duel-player-head strong'];
+    selectors.forEach(selector=>document.querySelectorAll(selector).forEach(node=>{
+      node.classList.remove(...EFFECTS.map(x=>'ks-premium-name--'+x));
+      node.style.removeProperty('background');
+      node.style.removeProperty('background-clip');
+      node.style.removeProperty('-webkit-background-clip');
+      node.style.removeProperty('-webkit-text-fill-color');
+      let label=Array.from(node.children).find(child=>child.classList?.contains('ks-premium-name-text'));
+      if(!label){const old=node.textContent.trim();node.textContent='';label=document.createElement('span');label.className='ks-premium-name-text';label.textContent=old||nickname;node.appendChild(label);}
+      if(node.id!=='ks-premium-preview-name' && !node.classList.contains('ks-showcase-name') && !node.matches('.ks-duel-player-card.is-player .ks-duel-player-head strong')) { if(label.textContent!==nickname) label.textContent=nickname; }
+      else if(!label.textContent.trim()) label.textContent=nickname;
+      label.classList.remove(...EFFECTS.map(x=>'ks-premium-name--'+x));
+      const effect=active&&EFFECTS.includes(settings.name)?settings.name:'';
+      if(effect)label.classList.add('ks-premium-name--'+effect);
+      const fallbackColors={aurora:'#e7d8ff',violet:'#d9baff',fire:'#ffc1aa',ice:'#c9efff',rainbow:'#e8d8ff',gold:'#f3dfa9',neon:'#aff2e3',silver:'#e2e7f0'};
+      const color=fallbackColors[effect]||'#f7f3ff';
+      label.style.setProperty('color',color,'important');
+      label.style.setProperty('-webkit-text-fill-color',color,'important');
+      label.style.setProperty('background','none','important');
+      const badge=Array.from(node.children).find(child=>child.classList?.contains('ks-premium-inline-badge'));
+      if(!active||!settings.badge||settings.badge==='none'){badge?.remove();return;}
+      let badgeNode=badge;
+      if(!badgeNode){badgeNode=document.createElement('span');node.appendChild(badgeNode);}
+      const badgeId=GLYPHS[settings.badge]?settings.badge:'diamond';
+      badgeNode.className='ks-premium-inline-badge ks-premium-inline-badge-visible';
+      badgeNode.dataset.badge=badgeId;
+      badgeNode.dataset.motion=settings.motion||'twinkle';
+      const bg={check:'#4c9687',crown:'#8d6b3c',diamond:'#7960b7',flame:'#b75d55',bolt:'#9c7b39',star:'#9a804d',comet:'#5e879e',planet:'#7567a8',butterfly:'#9c6a94',flower:'#a87591',moon:'#8188a8',heart:'#a65378',medal:'#97733f',sparkle:'#876cae'};
+      badgeNode.style.setProperty('background',bg[badgeId],'important');
+      badgeNode.style.setProperty('display','inline-grid','important');
+      badgeNode.style.setProperty('width','1.2em','important');
+      badgeNode.style.setProperty('height','1.2em','important');
+      let glyph=badgeNode.querySelector('.ks-premium-badge-glyph');
+      if(!glyph){badgeNode.textContent='';glyph=document.createElement('span');glyph.className='ks-premium-badge-glyph';badgeNode.appendChild(glyph);}
+      if(glyph.textContent!==GLYPHS[badgeId]) glyph.textContent=GLYPHS[badgeId];
+    }));
+    const preview=document.getElementById('ks-premium-preview-name');
+    if(preview){preview.classList.remove(...EFFECTS.map(x=>'ks-premium-name--'+x));preview.style.setProperty('color','#f7f3ff','important');preview.style.setProperty('-webkit-text-fill-color','#f7f3ff','important');}
+    const title=document.querySelector('#ks-premium-title em');if(title){title.style.setProperty('color','#d8c0ff','important');title.style.setProperty('-webkit-text-fill-color','#d8c0ff','important');title.style.setProperty('background','none','important');}
+    const avatar=document.getElementById('ks-premium-preview-img');
+    const avatarWrap=document.getElementById('ks-premium-preview-avatar');
+    if(avatar&&avatarWrap){avatar.onerror=()=>avatarWrap.classList.add('is-fallback');if(avatar.complete&&avatar.naturalWidth===0)avatarWrap.classList.add('is-fallback');}
+    paintOptions();
+  }
+  let queued=false;
+  function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;fixNames();});}
+  const wrap=(name,after)=>{const original=window[name];if(typeof original!=='function'||original.__ksDisplayWrap)return;const fn=function(...args){const result=original.apply(this,args);schedule();return result;};fn.__ksDisplayWrap=true;window[name]=fn;};
+  ['ksPremiumRender','updateProfileUI','ksPremiumChoose','showPage','ksOpenPremium','ksOSGo'].forEach(name=>wrap(name,schedule));
+  window.ksPremiumRefreshIdentityV2=fixNames;
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
+  setTimeout(schedule,250);setTimeout(schedule,1100);
+  const obs=new MutationObserver(records=>{if(records.some(r=>r.type==='childList'||r.type==='characterData'))schedule();});
+  if(document.body)obs.observe(document.body,{subtree:true,childList:true,characterData:true});
+})();
+</script>
+<style id="kesug-premium-avatar-fallback-fix">.ks-premium-preview-avatar.is-fallback img{opacity:0!important;visibility:hidden!important}.ks-premium-preview-avatar.is-fallback{overflow:visible!important}</style>
+<!-- /KESUG PREMIUM FINAL DISPLAY FALLBACK V2 -->
+
 </body>
 </html>

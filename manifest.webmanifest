@@ -1,19 +1,19 @@
 {
   "id": "./",
-  "name": "Kesug Slots",
-  "short_name": "Kesug",
-  "description": "Kesug Slots — игровые автоматы, дуэли с ботами и личная музыка.",
+  "name": "Kesug Slots Remastered",
+  "short_name": "Kesug Slots",
+  "description": "Kesug OS — локальная игра с виртуальными очками.",
   "lang": "ru",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "display_override": [
-    "standalone",
-    "minimal-ui"
-  ],
   "orientation": "any",
-  "background_color": "#090d16",
-  "theme_color": "#121214",
+  "background_color": "#111116",
+  "theme_color": "#17161e",
+  "categories": [
+    "games",
+    "entertainment"
+  ],
   "icons": [
     {
       "src": "./icons/icon-192.png",
@@ -28,7 +28,7 @@
       "purpose": "any"
     },
     {
-      "src": "./icons/icon-512-maskable.png",
+      "src": "./icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

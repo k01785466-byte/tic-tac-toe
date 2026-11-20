@@ -11582,8 +11582,8 @@ body.lite-mode .ks-os-root::after{display:none!important}
       node.style.removeProperty('-webkit-text-fill-color');
       let label=Array.from(node.children).find(child=>child.classList?.contains('ks-premium-name-text'));
       if(!label){const old=node.textContent.trim();node.textContent='';label=document.createElement('span');label.className='ks-premium-name-text';label.textContent=old||nickname;node.appendChild(label);}
-      if(node.id!=='ks-premium-preview-name' && !node.classList.contains('ks-showcase-name') && !node.matches('.ks-duel-player-card.is-player .ks-duel-player-head strong')) { if(label.textContent!==nickname) label.textContent=nickname; }
-      else if(!label.textContent.trim()) label.textContent=nickname;
+      if(node.id!=='ks-premium-preview-name' && !node.classList.contains('ks-showcase-name') && !node.matches('.ks-duel-player-card.is-player .ks-duel-player-head strong')) label.textContent=nickname;
+      else if(!label.textContent.trim())label.textContent=nickname;
       label.classList.remove(...EFFECTS.map(x=>'ks-premium-name--'+x));
       const effect=active&&EFFECTS.includes(settings.name)?settings.name:'';
       if(effect)label.classList.add('ks-premium-name--'+effect);
@@ -11607,7 +11607,7 @@ body.lite-mode .ks-os-root::after{display:none!important}
       badgeNode.style.setProperty('height','1.2em','important');
       let glyph=badgeNode.querySelector('.ks-premium-badge-glyph');
       if(!glyph){badgeNode.textContent='';glyph=document.createElement('span');glyph.className='ks-premium-badge-glyph';badgeNode.appendChild(glyph);}
-      if(glyph.textContent!==GLYPHS[badgeId]) glyph.textContent=GLYPHS[badgeId];
+      glyph.textContent=GLYPHS[badgeId];
     }));
     const preview=document.getElementById('ks-premium-preview-name');
     if(preview){preview.classList.remove(...EFFECTS.map(x=>'ks-premium-name--'+x));preview.style.setProperty('color','#f7f3ff','important');preview.style.setProperty('-webkit-text-fill-color','#f7f3ff','important');}
@@ -11628,7 +11628,6 @@ body.lite-mode .ks-os-root::after{display:none!important}
   if(document.body)obs.observe(document.body,{subtree:true,childList:true,characterData:true});
 })();
 </script>
-<style id="kesug-premium-avatar-fallback-fix">.ks-premium-preview-avatar.is-fallback img{opacity:0!important;visibility:hidden!important}.ks-premium-preview-avatar.is-fallback{overflow:visible!important}</style>
 <!-- /KESUG PREMIUM FINAL DISPLAY FALLBACK V2 -->
 
 </body>
